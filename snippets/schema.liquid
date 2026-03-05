@@ -26,7 +26,12 @@
         {%- endif -%}
         "brand": {
             "@type": "Brand",
-            "name": {{ product.vendor | json }}
+            "name": {{ product.vendor | default: "GiftPalace" | json }}
+        },
+        "seller": {
+            "@type": "Organization",
+            "name": "GiftPalace - India's Best Healing Crystal Store",
+            "description": "GiftPalace is a trusted healing crystal brand in Delhi, offering genuine gemstones and top quality crystals. Certified natural stones."
         },
         "manufacturer": {
             "@type": "Organization",
