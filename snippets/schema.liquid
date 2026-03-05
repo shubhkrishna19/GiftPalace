@@ -28,7 +28,36 @@
             "@type": "Brand",
             "name": {{ product.vendor | json }}
         },
+        "manufacturer": {
+            "@type": "Organization",
+            "name": {{ shop.name | json }}
+        },
         "category": {{ product.product_type | json }},
+        "color": {%- assign product_title_downcase = product.title | downcase -%}
+          {%- if product_title_downcase contains 'rose' -%}
+            "Pink"
+          {%- elsif product_title_downcase contains 'amethyst' -%}
+            "Purple"
+          {%- elsif product_title_downcase contains 'emerald' or product_title_downcase contains 'jade' or product_title_downcase contains 'malachite' or product_title_downcase contains 'aventurine' -%}
+            "Green"
+          {%- elsif product_title_downcase contains 'sapphire' or product_title_downcase contains 'aquamarine' or product_title_downcase contains 'lapis' or product_title_downcase contains 'turquoise' -%}
+            "Blue"
+          {%- elsif product_title_downcase contains 'ruby' or product_title_downcase contains 'garnet' or product_title_downcase contains 'carnelian' -%}
+            "Red"
+          {%- elsif product_title_downcase contains 'citrine' or product_title_downcase contains 'topaz' or product_title_downcase contains 'amber' -%}
+            "Yellow"
+          {%- elsif product_title_downcase contains 'moonstone' -%}
+            "White"
+          {%- elsif product_title_downcase contains 'onyx' or product_title_downcase contains 'obsidian' or product_title_downcase contains 'tourmaline' -%}
+            "Black"
+          {%- else -%}
+            "Multi"
+          {%- endif -%},
+        "material": {%- if product.metafields.custom.gemstone_type != blank -%}
+          {{ product.metafields.custom.gemstone_type | json }}
+        {%- else -%}
+          "Natural Gemstone"
+        {%- endif -%},
         {%- if product.metafields.reviews.rating.value != blank or product.metafields.judgeme.badge != blank -%}
           {%- if product.metafields.reviews.rating.value != blank -%}
             "aggregateRating": {
