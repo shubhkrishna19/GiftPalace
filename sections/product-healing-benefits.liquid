@@ -1,0 +1,105 @@
+{% comment %}
+  Product Healing Benefits Section - Custom for specific products
+{% endcomment %}
+
+<div class="product-healing-benefits">
+  {% if product.handle == 'sunstone-bracelet' %}
+    <div class="healing-section">
+      <h3 class="healing-title">Perfect for you if you feel:</h3>
+      <ul class="healing-audience">
+        <li>Lacking in confidence or self-esteem</li>
+        <li>Independent but need motivation</li>
+        <li>Stuck in a rut or need a fresh start</li>
+        <li>Emotionally dependent on others</li>
+        <li>Unworthy or lacking self-worth</li>
+        <li>Need more vitality and energy</li>
+      </ul>
+    </div>
+
+    <div class="healing-section">
+      <h3 class="healing-title">Healing Benefits:</h3>
+      <ul class="healing-benefits-list">
+        <li>Encourages independence and originality</li>
+        <li>Attracts fame and unexpected prosperity</li>
+        <li>Increases vitality and energy levels</li>
+        <li>Reveals hidden talents and potential</li>
+        <li>Cleanses the aura and Chakras</li>
+        <li>Removes co-dependency</li>
+        <li>Encourages self-empowerment</li>
+        <li>Melts away feelings of unworthiness</li>
+        <li>Brings luck and good fortune</li>
+        <li>Supports emotional healing</li>
+      </ul>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.product-healing-benefits {
+  margin: 30px 0;
+  padding: 25px;
+  background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 100%);
+  border-radius: 12px;
+  border: 1px solid #e8e4df;
+}
+
+.healing-section {
+  margin-bottom: 25px;
+}
+
+.healing-section:last-child {
+  margin-bottom: 0;
+}
+
+.healing-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2f2f2f;
+  margin-bottom: 15px;
+  letter-spacing: 0.02em;
+}
+
+.healing-audience,
+.healing-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.healing-audience li,
+.healing-benefits-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.healing-audience li:before,
+.healing-benefits-list li:before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: #8d5d48;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 767px) {
+  .product-healing-benefits {
+    padding: 20px 15px;
+    margin: 20px 0;
+  }
+
+  .healing-title {
+    font-size: 1.2rem;
+  }
+
+  .healing-audience li,
+  .healing-benefits-list li {
+    font-size: 0.85rem;
+  }
+}
+</style>
