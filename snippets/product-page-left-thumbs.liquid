@@ -825,6 +825,13 @@
                                                 share_layout: check_show_share
                                             %}
                                         </div>
+                                    {%- when 'healing_benefits' -%}
+                                        <div class="productView-moreItem"
+                                            style="--spacing-top: {{ spacing_top | append: 'px' }};
+                                            --spacing-bottom: {{ spacing_bottom | append: 'px' }}"
+                                        >
+                                            {% render 'product-healing-benefits', product: product %}
+                                        </div>
                                     {%- when 'meta' -%}
                                         {%- liquid 
                                             assign show_review = block.settings.show_review
