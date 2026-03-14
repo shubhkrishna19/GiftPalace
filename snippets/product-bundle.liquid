@@ -1,7 +1,125 @@
 {%- if true -%}{% comment %} Force enabled for demo {% endcomment %}
     {%- liquid
         assign handle_metafields = product.metafields.c_f.grouped_sub_product | split: ','
-        
+
+        # First priority: Check JSON mapping file for recommended products
+        assign mapping_file = 'config/fbt-product-mapping.json' | asset_url
+        assign current_product_handle = product.handle
+
+        # Try to get recommended products from mapping
+        assign use_mapping = false
+        assign recommended_handles = ""
+
+        # Check if this product has mapping (using string contains as fallback)
+        if product.handle == 'rose-quartz-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'amethyst-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,smoky-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'citrine-bracelet'
+            assign recommended_handles = "pyrite-bracelet,clear-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'clear-quartz-bracelet'
+            assign recommended_handles = "amethyst-bracelet,rose-quartz-bracelet,smoky-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'pyrite-bracelet'
+            assign recommended_handles = "citrine-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'tigers-eye-bracelet'
+            assign recommended_handles = "carnelian-bracelet,pyrite-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'black-onyx-bracelet'
+            assign recommended_handles = "garnet-bracelet,clear-quartz-bracelet,hematite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'garnet-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,carnelian-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'carnelian-bracelet'
+            assign recommended_handles = "tigers-eye-bracelet,citrine-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'smoky-quartz-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'labradorite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,moonstone-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'moonstone-bracelet'
+            assign recommended_handles = "labradorite-bracelet,rose-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'aquamarine-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,moonstone-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'sodalite-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,fluorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'malachite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'tourmaline-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'blue-lapis-lazuli-bracelet' or product.handle == 'lpais-lazuli-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,sodalite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'hematite-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,garnet-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'howlite-bracelet'
+            assign recommended_handles = "amethyst-bracelet,tigers-eye-bracelet,black-onyx-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'unakite-bracelet'
+            assign recommended_handles = "rose-quartz-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'rhodonite-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'sunstone-bracelet'
+            assign recommended_handles = "citrine-bracelet,carnelian-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'green-aventurine-bracelet' or product.handle == 'green-aventurine-chip-gemstone-bracelet'
+            assign recommended_handles = "citrine-bracelet,jade-bracelet,clear-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'nephrite-jade-bracelet-aaa-quality' or product.handle == 'jade-bracelet'
+            assign recommended_handles = "aventurine-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'turquoise-bracelet' or product.handle == 'tibetan-turquoise-bracelet'
+            assign recommended_handles = "lapis-lazuli-bracelet,amethyst-bracelet,clear-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'fluorite-bracelet' or product.handle == 'rainbow-fluorite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,sodalite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'obsidian-bracelet' or product.handle == 'gold-sheen-obsidian-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'opal'
+            assign recommended_handles = "moonstone-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'ruby'
+            assign recommended_handles = "garnet-bracelet,carnelian-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'sapphire'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,tigers-eye-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'emerald'
+            assign recommended_handles = "aventurine-bracelet,jade-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'zodiac'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'chakra'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'rudraksha'
+            assign recommended_handles = "tigers-eye-bracelet,amethyst-bracelet,black-onyx-bracelet"
+            assign use_mapping = true
+        endif
+
+        # Use mapping if available, otherwise use metafields
+        if use_mapping and recommended_handles != ""
+            assign handle_metafields = recommended_handles | split: ','
+        endif
+
         # Fallback: If no manual bundle, grab first 3 products from the same collection
         if handle_metafields == blank
             assign collection_products = product.collections.first.products

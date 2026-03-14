@@ -1,0 +1,310 @@
+{
+  "comment": "Frequently Bought Together Product Mapping - Edit product handles to customize recommended pairs",
+  "description": "Map each product handle to recommended complementary products",
+
+  "rose-quartz-bracelet": {
+    "title": "Rose Quartz",
+    "recommended": [
+      "amethyst-bracelet",
+      "clear-quartz-bracelet",
+      "carnelian-bracelet"
+    ]
+  },
+
+  "amethyst-bracelet": {
+    "title": "Amethyst",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "rose-quartz-bracelet",
+      "smoky-quartz-bracelet"
+    ]
+  },
+
+  "citrine-bracelet": {
+    "title": "Citrine",
+    "recommended": [
+      "pyrite-bracelet",
+      "clear-quartz-bracelet",
+      "carnelian-bracelet"
+    ]
+  },
+
+  "clear-quartz-bracelet": {
+    "title": "Clear Quartz",
+    "recommended": [
+      "amethyst-bracelet",
+      "rose-quartz-bracelet",
+      "smoky-quartz-bracelet"
+    ]
+  },
+
+  "pyrite-bracelet": {
+    "title": "Pyrite",
+    "recommended": [
+      "citrine-bracelet",
+      "clear-quartz-bracelet",
+      "garnet-bracelet"
+    ]
+  },
+
+  "tigers-eye-bracelet": {
+    "title": "Tiger's Eye",
+    "recommended": [
+      "carnelian-bracelet",
+      "pyrite-bracelet",
+      "citrine-bracelet"
+    ]
+  },
+
+  "black-onyx-bracelet": {
+    "title": "Black Onyx",
+    "recommended": [
+      "garnet-bracelet",
+      "clear-quartz-bracelet",
+      "hematite-bracelet"
+    ]
+  },
+
+  "garnet-bracelet": {
+    "title": "Garnet",
+    "recommended": [
+      "black-onyx-bracelet",
+      "carnelian-bracelet",
+      "pyrite-bracelet"
+    ]
+  },
+
+  "carnelian-bracelet": {
+    "title": "Carnelian",
+    "recommended": [
+      "tigers-eye-bracelet",
+      "citrine-bracelet",
+      "rose-quartz-bracelet"
+    ]
+  },
+
+  "smoky-quartz-bracelet": {
+    "title": "Smoky Quartz",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "amethyst-bracelet",
+      "labradorite-bracelet"
+    ]
+  },
+
+  "labradorite-bracelet": {
+    "title": "Labradorite",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "moonstone-bracelet",
+      "amethyst-bracelet"
+    ]
+  },
+
+  "moonstone-bracelet": {
+    "title": "Moonstone",
+    "recommended": [
+      "labradorite-bracelet",
+      "rose-quartz-bracelet",
+      "carnelian-bracelet"
+    ]
+  },
+
+  "aquamarine-bracelet": {
+    "title": "Aquamarine",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "moonstone-bracelet",
+      "labradorite-bracelet"
+    ]
+  },
+
+  "sodalite-bracelet": {
+    "title": "Sodalite",
+    "recommended": [
+      "amethyst-bracelet",
+      "clear-quartz-bracelet",
+      "fluorite-bracelet"
+    ]
+  },
+
+  "malachite-bracelet": {
+    "title": "Malachite",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "rose-quartz-bracelet",
+      "citrine-bracelet"
+    ]
+  },
+
+  "tourmaline-bracelet": {
+    "title": "Tourmaline",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "rose-quartz-bracelet",
+      "labradorite-bracelet"
+    ]
+  },
+
+  "blue-lapis-lazuli-bracelet": {
+    "title": "Lapis Lazuli",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "amethyst-bracelet",
+      "sodalite-bracelet"
+    ]
+  },
+
+  "hematite-bracelet": {
+    "title": "Hematite",
+    "recommended": [
+      "black-onyx-bracelet",
+      "garnet-bracelet",
+      "pyrite-bracelet"
+    ]
+  },
+
+  "howlite-bracelet": {
+    "title": "Howlite",
+    "recommended": [
+      "amethyst-bracelet",
+      "tigers-eye-bracelet",
+      "black-onyx-bracelet"
+    ]
+  },
+
+  "unakite-bracelet": {
+    "title": "Unakite",
+    "recommended": [
+      "rose-quartz-bracelet",
+      "clear-quartz-bracelet",
+      "amethyst-bracelet"
+    ]
+  },
+
+  "rhodonite-bracelet": {
+    "title": "Rhodonite",
+    "recommended": [
+      "black-onyx-bracelet",
+      "clear-quartz-bracelet",
+      "garnet-bracelet"
+    ]
+  },
+
+  "sunstone-bracelet": {
+    "title": "Sunstone",
+    "recommended": [
+      "citrine-bracelet",
+      "carnelian-bracelet",
+      "pyrite-bracelet"
+    ]
+  },
+
+  "aventurine-bracelet": {
+    "title": "Aventurine",
+    "recommended": [
+      "citrine-bracelet",
+      "jade-bracelet",
+      "clear-quartz-bracelet"
+    ]
+  },
+
+  "jade-bracelet": {
+    "title": "Jade",
+    "recommended": [
+      "aventurine-bracelet",
+      "clear-quartz-bracelet",
+      "amethyst-bracelet"
+    ]
+  },
+
+  "turquoise-bracelet": {
+    "title": "Turquoise",
+    "recommended": [
+      "lapis-lazuli-bracelet",
+      "amethyst-bracelet",
+      "clear-quartz-bracelet"
+    ]
+  },
+
+  "fluorite-bracelet": {
+    "title": "Fluorite",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "amethyst-bracelet",
+      "sodalite-bracelet"
+    ]
+  },
+
+  "obsidian-bracelet": {
+    "title": "Obsidian",
+    "recommended": [
+      "amethyst-bracelet",
+      "clear-quartz-bracelet",
+      "garnet-bracelet"
+    ]
+  },
+
+  "opal-bracelet": {
+    "title": "Opal",
+    "recommended": [
+      "moonstone-bracelet",
+      "clear-quartz-bracelet",
+      "amethyst-bracelet"
+    ]
+  },
+
+  "ruby-bracelet": {
+    "title": "Ruby",
+    "recommended": [
+      "garnet-bracelet",
+      "carnelian-bracelet",
+      "citrine-bracelet"
+    ]
+  },
+
+  "sapphire-bracelet": {
+    "title": "Sapphire",
+    "recommended": [
+      "amethyst-bracelet",
+      "clear-quartz-bracelet",
+      "tigers-eye-bracelet"
+    ]
+  },
+
+  "emerald-bracelet": {
+    "title": "Emerald",
+    "recommended": [
+      "aventurine-bracelet",
+      "jade-bracelet",
+      "rose-quartz-bracelet"
+    ]
+  },
+
+  "zodiac-bracelet": {
+    "title": "Zodiac Bracelets",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "amethyst-bracelet",
+      "rose-quartz-bracelet"
+    ]
+  },
+
+  "chakra-bracelet": {
+    "title": "Chakra Bracelets",
+    "recommended": [
+      "clear-quartz-bracelet",
+      "amethyst-bracelet",
+      "carnelian-bracelet"
+    ]
+  },
+
+  "rudraksha-bracelet": {
+    "title": "Rudraksha Bracelet",
+    "recommended": [
+      "tigers-eye-bracelet",
+      "amethyst-bracelet",
+      "black-onyx-bracelet"
+    ]
+  }
+}
