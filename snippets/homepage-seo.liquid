@@ -1,0 +1,75 @@
+{%- comment -%} Homepage SEO Optimization {%- endcomment -%}
+{%- if template.name == 'index' -%}
+  <meta name="description" content="GiftPalace - India's Best Healing Crystal Store. Trusted healing crystal brand in Delhi offering genuine gemstones, certified natural stones & top quality crystals. Free shipping across India.">
+  <meta name="keywords" content="healing crystals India, best crystal store India, genuine gemstones, top quality crystals, certified crystals, healing crystals Delhi, metaphysical stones, crystal jewelry, natural gemstones, spiritual jewelry, Rose Quartz, Amethyst, Citrine, Black Obsidian, healing stones">
+
+  {%- capture home_seo_title -%}
+    GiftPalace - India's Best Healing Crystal Store | Genuine Gemstones & Top Quality Crystals
+  {%- endcapture -%}
+
+  <meta property="og:title" content="{{ home_seo_title }}">
+  <meta name="twitter:title" content="{{ home_seo_title }}">
+
+  {%- capture home_description -%}
+    Discover India's best healing crystal store. GiftPalace is a trusted healing crystal brand in Delhi offering genuine gemstones, certified natural stones, and top quality crystals. Free shipping across India.
+  {%- endcapture -%}
+
+  <meta property="og:description" content="{{ home_description }}">
+  <meta name="twitter:description" content="{{ home_description }}">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GiftPalace - India's Best Healing Crystal Store",
+    "url": "{{ shop.url }}",
+    "description": "India's best healing crystal store. Trusted healing crystal brand in Delhi offering genuine gemstones, certified natural stones & top quality crystals.",
+    "keywords": "healing crystals, genuine gemstones, top quality crystals, certified crystals, India, Delhi",
+    "publisher": {
+      "@type": "Organization",
+      "name": "GiftPalace"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "GiftPalace",
+    "alternateName": "GiftPalace - India's Best Healing Crystal Store",
+    "description": "Trusted healing crystal brand in Delhi offering genuine gemstones, certified natural stones and top quality crystals.",
+    "url": "{{ shop.url }}",
+    "logo": "{{ 'logo.png' | asset_url }}",
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "serviceType": "Healing Crystals, Gemstones, Crystal Jewelry",
+    "priceRange": "₹₹"
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Collection SEO Optimization {%- endcomment -%}
+{%- if template.name == 'collection' and collection -%}
+  {%- assign collection_keywords = "" -%}
+  {%- if collection.handle contains 'bracelet' -%}
+    {%- assign collection_keywords = "healing crystal bracelets, crystal bangles, gemstone bracelets, spiritual bracelets, energy jewelry" -%}
+  {%- elsif collection.handle contains 'necklace' -%}
+    {%- assign collection_keywords = "healing crystal necklaces, gemstone pendants, spiritual necklaces, crystal jewelry, healing necklaces" -%}
+  {%- elsif collection.handle contains 'ring' -%}
+    {%- assign collection_keywords = "healing crystal rings, gemstone rings, spiritual rings, healing stone rings, gemstone jewelry" -%}
+  {%- elsif collection.handle contains 'heirloom' or collection.handle contains 'celestial' -%}
+    {%- assign collection_keywords = "celestial jewelry, zodiac jewelry, birthstone jewelry, astrological crystals, celestial crystals" -%}
+  {%- else -%}
+    {%- assign collection_keywords = "healing crystals, gemstones, crystal jewelry, metaphysical stones, spiritual jewelry" -%}
+  {%- endif -%}
+
+  <meta name="keywords" content="{{ collection_keywords }}, GiftPalace, India best crystals">
+{%- endif -%}

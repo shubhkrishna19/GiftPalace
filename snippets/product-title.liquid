@@ -1,0 +1,50 @@
+{%- liquid 
+    assign fontsize_text = block.settings.fontsize_text
+    assign fontsize_text_mb = block.settings.fontsize_text_mb
+    assign color_title = block.settings.color_title
+-%}
+{%- if check_show_share == '3' -%}
+    <div class="halo-share-3">
+        <h1 class="productView-title" 
+            style="--color-title: {{ color_title }};
+            --fontsize-text: {{ fontsize_text | append: 'px' }};
+            --fontsize-mb-text: {{ fontsize_text_mb | append: 'px' }};"
+        >
+            <span>
+                {{ product.title | escape }}
+            </span>
+        </h1>
+    {%- if product.metafields.custom.zodiac_date -%}
+        <p class="productView-zodiac-date">{{ product.metafields.custom.zodiac_date }}</p>
+    {%- elsif product.title contains 'Virgo' -%}
+        <p class="productView-zodiac-date">23rd aug - 22 sep</p>
+    {%- endif -%}
+        {% render 'halo-share',
+            product: product,
+            share_product_type: share_product_type,
+            share_product_script: share_product_script,
+            share_layout: check_show_share
+        %}
+    </div>
+{%- else -%}
+    <h1 class="productView-title" 
+        style="--color-title: {{ color_title }};
+        --fontsize-text: {{ fontsize_text | append: 'px' }};
+        --fontsize-mb-text: {{ fontsize_text_mb | append: 'px' }};"
+    >
+        <span>
+            {{ product.title | escape }}
+        </span>
+    </h1>
+    {%- if product.metafields.custom.zodiac_date -%}
+        <p class="productView-zodiac-date">{{ product.metafields.custom.zodiac_date }}</p>
+    {%- elsif product.title contains 'Virgo' -%}
+        <p class="productView-zodiac-date">23rd aug - 22 sep</p>
+    {%- endif -%}
+{%- endif -%}
+
+<!-- Start of Judge.me code --> 
+      <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'>
+        {{ product.metafields.judgeme.badge }}
+      </div>  
+      <!-- End of Judge.me code -->

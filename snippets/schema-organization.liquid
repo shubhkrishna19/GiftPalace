@@ -1,0 +1,47 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JewelryStore",
+  "name": {{ shop.name | json }},
+  "alternateName": "GiftPalace - India's Best Healing Crystal Store",
+  "url": {{ shop.url | json }},
+  "image": {{ settings.favicon | img_url: '512x512' | prepend: 'https:' | json }},
+  "description": "GiftPalace is India's best healing crystal store and trusted healing crystal brand in Delhi. We offer genuine gemstones, certified natural crystals, and top quality crystals. Our collection includes Rose Quartz, Amethyst, Citrine, Black Obsidian, and more healing crystals.",
+  "keywords": "healing crystals, genuine gemstones, top quality crystals, certified crystals, metaphysical stones, natural gemstones, crystal jewelry, healing stones, spiritual jewelry, India, Delhi",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Delhi",
+    "addressLocality": "Delhi",
+    "addressRegion": "Delhi",
+    "postalCode": "110001",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "28.6139",
+    "longitude": "77.2090"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Service",
+    "email": {{ shop.email | json }}
+  },
+  "sameAs": [
+    {%- if settings.social_facebook_link != blank -%}
+      {{ settings.social_facebook_link | json }}{% if settings.social_twitter_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_pinterest_link != blank %},{% endif %}
+    {%- endif -%}
+    {%- if settings.social_twitter_link != blank -%}
+      {{ settings.social_twitter_link | json }}{% if settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_pinterest_link != blank %},{% endif %}
+    {%- endif -%}
+    {%- if settings.social_instagram_link != blank -%}
+      {{ settings.social_instagram_link | json }}{% if settings.social_youtube_link != blank or settings.social_pinterest_link != blank %},{% endif %}
+    {%- endif -%}
+    {%- if settings.social_youtube_link != blank -%}
+      {{ settings.social_youtube_link | json }}{% if settings.social_pinterest_link != blank %},{% endif %}
+    {%- endif -%}
+    {%- if settings.social_pinterest_link != blank -%}
+      {{ settings.social_pinterest_link | json }}
+    {%- endif -%}
+  ]
+}
+</script>

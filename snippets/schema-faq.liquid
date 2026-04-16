@@ -1,0 +1,37 @@
+{%- if template.name == 'index' or template.name == 'product' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Are your crystals and gemstones authentic?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, we guarantee that 100% of our gemstones and crystals are natural, authentic, and hand-selected for quality. We are GJEPC members committed to genuine products."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Do you have a physical store?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, we have 2 physical store locations where you can view our collection in person. Please visit our website for specific addresses."
+    }
+  }, {
+    "@type": "Question",
+    "name": "How do I cleanse my new crystals?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We recommend cleansing your crystals using Selenite plates, moonlight, or sage smudging. All our crystals arrive cleansed and charged."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Do you offer international shipping?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, we ship our authentic crystals and jewelry worldwide."
+    }
+  }]
+}
+</script>
+{%- endif -%}

@@ -1,0 +1,55 @@
+{%- comment -%}
+  Enhanced SEO Configuration
+  Centralized SEO settings and meta tag generation
+{%- endcomment -%}
+
+{%- liquid
+  assign seo_title = page_title | default: shop.name
+  assign seo_description = page_description | default: shop.description | default: shop.name
+  
+  comment
+    Build dynamic title based on page type
+  endcomment
+  
+  if template.name == 'product'
+    assign seo_title = product.title | append: ' | ' | append: shop.name
+    if product.description != blank
+      assign seo_description = product.description | strip_html | truncatewords: 30
+    endif
+  elsif template.name == 'collection'
+    assign seo_title = collection.title | append: ' | ' | append: shop.name
+    if collection.description != blank
+      assign seo_description = collection.description | strip_html | truncatewords: 30
+    endif
+  elsif template.name == 'article'
+    assign seo_title = article.title | append: ' | ' | append: blog.title | append: ' | ' | append: shop.name
+    if article.excerpt != blank
+      assign seo_description = article.excerpt | strip_html | truncatewords: 30
+    elsif article.content != blank
+      assign seo_description = article.content | strip_html | truncatewords: 30
+    endif
+  elsif template.name == 'page'
+    assign seo_title = page.title | append: ' | ' | append: shop.name
+    if page.content != blank
+      assign seo_description = page.content | strip_html | truncatewords: 30
+    endif
+  endif
+  
+  comment
+    Add pagination info to title
+  endcomment
+  
+  if current_page != 1
+    assign seo_title = seo_title | append: ' - Page ' | append: current_page
+  endif
+  
+  comment
+    Ensure description length is optimal (50-160 characters)
+  endcomment
+  
+  assign seo_description = seo_description | strip | truncate: 160
+-%}
+
+{%- comment -%} Export variables for use in theme {%- endcomment -%}
+{%- assign final_seo_title = seo_title -%}
+{%- assign final_seo_description = seo_description -%}

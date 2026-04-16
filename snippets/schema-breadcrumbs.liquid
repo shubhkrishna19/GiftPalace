@@ -1,0 +1,83 @@
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+{%- assign breadcrumb_list = '' -%}
+{%- assign breadcrumb_position = 0 -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ shop.url }}"
+    }
+    {%- if template contains 'collection' and collection -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": "{{ shop.url }}{{ collection.url }}"
+    }
+    {%- endif -%}
+    {%- if template contains 'product' and product -%}
+      {%- assign current_collection = collection | default: product.collections.first -%}
+      {%- if current_collection -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ current_collection.title | json }},
+        "item": "{{ shop.url }}{{ current_collection.url }}"
+      }
+      ,{
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ product.title | json }},
+        "item": "{{ shop.url }}{{ product.url }}"
+      }
+      {%- else -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ product.title | json }},
+        "item": "{{ shop.url }}{{ product.url }}"
+      }
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if template contains 'page' and page -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | json }},
+      "item": {{ shop.url | append: page.url | json }}
+    }
+    {%- endif -%}
+    {%- if template contains 'blog' -%}
+      {%- if article -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ blog.title | json }},
+        "item": {{ shop.url | append: blog.url | json }}
+      }
+      ,{
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ article.title | json }},
+        "item": {{ shop.url | append: article.url | json }}
+      }
+      {%- else -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ blog.title | json }},
+        "item": {{ shop.url | append: blog.url | json }}
+      }
+      {%- endif -%}
+    {%- endif -%}
+  ]
+}
+</script>
+{%- endunless -%}

@@ -1,0 +1,184 @@
+<div class="home-conversion-section home-concierge-cta section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-conversion-shell home-conversion-reveal" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-conversion-inner home-concierge-layout">
+        <div>
+          {% if section.settings.eyebrow != blank %}
+            <p class="home-conversion-kicker">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+
+          {% if section.settings.title != blank %}
+            <h2 class="home-conversion-heading" style="font-size: clamp(2rem, 3vw, 3.75rem);">{{ section.settings.title }}</h2>
+          {% endif %}
+
+          {% if section.settings.copy != blank %}
+            <div class="home-conversion-copy rte" style="margin-top: 18px;">
+              {{ section.settings.copy }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
+            <div class="home-conversion-actions">
+              {% if section.settings.primary_label != blank %}
+                <a class="button home-conversion-button home-conversion-button--primary" {% if section.settings.primary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.primary_link }}"{% endif %}>
+                  {{ section.settings.primary_label }}
+                </a>
+              {% endif %}
+              {% if section.settings.secondary_label != blank %}
+                <a class="button home-conversion-button home-conversion-button--secondary" {% if section.settings.secondary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.secondary_link }}"{% endif %}>
+                  {{ section.settings.secondary_label }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if section.settings.note != blank %}
+            <p class="home-concierge-note">{{ section.settings.note }}</p>
+          {% endif %}
+        </div>
+
+        {% assign point_blocks = section.blocks | where: 'type', 'point' %}
+        {% if point_blocks.size > 0 %}
+          <div class="home-conversion-panel">
+            <ul class="home-conversion-point-list">
+              {% for block in point_blocks %}
+                <li class="home-conversion-point" {{ block.shopify_attributes }}>
+                  {% if block.settings.title != blank %}
+                    <span class="home-conversion-point-title">{{ block.settings.title }}</span>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                    <span class="home-conversion-point-text">{{ block.settings.text }}</span>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home Concierge CTA",
+  "tag": "section",
+  "class": "section-home-concierge-cta",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Need help choosing?"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Heading",
+      "default": "Turn indecision into a guided sale with a stronger concierge-style close."
+    },
+    {
+      "type": "richtext",
+      "id": "copy",
+      "label": "Copy",
+      "default": "<p>Use this final section to help shoppers who are interested but not fully decided yet. Offer support, guidance, gifting help, or a curated path into bestsellers.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary CTA label",
+      "default": "Shop Gift-Ready Picks"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary CTA label",
+      "default": "Talk to Us"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Support note",
+      "default": "Keep this final message practical and reassuring. It should feel like a premium assist, not a generic footer CTA."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Support point",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Offer a clear reassurance"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Add a short support point that helps remove hesitation."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Concierge CTA"
+    }
+  ]
+}
+{% endschema %}

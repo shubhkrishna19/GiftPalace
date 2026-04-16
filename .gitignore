@@ -1,0 +1,9 @@
+# Shopify theme files to ignore
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+.npm/
+.env
+.env.*
+!.env.example

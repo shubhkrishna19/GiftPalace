@@ -1,0 +1,156 @@
+<div class="home-apps-section section-block-{{ section.id }}{% if section.settings.theme_style == 'dark' %} home-apps-section--dark{% endif %}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.include_margins %}page-width{% else %}container{% endif %}">
+    <div class="{% if section.settings.theme_style != 'none' %}home-conversion-shell{% endif %} home-conversion-reveal" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-conversion-inner home-apps-grid">
+        {% if section.settings.eyebrow != blank or section.settings.title != blank or section.settings.description != blank or section.settings.button_label != blank %}
+          <div class="halo-block-header text-{{ section.settings.text_align }}">
+            {% if section.settings.eyebrow != blank %}
+              <p class="home-conversion-kicker">{{ section.settings.eyebrow }}</p>
+            {% endif %}
+
+            {% if section.settings.title != blank %}
+              <h2 class="home-conversion-heading" style="font-size: clamp(1.85rem, 3vw, 3.5rem);">{{ section.settings.title }}</h2>
+            {% endif %}
+
+            {% if section.settings.description != blank %}
+              <div class="home-conversion-copy rte" style="margin-top: 18px; max-width: 760px; margin-left: auto; margin-right: auto;">
+                {{ section.settings.description }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.button_label != blank %}
+              <div class="home-conversion-actions" style="justify-content: center;">
+                <a class="button home-conversion-button {% if section.settings.button_style == 'secondary' %}home-conversion-button--secondary{% else %}home-conversion-button--primary{% endif %}" {% if section.settings.button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.button_link }}"{% endif %}>
+                  {{ section.settings.button_label }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {%- for block in section.blocks -%}
+          {% render block %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.apps.name",
+  "class": "spaced-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "include_margins",
+      "label": "t:sections.apps.settings.include_margins.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "theme_style",
+      "label": "Wrapper style",
+      "default": "card",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "card", "label": "Card" },
+        { "value": "dark", "label": "Dark card" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "primary",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 28
+    }
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{
+    "name": "t:sections.apps.presets.name"
+  }]
+}
+{% endschema %}

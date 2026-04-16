@@ -1,0 +1,495 @@
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .ring-size-guide {
+    background-color: #faf9f7;
+    padding: 40px 20px;
+    margin: 30px 0;
+    border-radius: 4px;
+  }
+
+  .ring-size-guide .section-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .ring-size-guide .section-title {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .ring-size-guide .section-subtitle {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0.02em;
+  }
+
+  .ring-size-guide .accordion-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .ring-size-guide .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .ring-size-guide .accordion-header:hover {
+    border-color: #1a1a1a;
+  }
+
+  .ring-size-guide .accordion-title {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ring-size-guide .accordion-icon {
+    font-size: 18px;
+    color: #1a1a1a;
+    transition: transform 0.3s ease;
+  }
+
+  .ring-size-guide .accordion-header.active .accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  .ring-size-guide .accordion-content {
+    display: none;
+    padding: 0;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
+
+  .ring-size-guide .accordion-content.active {
+    display: block;
+    animation: slideDown 0.4s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ring-size-guide .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .ring-size-guide .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 20px;
+    }
+  }
+
+  .ring-size-guide .visual-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring-size-guide .ring-measurement-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .ring-size-guide .measurement-label {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 15px;
+  }
+
+  .ring-size-guide .steps-side {
+    padding: 10px 0;
+  }
+
+  .ring-size-guide .steps-title {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .ring-size-guide .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+  }
+
+  .ring-size-guide .step-list li {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+  }
+
+  .ring-size-guide .step-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: #d4af37;
+    border-radius: 50%;
+  }
+
+  .ring-size-guide .step-number {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .ring-size-guide .size-chart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #faf9f7;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .ring-size-guide .size-chart-table th,
+  .ring-size-guide .size-chart-table td {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .ring-size-guide .size-chart-table th {
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .ring-size-guide .size-chart-table td {
+    font-size: 14px;
+    color: #4a4a4a;
+  }
+
+  .ring-size-guide .size-chart-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ring-size-guide .size-chart-table tr:hover td {
+    background: #f5f3f0;
+  }
+
+  .ring-size-guide .important-note {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: #666666;
+    font-style: italic;
+    padding: 15px;
+    background: #fffbea;
+    border-left: 3px solid #d4af37;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+
+  .ring-size-guide .whatsapp-section {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .ring-size-guide .whatsapp-text {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 12px;
+  }
+
+  .ring-size-guide .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #25D366;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ring-size-guide .whatsapp-btn:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+
+  .ring-size-guide .whatsapp-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  @media (max-width: 768px) {
+    .ring-size-guide {
+      padding: 30px 15px;
+    }
+
+    .ring-size-guide .section-title {
+      font-size: 20px;
+    }
+
+    .ring-size-guide .accordion-title {
+      font-size: 12px;
+    }
+
+    .ring-size-guide .size-chart-table th,
+    .ring-size-guide .size-chart-table td {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+
+    .ring-size-guide .whatsapp-btn {
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<div class="ring-size-guide">
+  <div class="section-header">
+    <h2 class="section-title">{{ section.settings.title }}</h2>
+    <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+  </div>
+
+  <div class="accordion-wrapper">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="accordion-title">{{ section.settings.accordion_title }}</span>
+      <span class="accordion-icon">+</span>
+    </div>
+    <div class="accordion-content">
+      <div class="content-wrapper">
+        <div class="visual-side">
+          {% if section.settings.measurement_image != blank %}
+            <img src="{{ section.settings.measurement_image | image_url: width: 600 }}"
+                 alt="Ring Size Measurement Guide"
+                 class="ring-measurement-img"
+                 width="300"
+                 height="auto"
+                 loading="lazy">
+          {% else %}
+            <div class="ring-measurement-img" style="display: flex; align-items: center; justify-content: center; min-height: 200px;">
+              <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="75" cy="75" r="45" stroke="#d4af37" stroke-width="2" fill="none"/>
+                <line x1="30" y1="75" x2="120" y2="75" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 2"/>
+                <text x="75" y="95" text-anchor="middle" fill="#1a1a1a" font-size="10" font-family="Montserrat">Diameter</text>
+                <circle cx="75" cy="75" r="50" stroke="#e0e0e0" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+          {% endif %}
+          <p class="measurement-label">Measure Inner Diameter in mm</p>
+        </div>
+
+        <div class="steps-side">
+          <h3 class="steps-title">{{ section.settings.steps_title }}</h3>
+
+          <ol class="step-list">
+            <li><span class="step-number">Step 1:</span> {{ section.settings.step_1 }}</li>
+            <li><span class="step-number">Step 2:</span> {{ section.settings.step_2 }}</li>
+            <li><span class="step-number">Step 3:</span> {{ section.settings.step_3 }}</li>
+          </ol>
+
+          <table class="size-chart-table">
+            <thead>
+              <tr>
+                <th>Inner Diameter (mm)</th>
+                <th>Indian Ring Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>16.5 mm</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>17.3 mm</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>18.1 mm</td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td>19.0 mm</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <td>19.8 mm</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>20.6 mm</td>
+                <td>22</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="important-note">
+            {{ section.settings.important_note }}
+          </div>
+
+          <div class="whatsapp-section">
+            <p class="whatsapp-text">{{ section.settings.whatsapp_text }}</p>
+            <a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="whatsapp-btn" target="_blank" rel="noopener">
+              <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              {{ section.settings.whatsapp_button_text }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleAccordion(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Ring Size Guide",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Find Your Perfect Ring Size",
+      "label": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "Already have a ring that fits? Use this simple method to find your exact size.",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "accordion_title",
+      "default": "Find Your Ring Size",
+      "label": "Accordion Button Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "measurement_image",
+      "label": "Measurement Guide Image"
+    },
+    {
+      "type": "text",
+      "id": "steps_title",
+      "default": "Step 1: Measure an Existing Ring (Most Accurate Method)",
+      "label": "Steps Title"
+    },
+    {
+      "type": "text",
+      "id": "step_1",
+      "default": "Take a ring that fits the same finger you plan to wear this ring on.",
+      "label": "Step 1 Text"
+    },
+    {
+      "type": "text",
+      "id": "step_2",
+      "default": "Place the ring on a ruler and measure the inner diameter (in millimeters).",
+      "label": "Step 2 Text"
+    },
+    {
+      "type": "text",
+      "id": "step_3",
+      "default": "Match the measurement with the size chart below.",
+      "label": "Step 3 Text"
+    },
+    {
+      "type": "text",
+      "id": "important_note",
+      "default": "Measure the inner edge to inner edge (not outer edge). For best accuracy, measure in millimeters.",
+      "label": "Important Note"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_text",
+      "default": "Still unsure? Message us on WhatsApp and our team will assist you instantly.",
+      "label": "WhatsApp Text"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_button_text",
+      "default": "Chat on WhatsApp",
+      "label": "WhatsApp Button Text"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "default": "917011099721",
+      "label": "WhatsApp Number (with country code, no +)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ring Size Guide"
+    }
+  ]
+}
+{% endschema %}

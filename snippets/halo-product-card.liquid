@@ -1,0 +1,513 @@
+{%- liquid
+    assign media_size = settings.product_block_image_ratio
+    if media_size == 'portrait'
+        assign portrait_aspect_ratio = settings.portrait_height
+    endif 
+
+    assign featured_media_aspect_ratio = product.featured_media.aspect_ratio
+    if product.featured_media.aspect_ratio == nil
+        assign featured_media_aspect_ratio = 1
+    endif
+
+    assign product_action_group = false
+    
+    assign sold_out = false
+    if product.available == false
+        assign sold_out = true
+    endif
+
+    assign variantCount = product.variants | size
+    assign option_name = product.options_with_values[0].name | downcase
+    assign product_swatch_option = settings.swatch | downcase
+
+    assign has_popup = false
+
+    if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.quick_shop_type == '1'
+        assign has_popup = false
+    else
+        assign has_popup = true
+    endif
+-%}
+<div class="product-item" data-product-id="{{ product.id }}">
+    <div class="card">
+        <div class="card-product{% if product.featured_media == nil %} card--text-only card--soft{% endif %}">
+            <div class="card-product__wrapper">
+                <a class="card-media card-media--{{ media_size }}{% if settings.show_image_swap %} media--hover-effect{% endif%}"
+                    href="{{ product.url | within: collection }}"
+                    {% if product.featured_media %}
+                        {% if media_size == 'adapt' %}
+                            style="padding-bottom: {{ 1 | divided_by: featured_media_aspect_ratio | times: 100 }}%;"
+                        {% elsif media_size == 'square' %}
+                            style="padding-bottom: 100%;"
+                        {% elsif media_size == 'portrait' %}
+                            {% if portrait_aspect_ratio != blank %}
+                                style="padding-bottom: {{ portrait_aspect_ratio | append: '%' }};"
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                >
+                    {%- if product.featured_media -%}
+                        {%- if variant_img != blank -%}
+                            <img {% render 'lazyload',preview_img: variant_img, class: true  %} />
+                        {%- else -%}
+                            <img {% render 'lazyload',preview_img: product.featured_media, class: true  %} />
+                        {%- endif -%}
+                        {%- if product.media[1] != nil and settings.show_image_swap -%}
+                            <img {% render 'lazyload',preview_img: product.media[1], class: true  %} />
+                        {%- endif -%}
+                        {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                    {%- else -%}
+                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                </a>
+                {%- if settings.show_action -%}
+                    <div class="card-action">
+                        <form action="{{ routes.cart_url }}/add" method="post" class="variants" id="{{ id }}-{{ product.id }}-{{ sectionId }}" data-product-id="{{ product.id }}" enctype="multipart/form-data">
+                            {%- if sold_out -%}
+                                {%- if settings.show_notify_form -%}
+                                    <a class="button button-ATC is-notify-me" href="{{ product.url }}" data-btn-addToCart>
+                                        {{ 'notify_form.general.label' | t }}
+                                    </a>
+                                {%- else -%}
+                                    <a class="button button-ATC" href="{{ product.url }}" disabled="disabled">
+                                        {{ 'products.product.out_of_stock' | t }}
+                                    </a>
+                                {%- endif -%}
+                            {%- else -%}
+                                {%- if variantCount > 0 and product.variants.first.title != 'Default Title' -%}
+                                    {%- if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.show_swatch and settings.quick_shop_type == '1' -%}
+                                        <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <button
+                                            class="button button-ATC"
+                                            type="submit"
+                                            data-form-id="#{{ id }}-{{ product.id }}-{{ sectionId }}"
+                                            data-btn-addToCart
+                                        >
+                                            {{ 'products.product.add_to_cart' | t }}
+                                        </button>
+                                    {%- else -%}
+                                        <a class="button button-ATC" href="{{ product.url }}">
+                                            {{ 'products.product.select_options' | t }}
+                                        </a>
+                                    {%- endif -%}
+                                {%- else -%}
+                                    <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    {%- liquid
+                                        assign current_variant_grid = product.selected_or_first_available_variant
+                                        assign first_inventory_grid = current_variant_grid.inventory_quantity
+                                    -%}
+                          
+                                    {%- if first_inventory_grid > 0 -%}
+                                        <button
+                                            class="button button-ATC"
+                                            type="submit"
+                                            data-form-id="#{{ id }}-{{ product.id }}-{{ sectionId }}"
+                                            data-btn-addToCart
+                                        >
+                                            {{ 'products.product.add_to_cart' | t }}
+                                        </button>
+                                    {%- else -%}
+                                        <button
+                                            class="button button-ATC"
+                                            type="submit"
+                                            data-form-id="#{{ id }}-{{ product.id }}-{{ sectionId }}"
+                                            data-btn-addToCart
+                                        >
+                                            {{ 'products.product.pre_order' | t }}
+                                        </button>
+                                    {%- endif -%} 
+                                {%- endif -%}
+                            {%- endif -%}
+                        </form>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+        <div class="card-information">
+            <div class="card-information__wrapper text-{{ settings.product_content_text_align }}">
+                {%- if settings.show_vendor -%}
+                    <div class="card-information__group card-information__group-2">
+                        {%- if settings.show_vendor -%}
+                            <div class="card-vendor">
+                                <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+                                {{ product.vendor | link_to_vendor }}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                <a class="card-title link-underline{% if settings.product_title_line_text != 'full' %} card-title-ellipsis{% endif %}{% if variant_selected != blank %} card-title-change{% endif %}" href="{{ product.url | within: collection }}" data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url | within: collection }}">
+                    <span class="text">
+                        {{ product.title | escape }}
+                        {% if variant_selected != blank %}
+                            <span data-change-title> - {{ variant_selected }}</span>
+                        {% endif %}
+                    </span>
+                </a>
+                {%- comment -%} Celestial Heirlooms Zodiac Signs {%- endcomment -%}
+                {% assign product_title_downcase = product.title | downcase %}
+                {% assign show_zodiac = false %}
+                {% assign zodiac_sign = '' %}
+                {% assign zodiac_dates = '' %}
+
+                {% if product_title_downcase contains 'aries' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♈ Aries' %}
+                  {% assign zodiac_dates = 'March 21 to April 19' %}
+                {% elsif product_title_downcase contains 'taurus' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♉ Taurus' %}
+                  {% assign zodiac_dates = 'April 20 to May 20' %}
+                {% elsif product_title_downcase contains 'gemini' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♊ Gemini' %}
+                  {% assign zodiac_dates = 'May 21 to June 20' %}
+                {% elsif product_title_downcase contains 'cancer' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♋ Cancer' %}
+                  {% assign zodiac_dates = 'June 21 to July 22' %}
+                {% elsif product_title_downcase contains 'leo' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♌ Leo' %}
+                  {% assign zodiac_dates = 'July 23 to August 22' %}
+                {% elsif product_title_downcase contains 'virgo' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♍ Virgo' %}
+                  {% assign zodiac_dates = 'August 23 to September 22' %}
+                {% elsif product_title_downcase contains 'libra' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♎ Libra' %}
+                  {% assign zodiac_dates = 'September 23 to October 22' %}
+                {% elsif product_title_downcase contains 'scorpio' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♏ Scorpio' %}
+                  {% assign zodiac_dates = 'October 23 to November 21' %}
+                {% elsif product_title_downcase contains 'sagittarius' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♐ Sagittarius' %}
+                  {% assign zodiac_dates = 'November 22 to December 21' %}
+                {% elsif product_title_downcase contains 'capricorn' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♑ Capricorn' %}
+                  {% assign zodiac_dates = 'December 22 to January 19' %}
+                {% elsif product_title_downcase contains 'aquarius' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♒ Aquarius' %}
+                  {% assign zodiac_dates = 'January 20 to February 18' %}
+                {% elsif product_title_downcase contains 'pisces' %}
+                  {% assign show_zodiac = true %}
+                  {% assign zodiac_sign = '♓ Pisces' %}
+                  {% assign zodiac_dates = 'February 19 to March 20' %}
+                {% endif %}
+
+                {%- comment -%} Bracelet Subheadings with Healing Benefits {%- endcomment -%}
+                {% assign product_type_downcase = product.product_type | downcase %}
+                {% assign show_bracelet_info = false %}
+                {% assign bracelet_info = '' %}
+
+                {% if product_type_downcase contains 'bracelet' or product_title_downcase contains 'bracelet' %}
+                  {% assign show_bracelet_info = true %}
+                  {% assign healing_benefits = '' %}
+
+                  {% if product_title_downcase contains 'rose quartz' or product_title_downcase contains 'rose-quartz' %}
+                    {% assign healing_benefits = 'Love | Emotional Healing | Self-Care' %}
+                  {% elsif product_title_downcase contains 'amethyst' %}
+                    {% assign healing_benefits = 'Peace | Spiritual Growth | Stress Relief' %}
+                  {% elsif product_title_downcase contains 'citrine' %}
+                    {% assign healing_benefits = 'Abundance | Success | Positive Energy' %}
+                  {% elsif product_title_downcase contains 'clear quartz' or product_title_downcase contains 'crystal quartz' %}
+                    {% assign healing_benefits = 'Clarity | Healing | Energy Amplifier' %}
+                  {% elsif product_title_downcase contains "tiger's eye" or product_title_downcase contains 'tigers eye' or product_title_downcase contains 'tiger eye' %}
+                    {% assign healing_benefits = 'Courage | Strength | Good Luck' %}
+                  {% elsif product_title_downcase contains 'obsidian' %}
+                    {% assign healing_benefits = 'Protection | Grounding | Negativity Shield' %}
+                  {% elsif product_title_downcase contains 'jade' %}
+                    {% assign healing_benefits = 'Luck | Prosperity | Wisdom' %}
+                  {% elsif product_title_downcase contains 'turquoise' %}
+                    {% assign healing_benefits = 'Protection | Communication | Healing' %}
+                  {% elsif product_title_downcase contains 'lapis' %}
+                    {% assign healing_benefits = 'Wisdom | Truth | Inner Peace' %}
+                  {% elsif product_title_downcase contains 'pyrite' %}
+                    {% assign healing_benefits = 'Protection | Abundance | Confidence' %}
+                  {% elsif product_title_downcase contains 'emerald' %}
+                    {% assign healing_benefits = 'Love | Rebirth | Fertility' %}
+                  {% elsif product_title_downcase contains 'sapphire' %}
+                    {% assign healing_benefits = 'Wisdom | Spiritual Growth | Clarity' %}
+                  {% elsif product_title_downcase contains 'ruby' %}
+                    {% assign healing_benefits = 'Passion | Energy | Courage' %}
+                  {% elsif product_title_downcase contains 'garnet' %}
+                    {% assign healing_benefits = 'Protection | Energy | Commitment' %}
+                  {% elsif product_title_downcase contains 'aquamarine' %}
+                    {% assign healing_benefits = 'Calm | Communication | Courage' %}
+                  {% elsif product_title_downcase contains 'opal' %}
+                    {% assign healing_benefits = 'Creativity | Inspiration | Luck' %}
+                  {% elsif product_title_downcase contains 'moonstone' %}
+                    {% assign healing_benefits = 'Intuition | Feminine Energy | Balance' %}
+                  {% elsif product_title_downcase contains 'hematite' %}
+                    {% assign healing_benefits = 'Grounding | Focus | Strength' %}
+                  {% elsif product_title_downcase contains 'howlite' %}
+                    {% assign healing_benefits = 'Calm | Patience | Awareness' %}
+                  {% elsif product_title_downcase contains 'amazonite' %}
+                    {% assign healing_benefits = 'Truth | Communication | Balance' %}
+                  {% elsif product_title_downcase contains 'coral' %}
+                    {% assign healing_benefits = 'Emotional Healing | Passion | Vitality' %}
+                  {% elsif product_title_downcase contains 'onyx' %}
+                    {% assign healing_benefits = 'Protection | Strength | Self-Control' %}
+                  {% elsif product_title_downcase contains 'green aventurine' or product_title_downcase contains 'aventurine' %}
+                    {% assign healing_benefits = 'Stone Of Opportunities | Attracts Luck | Growth' %}
+                  {% elsif product_title_downcase contains 'sulemani hakik' or product_title_downcase contains 'sulaimani' %}
+                    {% assign healing_benefits = 'Protection | Balance | Power' %}
+                  {% elsif product_title_downcase contains 'carnelian' %}
+                    {% assign healing_benefits = 'Strength | Creativity | Ambition' %}
+                  {% elsif product_title_downcase contains "hawk's eye" or product_title_downcase contains 'hawks eye' or product_title_downcase contains 'hawk eye' %}
+                    {% assign healing_benefits = 'Vision | Strength | Stability' %}
+                  {% elsif product_title_downcase contains 'selenite' %}
+                    {% assign healing_benefits = 'Cleanse | Purify | Protect' %}
+                  {% elsif product_title_downcase contains 'sodalite' %}
+                    {% assign healing_benefits = 'Clarity | Confidence | Communication' %}
+                  {% elsif product_title_downcase contains 'sunstone' %}
+                    {% assign healing_benefits = 'Joy | Confidence | Success' %}
+                  {% elsif product_title_downcase contains "cat's eye" or product_title_downcase contains 'cats eye' or product_title_downcase contains 'cat eye' %}
+                    {% assign healing_benefits = 'Shield | Strength | Success' %}
+                  {% elsif product_title_downcase contains 'unakite' %}
+                    {% assign healing_benefits = 'Release | Renew | Restore' %}
+                  {% elsif product_title_downcase contains 'smokey quartz' or product_title_downcase contains 'smoky quartz' %}
+                    {% assign healing_benefits = 'Grounding | Protection | Calm' %}
+                  {% elsif product_title_downcase contains 'labradorite' %}
+                    {% assign healing_benefits = 'Mystic | Power | Clarity' %}
+                  {% elsif product_title_downcase contains 'agate' %}
+                    {% assign healing_benefits = 'Balance | Harmony | Protection' %}
+                  {% elsif product_title_downcase contains 'malachite' %}
+                    {% assign healing_benefits = 'Transformation | Growth | Protection' %}
+                  {% elsif product_title_downcase contains 'peridot' %}
+                    {% assign healing_benefits = 'Growth | Healing | Prosperity' %}
+                  {% elsif product_title_downcase contains 'topaz' %}
+                    {% assign healing_benefits = 'Love | Passion | Creativity' %}
+                  {% elsif product_title_downcase contains 'tourmaline' %}
+                    {% assign healing_benefits = 'Protection | Balance | Healing' %}
+                  {% else %}
+                    {% assign healing_benefits = 'Positive Energy | Healing | Balance' %}
+                  {% endif %}
+
+                  {% assign bracelet_info = healing_benefits %}
+                {% endif %}
+
+                {%- comment %} Necklace Healing Benefits - Women's Focus {%- endcomment -%}
+                {% if product_type_downcase contains 'necklace' or product_type_downcase contains 'pendant' or product_title_downcase contains 'necklace' or product_title_downcase contains 'pendant' %}
+                  {% assign show_necklace_info = true %}
+                  {% assign necklace_healing = '' %}
+
+                  {% if product_title_downcase contains 'rose quartz' or product_title_downcase contains 'rose-quartz' %}
+                    {% assign necklace_healing = 'Self-Love | Emotional Healing | Feminine Charm' %}
+                  {% elsif product_title_downcase contains 'pearl' %}
+                    {% assign necklace_healing = 'Purity | Wisdom | Inner Light' %}
+                  {% elsif product_title_downcase contains 'moonstone' %}
+                    {% assign necklace_healing = 'Divine Feminine | Intuition | Emotional Balance' %}
+                  {% elsif product_title_downcase contains 'amethyst' %}
+                    {% assign necklace_healing = 'Inner Peace | Spiritual Growth | Stress Relief' %}
+                  {% elsif product_title_downcase contains 'emerald' %}
+                    {% assign necklace_healing = 'Love | Fertility | Rebirth' %}
+                  {% elsif product_title_downcase contains 'ruby' %}
+                    {% assign necklace_healing = 'Passion | Confidence | Vitality' %}
+                  {% elsif product_title_downcase contains 'sapphire' %}
+                    {% assign necklace_healing = 'Wisdom | Mental Clarity | Spiritual Insight' %}
+                  {% elsif product_title_downcase contains 'diamond' %}
+                    {% assign necklace_healing = 'Inner Strength | Purity | Everlasting Love' %}
+                  {% elsif product_title_downcase contains 'opal' %}
+                    {% assign necklace_healing = 'Creativity | Feminine Magic | Inspiration' %}
+                  {% elsif product_title_downcase contains 'aquamarine' %}
+                    {% assign necklace_healing = 'Courage | Clear Communication | Soothing Energy' %}
+                  {% elsif product_title_downcase contains 'garnet' %}
+                    {% assign necklace_healing = 'Devotion | Energy | Commitment' %}
+                  {% elsif product_title_downcase contains 'citrine' %}
+                    {% assign necklace_healing = 'Success | Abundance | Personal Power' %}
+                  {% elsif product_title_downcase contains 'jade' %}
+                    {% assign necklace_healing = 'Luck | Wisdom | Gentle Energy' %}
+                  {% elsif product_title_downcase contains 'turquoise' %}
+                    {% assign necklace_healing = 'Protection | Healing | Authentic Expression' %}
+                  {% elsif product_title_downcase contains 'lapis' %}
+                    {% assign necklace_healing = 'Inner Truth | Wisdom | Self-Expression' %}
+                  {% elsif product_title_downcase contains 'onyx' %}
+                    {% assign necklace_healing = 'Inner Strength | Protection | Self-Control' %}
+                  {% elsif product_title_downcase contains 'green aventurine' or product_title_downcase contains 'aventurine' %}
+                    {% assign necklace_healing = 'Opportunities | Luck | Heart Healing' %}
+                  {% elsif product_title_downcase contains 'coral' %}
+                    {% assign necklace_healing = 'Passion | Vitality | Emotional Warmth' %}
+                  {% elsif product_title_downcase contains 'clear quartz' or product_title_downcase contains 'crystal quartz' %}
+                    {% assign necklace_healing = 'Clarity | Energy Amplification | Spiritual Focus' %}
+                  {% elsif product_title_downcase contains 'tourmaline' %}
+                    {% assign necklace_healing = 'Protection | Balance | Negative Energy Shield' %}
+                  {% elsif product_title_downcase contains 'topaz' %}
+                    {% assign necklace_healing = 'Love | Passion | Creative Expression' %}
+                  {% elsif product_title_downcase contains 'peridot' %}
+                    {% assign necklace_healing = 'Growth | Healing | Renewal' %}
+                  {% elsif product_title_downcase contains 'labradorite' %}
+                    {% assign necklace_healing = 'Mystic Power | Intuition | Transformation' %}
+                  {% elsif product_title_downcase contains 'smokey quartz' or product_title_downcase contains 'smoky quartz' %}
+                    {% assign necklace_healing = 'Grounding | Emotional Stability | Protection' %}
+                  {% elsif product_title_downcase contains 'selenite' %}
+                    {% assign necklace_healing = 'Energy Cleansing | Purification | Light Energy' %}
+                  {% else %}
+                    {% assign necklace_healing = 'Elegance | Positive Energy | Timeless Beauty' %}
+                  {% endif %}
+
+                  {% assign necklace_info = necklace_healing %}
+                {% endif %}
+
+                {%- comment -%} Ring Healing Benefits {%- endcomment -%}
+                {% assign show_ring_info = false %}
+                {% assign ring_info = '' %}
+
+                {% if product_type_downcase contains 'ring' or product_title_downcase contains ' ring' %}
+                  {% assign show_ring_info = true %}
+
+                  {% if product_title_downcase contains 'rose quartz' %}
+                    {% assign ring_info = 'Love | Emotional Healing | Romance' %}
+                  {% elsif product_title_downcase contains 'amethyst' %}
+                    {% assign ring_info = 'Calm | Spiritual Growth | Stress Relief' %}
+                  {% elsif product_title_downcase contains 'citrine' %}
+                    {% assign ring_info = 'Abundance | Success | Manifestation' %}
+                  {% elsif product_title_downcase contains 'emerald' %}
+                    {% assign ring_info = 'Love | Fertility | Renewal' %}
+                  {% elsif product_title_downcase contains 'ruby' %}
+                    {% assign ring_info = 'Passion | Vitality | Courage' %}
+                  {% elsif product_title_downcase contains 'sapphire' %}
+                    {% assign ring_info = 'Wisdom | Loyalty | Protection' %}
+                  {% elsif product_title_downcase contains 'diamond' %}
+                    {% assign ring_info = 'Eternal Love | Purity | Strength' %}
+                  {% elsif product_title_downcase contains 'opal' %}
+                    {% assign ring_info = 'Creativity | Inspiration | Magic' %}
+                  {% elsif product_title_downcase contains 'turquoise' %}
+                    {% assign ring_info = 'Protection | Communication | Healing' %}
+                  {% elsif product_title_downcase contains 'lapis' %}
+                    {% assign ring_info = 'Truth | Wisdom | Inner Power' %}
+                  {% elsif product_title_downcase contains 'malachite' %}
+                    {% assign ring_info = 'Transformation | Growth | Protection' %}
+                  {% elsif product_title_downcase contains 'onyx' %}
+                    {% assign ring_info = 'Strength | Protection | Focus' %}
+                  {% elsif product_title_downcase contains 'tiger' %}
+                    {% assign ring_info = 'Courage | Confidence | Protection' %}
+                  {% elsif product_title_downcase contains 'moonstone' %}
+                    {% assign ring_info = 'Intuition | Balance | New Beginnings' %}
+                  {% elsif product_title_downcase contains 'labradorite' %}
+                    {% assign ring_info = 'Mystic | Transformation | Protection' %}
+                  {% elsif product_title_downcase contains 'aquamarine' %}
+                    {% assign ring_info = 'Calm | Courage | Clear Communication' %}
+                  {% elsif product_title_downcase contains 'peridot' %}
+                    {% assign ring_info = 'Growth | Prosperity | Healing' %}
+                  {% elsif product_title_downcase contains 'topaz' %}
+                    {% assign ring_info = 'Love | Joy | Abundance' %}
+                  {% elsif product_title_downcase contains 'garnet' %}
+                    {% assign ring_info = 'Devotion | Energy | Protection' %}
+                  {% elsif product_title_downcase contains 'jade' %}
+                    {% assign ring_info = 'Luck | Wisdom | Harmony' %}
+                  {% else %}
+                    {% assign ring_info = 'Elegance | Meaning | Timeless Style' %}
+                  {% endif %}
+                {% endif %}
+
+                {%- comment -%} Earring Healing Benefits {%- endcomment -%}
+                {% assign show_earring_info = false %}
+                {% assign earring_info = '' %}
+
+                {% if product_type_downcase contains 'earring' or product_title_downcase contains 'earring' %}
+                  {% assign show_earring_info = true %}
+
+                  {% if product_title_downcase contains 'rose quartz' %}
+                    {% assign earring_info = 'Self-Love | Emotional Healing | Warmth' %}
+                  {% elsif product_title_downcase contains 'pearl' %}
+                    {% assign earring_info = 'Purity | Wisdom | Elegance' %}
+                  {% elsif product_title_downcase contains 'moonstone' %}
+                    {% assign earring_info = 'Intuition | Feminine Energy | Balance' %}
+                  {% elsif product_title_downcase contains 'amethyst' %}
+                    {% assign earring_info = 'Peace | Spiritual Clarity | Calm' %}
+                  {% elsif product_title_downcase contains 'emerald' %}
+                    {% assign earring_info = 'Love | Hope | Renewal' %}
+                  {% elsif product_title_downcase contains 'ruby' %}
+                    {% assign earring_info = 'Passion | Vitality | Courage' %}
+                  {% elsif product_title_downcase contains 'sapphire' %}
+                    {% assign earring_info = 'Wisdom | Trust | Devotion' %}
+                  {% elsif product_title_downcase contains 'diamond' %}
+                    {% assign earring_info = 'Eternal Love | Strength | Purity' %}
+                  {% elsif product_title_downcase contains 'opal' %}
+                    {% assign earring_info = 'Creativity | Inspiration | Hope' %}
+                  {% elsif product_title_downcase contains 'aquamarine' %}
+                    {% assign earring_info = 'Calm | Clarity | Courage' %}
+                  {% elsif product_title_downcase contains 'tourmaline' %}
+                    {% assign earring_info = 'Protection | Balance | Joy' %}
+                  {% elsif product_title_downcase contains 'labradorite' %}
+                    {% assign earring_info = 'Mystic | Intuition | Magic' %}
+                  {% elsif product_title_downcase contains 'clear quartz' %}
+                    {% assign earring_info = 'Clarity | Healing | Energy' %}
+                  {% elsif product_title_downcase contains 'coral' %}
+                    {% assign earring_info = 'Vitality | Passion | Warmth' %}
+                  {% elsif product_title_downcase contains 'jade' %}
+                    {% assign earring_info = 'Luck | Harmony | Serenity' %}
+                  {% else %}
+                    {% assign earring_info = 'Grace | Beauty | Elegance' %}
+                  {% endif %}
+                {% endif %}
+
+                {%- comment -%} Anklet Healing Benefits {%- endcomment -%}
+                {% assign show_anklet_info = false %}
+                {% assign anklet_info = '' %}
+
+                {% if product_type_downcase contains 'anklet' or product_title_downcase contains 'anklet' %}
+                  {% assign show_anklet_info = true %}
+
+                  {% if product_title_downcase contains 'rose quartz' %}
+                    {% assign anklet_info = 'Love | Healing | Self-Care' %}
+                  {% elsif product_title_downcase contains 'amethyst' %}
+                    {% assign anklet_info = 'Peace | Spiritual | Calm' %}
+                  {% elsif product_title_downcase contains 'turquoise' %}
+                    {% assign anklet_info = 'Protection | Healing | Joy' %}
+                  {% elsif product_title_downcase contains 'jade' %}
+                    {% assign anklet_info = 'Luck | Harmony | Balance' %}
+                  {% elsif product_title_downcase contains 'pearl' %}
+                    {% assign anklet_info = 'Purity | Grace | Beauty' %}
+                  {% else %}
+                    {% assign anklet_info = 'Flow | Balance | Positive Energy' %}
+                  {% endif %}
+                {% endif %}
+
+                {%- if show_zodiac -%}
+                    <div class="product-subheading card-subheading zodiac-subheading">
+                        {{ zodiac_dates }}
+                    </div>
+                {% elsif show_bracelet_info and bracelet_info != blank %}
+                    <div class="product-subheading card-subheading bracelet-subheading">
+                        {{ bracelet_info }}
+                    </div>
+                {% elsif show_necklace_info and necklace_info != blank %}
+                    <div class="product-subheading card-subheading bracelet-subheading">
+                        {{ necklace_info }}
+                    </div>
+                {% elsif show_ring_info and ring_info != blank %}
+                    <div class="product-subheading card-subheading bracelet-subheading">
+                        {{ ring_info }}
+                    </div>
+                {% elsif show_earring_info and earring_info != blank %}
+                    <div class="product-subheading card-subheading bracelet-subheading">
+                        {{ earring_info }}
+                    </div>
+                {% elsif show_anklet_info and anklet_info != blank %}
+                    <div class="product-subheading card-subheading bracelet-subheading">
+                        {{ anklet_info }}
+                    </div>
+                {%- elsif product.metafields.custom.subheading != blank -%}
+                    <div class="card-subheading">
+                        {{ product.metafields.custom.subheading }}
+                    </div>
+                {%- endif -%}
+                <div class="card-price">
+                    {% render 'price',
+                        product: product,
+                        price_class: ''
+                    %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

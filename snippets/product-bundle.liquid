@@ -1,0 +1,323 @@
+{%- if true -%}{% comment %} Force enabled for demo {% endcomment %}
+    {%- liquid
+        assign handle_metafields = product.metafields.c_f.grouped_sub_product | split: ','
+
+        # First priority: Check JSON mapping file for recommended products
+        assign mapping_file = 'config/fbt-product-mapping.json' | asset_url
+        assign current_product_handle = product.handle
+
+        # Try to get recommended products from mapping
+        assign use_mapping = false
+        assign recommended_handles = ""
+
+        # Check if this product has mapping (using string contains as fallback)
+        if product.handle == 'rose-quartz-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'amethyst-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,smoky-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'citrine-bracelet'
+            assign recommended_handles = "pyrite-bracelet,clear-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'clear-quartz-bracelet'
+            assign recommended_handles = "amethyst-bracelet,rose-quartz-bracelet,smoky-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'pyrite-bracelet'
+            assign recommended_handles = "citrine-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'tigers-eye-bracelet'
+            assign recommended_handles = "carnelian-bracelet,pyrite-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'black-onyx-bracelet'
+            assign recommended_handles = "garnet-bracelet,clear-quartz-bracelet,hematite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'garnet-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,carnelian-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'carnelian-bracelet'
+            assign recommended_handles = "tigers-eye-bracelet,citrine-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'smoky-quartz-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'labradorite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,moonstone-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'moonstone-bracelet'
+            assign recommended_handles = "labradorite-bracelet,rose-quartz-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'aquamarine-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,moonstone-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'sodalite-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,fluorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'malachite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'tourmaline-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,rose-quartz-bracelet,labradorite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'blue-lapis-lazuli-bracelet' or product.handle == 'lpais-lazuli-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,sodalite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'hematite-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,garnet-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'howlite-bracelet'
+            assign recommended_handles = "amethyst-bracelet,tigers-eye-bracelet,black-onyx-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'unakite-bracelet'
+            assign recommended_handles = "rose-quartz-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'rhodonite-bracelet'
+            assign recommended_handles = "black-onyx-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'sunstone-bracelet'
+            assign recommended_handles = "citrine-bracelet,carnelian-bracelet,pyrite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'green-aventurine-bracelet' or product.handle == 'green-aventurine-chip-gemstone-bracelet'
+            assign recommended_handles = "citrine-bracelet,jade-bracelet,clear-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'nephrite-jade-bracelet-aaa-quality' or product.handle == 'jade-bracelet'
+            assign recommended_handles = "aventurine-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'turquoise-bracelet' or product.handle == 'tibetan-turquoise-bracelet'
+            assign recommended_handles = "lapis-lazuli-bracelet,amethyst-bracelet,clear-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'fluorite-bracelet' or product.handle == 'rainbow-fluorite-bracelet'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,sodalite-bracelet"
+            assign use_mapping = true
+        elsif product.handle == 'obsidian-bracelet' or product.handle == 'gold-sheen-obsidian-bracelet'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,garnet-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'opal'
+            assign recommended_handles = "moonstone-bracelet,clear-quartz-bracelet,amethyst-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'ruby'
+            assign recommended_handles = "garnet-bracelet,carnelian-bracelet,citrine-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'sapphire'
+            assign recommended_handles = "amethyst-bracelet,clear-quartz-bracelet,tigers-eye-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'emerald'
+            assign recommended_handles = "aventurine-bracelet,jade-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'zodiac'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,rose-quartz-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'chakra'
+            assign recommended_handles = "clear-quartz-bracelet,amethyst-bracelet,carnelian-bracelet"
+            assign use_mapping = true
+        elsif product.handle contains 'rudraksha'
+            assign recommended_handles = "tigers-eye-bracelet,amethyst-bracelet,black-onyx-bracelet"
+            assign use_mapping = true
+        endif
+
+        # Use mapping if available, otherwise use metafields
+        if use_mapping and recommended_handles != ""
+            assign handle_metafields = recommended_handles | split: ','
+        endif
+
+        # Fallback: If no manual bundle, grab first 3 products from the same collection
+        if handle_metafields == blank
+            assign collection_products = product.collections.first.products
+            assign fallback_handles = ""
+            assign count = 0
+            for prod in collection_products
+                if prod.id != product.id and count < 3
+                    assign fallback_handles = fallback_handles | append: prod.handle | append: ","
+                    assign count = count | plus: 1
+                endif
+            endfor
+            assign handle_metafields = fallback_handles | split: ','
+        endif
+    -%}
+
+    {% if handle_metafields.size > 0 %}
+        {%- assign handle_size =  handle_metafields | size -%}
+
+        <link rel="stylesheet" href="{{ 'component-product-bundle.css' | asset_url }}" media="print" onload="this.media='all'">
+        <noscript>{{ 'component-product-bundle.css' | asset_url | stylesheet_tag }}</noscript>
+
+        {%- liquid
+            assign padding_top = section.settings.padding_top | append: 'px'
+            assign padding_bottom = section.settings.padding_bottom | append: 'px'
+            assign padding_top_tablet = section.settings.padding_top_tablet | append: 'px'
+            assign padding_bottom_tablet = section.settings.padding_bottom_tablet | append: 'px'
+            assign padding_top_mobile = section.settings.padding_top_mobile | append: 'px'
+            assign padding_bottom_mobile = section.settings.padding_bottom_mobile | append: 'px'
+            assign container = section.settings.container
+            assign background_color = section.settings.background_color
+            assign block_title = section.settings.block_title
+            assign block_title_align = section.settings.block_title_align
+            assign block_dots = section.settings.block_dots
+            assign block_arrows = section.settings.block_arrows
+            assign product_style = section.settings.product_style
+            assign image_ratio = section.settings.block_image_ratio
+            assign portrait_aspect_ratio = 148
+            assign handle_metafields = product.metafields.c_f.grouped_sub_product | split: ','
+            assign bundle_discount = section.settings.bundle_discount
+
+            if bundle_discount
+                assign bundle_discount_rate = product.metafields.c_f.bundle_discount_rate | plus: 0 | divided_by: 100.00
+                assign bundle_discount_text = section.settings.bundle_discount_text
+                assign bundle_discount_text_color =  section.settings.bundle_discount_text_color
+            endif
+
+            
+            assign total_btn_color = section.settings.total_btn_color
+            assign total_btn_border = section.settings.total_btn_border
+            assign total_btn_bg = section.settings.total_btn_bg
+            assign total_btn_bg_gradient = section.settings.total_btn_bg_gradient
+            
+            assign total_btn_color_hover = section.settings.total_btn_color_hover
+            assign total_btn_border_hover = section.settings.total_btn_border_hover
+            assign total_btn_bg_hover = section.settings.total_btn_bg_hover
+            assign total_btn_bg_gradient_hover = section.settings.total_btn_bg_gradient_hover
+        -%}
+        <style type="text/css" media="screen">
+            #halo-product-bundle{
+                padding-top: {{ padding_top }};
+                padding-bottom: {{ padding_bottom }};
+                background: #ffffff; /* Clean white background */
+                border-top: 1px solid #e6e6e6;
+                margin-top: 40px;
+            }
+
+            #halo-product-bundle .halo-block-header .title {
+                text-align: center;
+                font-family: var(--font-heading-family);
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                margin-bottom: 30px;
+            }
+
+            #halo-product-bundle .bundle-product-action .button{
+                background: #000000;
+                color: #ffffff;
+                border-color: #000000;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-weight: 600;
+            }
+             #halo-product-bundle .bundle-product-action .button:hover{
+                background: #333333;
+                border-color: #333333;
+             }
+
+            @media (max-width: 1024px) {
+                #halo-product-bundle{
+                    padding-top: {{ padding_top_tablet }};
+                    padding-bottom: {{ padding_bottom_tablet }};
+                }
+            }
+
+            @media (max-width: 550px) {
+                #halo-product-bundle{
+                    padding-top: {{ padding_top_mobile }};
+                    padding-bottom: {{ padding_bottom_mobile }};
+                }
+            }
+
+            @media (min-width: 1025px) {
+                #halo-product-bundle .bundle-product-action .button:hover{
+                    background: {% if total_btn_bg_gradient_hover != blank %}{{ total_btn_bg_gradient_hover }}{% else %}{{ total_btn_bg_hover }}{% endif %};
+                    color: {{ total_btn_color_hover }};
+                    border-color: {{ total_btn_border_hover }};
+                }
+            }
+        </style>
+
+        <script>
+            window.total_btn = {
+                add_item: `{{ 'products.product.bundle_block.add_item_to_cart' | t }}`,
+                add_items: `{{ 'products.product.bundle_block.add_items_to_cart' | t }}`,
+                add_all_item: `{{ 'products.product.bundle_block.add_all_to_cart' | t }}`
+            }
+        </script>
+
+        <product-bundle class="halo-block halo-product-bundle frequently-bought-together-block" data-product-bundle id="halo-product-bundle">
+            <div class="container container-{{ container }}">
+                {%- if block_title != blank -%}
+                    <div class="halo-block-header">
+                        <h3 class="title text-{{ block_title_align }}">
+                            <span class="text">
+                                {%- if block_title != blank -%}
+                                    {{ block_title | escape }}
+                                {%- else -%}
+                                    Complete The Look
+                                {%- endif -%}
+                            </span>
+                        </h3>
+                    </div>
+                {%- endif -%}
+                <div class="halo-block-content">
+                    <div class="bundle-product">
+                        {%- assign product_form_bundle_id = 'product-form-bundle-' | append: product.id -%}
+                        {%- form 'product', product, id: product_form_bundle_id, class: 'frequently-bought-together-form' -%}
+                            <div class="bundle-product-wrapper has-halo-block-loader">
+                                <div class="halo-block-loader"></div>
+                                <div class="bundle-product-left">
+                                    <div class="bundle-product-list" data-bundle-slider data-dots="{{ block_dots }}" data-arrows="{{ block_arrows }}">
+                                        {%- render 'product-bundle-item',
+                                            product: product,
+                                            product_style: product_style,
+                                            image_ratio: image_ratio,
+                                            portrait_aspect_ratio: portrait_aspect_ratio,
+                                            first: true
+                                        -%}
+                                        {%- for handle in handle_metafields limit: 10 -%}
+                                            {%- liquid
+                                                assign handle_bundle = handle | strip
+                                                assign product = all_products[handle_bundle]
+                                            -%}
+                                            {%- render 'product-bundle-item',
+                                                product: product,
+                                                product_style: product_style,
+                                                image_ratio: image_ratio,
+                                                portrait_aspect_ratio: portrait_aspect_ratio,
+                                                first: false
+                                            -%}
+                                        {%- endfor -%}
+                                    </div>
+                                </div>
+                                <div class="bundle-product-right">
+                                    <div class="bundle-product-total">
+                                        <div class="bundle-product-totalPrice">
+                                            <span class="text">
+                                                {{ 'products.product.bundle_block.total_price' | t }}
+                                            </span>
+                                            {%- if bundle_discount_rate > 0 -%}
+                                                <span class="old-price bundle-old-price">
+                                                    {{ cart.total_price | money }}
+                                                </span>
+                                                <span class="bundle-price" data-bundle-product-price data-bundle-discount-rate="{{ bundle_discount_rate }}">
+                                                    {%- assign compensation = 1 | minus: bundle_discount_rate -%}
+                                                    {{ cart.total_price | times: compensation | money }}
+                                                </span>
+                                            {%- endif -%}
+                                            <span class="price" data-bundle-product-total>
+                                                {{ cart.total_price | money }}
+                                            </span>
+                                        </div>
+                                        <div class="bundle-product-action">
+                                            <input data-bundle-addToCart type="submit" name="add" data-form-id="{{ product_form_bundle_id | prepend : '#' }}" class="button button--primary button-bundle style-{{ total_btn_style }}" value="{{ 'products.product.bundle_block.add_all_to_cart' | t }}">
+                                        </div>
+                                        {%- if bundle_discount_rate > 0 -%}
+                                            <div class="bundle-product-text">
+                                                {{ bundle_discount_text }}
+                                            </div>
+                                        {%- endif -%}
+                                    </div>
+                                </div>
+                            </div>
+                        {%- endform -%}
+                    </div>
+                </div>
+            </div>
+        </product-bundle>
+        <script src="{{ 'product-bundle.js' | asset_url }}" defer></script>
+    {% endif %}
+{% endif %}

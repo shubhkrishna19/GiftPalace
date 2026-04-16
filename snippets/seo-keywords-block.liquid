@@ -1,0 +1,254 @@
+<div class="seo-keywords-block" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
+  <p style="font-size: 13px; color: #666; margin-bottom: 10px; font-weight: 600; text-transform: uppercase;">Search Keywords:</p>
+  <div class="seo-links" style="font-size: 14px; line-height: 1.8;">
+    {% comment %} Always show general categories {% endcomment %}
+    <a href="/collections/healing-crystals" title="Healing Crystals" style="color: #555; text-decoration: none; margin-right: 8px;">Healing Crystals</a>
+    <a href="/collections/natural-gemstones" title="Natural Gemstones" style="color: #555; text-decoration: none; margin-right: 8px;">Natural Gemstones</a>
+
+    {% comment %} Detect crystal type from product title and show relevant keywords {% endcomment %}
+    {% assign title_downcase = product.title | downcase %}
+
+    {% if title_downcase contains 'amethyst' %}
+      <a href="/collections/amethyst" title="Amethyst Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Amethyst</a>
+      <a href="/collections/amethyst-bracelet" title="Amethyst Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Amethyst Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'rose quartz' %}
+      <a href="/collections/rose-quartz" title="Rose Quartz" style="color: #555; text-decoration: none; margin-right: 8px;">Rose Quartz</a>
+      <a href="/collections/rose-quartz-bracelet" title="Rose Quartz Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Rose Quartz Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'citrine' %}
+      <a href="/collections/citrine" title="Citrine Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Citrine</a>
+      <a href="/collections/citrine-bracelet" title="Citrine Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Citrine Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'clear quartz' or title_downcase contains 'sphatik' %}
+      <a href="/collections/clear-quartz" title="Clear Quartz" style="color: #555; text-decoration: none; margin-right: 8px;">Clear Quartz</a>
+      <a href="/collections/clear-quartz-bracelet" title="Clear Quartz Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Clear Quartz Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'smoky quartz' or title_downcase contains 'smokey quartz' %}
+      <a href="/collections/smoky-quartz" title="Smoky Quartz" style="color: #555; text-decoration: none; margin-right: 8px;">Smoky Quartz</a>
+      <a href="/collections/smoky-quartz-bracelet" title="Smoky Quartz Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Smoky Quartz Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'obsidian' %}
+      <a href="/collections/obsidian" title="Obsidian Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Obsidian</a>
+      <a href="/collections/obsidian-bracelet" title="Obsidian Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Obsidian Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'tiger' %}
+      <a href="/collections/tigers-eye" title="Tiger's Eye" style="color: #555; text-decoration: none; margin-right: 8px;">Tiger's Eye</a>
+      <a href="/collections/tigers-eye-bracelet" title="Tiger's Eye Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Tiger's Eye Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'jade' %}
+      <a href="/collections/jade" title="Jade Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Jade</a>
+      <a href="/collections/jade-bracelet" title="Jade Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Jade Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'turquoise' %}
+      <a href="/collections/turquoise" title="Turquoise Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Turquoise</a>
+      <a href="/collections/turquoise-bracelet" title="Turquoise Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Turquoise Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'lapis lazuli' or title_downcase contains 'lapis' %}
+      <a href="/collections/lapis-lazuli" title="Lapis Lazuli" style="color: #555; text-decoration: none; margin-right: 8px;">Lapis Lazuli</a>
+      <a href="/collections/lapis-lazuli-bracelet" title="Lapis Lazuli Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Lapis Lazuli Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'sapphire' %}
+      <a href="/collections/sapphire" title="Sapphire Gemstone" style="color: #555; text-decoration: none; margin-right: 8px;">Sapphire</a>
+    {% endif %}
+
+    {% if title_downcase contains 'emerald' %}
+      <a href="/collections/emerald" title="Emerald Gemstone" style="color: #555; text-decoration: none; margin-right: 8px;">Emerald</a>
+    {% endif %}
+
+    {% if title_downcase contains 'ruby' %}
+      <a href="/collections/ruby" title="Ruby Gemstone" style="color: #555; text-decoration: none; margin-right: 8px;">Ruby</a>
+      <a href="/collections/ruby-bracelet" title="Ruby Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Ruby Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'garnet' %}
+      <a href="/collections/garnet" title="Garnet Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Garnet</a>
+      <a href="/collections/garnet-bracelet" title="Garnet Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Garnet Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'aquamarine' %}
+      <a href="/collections/aquamarine" title="Aquamarine Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Aquamarine</a>
+      <a href="/collections/aquamarine-bracelet" title="Aquamarine Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Aquamarine Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'opal' %}
+      <a href="/collections/opal" title="Opal Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Opal</a>
+      <a href="/collections/opal-bracelet" title="Opal Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Opal Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'moonstone' %}
+      <a href="/collections/moonstone" title="Moonstone Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Moonstone</a>
+      <a href="/collections/moonstone-bracelet" title="Moonstone Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Moonstone Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'pyrite' %}
+      <a href="/collections/pyrite" title="Pyrite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Pyrite</a>
+      <a href="/collections/pyrite-bracelet" title="Pyrite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Pyrite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'labradorite' %}
+      <a href="/collections/labradorite" title="Labradorite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Labradorite</a>
+      <a href="/collections/labradorite-bracelet" title="Labradorite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Labradorite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'malachite' %}
+      <a href="/collections/malachite" title="Malachite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Malachite</a>
+      <a href="/collections/malachite-bracelet" title="Malachite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Malachite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'sodalite' %}
+      <a href="/collections/sodalite" title="Sodalite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Sodalite</a>
+      <a href="/collections/sodalite-bracelet" title="Sodalite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Sodalite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'onyx' %}
+      <a href="/collections/black-onyx" title="Black Onyx" style="color: #555; text-decoration: none; margin-right: 8px;">Black Onyx</a>
+      <a href="/collections/onyx-bracelet" title="Onyx Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Onyx Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'hematite' %}
+      <a href="/collections/hematite" title="Hematite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Hematite</a>
+      <a href="/collections/hematite-bracelet" title="Hematite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Hematite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'carnelian' %}
+      <a href="/collections/carnelian" title="Carnelian Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Carnelian</a>
+      <a href="/collections/carnelian-bracelet" title="Carnelian Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Carnelian Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'tourmaline' %}
+      <a href="/collections/tourmaline" title="Tourmaline Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Tourmaline</a>
+      <a href="/collections/tourmaline-bracelet" title="Tourmaline Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Tourmaline Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'fluorite' %}
+      <a href="/collections/fluorite" title="Fluorite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Fluorite</a>
+      <a href="/collections/fluorite-bracelet" title="Fluorite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Fluorite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'jasper' %}
+      <a href="/collections/jasper" title="Jasper Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Jasper</a>
+      <a href="/collections/jasper-bracelet" title="Jasper Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Jasper Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'agate' %}
+      <a href="/collections/agate" title="Agate Stone" style="color: #555; text-decoration: none; margin-right: 8px;">Agate</a>
+      <a href="/collections/agate-bracelet" title="Agate Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Agate Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'howlite' %}
+      <a href="/collections/howlite" title="Howlite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Howlite</a>
+      <a href="/collections/howlite-bracelet" title="Howlite Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Howlite Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'angelite' %}
+      <a href="/collections/angelite" title="Angelite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Angelite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'selenite' %}
+      <a href="/collections/selenite" title="Selenite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Selenite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'unakite' %}
+      <a href="/collections/unakite" title="Unakite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Unakite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'rhodonite' %}
+      <a href="/collections/rhodonite" title="Rhodonite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Rhodonite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'larimar' %}
+      <a href="/collections/larimar" title="Larimar Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Larimar</a>
+    {% endif %}
+
+    {% if title_downcase contains 'charoite' %}
+      <a href="/collections/charoite" title="Charoite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Charoite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'kunzite' %}
+      <a href="/collections/kunzite" title="Kunzite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Kunzite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'apatite' %}
+      <a href="/collections/apatite" title="Apatite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Apatite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'kyanite' %}
+      <a href="/collections/kyanite" title="Kyanite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Kyanite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'amazonite' %}
+      <a href="/collections/amazonite" title="Amazonite Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Amazonite</a>
+    {% endif %}
+
+    {% if title_downcase contains 'sunstone' %}
+      <a href="/collections/sunstone" title="Sunstone Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Sunstone</a>
+    {% endif %}
+
+    {% if title_downcase contains 'aventurine' %}
+      <a href="/collections/aventurine" title="Aventurine Crystal" style="color: #555; text-decoration: none; margin-right: 8px;">Aventurine</a>
+    {% endif %}
+
+    {% if title_downcase contains 'rudraksha' or title_downcase contains 'rudraksha' %}
+      <a href="/collections/rudraksha" title="Rudraksha Beads" style="color: #555; text-decoration: none; margin-right: 8px;">Rudraksha</a>
+      <a href="/collections/rudraksha-bracelet" title="Rudraksha Bracelet" style="color: #555; text-decoration: none; margin-right: 8px;">Rudraksha Bracelet</a>
+    {% endif %}
+
+    {% if title_downcase contains 'chakra' %}
+      <a href="/collections/chakra-jewelry" title="Chakra Jewelry" style="color: #555; text-decoration: none; margin-right: 8px;">Chakra Jewelry</a>
+    {% endif %}
+
+    {% comment %} Zodiac signs {% endcomment %}
+    {% if title_downcase contains 'aries' %}
+      <a href="/collections/aries-zodiac" title="Aries Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Aries</a>
+    {% endif %}
+    {% if title_downcase contains 'taurus' %}
+      <a href="/collections/taurus-zodiac" title="Taurus Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Taurus</a>
+    {% endif %}
+    {% if title_downcase contains 'gemini' %}
+      <a href="/collections/gemini-zodiac" title="Gemini Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Gemini</a>
+    {% endif %}
+    {% if title_downcase contains 'cancer' %}
+      <a href="/collections/cancer-zodiac" title="Cancer Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Cancer</a>
+    {% endif %}
+    {% if title_downcase contains 'leo' %}
+      <a href="/collections/leo-zodiac" title="Leo Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Leo</a>
+    {% endif %}
+    {% if title_downcase contains 'virgo' %}
+      <a href="/collections/virgo-zodiac" title="Virgo Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Virgo</a>
+    {% endif %}
+    {% if title_downcase contains 'libra' %}
+      <a href="/collections/libra-zodiac" title="Libra Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Libra</a>
+    {% endif %}
+    {% if title_downcase contains 'scorpio' %}
+      <a href="/collections/scorpio-zodiac" title="Scorpio Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Scorpio</a>
+    {% endif %}
+    {% if title_downcase contains 'sagittarius' %}
+      <a href="/collections/sagittarius-zodiac" title="Sagittarius Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Sagittarius</a>
+    {% endif %}
+    {% if title_downcase contains 'capricorn' %}
+      <a href="/collections/capricorn-zodiac" title="Capricorn Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Capricorn</a>
+    {% endif %}
+    {% if title_downcase contains 'aquarius' %}
+      <a href="/collections/aquarius-zodiac" title="Aquarius Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Aquarius</a>
+    {% endif %}
+    {% if title_downcase contains 'pisces' %}
+      <a href="/collections/pisces-zodiac" title="Pisces Zodiac" style="color: #555; text-decoration: none; margin-right: 8px;">Pisces</a>
+    {% endif %}
+
+    {% comment %} Default category links {% endcomment %}
+    <a href="/collections/certified-crystals" title="Certified Crystals" style="color: #555; text-decoration: none; margin-right: 8px;">Certified Crystals</a>
+    <a href="/collections/zodiac-jewelry" title="Zodiac Jewelry" style="color: #555; text-decoration: none; margin-right: 8px;">Zodiac Jewelry</a>
+    <a href="/collections/spiritual-jewelry" title="Spiritual Jewelry" style="color: #555; text-decoration: none; margin-right: 8px;">Spiritual Jewelry</a>
+  </div>
+</div>

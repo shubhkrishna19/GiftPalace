@@ -1,0 +1,17 @@
+/*// =============================================================================
+// Ella Custom CSS - Customize The Style For Layout
+// =============================================================================
+
+// =============================================================================
+//
+// IMPORTANT DISCLAIMER
+// Shopify is notifying shop owners about the need to convert scss files to css files.
+// Please use only CSS to style the layout.
+//
+// =============================================================================*/
+#shopify-section-template--19094164308280__163835209394385a65 .description{ background:#1796c9!important; color:#fff!important; padding:7px 0!important; width:120px!important; margin:0 auto!important}
+#shopify-section-template--19094164308280__163835209394385a65 .description:hover{ background:#fff!important;border:1px solid #232323; color:#232323!important;padding:7px 0!important;}
+.newsletter-section{background:#e5f2fa!important}
+
+.block-ad3a1911-3e78-4eed-abef-a5cd4357dc89 .description, .sections-brand-slider .description{ margin:0 0 15px 0!important; text-transform:uppercase!important}
+.header-05 .menu-lv-1__action{padding: 21px 14px 22px!important;}
