@@ -16,7 +16,7 @@
   
 
 	<!-- Added by AVADA SEO Suite -->
-	{% include 'avada-seo' %}
+	{% render 'avada-seo' %}
 	<!-- /Added by AVADA SEO Suite -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,7 +58,7 @@
 
         <script>
           document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-          window.gemstoneLoaderUrl = "{{ 'gemstone-loader.png' | asset_url }}";
+          window.gemstoneLoaderUrl = "{{ 'gemstone-loader.png' | asset_url | default: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' }}";
         </script>
 
         {%- liquid
@@ -207,7 +207,7 @@
         {% render 'theme-demo-notification' %}
 
         {%- if settings.use_custom_js -%}
-            {{ 'custom.js' | asset_url | script_tag }}
+            <script src="{{ 'custom.js' | asset_url }}" defer></script>
         {%- endif -%}
         
         <div class="background-overlay">

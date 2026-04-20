@@ -9203,6 +9203,7 @@
     {
       "type": "select",
       "id": "envType",
+      "label": "Environment",
       "options": [
         { "value": "qa", "label": "QA" },
         { "value": "sandbox", "label": "Sandbox" },
