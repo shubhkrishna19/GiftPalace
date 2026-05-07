@@ -1,0 +1,85 @@
+{%- comment -%} Snippet: home-structured-data.liquid — Homepage structured data snippet {%- endcomment -%}
+{%- if template == 'index' -%}
+  {%- liquid
+    assign shop_url = request.origin
+    if shop_url == blank
+      assign shop_url = shop.url
+    endif
+
+    assign logo_url = "https://via.placeholder.com/500x200?text=Gift+Palace+India"
+    if settings.logo != blank
+      assign logo_url = settings.logo | image_url: width: 500 | prepend: "https:"
+    elsif settings.before_you_leave_logo != blank
+      assign logo_url = settings.before_you_leave_logo | image_url: width: 500 | prepend: "https:"
+    endif
+
+    assign organization_id = shop_url | append: '#organization'
+    assign website_id = shop_url | append: '#website'
+    assign breadcrumb_id = shop_url | append: '#breadcrumb'
+
+    assign facebook_url = settings.social_facebook_link | default: 'https://facebook.com/giftpalaceindia'
+    assign instagram_url = settings.social_instagram_link | default: 'https://instagram.com/giftpalaceindia'
+    assign whatsapp_url = 'https://wa.me/917011099721'
+  -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ organization_id | json }},
+        "name": "Gift Palace India",
+        "url": {{ shop_url | json }},
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ logo_url | json }},
+          "width": 500,
+          "height": 200
+        },
+        "sameAs": [
+          {{ facebook_url | json }},
+          {{ instagram_url | json }},
+          {{ whatsapp_url | json }}
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Founder of Gift Palace India"
+        },
+        "foundingDate": "1989",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-7011099721",
+          "contactType": "customer service"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ website_id | json }},
+        "name": "Gift Palace India",
+        "url": {{ shop_url | json }},
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            {%- assign search_url = shop_url | append: '/search?q=' | append: '{' | append: 'search_term_string' | append: '}' -%}
+            "urlTemplate": {{ search_url | json }}
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": {{ breadcrumb_id | json }},
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ shop_url | json }}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+{%- endif -%}
