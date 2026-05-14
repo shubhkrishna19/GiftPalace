@@ -1,0 +1,67 @@
+{%- comment -%} Section: gpi-collection-toolbar — filters (chips) + sort + count {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-collection.css' | asset_url }}">
+
+{%- liquid
+  assign cur_sort = collection.sort_by | default: collection.default_sort_by
+  assign sort_options = collection.sort_options
+-%}
+
+<section class="gpi-collection-toolbar" data-gpi-toolbar>
+  <div class="gpi-container gpi-collection-toolbar__inner">
+
+    <details class="gpi-collection-toolbar__filters-toggle">
+      <summary class="gpi-button gpi-button--secondary gpi-button--sm">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Filter
+      </summary>
+
+      <form class="gpi-collection-toolbar__filters" data-gpi-filters>
+        {%- for filter in collection.filters -%}
+          <fieldset class="gpi-collection-toolbar__filter">
+            <legend>{{ filter.label }}</legend>
+            <div class="gpi-collection-toolbar__chips">
+              {%- case filter.type -%}
+                {%- when 'list' -%}
+                  {%- for v in filter.values -%}
+                    <label class="gpi-chip{% if v.active %} is-active{% endif %}{% if v.count == 0 and v.active == false %} is-disabled{% endif %}">
+                      <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}" {% if v.active %}checked{% endif %} {% if v.count == 0 and v.active == false %}disabled{% endif %}>
+                      <span>{{ v.label }}</span>
+                    </label>
+                  {%- endfor -%}
+                {%- when 'price_range' -%}
+                  <label class="gpi-chip__range">
+                    <span>Min</span>
+                    <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | default: 0 | money_without_currency }}" min="0">
+                  </label>
+                  <label class="gpi-chip__range">
+                    <span>Max</span>
+                    <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | default: filter.range_max | money_without_currency }}" min="0">
+                  </label>
+              {%- endcase -%}
+            </div>
+          </fieldset>
+        {%- endfor -%}
+        <button type="submit" class="gpi-button gpi-button--primary gpi-button--sm">Apply</button>
+        {%- if collection.current_vendor or collection.current_type or collection.url -%}
+          <a href="{{ collection.url }}" class="gpi-button gpi-button--text">Clear all</a>
+        {%- endif -%}
+      </form>
+    </details>
+
+    <p class="gpi-collection-toolbar__count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'piece', 'pieces' }}</p>
+
+    <label class="gpi-collection-toolbar__sort">
+      <span class="visually-hidden">Sort by</span>
+      <select data-gpi-sort>
+        {%- for option in sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == cur_sort %}selected{% endif %}>Sort: {{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    </label>
+  </div>
+</section>
+
+{% schema %}
+{"name": "GPI Collection toolbar", "presets": [{"name": "GPI Collection toolbar"}]}
+{% endschema %}

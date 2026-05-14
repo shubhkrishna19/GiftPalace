@@ -1,0 +1,39 @@
+{%- comment -%} Section: gpi-collection-hero {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-collection.css' | asset_url }}">
+
+{%- liquid
+  assign hero_image = section.settings.hero_image | default: collection.image
+  assign show_breadcrumb = section.settings.show_breadcrumb
+-%}
+<section class="gpi-collection-hero{% if hero_image %} gpi-collection-hero--has-image{% endif %}" aria-labelledby="gpi-collection-title">
+  {%- if hero_image -%}
+    <div class="gpi-collection-hero__media">
+      {%- render 'gpi-image', image: hero_image, alt: collection.title, sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'gpi-collection-hero__img' -%}
+      <div class="gpi-collection-hero__overlay"></div>
+    </div>
+  {%- endif -%}
+  <div class="gpi-container gpi-collection-hero__inner">
+    {%- if show_breadcrumb -%}{%- render 'gpi-breadcrumbs' -%}{%- endif -%}
+    <div class="gpi-collection-hero__copy">
+      <p class="gpi-collection-hero__eyebrow">{{ section.settings.eyebrow | default: 'Shop the collection' }}</p>
+      <h1 id="gpi-collection-title" class="gpi-collection-hero__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="gpi-collection-hero__lede">{{ collection.description | strip_html | truncate: 220 }}</p>
+      {%- endif -%}
+      <p class="gpi-collection-hero__count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'piece', 'pieces' }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Collection hero",
+  "settings": [
+    {"type": "image_picker", "id": "hero_image", "label": "Override hero image"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop the collection"},
+    {"type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true}
+  ],
+  "presets": [{"name": "GPI Collection hero"}]
+}
+{% endschema %}

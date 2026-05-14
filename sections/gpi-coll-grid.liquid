@@ -1,0 +1,46 @@
+{%- comment -%} Section: gpi-collection-grid - product grid with load-more pagination {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-collection.css' | asset_url }}">
+
+{%- assign per_page = section.settings.per_page | default: 24 -%}
+{%- paginate collection.products by per_page -%}
+<section class="gpi-collection-grid-section" data-gpi-collection-grid>
+  <div class="gpi-container">
+    {%- if collection.products.size == 0 -%}
+      <div class="gpi-collection-empty">
+        <h2 class="gpi-collection-empty__heading">No pieces match yet</h2>
+        <p class="gpi-collection-empty__lede">Try clearing filters or exploring an intention to find what feels right.</p>
+        <div class="gpi-collection-empty__chips">
+          <a href="/collections/all" class="gpi-button gpi-button--primary gpi-button--sm">Browse all</a>
+          <a href="/pages/shop-by-intention" class="gpi-button gpi-button--secondary gpi-button--sm">Shop by intention</a>
+          <a href="{{ collection.url }}" class="gpi-button gpi-button--text">Reset filters</a>
+        </div>
+      </div>
+    {%- else -%}
+      <ul class="gpi-collection-grid" role="list" data-gpi-grid>
+        {%- for product in collection.products -%}
+          <li>{%- render 'gpi-product-card', product: product -%}</li>
+        {%- endfor -%}
+      </ul>
+      {%- if paginate.pages > 1 -%}
+        <div class="gpi-collection-loadmore">
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="gpi-button gpi-button--secondary gpi-button--md" data-gpi-loadmore>Load more pieces</a>
+          {%- endif -%}
+          <p class="gpi-collection-loadmore__progress">Page {{ paginate.current_page }} of {{ paginate.pages }}</p>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "GPI Coll grid",
+  "settings": [
+    {"type": "range", "id": "per_page", "label": "Products per page", "min": 12, "max": 48, "step": 4, "default": 24}
+  ],
+  "presets": [{"name": "GPI Coll grid"}]
+}
+{% endschema %}
