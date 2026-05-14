@@ -105,10 +105,39 @@
           <li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.8 6.4 19.5l1.1-6.3L3 8.9l6-.9 3-6z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Hand-finished in our atelier</li>
         </ul>
 
+        {%- comment -%} Certificate of authenticity download CTA {%- endcomment -%}
+        {%- if product.metafields.gpi.certificate_pdf -%}
+          <a href="{{ product.metafields.gpi.certificate_pdf }}" target="_blank" rel="noopener" class="gpi-product__cert-dl">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="18" x2="12" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="9 15 12 18 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download certificate of authenticity (PDF)
+          </a>
+        {%- endif -%}
+
         {%- comment -%} Healing benefits — preserved from previous work {%- endcomment -%}
         {%- render 'product-healing-benefits', product: product -%}
 
       </div>
+    </div>
+  </div>
+
+  {%- comment -%} Sticky add-to-bag bar (mobile + desktop on scroll past main ATC) {%- endcomment -%}
+  <div class="gpi-product__sticky" data-gpi-product-sticky aria-hidden="true">
+    <div class="gpi-container gpi-product__sticky-inner">
+      <div class="gpi-product__sticky-info">
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 96 }}" alt="" width="48" height="48" loading="lazy">
+        {%- endif -%}
+        <div>
+          <strong>{{ product.title }}</strong>
+          <span>{{ cur.price | money }}</span>
+        </div>
+      </div>
+      {%- form 'product', product, class: 'gpi-product__sticky-form' -%}
+        <input type="hidden" name="id" value="{{ cur.id }}">
+        <button type="submit" class="gpi-button gpi-button--primary gpi-button--md" {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}Add to bag{% else %}Sold out{% endif %}
+        </button>
+      {%- endform -%}
     </div>
   </div>
 </section>

@@ -331,3 +331,71 @@
   .gpi-product-tabs__nav { overflow-x: auto; flex-wrap: nowrap; }
   .gpi-product-tabs__trigger { white-space: nowrap; }
 }
+
+/* ---------- Certificate download CTA ---------- */
+.gpi-product__cert-dl {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: var(--gpi-surface-ivory);
+  border: 1px solid var(--gpi-border-soft);
+  border-radius: var(--gpi-radius-pill);
+  font-size: 13px;
+  color: var(--gpi-ink-strong);
+  text-decoration: none;
+  transition: all var(--gpi-transition);
+}
+.gpi-product__cert-dl:hover { border-color: var(--gpi-gold); background: var(--gpi-surface-card); }
+.gpi-product__cert-dl svg { color: var(--gpi-gold); flex-shrink: 0; }
+
+/* ---------- Sticky add-to-bag bar ---------- */
+.gpi-product__sticky {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--gpi-surface-card);
+  border-top: 1px solid var(--gpi-border-soft);
+  box-shadow: 0 -8px 24px rgba(24, 18, 12, 0.08);
+  z-index: 80;
+  padding: 10px 0;
+  transform: translateY(100%);
+  transition: transform 200ms ease, opacity 200ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.gpi-product__sticky.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.gpi-product__sticky-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.gpi-product__sticky-info {
+  display: flex; align-items: center; gap: 12px;
+  min-width: 0; flex: 1;
+}
+.gpi-product__sticky-info img {
+  width: 48px; height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.gpi-product__sticky-info div { display: flex; flex-direction: column; min-width: 0; }
+.gpi-product__sticky-info strong {
+  font-family: var(--gpi-body); font-weight: 500; font-size: 14px;
+  color: var(--gpi-ink-strong);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.gpi-product__sticky-info span {
+  font-family: var(--gpi-heading);
+  font-size: 15px;
+  color: var(--gpi-ink-strong);
+}
+.gpi-product__sticky-form { flex-shrink: 0; }
+.gpi-product__sticky-form button { min-width: 140px; }
+
+@media (max-width: 480px) {
+  .gpi-product__sticky-info strong { font-size: 13px; }
+  .gpi-product__sticky-info img { width: 40px; height: 40px; }
+  .gpi-product__sticky-form button { min-width: 120px; padding: 12px 18px; font-size: 13px; }
+}

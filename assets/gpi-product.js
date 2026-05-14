@@ -1,6 +1,19 @@
 (function () {
   'use strict';
 
+  /* Sticky ATC bar — show after user scrolls past the main ATC button */
+  var sticky = document.querySelector('[data-gpi-product-sticky]');
+  var mainAtc = document.querySelector('.gpi-product__atc');
+  if (sticky && mainAtc) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) sticky.classList.remove('is-visible');
+        else sticky.classList.add('is-visible');
+      });
+    }, { rootMargin: '0px 0px -80% 0px' });
+    io.observe(mainAtc);
+  }
+
   /* Quantity stepper */
   document.querySelectorAll('[data-gpi-product]').forEach(function (root) {
     var qtyInput = root.querySelector('.gpi-product__qty-input');

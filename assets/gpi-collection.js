@@ -1,6 +1,52 @@
 (function () {
   'use strict';
 
+  /* Quick-add: POSTs the first variant to cart without leaving the page */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-gpi-quick-add]');
+    if (!btn) return;
+    e.preventDefault();
+    var variantId = btn.getAttribute('data-gpi-quick-add');
+    var originalText = btn.textContent;
+    btn.textContent = 'Adding...';
+    btn.disabled = true;
+    var body = new FormData();
+    body.append('id', variantId);
+    body.append('quantity', '1');
+    fetch('/cart/add.js', { method: 'POST', body: body })
+      .then(function (r) { return r.json(); })
+      .then(function () { return fetch('/cart.js'); })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        document.dispatchEvent(new CustomEvent('cart:change', { detail: { count: cart.item_count } }));
+        btn.textContent = 'Added ✓';
+        setTimeout(function () { btn.textContent = originalText; btn.disabled = false; }, 1600);
+      })
+      .catch(function () { btn.textContent = 'Try again'; btn.disabled = false; });
+  });
+
+  /* View toggle (4-col / 3-col / list) — persists in localStorage */
+  var grid = document.querySelector('[data-gpi-grid]');
+  document.querySelectorAll('[data-gpi-view]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var view = btn.getAttribute('data-gpi-view');
+      if (!grid) return;
+      grid.setAttribute('data-view', view);
+      try { localStorage.setItem('gpiCollectionView', view); } catch (e) {}
+      document.querySelectorAll('[data-gpi-view]').forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+    });
+  });
+  if (grid) {
+    try {
+      var saved = localStorage.getItem('gpiCollectionView');
+      if (saved) {
+        grid.setAttribute('data-view', saved);
+        var b = document.querySelector('[data-gpi-view="' + saved + '"]');
+        if (b) b.classList.add('is-active');
+      }
+    } catch (e) {}
+  }
+
   /* Sort dropdown change → reload with ?sort_by= */
   document.querySelectorAll('[data-gpi-sort]').forEach(function (sel) {
     sel.addEventListener('change', function () {
