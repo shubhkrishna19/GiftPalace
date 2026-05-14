@@ -19,20 +19,30 @@
         <div class="home-meaning-grid" style="margin-top: 28px;">
           {% for block in section.blocks %}
             {% liquid
-              assign meaning_image = 'gpi-stone-pukhraj.webp'
+              assign meaning_image = 'gpi-mean-intention.webp'
               assign meaning_title = block.settings.title | downcase
-              if meaning_title contains 'money'
-                assign meaning_image = 'gpi-stone-pukhraj.webp'
-              elsif meaning_title contains 'protection'
-                assign meaning_image = 'gpi-stone-neelam.webp'
+              if meaning_title contains 'intention'
+                assign meaning_image = 'gpi-mean-intention.webp'
+              elsif meaning_title contains 'zodiac'
+                assign meaning_image = 'gpi-mean-zodiac.webp'
+              elsif meaning_title contains 'statement' or meaning_title contains 'crystal'
+                assign meaning_image = 'gpi-mean-crystal.webp'
+              elsif meaning_title contains 'necklace' or meaning_title contains 'layering'
+                assign meaning_image = 'gpi-mean-layering.webp'
+              elsif meaning_title contains 'mala' or meaning_title contains 'spiritual'
+                assign meaning_image = 'gpi-mean-mala.webp'
+              elsif meaning_title contains 'gemstone' or meaning_title contains 'loose'
+                assign meaning_image = 'gpi-mean-loose.webp'
               elsif meaning_title contains 'love'
                 assign meaning_image = 'gpi-stone-pearl.webp'
-              elsif meaning_title contains 'peace'
+              elsif meaning_title contains 'protection' or meaning_title contains 'peace'
                 assign meaning_image = 'gpi-stone-neelam.webp'
               elsif meaning_title contains 'health'
                 assign meaning_image = 'gpi-stone-emerald.webp'
               elsif meaning_title contains 'confidence'
                 assign meaning_image = 'gpi-stone-ruby.webp'
+              elsif meaning_title contains 'money'
+                assign meaning_image = 'gpi-stone-pukhraj.webp'
               endif
             %}
             <div class="home-meaning-card" {{ block.shopify_attributes }}>

@@ -7,3 +7,11 @@
 backup/
 tmp/
 docs/
+
+# Explicit phantom references stuck in dev-server queue (clears on restart)
+sections/gpi-real-store-proof.liquid
+sections/gpi-collection-grid.liquid.tmp.24600.f8a43630a229
+sections/gpi-real-store-proof.liquid.tmp.24600.a6efca6bdd29
+
+# Legacy backup folder
+assets/.legacy/

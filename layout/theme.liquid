@@ -31,7 +31,17 @@
         <link rel="canonical" href="{{ canonical_url }}" canonical-shop-url="{{ shop.url }}/">
         {%- if settings.favicon != blank -%}
             <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+        {%- else -%}
+            <link rel="shortcut icon" href="{{ 'gpi-favicon-512.png' | asset_url }}" type="image/png">
+            <link rel="icon" sizes="any" type="image/webp" href="{{ 'gpi-favicon-512.webp' | asset_url }}">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ 'gpi-apple-touch-180.png' | asset_url }}">
         {%- endif -%}
+        {%- unless template.name == 'product' or template.name == 'article' -%}
+            <meta property="og:image" content="{{ 'gpi-og-default.png' | asset_url }}">
+            <meta name="twitter:image" content="{{ 'gpi-og-default.png' | asset_url }}">
+            <meta name="twitter:card" content="summary_large_image">
+        {%- endunless -%}
         <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

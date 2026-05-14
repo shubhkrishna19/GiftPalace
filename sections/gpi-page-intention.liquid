@@ -16,13 +16,18 @@
       <ul class="gpi-page-intention__grid" role="list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'intention' -%}
+            {%- liquid
+              assign asset_handle = block.settings.name | handleize
+              assign fallback_asset = 'gpi-intent-' | append: asset_handle | append: '.webp'
+            -%}
             <li class="gpi-page-intention__tile"{{ block.shopify_attributes }}>
               <a href="{{ block.settings.link }}">
                 <div class="gpi-page-intention__frame">
                   {%- if block.settings.image -%}
                     {%- render 'gpi-image', image: block.settings.image, alt: block.settings.name, sizes: '160px', loading: 'lazy' -%}
                   {%- else -%}
-                    <span class="gpi-page-intention__glyph" aria-hidden="true">{{ block.settings.glyph | default: '✦' }}</span>
+                    <img src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="640" height="640" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+                    <span class="gpi-page-intention__glyph" aria-hidden="true" style="display:none">{{ block.settings.glyph | default: '✦' }}</span>
                   {%- endif -%}
                 </div>
                 <h3>{{ block.settings.name }}</h3>
