@@ -69,6 +69,24 @@
 .gpi-footer__newsletter { display: flex; flex-direction: column; gap: 16px; }
 .gpi-footer__currency-wrap { margin-top: 8px; }
 
+.gpi-footer__contact {
+  list-style: none; margin: 12px 0 0; padding: 12px 0 0;
+  border-top: 1px solid var(--gpi-border-warm);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.gpi-footer__contact li {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px;
+  color: var(--gpi-text-muted);
+}
+.gpi-footer__contact svg { color: var(--gpi-gold); flex-shrink: 0; }
+.gpi-footer__contact a {
+  color: var(--gpi-ink-strong);
+  text-decoration: none;
+  word-break: break-word;
+}
+.gpi-footer__contact a:hover { color: var(--gpi-gold); }
+
 .gpi-footer__trust { padding: 40px 0; border-bottom: 1px solid var(--gpi-border-warm); }
 
 .gpi-footer__legal {

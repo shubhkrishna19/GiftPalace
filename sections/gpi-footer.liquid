@@ -1,6 +1,30 @@
-{%- comment -%} Section: gpi-footer — 4-column grid + newsletter + trust strip + currency + social + legal {%- endcomment -%}
+{%- comment -%} Section: gpi-footer — brand, 4 link columns (menu OR inline), newsletter+currency, trust strip, social, legal {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'component-gpi-footer.css' | asset_url }}">
+
+{%- liquid
+  comment
+    Bucket "link_item" blocks by their column setting so default preset can
+    populate footer without admin menu setup.
+  endcomment
+  assign cols_shop    = ''
+  assign cols_about   = ''
+  assign cols_help    = ''
+  assign cols_connect = ''
+  for block in section.blocks
+    if block.type == 'link_item'
+      assign label = block.settings.label
+      assign url   = block.settings.link
+      assign row   = label | append: '|' | append: url | append: '||'
+      case block.settings.column
+        when 'shop'    then assign cols_shop    = cols_shop    | append: row
+        when 'about'   then assign cols_about   = cols_about   | append: row
+        when 'help'    then assign cols_help    = cols_help    | append: row
+        when 'connect' then assign cols_connect = cols_connect | append: row
+      endcase
+    endif
+  endfor
+-%}
 
 <footer class="gpi-footer" role="contentinfo">
   <div class="gpi-container">
@@ -19,6 +43,7 @@
       </div>
 
       <div class="gpi-footer__cols">
+        {%- comment -%} Render menu-based link_column blocks first {%- endcomment -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'link_column' -%}
             <div class="gpi-footer__col"{{ block.shopify_attributes }}>
@@ -34,6 +59,33 @@
             </div>
           {%- endif -%}
         {%- endfor -%}
+
+        {%- comment -%} Render the 4 inline-link columns from bucketed link_item blocks {%- endcomment -%}
+        {%- assign cols = 'shop|Shop;about|About;help|Help;connect|Connect' | split: ';' -%}
+        {%- for col_def in cols -%}
+          {%- assign parts = col_def | split: '|' -%}
+          {%- assign col_key   = parts[0] -%}
+          {%- assign col_label = parts[1] -%}
+          {%- case col_key -%}
+            {%- when 'shop'    -%}{%- assign rows = cols_shop    | split: '||' -%}
+            {%- when 'about'   -%}{%- assign rows = cols_about   | split: '||' -%}
+            {%- when 'help'    -%}{%- assign rows = cols_help    | split: '||' -%}
+            {%- when 'connect' -%}{%- assign rows = cols_connect | split: '||' -%}
+          {%- endcase -%}
+          {%- if rows.size > 0 -%}
+            <div class="gpi-footer__col">
+              <h3 class="gpi-footer__col-heading">{{ col_label }}</h3>
+              <ul class="gpi-footer__col-list" role="list">
+                {%- for row in rows -%}
+                  {%- if row != '' -%}
+                    {%- assign rp = row | split: '|' -%}
+                    <li><a href="{{ rp[1] }}">{{ rp[0] }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
 
       <div class="gpi-footer__newsletter">
@@ -43,6 +95,28 @@
             placeholder: 'Your email',
             submit_label: 'Join the circle' -%}
         <div class="gpi-footer__currency-wrap">{%- render 'gpi-currency-switcher' -%}</div>
+        {%- if section.settings.show_contact_quick -%}
+          <ul class="gpi-footer__contact" role="list">
+            {%- if section.settings.contact_phone != blank -%}
+              <li>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.86 19.86 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.86 19.86 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.contact_phone }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.contact_email != blank -%}
+              <li>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.contact_whatsapp != blank -%}
+              <li>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <a href="https://wa.me/{{ section.settings.contact_whatsapp | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}" target="_blank" rel="noopener">WhatsApp · {{ section.settings.contact_whatsapp }}</a>
+              </li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
       </div>
     </div>
 
@@ -100,7 +174,12 @@
     {"type": "image_picker", "id": "logo", "label": "Logo image (optional)"},
     {"type": "text", "id": "wordmark", "label": "Wordmark", "default": "GIFT PALACE"},
     {"type": "text", "id": "tagline", "label": "Tagline", "default": "Crafted in trust since 1989."},
-    {"type": "textarea", "id": "address", "label": "Address"},
+    {"type": "textarea", "id": "address", "label": "Address", "default": "Chanakyapuri, New Delhi 110021\nIndia"},
+    {"type": "header", "content": "Quick contact"},
+    {"type": "checkbox", "id": "show_contact_quick", "label": "Show contact row in newsletter column", "default": true},
+    {"type": "text", "id": "contact_phone", "label": "Phone", "default": "+91 70110 99721"},
+    {"type": "text", "id": "contact_email", "label": "Email", "default": "support@giftpalaceindia.com"},
+    {"type": "text", "id": "contact_whatsapp", "label": "WhatsApp", "default": "+91 70110 99721"},
     {"type": "header", "content": "Newsletter"},
     {"type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Join the Gift Palace circle"},
     {"type": "text", "id": "newsletter_lede", "label": "Newsletter lede", "default": "Quiet emails on new arrivals, zodiac drops, and pieces our team is wearing."},
@@ -112,8 +191,25 @@
   ],
   "blocks": [
     {
+      "type": "link_item",
+      "name": "Direct link",
+      "limit": 32,
+      "settings": [
+        {"type": "select", "id": "column", "label": "Column", "default": "shop",
+          "options": [
+            {"value": "shop", "label": "Shop"},
+            {"value": "about", "label": "About"},
+            {"value": "help", "label": "Help"},
+            {"value": "connect", "label": "Connect"}
+          ]
+        },
+        {"type": "text", "id": "label", "label": "Label"},
+        {"type": "url", "id": "link", "label": "Link"}
+      ]
+    },
+    {
       "type": "link_column",
-      "name": "Link column",
+      "name": "Menu-bound column (advanced)",
       "limit": 4,
       "settings": [
         {"type": "text", "id": "heading", "label": "Column heading"},
@@ -149,17 +245,47 @@
   ],
   "presets": [
     {"name": "GPI Footer", "blocks": [
-      {"type": "link_column", "settings": {"heading": "Shop"}},
-      {"type": "link_column", "settings": {"heading": "About"}},
-      {"type": "link_column", "settings": {"heading": "Help"}},
-      {"type": "link_column", "settings": {"heading": "Connect"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "All collections", "link": "/collections"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Necklaces", "link": "/collections/necklaces"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Bracelets", "link": "/collections/bracelets"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Rings", "link": "/collections/rings"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Loose gemstones", "link": "/collections/gemstones"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Raw crystals", "link": "/collections/raw-crystals"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Mala", "link": "/collections/jaap-mala"}},
+      {"type": "link_item", "settings": {"column": "shop", "label": "Gift sets", "link": "/collections/gift-sets"}},
+
+      {"type": "link_item", "settings": {"column": "about", "label": "Our story", "link": "/pages/about-us"}},
+      {"type": "link_item", "settings": {"column": "about", "label": "Our atelier", "link": "/pages/about-us"}},
+      {"type": "link_item", "settings": {"column": "about", "label": "Certifications", "link": "/pages/certifications"}},
+      {"type": "link_item", "settings": {"column": "about", "label": "Healing crystals guide", "link": "/pages/healing-crystals-guide"}},
+      {"type": "link_item", "settings": {"column": "about", "label": "Shop by intention", "link": "/pages/shop-by-intention"}},
+      {"type": "link_item", "settings": {"column": "about", "label": "Journal", "link": "/blogs/news"}},
+
+      {"type": "link_item", "settings": {"column": "help", "label": "Contact us", "link": "/pages/contact-us"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "FAQs", "link": "/pages/faqs"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "Shipping policy", "link": "/policies/shipping-policy"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "Refunds & returns", "link": "/policies/refund-policy"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "Ring size guide", "link": "/pages/ring-size-guide"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "Care instructions", "link": "/pages/care-instructions"}},
+      {"type": "link_item", "settings": {"column": "help", "label": "Track your order", "link": "/account"}},
+
+      {"type": "link_item", "settings": {"column": "connect", "label": "Visit the store", "link": "/pages/store-locator"}},
+      {"type": "link_item", "settings": {"column": "connect", "label": "Book a private viewing", "link": "/pages/contact-us"}},
+      {"type": "link_item", "settings": {"column": "connect", "label": "Wholesale enquiries", "link": "/pages/contact-us"}},
+      {"type": "link_item", "settings": {"column": "connect", "label": "Custom commissions", "link": "/pages/contact-us"}},
+      {"type": "link_item", "settings": {"column": "connect", "label": "My account", "link": "/account"}},
+      {"type": "link_item", "settings": {"column": "connect", "label": "Wishlist", "link": "/pages/wishlist"}},
+
       {"type": "policy_link", "settings": {"label": "Privacy Policy", "link": "/policies/privacy-policy"}},
       {"type": "policy_link", "settings": {"label": "Terms of Service", "link": "/policies/terms-of-service"}},
-      {"type": "policy_link", "settings": {"label": "Shipping Policy", "link": "/policies/shipping-policy"}},
-      {"type": "policy_link", "settings": {"label": "Refund Policy", "link": "/policies/refund-policy"}},
+      {"type": "policy_link", "settings": {"label": "Shipping", "link": "/policies/shipping-policy"}},
+      {"type": "policy_link", "settings": {"label": "Refunds", "link": "/policies/refund-policy"}},
+      {"type": "policy_link", "settings": {"label": "Accessibility", "link": "/pages/accessibility"}},
+
       {"type": "social", "settings": {"platform": "instagram"}},
       {"type": "social", "settings": {"platform": "facebook"}},
-      {"type": "social", "settings": {"platform": "whatsapp"}}
+      {"type": "social", "settings": {"platform": "whatsapp"}},
+      {"type": "social", "settings": {"platform": "youtube"}}
     ]}
   ]
 }

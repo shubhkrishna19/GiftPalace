@@ -1,0 +1,97 @@
+{%- comment -%} Section: gpi-certified-stones — image-first showcase of 4-6 hero stones with certificates {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-certified-stones.css' | asset_url }}">
+
+<section class="gpi-cert-stones gpi-section" aria-labelledby="gpi-cert-stones-heading-{{ section.id }}">
+  <div class="gpi-container">
+    <header class="gpi-cert-stones__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="gpi-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 id="gpi-cert-stones-heading-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="gpi-cert-stones__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+
+    <ul class="gpi-cert-stones__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stone' -%}
+          {%- assign coll = collections[block.settings.collection] -%}
+          {%- assign target = block.settings.link | default: coll.url | default: '#' -%}
+          <li class="gpi-cert-stones__card"{{ block.shopify_attributes }}>
+            <a href="{{ target }}" class="gpi-cert-stones__link">
+              <figure class="gpi-cert-stones__media">
+                {%- if block.settings.image -%}
+                  {%- render 'gpi-image', image: block.settings.image, alt: block.settings.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
+                {%- elsif coll.image -%}
+                  {%- render 'gpi-image', image: coll.image, alt: coll.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
+                {%- else -%}
+                  <span class="gpi-cert-stones__placeholder" aria-hidden="true">{{ block.settings.glyph | default: '◆' }}</span>
+                {%- endif -%}
+                <span class="gpi-cert-stones__cert" aria-label="{{ block.settings.cert_label }}">
+                  <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {{ block.settings.cert_label | default: 'Certified' }}
+                </span>
+              </figure>
+              <div class="gpi-cert-stones__body">
+                {%- if block.settings.kicker != blank -%}<p class="gpi-cert-stones__kicker">{{ block.settings.kicker }}</p>{%- endif -%}
+                <h3 class="gpi-cert-stones__title">{{ block.settings.title }}</h3>
+                {%- if block.settings.subtitle != blank -%}<p class="gpi-cert-stones__sub">{{ block.settings.subtitle }}</p>{%- endif -%}
+                <span class="gpi-cert-stones__cta">{{ block.settings.cta_label | default: 'Shop' }}
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.foot_cta_label != blank -%}
+      <div class="gpi-cert-stones__foot">
+        <a href="{{ section.settings.foot_cta_link }}" class="gpi-button gpi-button--secondary gpi-button--md">
+          {{ section.settings.foot_cta_label }}
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Certified stones",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Certified gemstone picks"},
+    {"type": "text", "id": "title",   "label": "Title",   "default": "Hand-picked gemstones, ready to gift."},
+    {"type": "textarea", "id": "lede", "label": "Lede"},
+    {"type": "header", "content": "Footer CTA"},
+    {"type": "text", "id": "foot_cta_label", "label": "Foot CTA label", "default": "Browse every gemstone"},
+    {"type": "url", "id": "foot_cta_link", "label": "Foot CTA link"}
+  ],
+  "blocks": [
+    {
+      "type": "stone",
+      "name": "Stone card",
+      "limit": 6,
+      "settings": [
+        {"type": "image_picker", "id": "image", "label": "Image"},
+        {"type": "text", "id": "glyph", "label": "Glyph (fallback)", "default": "◆"},
+        {"type": "text", "id": "kicker", "label": "Kicker"},
+        {"type": "text", "id": "title", "label": "Title"},
+        {"type": "text", "id": "subtitle", "label": "Subtitle"},
+        {"type": "text", "id": "cert_label", "label": "Cert label", "default": "Lab certified"},
+        {"type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop"},
+        {"type": "collection", "id": "collection", "label": "Collection (link target)"},
+        {"type": "url", "id": "link", "label": "Custom link (overrides collection)"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "GPI Certified stones",
+    "blocks": [
+      {"type": "stone", "settings": {"kicker": "Burmese", "title": "Ruby (Manik)", "subtitle": "Confidence & vitality", "cert_label": "Lab certified", "cta_label": "Shop ruby", "glyph": "◆"}},
+      {"type": "stone", "settings": {"kicker": "Kashmir", "title": "Blue sapphire (Neelam)", "subtitle": "Discipline & focus", "cert_label": "Jyotish grade", "cta_label": "Shop neelam", "glyph": "◇"}},
+      {"type": "stone", "settings": {"kicker": "Colombian", "title": "Emerald (Panna)", "subtitle": "Growth & balance", "cert_label": "Lab certified", "cta_label": "Shop panna", "glyph": "◈"}},
+      {"type": "stone", "settings": {"kicker": "Ceylon", "title": "Yellow sapphire (Pukhraj)", "subtitle": "Wisdom & wealth", "cert_label": "Jyotish grade", "cta_label": "Shop pukhraj", "glyph": "◉"}}
+    ]
+  }]
+}
+{% endschema %}

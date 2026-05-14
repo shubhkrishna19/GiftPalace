@@ -191,569 +191,6 @@
         "padding_horizontal": 36
       }
     },
-    "163945138066afddf5": {
-      "type": "product-block",
-      "settings": {
-        "container": "fullwidth",
-        "padding_full_width": 0,
-        "disable_padding_content": false,
-        "enable_border_top": true,
-        "enable_border_bottom": false,
-        "border_height": 1,
-        "color_border_bottom": "#e6e6e6",
-        "enable_minus_mg_top": false,
-        "minus_spacing_top": -100,
-        "mg_top_desktop": 45,
-        "mg_top_tablet": 40,
-        "mg_top_mobile": 30,
-        "mg_bottom_desktop": 30,
-        "mg_bottom_tablet": 30,
-        "mg_bottom_mobile": 10,
-        "product_block_layout": "scroll",
-        "product_bg": "#ffffff",
-        "product_bg_gradient": "",
-        "style_block_header": "style1",
-        "pd_top_title": 30,
-        "product_block_title": "Certified gemstone edits",
-        "enable_border_title": false,
-        "enable_border_title_style2": true,
-        "fontsize_title": 30,
-        "fontsize_title_mb": 20,
-        "mg_bottom_title": 12,
-        "mg_bottom_title_mb": 12,
-        "border_color_title": "#000000",
-        "color_title": "#232323",
-        "view_all": "Lab-tested gemstone picks for shoppers who want beauty, meaning, and clearer buying confidence.",
-        "view_all_align": "center",
-        "font_weight_view_all": "400",
-        "mg_bottom_view": 30,
-        "mg_bottom_view_mb": 0,
-        "enable_border_view_all": true,
-        "link_view_all": "shopify://collections/gemstones",
-        "color_view_all": "#3c3c3c",
-        "icon_view_all": "",
-        "color_view_all_icon": "#eb492f",
-        "title_align": "center",
-        "button_text": "Explore certified stones",
-        "button_text_font_size": 14,
-        "button_text_font_weight": "500",
-        "button_text_text_transform": "uppercase",
-        "product_button_width": 270,
-        "pd_top_product_button": 12,
-        "pd_bottom_product_button": 12,
-        "button_icon": "",
-        "mg_bottom_button": 55,
-        "enable_button_shadow": false,
-        "color_button": "#ffffff",
-        "border_color_button": "#232323",
-        "bg_color_button": "#232323",
-        "bg_color_gradient_button": "",
-        "color_button_hover": "",
-        "border_color_button_hover": "",
-        "bg_color_button_hover": "",
-        "bg_color_gradient_button_hover": "",
-        "product_block_collection": "gemstones",
-        "product_block_limit": 20,
-        "grid_gap": 25,
-        "pb_style": "style1",
-        "style_countdown": "style_1",
-        "countdown": "",
-        "font_size_countdown_text": 14,
-        "color_countdown": "#f42b23",
-        "countdown_margin_left": 15,
-        "product_block_per_row": "4",
-        "product_block_infinite_scroll": true,
-        "product_block_swipe_on_mobile": true,
-        "enable_product_card_pd_bottom": false,
-        "product_card_pd_bottom": 40,
-        "product_block_dots": false,
-        "product_block_dots_mb": true,
-        "spacing_top_dots": 0,
-        "product_block_arrows": true,
-        "product_block_arrows_mb": false,
-        "product_block_show": "4",
-        "position_vertical_arrow": "70px",
-        "product_block_per_view": "4",
-        "show_half": true,
-        "scroll_height": 4,
-        "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000000",
-        "scroll_thumb_hover_color": "#444444",
-        "enable_hover_drag_icon": true,
-        "position": "left",
-        "width_banner": 40,
-        "display_list_collection": false,
-        "collection_color": "#202020",
-        "collection_color_hover": "#3e8cc4",
-        "collection_bg_color": "#ffffff",
-        "collection_bg_color_gradient": "",
-        "text_list": "View all categories",
-        "url_list": "",
-        "enable_layout_special": false,
-        "bg_card": "#ffffff",
-        "padding_card": 15,
-        "border_radius_card": 5,
-        "border_layout_card": "full",
-        "border_width_card": 5,
-        "border_color_card": "#f0f1f4"
-      }
-    },
-    "f69000d3-4d8c-439d-a650-6f122fcd1b9d": {
-      "type": "brand-slider",
-      "blocks": {
-        "ad3a1911-3e78-4eed-abef-a5cd4357dc89": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/bracelts.png",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "BRACELETS",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/bracelets",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "924c32dc-8497-4c2c-af82-3a30c43b0460": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/8ABCBA24-4765-4654-A56F-1D3C0AE13563.jpg",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "CRYSTAL-SCULPTURES",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "https://www.giftpalaceindia.com/pages/crystal-sculptures",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "e92055a0-da72-406d-9e83-eba52f8072e6": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/il_fullxfull.4376077559_47zt.jpg",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "NECKLACES",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/necklaces",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "345c1235-3d48-4ea4-a23a-0012dab4e316": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/new3.jpg",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "SILVER CHAINS",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 15,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 2,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/silver-chains",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "e429061d-6e1a-40a4-9b0b-f7eb741ef9d6": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/3j.png",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "GEMSTONES",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/gemstones",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "a89bd215-a89a-440d-932f-efc5504e7dc7": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat6.png",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "RAW-CRYSTALS",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/raw-crystals",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "a6d69b36-d8da-46a3-b2af-8295002002bd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat7.png",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "CRYSTAL-TREE",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/cystal-tree",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "dc86edca-db5a-452e-b34a-5db69b72b823": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Benefits_Selenite.png",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "SELENITE & CLEANSING",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "600",
-            "color_text": "#232323",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 5,
-            "description": "SHOP NOW",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/selelite-cleansing",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "21276734-ac55-4a35-b2eb-eac387954213": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "margin_bottom_image": 0,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "LIVE-SALE",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "400",
-            "color_text": "#000000",
-            "color_text_hover": "#494949",
-            "margin_bottom_title": 0,
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "c8e0b0a7-8e86-4ae2-bb8f-ff7467861855": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/ROSEQUARTZClassic108JapaMala2.jpg",
-            "margin_bottom_image": 20,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "JAAP MALA",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "700",
-            "color_text": "#000000",
-            "color_text_hover": "#3e8cc4",
-            "margin_bottom_title": 0,
-            "description": "Shop Now \nNew Launches !",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/jaap-mala",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "image_Gtr6jj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/angelspendant-Photoroom.jpg",
-            "margin_bottom_image": 0,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "Pendants",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "400",
-            "color_text": "#000000",
-            "color_text_hover": "#3e8cc4",
-            "margin_bottom_title": 0,
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "https://www.giftpalaceindia.com/collections/pendants",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "image_4UpjVa": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/27022_W_1_1600X1600_e3fcc212-ee80-4a3e-8d88-f1434d702e63.jpg",
-            "margin_bottom_image": 0,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "Earrings",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "400",
-            "color_text": "#000000",
-            "color_text_hover": "#3e8cc4",
-            "margin_bottom_title": 0,
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "https://www.giftpalaceindia.com/collections/earrings",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        },
-        "image_yxLjeK": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/AmethystRoseGoldRing.jpg",
-            "margin_bottom_image": 0,
-            "image_border_radius": 0,
-            "enable_border": false,
-            "border_radius": 4,
-            "border_color": "#e2e5e7",
-            "border_color_hover": "#2d2d2d",
-            "title": "Rings",
-            "fontsize_text": 16,
-            "fontsize_text_mb": 13,
-            "font_weight_title": "400",
-            "color_text": "#000000",
-            "color_text_hover": "#3e8cc4",
-            "margin_bottom_title": 0,
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "https://www.giftpalaceindia.com/collections/rings",
-            "box_shadow": "none",
-            "bx_horizontal_length": 0,
-            "bx_vertical_length": 3,
-            "bx_blur_radius": 8,
-            "bx_spread": 0,
-            "bx_opacity": 0.2,
-            "bx_inset": "no"
-          }
-        }
-      },
-      "block_order": [
-        "ad3a1911-3e78-4eed-abef-a5cd4357dc89",
-        "924c32dc-8497-4c2c-af82-3a30c43b0460",
-        "e92055a0-da72-406d-9e83-eba52f8072e6",
-        "345c1235-3d48-4ea4-a23a-0012dab4e316",
-        "e429061d-6e1a-40a4-9b0b-f7eb741ef9d6",
-        "a89bd215-a89a-440d-932f-efc5504e7dc7",
-        "a6d69b36-d8da-46a3-b2af-8295002002bd",
-        "dc86edca-db5a-452e-b34a-5db69b72b823",
-        "21276734-ac55-4a35-b2eb-eac387954213",
-        "c8e0b0a7-8e86-4ae2-bb8f-ff7467861855",
-        "image_Gtr6jj",
-        "image_4UpjVa",
-        "image_yxLjeK"
-      ],
-      "settings": {
-        "container": "1770",
-        "padding_full_width": 0,
-        "mg_top_desktop": 35,
-        "mg_top_tablet": 25,
-        "mg_top_mobile": 25,
-        "mg_bottom_desktop": 45,
-        "mg_bottom_tablet": 35,
-        "mg_bottom_mobile": 35,
-        "brands_block_style": "style_1",
-        "brand_layout": "grid",
-        "display_brand_border": false,
-        "brand_bg": "rgba(0,0,0,0)",
-        "brand_bg_gradient": "",
-        "brand_title": "Shop the gemstone wardrobe",
-        "color_title": "#232323",
-        "fontsize_title": 30,
-        "fontsize_title_mb": 18,
-        "mg_bottom_title": 10,
-        "enable_border_title": false,
-        "border_color_title": "#000000",
-        "brand_des": "Start with the piece type you will actually wear: daily bracelets, giftable necklaces, raw crystals for desks and mandirs, and lab-tested gemstones for serious buying.",
-        "color_des": "#3c3c3c",
-        "fontsize_des": 16,
-        "mg_bottom_des": 30,
-        "view_all": "",
-        "view_all_fs": 12,
-        "view_all_align": "center",
-        "font_weight_view_all": "400",
-        "mg_bottom_view": 30,
-        "enable_border_view_all": true,
-        "link_view_all": "",
-        "color_view_all": "#3c3c3c",
-        "icon_view_all": "",
-        "color_view_all_icon": "#eb492f",
-        "view_all_icon_side": "left",
-        "btn_text": "",
-        "fontsize_btn": 12,
-        "btn_spacing_top": 15,
-        "btn_color": "#828282",
-        "btn_link": "",
-        "title_align": "center",
-        "item_distance": 15,
-        "brand_rows": "4",
-        "enable_arrows": true,
-        "enable_dots": false,
-        "style_position_arrows": "none",
-        "position_horizontal_arrow": 15,
-        "color_arrow": "",
-        "arrow_background": "",
-        "arrow_background_gradient": "",
-        "arrow_border": "",
-        "color_arrow_hover": "",
-        "arrow_background_hover": "",
-        "arrow_background_gradient_hover": "",
-        "arrow_border_hover": "",
-        "brand_rows_mb": "2",
-        "enable_hover_zoom_image": true
-      }
-    },
     "home_trust_proof": {
       "type": "home-trust-proof",
       "blocks": {
@@ -1004,29 +441,54 @@
       }
     },
     "home_store_proof": {
-      "type": "home-store-proof",
+      "type": "gpi-real-store",
       "settings": {
-        "container": "1770",
-        "image_1": "shopify://shop_images/3j.png",
-        "image_2": "shopify://shop_images/bracelts.png",
-        "image_3": "shopify://shop_images/Benefits_Selenite.png",
-        "eyebrow": "Real store confidence",
-        "heading": "Lab-tested gemstones with a real Delhi store behind them.",
-        "copy": "<p>Shop online with the reassurance of product support, documentation, and a physical Chanakyapuri store shoppers can trust before and after purchase.</p>",
-        "proof_1_title": "GJEPC lab-tested",
-        "proof_1_text": "Authenticity support for gemstone shoppers who want clearer buying confidence.",
-        "proof_2_title": "100K customers",
-        "proof_2_text": "Online and offline customers across gifting, jewellery, crystals, and gemstone buying.",
-        "proof_3_title": "Chanakyapuri store",
-        "proof_3_text": "Offline buying support in Delhi for shoppers who prefer guidance before purchase.",
-        "primary_label": "Shop gemstones",
-        "primary_link": "shopify://collections/gemstones",
-        "secondary_label": "Chat before buying",
-        "secondary_link": "https://wa.me/917011099721",
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "padding_horizontal": 36
-      }
+        "eyebrow": "Real shop. Real shelves.",
+        "title": "Walk in. See the gemstones before you decide.",
+        "lede": "Our flagship boutique in Chanakyapuri has been the home of Gift Palace since 1989. Come in, examine the stones in person, and meet the team who set them.",
+        "store_name": "Gift Palace India — Chanakyapuri",
+        "address": "Chanakyapuri, New Delhi 110021, India",
+        "hours": "Mon–Sat · 10:00 AM – 8:00 PM",
+        "hours_iso": "Mo-Sa 10:00-20:00",
+        "phone": "+91 70110 99721",
+        "whatsapp": "+91 70110 99721",
+        "map_query": "Gift Palace India Chanakyapuri Delhi",
+        "map_zoom": 16,
+        "book_label": "Book a private viewing",
+        "book_link": "/pages/contact"
+      },
+      "blocks": {
+        "c1": {
+          "type": "cue",
+          "settings": {
+            "text": "Established 1989 in Delhi"
+          }
+        },
+        "c2": {
+          "type": "cue",
+          "settings": {
+            "text": "GJEPC certified jeweller"
+          }
+        },
+        "c3": {
+          "type": "cue",
+          "settings": {
+            "text": "BIS hallmarked metals only"
+          }
+        },
+        "c4": {
+          "type": "cue",
+          "settings": {
+            "text": "Lifetime support on every piece"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
     },
     "home_origin_story": {
       "type": "home-origin-story",
@@ -1736,14 +1198,166 @@
         "submit_label": "Subscribe",
         "disclaimer": "<p>By subscribing, you agree to our Privacy Policy. Double opt-in required.</p>"
       }
+    },
+    "home_certified_stones": {
+      "type": "gpi-certified-stones",
+      "settings": {
+        "eyebrow": "Certified gemstone picks",
+        "title": "Hand-picked gemstones, ready to gift.",
+        "lede": "Each piece is lab-tested, BIS-hallmarked where applicable, and arrives with a certificate of authenticity. No grey areas — just stones we would gift our own family.",
+        "foot_cta_label": "Browse every gemstone",
+        "foot_cta_link": "/collections/gemstones"
+      },
+      "blocks": {
+        "ruby": {
+          "type": "stone",
+          "settings": {
+            "kicker": "Burmese",
+            "title": "Ruby (Manik)",
+            "subtitle": "Confidence & vitality",
+            "cert_label": "Lab certified",
+            "cta_label": "Shop ruby",
+            "glyph": "◆",
+            "collection": "rubies"
+          }
+        },
+        "neelam": {
+          "type": "stone",
+          "settings": {
+            "kicker": "Kashmir",
+            "title": "Blue sapphire (Neelam)",
+            "subtitle": "Discipline & focus",
+            "cert_label": "Jyotish grade",
+            "cta_label": "Shop neelam",
+            "glyph": "◇",
+            "collection": "neelam"
+          }
+        },
+        "panna": {
+          "type": "stone",
+          "settings": {
+            "kicker": "Colombian",
+            "title": "Emerald (Panna)",
+            "subtitle": "Growth & balance",
+            "cert_label": "Lab certified",
+            "cta_label": "Shop panna",
+            "glyph": "◈",
+            "collection": "emerald"
+          }
+        },
+        "pukhraj": {
+          "type": "stone",
+          "settings": {
+            "kicker": "Ceylon",
+            "title": "Yellow sapphire (Pukhraj)",
+            "subtitle": "Wisdom & wealth",
+            "cert_label": "Jyotish grade",
+            "cta_label": "Shop pukhraj",
+            "glyph": "◉",
+            "collection": "pukhraj"
+          }
+        }
+      },
+      "block_order": [
+        "ruby",
+        "neelam",
+        "panna",
+        "pukhraj"
+      ]
+    },
+    "home_wardrobe_grid": {
+      "type": "gpi-wardrobe-grid",
+      "settings": {
+        "eyebrow": "Shop the wardrobe",
+        "title": "Shop the gemstone wardrobe",
+        "lede": "From everyday layering to once-in-a-lifetime gifting — every category is one tap away.",
+        "columns": "4",
+        "show_count": false
+      },
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "title": "Necklaces",
+            "glyph": "○",
+            "collection": "necklaces"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "title": "Bracelets",
+            "glyph": "◦",
+            "collection": "bracelets"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "title": "Rings",
+            "glyph": "◯",
+            "collection": "rings"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "title": "Earrings",
+            "glyph": "◌",
+            "collection": "earrings"
+          }
+        },
+        "t5": {
+          "type": "tile",
+          "settings": {
+            "title": "Pendants",
+            "glyph": "✦",
+            "collection": "pendants"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "settings": {
+            "title": "Mala",
+            "glyph": "❀",
+            "collection": "jaap-mala"
+          }
+        },
+        "t7": {
+          "type": "tile",
+          "settings": {
+            "title": "Loose gemstones",
+            "glyph": "◆",
+            "collection": "gemstones"
+          }
+        },
+        "t8": {
+          "type": "tile",
+          "settings": {
+            "title": "Raw crystals",
+            "glyph": "✧",
+            "collection": "raw-crystals"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7",
+        "t8"
+      ]
     }
   },
   "order": [
     "home_luxury_hero",
     "home_lookbook_spotlight",
     "home_conversion_intro",
-    "163945138066afddf5",
-    "f69000d3-4d8c-439d-a650-6f122fcd1b9d",
+    "home_certified_stones",
+    "home_wardrobe_grid",
     "home_trust_proof",
     "home_trust_pillars",
     "home_testimonials",

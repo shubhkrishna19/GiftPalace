@@ -1,0 +1,88 @@
+{%- comment -%} Section: gpi-wardrobe-grid — image-first 8-tile category grid (moonmagic-style "shop the wardrobe") {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-wardrobe.css' | asset_url }}">
+
+<section class="gpi-wardrobe gpi-section" aria-labelledby="gpi-wardrobe-heading-{{ section.id }}">
+  <div class="gpi-container">
+    <header class="gpi-wardrobe__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="gpi-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 id="gpi-wardrobe-heading-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="gpi-wardrobe__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+
+    <ul class="gpi-wardrobe__grid gpi-wardrobe__grid--{{ section.settings.columns }}" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tile' -%}
+          {%- assign coll = collections[block.settings.collection] -%}
+          {%- assign target = block.settings.link | default: coll.url | default: '#' -%}
+          {%- assign img = block.settings.image | default: coll.image -%}
+          {%- assign featured = coll.products.first -%}
+          {%- if img == blank and featured.featured_image -%}{%- assign img = featured.featured_image -%}{%- endif -%}
+          <li class="gpi-wardrobe__tile"{{ block.shopify_attributes }}>
+            <a href="{{ target }}" class="gpi-wardrobe__link">
+              <div class="gpi-wardrobe__media">
+                {%- if img -%}
+                  {%- render 'gpi-image', image: img, alt: block.settings.title | default: coll.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
+                {%- else -%}
+                  <span class="gpi-wardrobe__glyph" aria-hidden="true">{{ block.settings.glyph | default: '✦' }}</span>
+                {%- endif -%}
+              </div>
+              <div class="gpi-wardrobe__caption">
+                <span class="gpi-wardrobe__title">{{ block.settings.title | default: coll.title }}</span>
+                {%- if section.settings.show_count and coll.products_count > 0 -%}
+                  <span class="gpi-wardrobe__count">{{ coll.products_count }} piece{% unless coll.products_count == 1 %}s{% endunless %}</span>
+                {%- endif -%}
+              </div>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Wardrobe grid",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop the wardrobe"},
+    {"type": "text", "id": "title",   "label": "Title",   "default": "Shop the gemstone wardrobe"},
+    {"type": "textarea", "id": "lede", "label": "Lede"},
+    {"type": "select", "id": "columns", "label": "Columns", "default": "4",
+      "options": [
+        {"value": "3", "label": "3"},
+        {"value": "4", "label": "4"},
+        {"value": "5", "label": "5"}
+      ]
+    },
+    {"type": "checkbox", "id": "show_count", "label": "Show product count", "default": false}
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Category tile",
+      "limit": 12,
+      "settings": [
+        {"type": "image_picker", "id": "image", "label": "Image (overrides collection image)"},
+        {"type": "text", "id": "glyph", "label": "Glyph (fallback)", "default": "✦"},
+        {"type": "text", "id": "title", "label": "Title (overrides collection title)"},
+        {"type": "collection", "id": "collection", "label": "Collection"},
+        {"type": "url", "id": "link", "label": "Custom link (overrides collection)"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "GPI Wardrobe grid",
+    "blocks": [
+      {"type": "tile", "settings": {"title": "Necklaces", "glyph": "○"}},
+      {"type": "tile", "settings": {"title": "Bracelets", "glyph": "◦"}},
+      {"type": "tile", "settings": {"title": "Rings", "glyph": "◯"}},
+      {"type": "tile", "settings": {"title": "Earrings", "glyph": "◌"}},
+      {"type": "tile", "settings": {"title": "Pendants", "glyph": "✦"}},
+      {"type": "tile", "settings": {"title": "Mala", "glyph": "❀"}},
+      {"type": "tile", "settings": {"title": "Loose gemstones", "glyph": "◆"}},
+      {"type": "tile", "settings": {"title": "Raw crystals", "glyph": "✧"}}
+    ]
+  }]
+}
+{% endschema %}

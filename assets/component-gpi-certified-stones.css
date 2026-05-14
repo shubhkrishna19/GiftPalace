@@ -1,0 +1,125 @@
+/* GPI Certified stones — image-first showcase grid */
+
+.gpi-cert-stones { background: var(--gpi-surface-canvas); }
+.gpi-cert-stones__head { text-align: center; margin-bottom: clamp(32px, 4vw, 56px); }
+.gpi-cert-stones__head h2 {
+  font-family: var(--gpi-heading);
+  font-size: clamp(28px, 3.4vw, 44px);
+  color: var(--gpi-ink-strong);
+  margin: 6px 0 12px;
+  line-height: 1.15;
+}
+.gpi-cert-stones__lede {
+  max-width: 60ch;
+  margin: 0 auto;
+  color: var(--gpi-text-muted);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+}
+
+.gpi-cert-stones__grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+}
+.gpi-cert-stones__card { position: relative; }
+.gpi-cert-stones__link {
+  display: block;
+  background: var(--gpi-surface-card);
+  border-radius: var(--gpi-radius-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--gpi-ink);
+  border: 1px solid var(--gpi-border-soft);
+  transition: all var(--gpi-transition);
+}
+.gpi-cert-stones__link:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--gpi-shadow-mid);
+  border-color: var(--gpi-border-warm);
+}
+
+.gpi-cert-stones__media {
+  position: relative;
+  aspect-ratio: 1;
+  margin: 0;
+  background: var(--gpi-surface-ivory);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.gpi-cert-stones__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--gpi-transition-slow);
+}
+.gpi-cert-stones__link:hover .gpi-cert-stones__media img { transform: scale(1.06); }
+.gpi-cert-stones__placeholder {
+  font-family: var(--gpi-heading);
+  font-size: clamp(56px, 8vw, 96px);
+  color: var(--gpi-gold);
+  opacity: 0.7;
+}
+
+.gpi-cert-stones__cert {
+  position: absolute; top: 12px; left: 12px;
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(255, 253, 248, 0.94);
+  color: var(--gpi-ink-strong);
+  padding: 4px 10px 4px 8px;
+  border-radius: var(--gpi-radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(155, 111, 43, 0.18);
+}
+.gpi-cert-stones__cert svg { color: var(--gpi-gold); }
+
+.gpi-cert-stones__body {
+  padding: 18px 18px 20px;
+}
+.gpi-cert-stones__kicker {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gpi-gold);
+  margin: 0 0 6px;
+}
+.gpi-cert-stones__title {
+  font-family: var(--gpi-heading);
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--gpi-ink-strong);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+.gpi-cert-stones__sub {
+  font-size: 13px;
+  color: var(--gpi-text-muted);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+.gpi-cert-stones__cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px;
+  color: var(--gpi-gold);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.gpi-cert-stones__link:hover .gpi-cert-stones__cta { color: var(--gpi-ink-strong); }
+
+.gpi-cert-stones__foot {
+  margin-top: clamp(28px, 3vw, 40px);
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .gpi-cert-stones__grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .gpi-cert-stones__grid { grid-template-columns: repeat(2, 1fr); }
+  .gpi-cert-stones__body { padding: 14px 14px 18px; }
+}
+@media (max-width: 360px) {
+  .gpi-cert-stones__grid { grid-template-columns: 1fr; }
+}

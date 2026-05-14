@@ -1,0 +1,143 @@
+{%- comment -%} Section: gpi-real-store-proof — real physical store proof with Google Maps embed {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-real-store.css' | asset_url }}">
+
+{%- liquid
+  assign map_query = section.settings.map_query | default: 'Gift Palace India Chanakyapuri Delhi' | url_encode
+  assign map_zoom  = section.settings.map_zoom  | default: 16
+-%}
+
+<section class="gpi-real-store gpi-section" aria-labelledby="gpi-real-store-heading-{{ section.id }}">
+  <div class="gpi-container">
+    <header class="gpi-real-store__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="gpi-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 id="gpi-real-store-heading-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="gpi-real-store__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+
+    <div class="gpi-real-store__layout">
+      <div class="gpi-real-store__map">
+        <iframe
+          src="https://www.google.com/maps?q={{ map_query }}&z={{ map_zoom }}&output=embed"
+          title="{{ section.settings.store_name | escape }} on Google Maps"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <aside class="gpi-real-store__details">
+        <div class="gpi-real-store__card">
+          <p class="gpi-real-store__pin">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            Visit us
+          </p>
+          <h3 class="gpi-real-store__store-name">{{ section.settings.store_name | default: 'Gift Palace India — Chanakyapuri' }}</h3>
+          <address class="gpi-real-store__addr">{{ section.settings.address | default: 'Chanakyapuri, New Delhi 110021, India' }}</address>
+
+          {%- if section.settings.hours != blank -%}
+            <div class="gpi-real-store__row">
+              <strong>Hours</strong>
+              <span>{{ section.settings.hours }}</span>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.phone != blank -%}
+            <div class="gpi-real-store__row">
+              <strong>Phone</strong>
+              <a href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.phone }}</a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.whatsapp != blank -%}
+            <div class="gpi-real-store__row">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/{{ section.settings.whatsapp | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}" target="_blank" rel="noopener">{{ section.settings.whatsapp }}</a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="gpi-real-store__cues" role="list">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'cue' -%}
+                  <li{{ block.shopify_attributes }}>
+                    <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {{ block.settings.text }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <div class="gpi-real-store__actions">
+            <a href="https://www.google.com/maps?q={{ map_query }}" target="_blank" rel="noopener" class="gpi-button gpi-button--primary gpi-button--md">
+              Get directions
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </a>
+            {%- if section.settings.book_link != blank -%}
+              <a href="{{ section.settings.book_link }}" class="gpi-button gpi-button--secondary gpi-button--md">{{ section.settings.book_label | default: 'Book a visit' }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} LocalBusiness JSON-LD for the physical store {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JewelryStore",
+  "name": {{ section.settings.store_name | default: 'Gift Palace India' | json }},
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ section.settings.address | default: 'Chanakyapuri' | json }},
+    "addressLocality": "New Delhi",
+    "addressRegion": "Delhi",
+    "postalCode": "110021",
+    "addressCountry": "IN"
+  },
+  {%- if section.settings.phone != blank -%}"telephone": {{ section.settings.phone | json }},{%- endif -%}
+  "url": "{{ shop.url }}",
+  "openingHours": "{{ section.settings.hours_iso | default: 'Mo-Sa 10:00-20:00' }}"
+}
+</script>
+
+{% schema %}
+{
+  "name": "GPI Real store",
+  "settings": [
+    {"type": "header", "content": "Header"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real shop. Real shelves."},
+    {"type": "text", "id": "title", "label": "Title", "default": "Walk in. See the gemstones before you decide."},
+    {"type": "textarea", "id": "lede", "label": "Lede", "default": "Our flagship boutique in Chanakyapuri has been the home of Gift Palace since 1989. Come in, examine the stones in person, and meet the team who set them."},
+    {"type": "header", "content": "Store details"},
+    {"type": "text", "id": "store_name", "label": "Store name", "default": "Gift Palace India — Chanakyapuri"},
+    {"type": "textarea", "id": "address", "label": "Address", "default": "Chanakyapuri, New Delhi 110021, India"},
+    {"type": "text", "id": "hours", "label": "Hours (display)", "default": "Mon–Sat · 10:00 AM – 8:00 PM"},
+    {"type": "text", "id": "hours_iso", "label": "Hours (schema.org format, e.g. 'Mo-Sa 10:00-20:00')", "default": "Mo-Sa 10:00-20:00"},
+    {"type": "text", "id": "phone", "label": "Phone", "default": "+91 70110 99721"},
+    {"type": "text", "id": "whatsapp", "label": "WhatsApp number", "default": "+91 70110 99721"},
+    {"type": "header", "content": "Google Maps"},
+    {"type": "text", "id": "map_query", "label": "Maps search query", "default": "Gift Palace India Chanakyapuri Delhi", "info": "Used for embed URL. Try the exact name as listed on Google Maps."},
+    {"type": "range", "id": "map_zoom", "label": "Map zoom", "min": 12, "max": 20, "step": 1, "default": 16},
+    {"type": "header", "content": "Book a visit (optional)"},
+    {"type": "text", "id": "book_label", "label": "Book button label", "default": "Book a private viewing"},
+    {"type": "url", "id": "book_link", "label": "Book link"}
+  ],
+  "blocks": [
+    {"type": "cue", "name": "Trust cue", "limit": 6, "settings": [
+      {"type": "text", "id": "text", "label": "Cue", "default": "Trusted by 3 generations of Delhi families"}
+    ]}
+  ],
+  "presets": [{
+    "name": "GPI Real store",
+    "blocks": [
+      {"type": "cue", "settings": {"text": "Established 1989 in Delhi"}},
+      {"type": "cue", "settings": {"text": "GJEPC certified jeweller"}},
+      {"type": "cue", "settings": {"text": "BIS hallmarked metals only"}},
+      {"type": "cue", "settings": {"text": "Lifetime support on every piece"}}
+    ]
+  }]
+}
+{% endschema %}
