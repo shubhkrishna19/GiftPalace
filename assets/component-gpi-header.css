@@ -71,6 +71,16 @@
   display: inline-flex; align-items: center; gap: 12px;
   color: inherit;
   text-decoration: none;
+  max-width: 100%;
+  min-width: 0;
+}
+.gpi-header__logo-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: clamp(140px, 28vw, 360px);
+  object-fit: contain;
+  object-position: center;
 }
 .gpi-header__wordmark {
   font-family: var(--gpi-heading);
@@ -298,13 +308,18 @@
 }
 @media (max-width: 480px) {
   .gpi-header__row--announce { display: none; }
-  .gpi-header__brand-inner { grid-template-columns: 44px 1fr auto; gap: 8px; }
+  .gpi-header__brand-inner { grid-template-columns: 44px 1fr 44px; gap: 4px; }
   .gpi-header__menu-toggle { width: 44px; height: 44px; padding: 8px; }
-  .gpi-header__logo { justify-self: start; }
-  .gpi-header__wordmark { font-size: 18px; }
-  .gpi-header__icon-btn { width: 40px; height: 40px; }
+  .gpi-header__logo { justify-self: center; }
+  .gpi-header__logo-img { max-width: clamp(120px, 50vw, 220px); }
+  .gpi-header__wordmark { font-size: clamp(16px, 5vw, 22px); }
+  .gpi-header__utility { grid-column: 3; }
+  .gpi-header__utility .gpi-header__icon-btn:not(.gpi-header__cart) { display: none; }
+  .gpi-header__icon-btn { width: 44px; height: 44px; }
   .gpi-header__icon-btn svg { width: 20px; height: 20px; }
 }
 @media (max-width: 360px) {
+  .gpi-header__wordmark { font-size: 15px; letter-spacing: 0.04em; }
+  .gpi-header__gem { width: 16px; height: 16px; }
   .gpi-header__utility .gpi-header__icon-btn:not(.gpi-header__cart):not(.gpi-header__wishlist) { display: none; }
 }

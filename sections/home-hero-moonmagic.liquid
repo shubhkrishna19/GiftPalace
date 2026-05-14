@@ -306,9 +306,9 @@
   }
 </style>
 
-{%- if section.settings.image != blank -%}
 <div class="home-hero-frame">
   <section class="home-hero">
+    {%- if section.settings.image != blank -%}
     <img
       src="{{ section.settings.image | image_url: width: 900 }}"
       srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
@@ -321,6 +321,18 @@
       width="900"
       height="500"
     />
+    {%- else -%}
+    <img
+      src="{{ 'gpi-hero-wearing.webp' | asset_url }}"
+      alt="{{ section.settings.heading | default: 'Gift Palace India hero' | escape }}"
+      class="home-hero__image"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="2752"
+      height="1536"
+    />
+    {%- endif -%}
 
     <div class="home-hero__content">
       {%- if section.settings.eyebrow != blank -%}
@@ -353,7 +365,6 @@
     </div>
   </section>
 </div>
-{%- endif -%}
 
 {% schema %}
 {

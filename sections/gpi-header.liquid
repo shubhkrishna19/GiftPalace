@@ -68,6 +68,13 @@
                alt="{{ shop.name | escape }}"
                width="{{ section.settings.logo.width }}"
                height="{{ section.settings.logo.height }}"
+               class="gpi-header__logo-img"
+               style="max-height: {{ logo_max }}px;">
+        {%- elsif section.settings.use_asset_logo -%}
+          <img src="{{ 'gpi-logo-wordmark-light.webp' | asset_url }}"
+               alt="{{ shop.name | escape }}"
+               width="600" height="160"
+               class="gpi-header__logo-img"
                style="max-height: {{ logo_max }}px;">
         {%- else -%}
           <span class="gpi-header__wordmark">
@@ -191,8 +198,9 @@
   "name": "GPI Header",
   "settings": [
     {"type": "image_picker", "id": "logo", "label": "Logo image (optional — wordmark used if blank)"},
-    {"type": "range", "id": "logo_max_height", "min": 24, "max": 80, "step": 2, "default": 44, "unit": "px", "label": "Logo max height"},
-    {"type": "text", "id": "wordmark", "label": "Wordmark text (used if no logo image)", "default": "GIFT PALACE"},
+    {"type": "range", "id": "logo_max_height", "min": 24, "max": 96, "step": 2, "default": 52, "unit": "px", "label": "Logo max height"},
+    {"type": "checkbox", "id": "use_asset_logo", "label": "Use built-in GPI logo asset if no image set", "default": true},
+    {"type": "text", "id": "wordmark", "label": "Wordmark text (used if no logo + asset disabled)", "default": "GIFT PALACE"},
     {"type": "checkbox", "id": "show_gem_glyph", "label": "Show gem glyph next to wordmark", "default": true},
     {"type": "link_list", "id": "main_menu", "label": "Primary menu", "default": "main-menu"},
     {"type": "checkbox", "id": "show_search", "label": "Show search icon", "default": true},
