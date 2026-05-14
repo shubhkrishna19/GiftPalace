@@ -1,0 +1,190 @@
+/* GPI Collection Page Overrides
+ * Aligns collection listing and banner with the Gift Palace India design system
+ * Layered over theme collection CSS — no core files edited
+ */
+
+/* ─── Collection banner / header ─────────────────────────────────────────────── */
+.collection-header-2 {
+  background-color: var(--gpi-surface-ivory) !important;
+}
+
+.collection-title {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+}
+
+.collection-header .page-header,
+.collection-header .page-title {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  color: var(--gpi-ink-strong);
+}
+
+.collection-description,
+.collection-desc p {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+  line-height: 1.7;
+}
+
+/* ─── Filter & sort bar ──────────────────────────────────────────────────────── */
+.halo-filterGroups,
+.filter-area,
+.collection-toolbar {
+  background-color: var(--gpi-surface-ivory) !important;
+  border-color: var(--gpi-border-soft) !important;
+}
+
+.collection-toolbar .toolbar-item,
+.halo-filterGroups .filter-label,
+.filter-area .filter-label {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-text-muted);
+}
+
+/* Active filter tags */
+.active-filters .filter-tag,
+.active-filters__item {
+  background-color: var(--gpi-surface-ivory-dark);
+  border-color: var(--gpi-border-warm);
+  color: var(--gpi-ink);
+  font-family: var(--gpi-body);
+}
+
+.active-filters .filter-tag .icon,
+.active-filters__item-close {
+  fill: var(--gpi-text-muted);
+}
+
+/* Sort dropdown */
+.toolbar-sort select,
+.sort-by select {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-soft);
+  background-color: var(--gpi-surface-canvas);
+}
+
+/* Filter sidebar panel */
+.facets__heading,
+.filter-group__label {
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gpi-ink-strong);
+}
+
+.facets__item label,
+.filter-option label {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+}
+
+.facets__item input[type="checkbox"]:checked + label,
+.filter-option input:checked + label {
+  color: var(--gpi-gold);
+}
+
+/* Price filter range */
+.price-range__from,
+.price-range__to {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-warm);
+}
+
+/* Filter divider lines */
+.facets__summary,
+.filter-group {
+  border-color: var(--gpi-border-soft) !important;
+}
+
+/* ─── Product grid breadcrumb ────────────────────────────────────────────────── */
+.breadcrumb,
+.breadcrumb a {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--gpi-gold);
+}
+
+.breadcrumb .breadcrumb-item.active {
+  color: var(--gpi-ink);
+}
+
+/* ─── Pagination ─────────────────────────────────────────────────────────────── */
+.pagination .page-item .page-link,
+.pagination-custom a,
+.pagination li a {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-soft);
+  background-color: transparent;
+}
+
+.pagination .page-item.active .page-link,
+.pagination-custom a.active,
+.pagination li.active a {
+  background-color: var(--gpi-gold);
+  border-color: var(--gpi-gold);
+  color: var(--gpi-surface-canvas);
+}
+
+.pagination .page-item .page-link:hover,
+.pagination-custom a:hover {
+  color: var(--gpi-gold);
+  border-color: var(--gpi-gold);
+}
+
+/* ─── Load more button ───────────────────────────────────────────────────────── */
+.collection-infinite-scroll .button.btn-load-more,
+.load-more__btn {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-warm);
+  background-color: transparent;
+  border-radius: var(--gpi-radius-pill);
+}
+
+.collection-infinite-scroll .button.btn-load-more:hover,
+.load-more__btn:hover {
+  color: var(--gpi-gold);
+  border-color: var(--gpi-gold);
+}
+
+/* ─── Collection result count ────────────────────────────────────────────────── */
+.toolbar-count,
+.collection-count,
+.collection-products-count {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* ─── Empty collection message ───────────────────────────────────────────────── */
+.collection-empty,
+.collection-no-results {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .filter-tag,
+  .pagination .page-item .page-link {
+    transition: none;
+  }
+}

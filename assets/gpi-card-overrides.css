@@ -1,0 +1,95 @@
+/* GPI Product Card Overrides
+ * Aligns product cards (component-card.css) with the Gift Palace India design system
+ * Applied globally — cards appear on home, collection, search, and product pages
+ */
+
+/* ─── Variant label text in card action ──────────────────────────────────────── */
+.card-action .selector-wrapper .form-label .label-value-1,
+.card-action .selector-wrapper .form-label .label-value-2,
+.card-action .selector-wrapper .form-label .label-value-3 {
+  color: var(--gpi-ink);
+}
+
+/* ─── Size variant pill borders ──────────────────────────────────────────────── */
+.size_varriant_style_2 .card-action .selector-wrapper .single-label {
+  border-color: var(--gpi-border-soft);
+  color: var(--gpi-ink);
+  font-family: var(--gpi-body);
+}
+
+.size_varriant_style_2 .card-action .selector-wrapper .single-option:checked + .single-label {
+  border-color: var(--gpi-gold) !important;
+  color: var(--gpi-gold);
+}
+
+/* ─── Scrollbar in variant popup ─────────────────────────────────────────────── */
+.card-action .variants-popup-content .variants::-webkit-scrollbar-track {
+  background: var(--gpi-surface-ivory);
+}
+
+.card-action .variants-popup-content .variants::-webkit-scrollbar-thumb,
+.card-action .variants-popup-content .variants::-webkit-scrollbar-thumb:hover {
+  background: var(--gpi-border-warm);
+}
+
+/* ─── Compare checkbox ───────────────────────────────────────────────────────── */
+.card-compare input[type=checkbox] + .form-label--checkbox:before {
+  border-color: var(--gpi-border-soft);
+}
+
+.card-compare input[type=checkbox]:checked + .form-label--checkbox:before {
+  border-color: var(--gpi-gold) !important;
+  background-color: var(--gpi-gold);
+}
+
+/* ─── Card wishlist / quick-view action icons ────────────────────────────────── */
+.card-action .btn-wishlist svg,
+.card-action .btn-quickview svg {
+  fill: var(--gpi-ink);
+}
+
+.card-action .btn-wishlist:hover svg,
+.card-action .btn-quickview:hover svg {
+  fill: var(--gpi-gold);
+}
+
+/* ─── Card product name ──────────────────────────────────────────────────────── */
+.card-product__title,
+.card-product .product-name,
+.productListing .card-title a {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  color: var(--gpi-ink-strong);
+}
+
+.card-product__title a:hover,
+.productListing .card-title a:hover {
+  color: var(--gpi-gold);
+}
+
+/* ─── Card vendor ────────────────────────────────────────────────────────────── */
+.card-product__vendor,
+.card-vendor {
+  font-family: var(--gpi-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Card price ─────────────────────────────────────────────────────────────── */
+.card-product .price-item--sale .money {
+  color: var(--gpi-gold);
+  font-weight: 700;
+}
+
+/* ─── "Add to Cart" button on card ──────────────────────────────────────────── */
+.card-action .btn-addcart,
+.card-action .button--primary {
+  font-family: var(--gpi-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--gpi-radius-pill) !important;
+}

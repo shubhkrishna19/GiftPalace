@@ -1,0 +1,95 @@
+<section class="home-shop-shortcuts section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-shop-shortcuts__layout" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-shop-shortcuts__intro">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gpi-eyebrow home-shop-shortcuts__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="gpi-heading-lg home-shop-shortcuts__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.copy != blank %}
+          <div class="gpi-body-base home-shop-shortcuts__copy rte">{{ section.settings.copy }}</div>
+        {% endif %}
+      </div>
+
+      <div class="home-shop-shortcuts__grid" aria-label="Popular Gift Palace India shopping paths">
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <a class="home-shop-shortcuts__card" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+              {% if block.settings.kicker != blank %}
+                <span class="home-shop-shortcuts__kicker">{{ block.settings.kicker }}</span>
+              {% endif %}
+              {% if block.settings.label != blank %}
+                <span class="home-shop-shortcuts__label">{{ block.settings.label }}</span>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <span class="home-shop-shortcuts__text">{{ block.settings.text }}</span>
+              {% endif %}
+            </a>
+          {% endfor %}
+        {% else %}
+          {%- assign fallback_kickers = 'Gift,Zodiac,Bracelets,Raw stones,Silver,Under budget' | split: ',' -%}
+          {%- assign fallback_labels = 'Meaningful gifts,Shop by zodiac,Crystal bracelets,Loose gemstones,Silver jewellery,Easy gifting' | split: ',' -%}
+          {%- assign fallback_texts = 'Personal pieces for birthdays and milestones.,Start from signs and intentions.,Everyday crystal wear with clear meaning.,Gemstones for rituals, study, and collection.,Polished pieces for everyday shine.,Quick picks that still feel thoughtful.' | split: ',' -%}
+          {%- assign fallback_links = '/collections/gifts,/collections/zodiac,/collections/bracelets,/collections/gemstones,/collections/silver-jewellery,/collections/under-999' | split: ',' -%}
+          {% for label in fallback_labels %}
+            <a class="home-shop-shortcuts__card" href="{{ fallback_links[forloop.index0] }}">
+              <span class="home-shop-shortcuts__kicker">{{ fallback_kickers[forloop.index0] }}</span>
+              <span class="home-shop-shortcuts__label">{{ label }}</span>
+              <span class="home-shop-shortcuts__text">{{ fallback_texts[forloop.index0] }}</span>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Shop Shortcuts",
+  "tag": "section",
+  "class": "section-home-shop-shortcuts",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Popular shortcuts" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Find the right piece without searching the whole store." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>Direct routes for the most common buying moments: gifts, zodiac, bracelets, raw crystals, budget-friendly picks, and customer-loved gemstone edits.</p>" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 48 },
+    { "type": "range", "id": "padding_horizontal", "min": 16, "max": 72, "step": 4, "unit": "px", "label": "Side padding", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "shortcut",
+      "name": "Shortcut",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Gift" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop necklaces" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Giftable pieces with an easy everyday feel." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GPI Shop Shortcuts"
+    }
+  ]
+}
+{% endschema %}

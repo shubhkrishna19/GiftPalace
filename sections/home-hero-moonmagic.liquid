@@ -1,0 +1,431 @@
+{%- comment -%}
+  Hero Section with Trust Anchors
+  Adapted from MoonMagic template patterns:
+  - Image-first layout (60/40 responsive)
+  - Single focused headline
+  - One primary CTA
+  - Trust anchors below (GJEPC, Certified, Support)
+  - Responsive: stacks on mobile
+  - Viewport-aware: entire section fits in one screen frame
+{%- endcomment -%}
+
+{%- if section.settings.image != blank -%}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ section.settings.image | image_url: width: 1200 }}"
+    imagesrcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+    imagesizes="(max-width: 1024px) 100vw, 50vw"
+    fetchpriority="high"
+  >
+{%- endif -%}
+
+<style>
+  /* ─── Viewport-aware hero wrapper ─────────────────────────────────────────── */
+  .home-hero-frame {
+    max-height: min(88vh, 920px);
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .home-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, var(--gpi-space-4xl));
+    align-items: center;
+    padding: clamp(2rem, 4vw, var(--gpi-space-3xl)) clamp(1.25rem, 5vw, var(--gpi-space-4xl));
+    background: linear-gradient(
+      135deg,
+      var(--gpi-surface-canvas) 0%,
+      rgba(139, 99, 38, 0.025) 100%
+    );
+    color: var(--gpi-ink-strong);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(
+      circle,
+      rgba(139, 99, 38, 0.07) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .home-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Hero Image ────────────────────────────────────────────────────────────── */
+  .home-hero__image {
+    width: 100%;
+    height: clamp(300px, 52vh, 520px);
+    max-width: 100%;
+    border-radius: var(--gpi-radius-editorial);
+    box-shadow: var(--gpi-shadow-high);
+    transition: transform var(--gpi-transition-slow);
+    object-fit: cover;
+    display: block;
+  }
+
+  .home-hero:hover .home-hero__image {
+    transform: scale(1.04);
+  }
+
+  /* ─── Content ───────────────────────────────────────────────────────────────── */
+  .home-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.5vw, var(--gpi-space-md));
+    max-width: 540px;
+  }
+
+  .home-hero__eyebrow {
+    font-family: var(--gpi-body);
+    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gpi-gold);
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-hero__heading {
+    font-family: var(--gpi-heading);
+    font-size: clamp(1.75rem, 4vw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    padding: 0;
+    color: var(--gpi-ink-strong);
+    letter-spacing: -0.02em;
+  }
+
+  .home-hero__subheading {
+    font-family: var(--gpi-body);
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: var(--gpi-text-muted);
+    margin: 0;
+    padding: 0;
+    max-width: 480px;
+  }
+
+  /* ─── CTA ───────────────────────────────────────────────────────────────────── */
+  .home-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.75rem, 1.2vw, var(--gpi-space-md)) clamp(1.5rem, 2.5vw, var(--gpi-space-2xl));
+    font-family: var(--gpi-body);
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 600;
+    color: var(--gpi-surface-canvas);
+    background: var(--gpi-ink-strong);
+    text-decoration: none;
+    border-radius: var(--gpi-radius-pill);
+    transition: background var(--gpi-transition-slow), box-shadow var(--gpi-transition-slow), transform var(--gpi-transition-slow);
+    border: 1.5px solid var(--gpi-ink-strong);
+    cursor: pointer;
+    width: fit-content;
+    box-shadow: var(--gpi-shadow-low);
+    letter-spacing: 0.01em;
+  }
+
+  .home-hero__cta:hover {
+    background: var(--gpi-gold);
+    border-color: var(--gpi-gold);
+    color: var(--gpi-surface-canvas);
+    box-shadow: var(--gpi-shadow-mid);
+    transform: translateY(-1px);
+  }
+
+  .home-hero__cta:focus-visible {
+    outline: 2px solid var(--gpi-gold);
+    outline-offset: 3px;
+  }
+
+  /* ─── Trust Anchors ─────────────────────────────────────────────────────────── */
+  .home-hero__trust-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gpi-space-sm);
+    margin-top: var(--gpi-space-sm);
+    padding-top: var(--gpi-space-md);
+    border-top: 1px solid var(--gpi-border-soft);
+  }
+
+  .home-hero__trust-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--gpi-space-xs) var(--gpi-space-sm);
+    background: rgba(139, 99, 38, 0.05);
+    border: 1px solid var(--gpi-border-soft);
+    border-radius: var(--gpi-radius-pill);
+    font-family: var(--gpi-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gpi-text-muted);
+    transition: background var(--gpi-transition), border-color var(--gpi-transition);
+    white-space: nowrap;
+  }
+
+  .home-hero__trust-badge:hover {
+    background: rgba(139, 99, 38, 0.1);
+    border-color: var(--gpi-gold);
+    color: var(--gpi-gold);
+  }
+
+  /* ─── Tablet ────────────────────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .home-hero-frame {
+      max-height: min(92vh, 840px);
+    }
+
+    .home-hero {
+      grid-template-columns: 1fr;
+      gap: var(--gpi-space-lg);
+      padding: var(--gpi-space-2xl) var(--gpi-space-xl);
+    }
+
+    .home-hero::before {
+      width: 340px;
+      height: 340px;
+      top: -25%;
+    }
+
+    .home-hero__image {
+      height: clamp(240px, 40vh, 380px);
+    }
+
+    .home-hero__content {
+      max-width: 100%;
+    }
+  }
+
+  /* ─── Mobile ────────────────────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .home-hero-frame {
+      max-height: none;
+      min-height: 100svh;
+    }
+
+    .home-hero {
+      padding: var(--gpi-space-xl) var(--gpi-space-md);
+      gap: var(--gpi-space-md);
+    }
+
+    .home-hero::before {
+      width: 220px;
+      height: 220px;
+      opacity: 0.5;
+    }
+
+    .home-hero__image {
+      height: clamp(200px, 38svh, 300px);
+    }
+
+    .home-hero__heading {
+      font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .home-hero__trust-anchors {
+      gap: var(--gpi-space-xs);
+    }
+
+    .home-hero__trust-badge {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* ─── Dark Mode ─────────────────────────────────────────────────────────────── */
+  @media (prefers-color-scheme: dark) {
+    .home-hero {
+      background: linear-gradient(
+        135deg,
+        var(--gpi-ink-strong) 0%,
+        rgba(139, 99, 38, 0.04) 100%
+      );
+    }
+
+    .home-hero__heading {
+      color: var(--gpi-surface-ivory);
+    }
+
+    .home-hero__subheading {
+      color: var(--gpi-text-soft);
+    }
+
+    .home-hero__cta {
+      background: var(--gpi-gold);
+      border-color: var(--gpi-gold);
+      color: var(--gpi-ink-strong);
+    }
+
+    .home-hero__cta:hover {
+      background: var(--gpi-gold-soft);
+      border-color: var(--gpi-gold-soft);
+    }
+
+    .home-hero__trust-anchors {
+      border-top-color: rgba(139, 99, 38, 0.2);
+    }
+
+    .home-hero__trust-badge {
+      background: rgba(139, 99, 38, 0.1);
+      border-color: rgba(139, 99, 38, 0.2);
+      color: var(--gpi-text-soft);
+    }
+  }
+
+  /* ─── Reduced Motion ────────────────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero__image,
+    .home-hero__cta,
+    .home-hero__trust-badge {
+      transition: none;
+    }
+
+    .home-hero:hover .home-hero__image,
+    .home-hero__cta:hover {
+      transform: none;
+    }
+  }
+</style>
+
+{%- if section.settings.image != blank -%}
+<div class="home-hero-frame">
+  <section class="home-hero">
+    <img
+      src="{{ section.settings.image | image_url: width: 900 }}"
+      srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+      sizes="(max-width: 1024px) 100vw, 50vw"
+      alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+      class="home-hero__image"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="900"
+      height="500"
+    />
+
+    <div class="home-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="home-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 class="home-hero__heading">{{ section.settings.heading }}</h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="home-hero__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_text != blank and section.settings.cta_link != blank -%}
+        <a href="{{ section.settings.cta_link }}" class="home-hero__cta">
+          {{ section.settings.cta_text }}
+        </a>
+      {%- endif -%}
+
+      <div class="home-hero__trust-anchors">
+        {%- if section.settings.trust_1 != blank -%}
+          <span class="home-hero__trust-badge">{{ section.settings.trust_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.trust_2 != blank -%}
+          <span class="home-hero__trust-badge">{{ section.settings.trust_2 }}</span>
+        {%- endif -%}
+        {%- if section.settings.trust_3 != blank -%}
+          <span class="home-hero__trust-badge">{{ section.settings.trust_3 }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero - MoonMagic",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Certified Gemstones"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted Since 1989"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Authentic, insured, and gift-ready gemstones sourced with care for every occasion."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Explore Gemstones"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust Badge 1",
+      "default": "GJEPC Certified"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust Badge 2",
+      "default": "35+ Years Heritage"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust Badge 3",
+      "default": "WhatsApp Support"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero - MoonMagic",
+      "settings": {
+        "eyebrow": "Certified Gemstones",
+        "heading": "Trusted Since 1989",
+        "subheading": "Authentic, insured, and gift-ready gemstones sourced with care for every occasion.",
+        "cta_text": "Explore Gemstones",
+        "cta_link": "/collections/all",
+        "trust_1": "GJEPC Certified",
+        "trust_2": "35+ Years Heritage",
+        "trust_3": "WhatsApp Support"
+      }
+    }
+  ]
+}
+{% endschema %}

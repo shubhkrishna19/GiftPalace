@@ -1,0 +1,116 @@
+/* GPI Footer Overrides
+ * Aligns theme footer with Gift Palace India design system
+ * Supplements settings_data.json color values with font + detail overrides
+ */
+
+/* ─── Footer top section ─────────────────────────────────────────────────────── */
+.footer-top {
+  border-top: 1px solid var(--gpi-border-soft);
+}
+
+/* ─── Section headings in footer ─────────────────────────────────────────────── */
+.footer .footer-block__heading,
+.footer .footer-block .h4,
+.footer .footer-block .h5,
+.footer-block__heading {
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Footer links ────────────────────────────────────────────────────────────── */
+.footer .footer-block a,
+.footer .list-social__link {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  transition: color var(--gpi-transition);
+}
+
+.footer .footer-block a:hover,
+.footer .footer-block a:focus-visible {
+  color: var(--gpi-gold);
+}
+
+/* ─── Footer body text (contact, subtext) ────────────────────────────────────── */
+.footer .footer-block p,
+.footer .footer-block .rte {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Newsletter input ────────────────────────────────────────────────────────── */
+.footer .newsletter__form .field__input {
+  font-family: var(--gpi-body);
+  border-color: var(--gpi-border-soft);
+  background-color: var(--gpi-surface-canvas);
+  color: var(--gpi-ink);
+}
+
+.footer .newsletter__form .field__input::placeholder {
+  color: var(--gpi-text-soft);
+}
+
+.footer .newsletter__form .newsletter__submit {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+}
+
+/* ─── Social icons ────────────────────────────────────────────────────────────── */
+.footer .social-icons a,
+.footer .list-social__link {
+  border-color: var(--gpi-border-soft);
+  transition: border-color var(--gpi-transition), color var(--gpi-transition);
+}
+
+.footer .social-icons a:hover,
+.footer .list-social__link:hover {
+  border-color: var(--gpi-gold);
+  color: var(--gpi-gold);
+}
+
+/* ─── Footer bottom bar ──────────────────────────────────────────────────────── */
+.footer-bottom {
+  border-top: 1px solid var(--gpi-border-soft) !important;
+}
+
+.footer-bottom .copyright,
+.footer-bottom p,
+.footer-bottom span {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Payment icons ──────────────────────────────────────────────────────────── */
+.footer-payment .payment-icon {
+  opacity: 0.72;
+  transition: opacity var(--gpi-transition);
+}
+
+.footer-payment .payment-icon:hover {
+  opacity: 1;
+}
+
+/* ─── Reduced-motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .footer .footer-block a,
+  .footer .list-social__link,
+  .footer-payment .payment-icon {
+    transition: none;
+  }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer .footer-block__heading {
+    letter-spacing: 0.1em;
+  }
+}

@@ -16,13 +16,18 @@
   
 
 	<!-- Added by AVADA SEO Suite -->
-	{% include 'avada-seo' %}
+	{% render 'avada-seo' %}
 	<!-- /Added by AVADA SEO Suite -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
+  {{ 'theme-dark-mode-colors.css' | asset_url | stylesheet_tag }}
+  {{ 'all-dark-mode-components.css' | asset_url | stylesheet_tag }}
+  {{ 'dark-mode-toggle.css' | asset_url | stylesheet_tag }}
+  <script>
+    (function(){try{var m=localStorage.getItem('gpi-theme-mode');if(m==='dark'){document.documentElement.classList.add('dark-mode');}}catch(e){}})();
+  </script>
         <meta name="theme-color" content="">
-        <link rel="canonical" href="{{ canonical_url }}">
         <link rel="canonical" href="{{ canonical_url }}" canonical-shop-url="{{ shop.url }}/">
         {%- if settings.favicon != blank -%}
             <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
@@ -30,7 +35,7 @@
         <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="dns-prefetch" href="https://www.google-analytics.com">
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
         
@@ -59,7 +64,7 @@
 
         <script>
           document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-          window.gemstoneLoaderUrl = "{{ 'gemstone-loader.png' | asset_url }}";
+          window.gemstoneLoaderUrl = "{{ 'gemstone-loader.png' | asset_url | default: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' }}";
         </script>
 
         {%- liquid
@@ -158,7 +163,7 @@
         <!-- End Meta Pixel Code -->
         
         {% render 'gsf-conversion-pixels' %}
-    </head>
+</head>
     <body class="template-{{ request.page_type }} {{layout_header}} {{layout_body}} {{layout_footer}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
  <!-- Gokwik theme code start -->
 
@@ -208,7 +213,7 @@
         {% render 'theme-demo-notification' %}
 
         {%- if settings.use_custom_js -%}
-            {{ 'custom.js' | asset_url | script_tag }}
+            <script src="{{ 'custom.js' | asset_url }}" defer></script>
         {%- endif -%}
         
         <div class="background-overlay">
@@ -226,5 +231,6 @@
         {% render 'halo-sidebar' %}
      {% include 'smile-initializer' %}
 
+        <script src="{{ 'dark-mode-toggle.js' | asset_url }}" defer></script>
 </body>
 </html>

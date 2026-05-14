@@ -4,3 +4,6 @@
 {%- if settings.show_calculator_free_shipping_message -%}
     <script src="{{ 'free-shipping-message.js' | asset_url }}" defer="defer"></script>
 {% endif %}
+{%- if request.page_type == 'index' -%}
+    <script src="{{ 'home-conversion.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

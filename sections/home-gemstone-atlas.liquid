@@ -1,0 +1,161 @@
+{{ 'component-home-gemstone-atlas.css' | asset_url | stylesheet_tag }}
+
+<div class="gpi-atlas" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="gpi-atlas__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gpi-atlas__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="gpi-atlas__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="gpi-atlas__description">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="gpi-atlas__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign fallback_image = ''
+          assign stone_key = block.settings.stone_name | downcase
+          if stone_key contains 'ruby' or stone_key contains 'manikya'
+            assign fallback_image = 'gpi-stone-ruby.webp'
+          elsif stone_key contains 'pearl' or stone_key contains 'moti'
+            assign fallback_image = 'gpi-stone-pearl.webp'
+          elsif stone_key contains 'coral' or stone_key contains 'moonga'
+            assign fallback_image = 'gpi-stone-coral.webp'
+          elsif stone_key contains 'emerald' or stone_key contains 'panna'
+            assign fallback_image = 'gpi-stone-emerald.webp'
+          elsif stone_key contains 'pukhraj' or stone_key contains 'yellow sapphire'
+            assign fallback_image = 'gpi-stone-pukhraj.webp'
+          elsif stone_key contains 'diamond' or stone_key contains 'heera'
+            assign fallback_image = 'gpi-stone-diamond.webp'
+          elsif stone_key contains 'neelam' or stone_key contains 'blue sapphire'
+            assign fallback_image = 'gpi-stone-neelam.webp'
+          elsif stone_key contains 'gomed' or stone_key contains 'hessonite'
+            assign fallback_image = 'gpi-stone-gomed.webp'
+          elsif stone_key contains 'lehsuniya' or stone_key contains "cat's eye" or stone_key contains 'cats eye'
+            assign fallback_image = 'gpi-stone-lehsuniya.webp'
+          endif
+        -%}
+        <article class="gpi-atlas__card" tabindex="0" {{ block.shopify_attributes }}>
+          <div class="gpi-atlas__card-inner">
+            <div class="gpi-atlas__card-front">
+              {%- if block.settings.stone_image != blank -%}
+                <img src="{{ block.settings.stone_image | image_url: width: 640 }}" alt="{{ block.settings.stone_name }} gemstone" width="640" height="640" loading="lazy">
+              {%- elsif fallback_image != blank -%}
+                <img src="{{ fallback_image | asset_url }}" alt="{{ block.settings.stone_name }} gemstone" width="640" height="640" loading="lazy">
+              {%- endif -%}
+              <div class="gpi-atlas__card-front-label">{{ block.settings.stone_name }}</div>
+            </div>
+            <div class="gpi-atlas__card-back">
+              <span class="gpi-atlas__corner gpi-atlas__corner--tl" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M11 1H1v10" /></svg></span>
+              <span class="gpi-atlas__corner gpi-atlas__corner--tr" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M1 1h10v10" /></svg></span>
+              <span class="gpi-atlas__corner gpi-atlas__corner--br" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M1 11h10V1" /></svg></span>
+              <span class="gpi-atlas__corner gpi-atlas__corner--bl" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M11 11H1V1" /></svg></span>
+              <h3 class="gpi-atlas__card-name">{{ block.settings.stone_name }}</h3>
+              <p class="gpi-atlas__card-sanskrit">{{ block.settings.sanskrit_name }}</p>
+              <p class="gpi-atlas__card-planet">Ruling planet: {{ block.settings.ruling_planet }}</p>
+              <p class="gpi-atlas__card-meaning">{{ block.settings.meaning }}</p>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GPI Gemstone Atlas",
+  "tag": "section",
+  "class": "gpi-atlas",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Atlas of Sacred Stones"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The nine gemstones, with their meanings."
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Sanskrit names, ruling planets, and grounded healing properties."
+    },
+    {
+      "type": "number",
+      "id": "padding_top",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stone",
+      "name": "Gemstone",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "stone_image",
+          "label": "Stone image"
+        },
+        {
+          "type": "text",
+          "id": "stone_name",
+          "label": "Stone name",
+          "default": "Ruby"
+        },
+        {
+          "type": "text",
+          "id": "sanskrit_name",
+          "label": "Sanskrit name",
+          "default": "Manikya"
+        },
+        {
+          "type": "text",
+          "id": "ruling_planet",
+          "label": "Ruling planet",
+          "default": "Sun"
+        },
+        {
+          "type": "textarea",
+          "id": "meaning",
+          "label": "Meaning",
+          "default": "Courage, vitality, leadership."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GPI Gemstone Atlas"
+    }
+  ]
+}
+{% endschema %}

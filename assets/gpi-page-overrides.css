@@ -1,0 +1,178 @@
+/* GPI Static Page Overrides
+ * Aligns page, FAQ, blog article, contact, and about pages with the GPI design system
+ * Layered over theme component CSS — no core files edited
+ */
+
+/* ─── Page header / title ────────────────────────────────────────────────────── */
+.page-header,
+.page-header .page-title {
+  font-family: var(--gpi-heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Breadcrumb ─────────────────────────────────────────────────────────────── */
+.breadcrumb,
+.breadcrumb a {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--gpi-gold);
+}
+
+/* ─── FAQ / accordion items ──────────────────────────────────────────────────── */
+.faqs-item,
+.faqs-item .card-header .title,
+.faqs .faqs-item .card-header .title {
+  background-color: var(--gpi-surface-ivory) !important;
+}
+
+.faqs .faqs-title::after {
+  background-color: var(--gpi-gold) !important;
+}
+
+.faqs-item .card-header .title {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  color: var(--gpi-ink-strong);
+}
+
+.faqs-item .card-body,
+.faqs-item .card-body p {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+  line-height: 1.7;
+}
+
+/* ─── FAQ title heading ──────────────────────────────────────────────────────── */
+.faqs-title {
+  font-family: var(--gpi-heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── FAQ section background ─────────────────────────────────────────────────── */
+.faqs {
+  background-color: var(--gpi-surface-canvas) !important;
+}
+
+/* ─── Contact form ───────────────────────────────────────────────────────────── */
+.contact-form .form-label,
+.contact-form label {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-ink-strong);
+}
+
+.contact-form .form-input,
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-warm);
+  background-color: var(--gpi-surface-canvas);
+}
+
+.contact-form .form-input:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--gpi-gold);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(139, 99, 38, 0.12);
+}
+
+/* ─── Blog / article page ────────────────────────────────────────────────────── */
+.article-header__title,
+.article .article-title,
+.blog-article h1 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--gpi-ink-strong);
+}
+
+.article-header__date,
+.article-meta,
+.blog-meta {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-text-muted);
+}
+
+.article__content,
+.article__content p,
+.rte p,
+.rte li {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  line-height: 1.75;
+}
+
+.article__content h2,
+.rte h2 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  color: var(--gpi-ink-strong);
+  margin-top: 2em;
+}
+
+.article__content h3,
+.rte h3 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  color: var(--gpi-ink-strong);
+}
+
+.article__content a,
+.rte a {
+  color: var(--gpi-gold);
+}
+
+.article__content a:hover,
+.rte a:hover {
+  color: var(--gpi-color-accent-gold-strong);
+}
+
+.rte code,
+.rte pre {
+  background-color: var(--gpi-surface-ivory);
+  border: 1px solid var(--gpi-border-soft);
+}
+
+.rte blockquote {
+  border-left-color: var(--gpi-gold);
+  color: var(--gpi-text-muted);
+  font-family: var(--gpi-heading);
+  font-style: italic;
+}
+
+/* ─── About page / editorial content ────────────────────────────────────────── */
+.about-section h1,
+.about-section h2,
+.about-section h3 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  color: var(--gpi-ink-strong);
+}
+
+.about-section p {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+  line-height: 1.75;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .faqs-item .card-header .title,
+  .faqs-item .card-body {
+    transition: none;
+  }
+}

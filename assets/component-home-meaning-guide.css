@@ -1,0 +1,100 @@
+/* home-meaning-guide — gemstone meaning cards, 3-up grid */
+
+.gpi-meaning-guide__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(var(--gpi-space-md), 2vw, var(--gpi-space-lg));
+}
+
+@media (max-width: 768px) {
+  .gpi-meaning-guide__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gpi-meaning-card {
+  background: var(--gpi-surface-ivory);
+  border: 1px solid var(--gpi-border-soft);
+  border-radius: var(--gpi-radius-card);
+  padding: clamp(var(--gpi-space-md), 2vw, var(--gpi-space-lg));
+  transition: transform var(--gpi-transition-slow), box-shadow var(--gpi-transition-slow);
+  text-align: center;
+}
+
+.gpi-meaning-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--gpi-shadow-mid);
+}
+
+.gpi-meaning-card__image img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto var(--gpi-space-md);
+  border: 2px solid var(--gpi-border-soft);
+}
+
+.gpi-meaning-card__name {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  color: var(--gpi-ink-strong);
+  margin: 0 0 var(--gpi-space-xs);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.gpi-meaning-card__sanskrit {
+  font-family: var(--gpi-heading);
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--gpi-gold);
+  margin-left: var(--gpi-space-xs);
+}
+
+.gpi-meaning-card__zodiac {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gpi-gold);
+  margin: 0 0 var(--gpi-space-xs);
+}
+
+.gpi-meaning-card__meaning {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--gpi-text-muted);
+  margin: 0;
+}
+
+/* ─── Dark Mode ─────────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  .gpi-meaning-card {
+    background: var(--gpi-ink);
+    border-color: rgba(139, 99, 38, 0.2);
+  }
+
+  .gpi-meaning-card__name {
+    color: var(--gpi-surface-ivory);
+  }
+
+  .gpi-meaning-card__meaning {
+    color: var(--gpi-text-soft);
+  }
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gpi-meaning-card {
+    transition: none;
+  }
+
+  .gpi-meaning-card:hover {
+    transform: none;
+  }
+}

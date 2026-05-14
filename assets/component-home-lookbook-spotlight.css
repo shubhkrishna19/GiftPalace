@@ -1,0 +1,165 @@
+.home-lookbook-spotlight {
+  position: relative;
+  min-height: 60vh;
+  max-height: min(88vh, 880px);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--gpi-color-surface-ivory);
+  color: var(--gpi-color-surface-card);
+}
+
+.home-lookbook-spotlight__media,
+.home-lookbook-spotlight__image,
+.home-lookbook-spotlight__placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-lookbook-spotlight__image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-lookbook-spotlight__placeholder {
+  background:
+    linear-gradient(135deg, var(--gpi-color-surface-ivory), var(--gpi-color-accent-gold-soft)),
+    var(--gpi-color-surface-ivory);
+}
+
+.home-lookbook-spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, var(--gpi-color-ink-strong) 0%, var(--gpi-color-ink) 45%, transparent 100%),
+    linear-gradient(0deg, var(--gpi-color-ink) 0%, transparent 45%);
+  opacity: 0.78;
+}
+
+.home-lookbook-spotlight__overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: inherit;
+  padding: var(--gpi-space-8) var(--gpi-space-7);
+}
+
+.home-lookbook-spotlight__content {
+  max-width: 620px;
+}
+
+.home-lookbook-spotlight__eyebrow {
+  margin: 0 0 var(--gpi-space-3);
+  color: var(--gpi-color-accent-gold-soft);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.home-lookbook-spotlight__title {
+  margin: 0;
+  color: var(--gpi-surface-card);
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.home-lookbook-spotlight__body {
+  max-width: 520px;
+  margin: var(--gpi-space-4) 0 0;
+  color: var(--gpi-color-surface-canvas);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.home-lookbook-spotlight__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gpi-space-3);
+  margin-top: var(--gpi-space-6);
+}
+
+.home-lookbook-spotlight__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--gpi-space-7);
+  padding: var(--gpi-space-3) var(--gpi-space-6);
+  border: 1px solid var(--gpi-color-accent-gold-soft);
+  border-radius: var(--gpi-radius-small);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+.home-lookbook-spotlight__button--primary {
+  background: var(--gpi-color-accent-gold-soft);
+  color: var(--gpi-color-ink-strong);
+}
+
+.home-lookbook-spotlight__button--secondary {
+  background: transparent;
+  color: var(--gpi-color-surface-card);
+}
+
+.home-lookbook-spotlight__button:hover,
+.home-lookbook-spotlight__button:focus-visible {
+  border-color: var(--gpi-color-surface-card);
+  background: var(--gpi-color-surface-card);
+  color: var(--gpi-color-ink-strong);
+}
+
+.home-lookbook-spotlight__button:focus-visible {
+  outline: 2px solid var(--gpi-color-accent-gold-soft);
+  outline-offset: var(--gpi-space-1);
+}
+
+@media (max-width: 1024px) {
+  .home-lookbook-spotlight__overlay {
+    padding: var(--gpi-space-7) var(--gpi-space-6);
+  }
+
+}
+
+@media (max-width: 768px) {
+  .home-lookbook-spotlight {
+    min-height: 50vh;
+  }
+
+  .home-lookbook-spotlight::after {
+    background: linear-gradient(0deg, var(--gpi-ink-strong) 0%, var(--gpi-ink) 64%, transparent 100%);
+    opacity: 0.82;
+  }
+
+  .home-lookbook-spotlight__overlay {
+    align-items: flex-end;
+    padding: var(--gpi-space-2xl) var(--gpi-space-lg);
+  }
+
+  .home-lookbook-spotlight__body {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .home-lookbook-spotlight__overlay {
+    padding: var(--gpi-space-xl) var(--gpi-space-md);
+  }
+
+  .home-lookbook-spotlight__actions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,144 @@
+/* GPI Header Overrides
+ * Aligns header-05 with Gift Palace India design system
+ * Layered on top of the theme's own header styles — no section settings changed
+ */
+
+/* ─── Logo Text ─────────────────────────────────────────────────────────────── */
+.header-05 .header__heading .h2,
+.header-05 .header__heading-link .h2 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Top-bar background ─────────────────────────────────────────────────────── */
+.header-05 .header-top {
+  background-color: var(--gpi-surface-canvas) !important;
+  border-bottom: 1px solid var(--gpi-border-soft);
+}
+
+.header-05 .header-bottom {
+  border-bottom: 1px solid var(--gpi-border-soft);
+}
+
+/* ─── Nav links — desktop ────────────────────────────────────────────────────── */
+.header-05 .menu-lv-1__action,
+.header-05 .menu-lv-2__action,
+.header-05 .menu-lv-3__action {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.header-05 .menu-lv-1__action .text {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Nav links — hover underline uses gold ──────────────────────────────────── */
+.header-05 .menu-lv-item.menu-lv-1:hover > a > .text {
+  border-bottom-color: var(--gpi-gold) !important;
+}
+
+/* ─── Mega-menu / dropdown ───────────────────────────────────────────────────── */
+.header-05 .list-menu--disclosure,
+.header-05 .menu-lv-item.has-megamenu:hover > .menu-dropdown {
+  background-color: var(--gpi-surface-canvas) !important;
+  border-top-color: var(--gpi-border-soft) !important;
+  border-color: var(--gpi-border-soft) !important;
+}
+
+.header-05 .site-nav-title,
+.header-05 .site-nav-title a,
+.header-05 .menu-dropdown__block--title {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--gpi-text-soft);
+}
+
+.header-05 .site-nav-link,
+.header-05 .menu-lv-3__action {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+}
+
+/* ─── Cart bubble ────────────────────────────────────────────────────────────── */
+.header-05 .header__icon--cart .cart-count-bubble {
+  background-color: var(--gpi-gold);
+  color: var(--gpi-surface-canvas);
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  font-size: 0.6875rem;
+}
+
+/* ─── Search input ───────────────────────────────────────────────────────────── */
+.header-05 .search_details .search-modal__form {
+  border-bottom-color: var(--gpi-border-soft) !important;
+}
+
+.header-05 .search_details .search-modal__form .search__input {
+  font-family: var(--gpi-body);
+}
+
+/* ─── Customer-service text / language-currency ──────────────────────────────── */
+.header-05 .customer-service-text,
+.header-05 .customer-service-text a,
+.header-05 .halo-top-language .text,
+.header-05 .halo-top-currency .text {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+}
+
+/* ─── Mobile header ──────────────────────────────────────────────────────────── */
+.header-05 .header-mobile {
+  background-color: var(--gpi-surface-canvas) !important;
+  border-bottom: 1px solid var(--gpi-border-soft);
+}
+
+.header-05 .header-mobile .header__heading .h2 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+}
+
+/* ─── Mobile drawer ──────────────────────────────────────────────────────────── */
+.header-05 .site-nav-mobile .menu-lv-1__action,
+.header-05 .menu-drawer__close-button {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.header-05 .site-nav-mobile .menu-lv-2__action,
+.header-05 .site-nav-mobile .menu-lv-3__action {
+  font-family: var(--gpi-body);
+}
+
+/* ─── Sticky header ──────────────────────────────────────────────────────────── */
+.shopify-section-header-sticky .header-05 .header-top {
+  background-color: var(--gpi-surface-canvas) !important;
+}
+
+/* ─── Parallax header (homepage) ─────────────────────────────────────────────── */
+.template-index .header-05.enable_parallax .header-bottom {
+  background-color: rgba(255, 253, 248, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.template-index.scroll-up .header-05.enable_parallax .header-bottom {
+  background-color: var(--gpi-surface-canvas);
+}
+
+/* ─── Reduced-motion guard ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .header-05,
+  .header-05 .header-top,
+  .header-05 .header-bottom,
+  .header-05 .menu-lv-1__action {
+    transition: none !important;
+  }
+}

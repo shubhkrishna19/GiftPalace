@@ -1,0 +1,453 @@
+<div class="newsletter-section section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="newsletter-wrapper" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      
+      <!-- Newsletter Card -->
+      <div class="newsletter-card">
+        <div class="newsletter-content">
+          <!-- Header -->
+          {% if section.settings.eyebrow != blank %}
+            <p class="newsletter-kicker">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+          
+          {% if section.settings.title != blank %}
+            <h2 class="newsletter-title">{{ section.settings.title }}</h2>
+          {% endif %}
+
+          {% if section.settings.description != blank %}
+            <p class="newsletter-description">{{ section.settings.description }}</p>
+          {% endif %}
+
+          <!-- Benefits List -->
+          {% if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank %}
+            <ul class="newsletter-benefits">
+              {% if section.settings.benefit_1 != blank %}
+                <li>{{ section.settings.benefit_1 }}</li>
+              {% endif %}
+              {% if section.settings.benefit_2 != blank %}
+                <li>{{ section.settings.benefit_2 }}</li>
+              {% endif %}
+              {% if section.settings.benefit_3 != blank %}
+                <li>{{ section.settings.benefit_3 }}</li>
+              {% endif %}
+            </ul>
+          {% endif %}
+
+          <!-- Signup Form -->
+          <form class="newsletter-form" data-netlify="true" method="POST" name="newsletter">
+            <input type="hidden" name="form-name" value="newsletter">
+            
+            <div class="form-group">
+              <input 
+                type="email" 
+                name="email" 
+                placeholder="{{ section.settings.input_placeholder }}"
+                required
+                class="newsletter-input"
+                aria-label="Email address"
+              >
+              <button 
+                type="submit" 
+                class="button button--primary newsletter-button"
+              >
+                {{ section.settings.button_label }}
+              </button>
+            </div>
+          </form>
+
+          <!-- Consent Text -->
+          {% if section.settings.consent_text != blank %}
+            <p class="newsletter-consent">{{ section.settings.consent_text }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Newsletter Image/Illustration -->
+        {% if section.settings.image != blank %}
+          <div class="newsletter-image">
+            <img 
+              src="{{ section.settings.image | image_url: width: 400 }}"
+              alt="Newsletter"
+              loading="lazy"
+              class="newsletter-visual"
+            >
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Success Message (hidden by default, shown via JavaScript) -->
+      <div class="newsletter-success" style="display: none;">
+        <div class="success-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 12 12 8 8 12"></polyline>
+            <line x1="12" y1="16" x2="12" y2="8"></line>
+          </svg>
+        </div>
+        <p class="success-message">{{ section.settings.success_message }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.newsletter-section {
+  background: linear-gradient(135deg, var(--color-background-secondary) 0%, var(--color-background-primary) 100%);
+  padding: var(--space-section) 0;
+}
+
+.newsletter-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.newsletter-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .newsletter-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+}
+
+.newsletter-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.newsletter-kicker {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.newsletter-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.newsletter-description {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.newsletter-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.newsletter-benefits li {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding-left: var(--space-md);
+  position: relative;
+  margin: 0;
+}
+
+.newsletter-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+}
+
+.newsletter-form {
+  margin-top: var(--space-md);
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-sm);
+  background: var(--color-background-secondary);
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.form-group:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+@media (max-width: 640px) {
+  .form-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+.newsletter-input {
+  background: transparent;
+  border: none;
+  padding: var(--space-md);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  outline: none;
+  font-family: inherit;
+}
+
+.newsletter-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.newsletter-button {
+  padding: var(--space-md) var(--space-lg);
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.newsletter-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.newsletter-consent {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.newsletter-image {
+  display: none;
+  position: relative;
+}
+
+@media (min-width: 769px) {
+  .newsletter-image {
+    display: block;
+  }
+}
+
+.newsletter-visual {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.newsletter-success {
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--color-background-secondary);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  animation: slideUp 0.6s var(--ease-out-expo);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--space-md);
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.success-message {
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+  margin: 0;
+  font-weight: var(--font-semibold);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('[data-netlify="true"]');
+  if (!form) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+      });
+
+      if (response.ok) {
+        const card = form.closest('.newsletter-card');
+        const success = form.closest('.newsletter-wrapper').querySelector('.newsletter-success');
+        
+        card.style.display = 'none';
+        success.style.display = 'block';
+        
+        setTimeout(() => {
+          form.reset();
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Newsletter signup error:', error);
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Get Exclusive Offers & New Arrivals"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Subscribe to our newsletter for special discounts, new collection launches, and gifting inspiration delivered to your inbox."
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "10% off your first order"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "Early access to new launches"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Styling tips and gifting guides"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Email input placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "textarea",
+      "id": "consent_text",
+      "label": "Consent text",
+      "default": "We respect your privacy. Unsubscribe at any time."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for subscribing! Check your email for your exclusive offer."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Section image (optional)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup"
+    }
+  ]
+}
+{% endschema %}

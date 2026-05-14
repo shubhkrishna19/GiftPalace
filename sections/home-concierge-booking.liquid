@@ -1,0 +1,181 @@
+<div class="gpi-concierge-booking" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="gpi-concierge-booking__card">
+      <div class="gpi-concierge-booking__layout">
+        <div class="gpi-concierge-booking__advisor">
+          <img src="{{ 'gpi-advisor.webp' | asset_url }}" alt="{{ section.settings.advisor_name }} gemstone advisor at Gift Palace India" width="750" height="1000" loading="lazy">
+          <div class="gpi-concierge-booking__advisor-overlay">
+            {% if section.settings.advisor_name != blank %}
+              <div class="gpi-concierge-booking__advisor-name">{{ section.settings.advisor_name }}</div>
+            {% endif %}
+            {% if section.settings.advisor_role != blank %}
+              <div class="gpi-concierge-booking__advisor-role">{{ section.settings.advisor_role }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="gpi-concierge-booking__content">
+          {% if section.settings.eyebrow != blank %}
+            <p class="gpi-concierge-booking__eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+          {% if section.settings.heading != blank %}
+            <h2 class="gpi-concierge-booking__heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if section.settings.description != blank %}
+            <p class="gpi-concierge-booking__description">{{ section.settings.description }}</p>
+          {% endif %}
+
+          <div class="gpi-concierge-booking__ctas">
+            {% if section.settings.whatsapp_label != blank and section.settings.whatsapp_link != blank %}
+              <a class="gpi-concierge-booking__cta gpi-concierge-booking__cta--whatsapp" href="{{ section.settings.whatsapp_link }}">
+                <span class="gpi-concierge-booking__cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+                <span>
+                  <span class="gpi-concierge-booking__cta-title">{{ section.settings.whatsapp_label }}</span>
+                  {% if section.settings.whatsapp_subtext != blank %}
+                    <span class="gpi-concierge-booking__cta-subtext">{{ section.settings.whatsapp_subtext }}</span>
+                  {% endif %}
+                </span>
+              </a>
+            {% endif %}
+
+            <div class="gpi-concierge-booking__cta gpi-concierge-booking__cta--store">
+              <span class="gpi-concierge-booking__cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span>
+                {% if section.settings.store_label != blank %}
+                  <span class="gpi-concierge-booking__cta-title">{{ section.settings.store_label }}</span>
+                {% endif %}
+                <span class="gpi-concierge-booking__cta-subtext">
+                  {% if section.settings.store_address != blank %}{{ section.settings.store_address }}{% endif %}
+                  {% if section.settings.store_address != blank and section.settings.store_hours != blank %}<br>{% endif %}
+                  {% if section.settings.store_hours != blank %}{{ section.settings.store_hours }}{% endif %}
+                </span>
+              </span>
+            </div>
+
+            {% if section.settings.video_label != blank and section.settings.video_link != blank %}
+              <a class="gpi-concierge-booking__cta gpi-concierge-booking__cta--video" href="{{ section.settings.video_link }}">
+                <span class="gpi-concierge-booking__cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></span>
+                <span class="gpi-concierge-booking__cta-title">{{ section.settings.video_label }}</span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GPI Concierge Booking",
+  "tag": "section",
+  "class": "gpi-concierge-booking",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1170",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Personal gemstone advisor"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three ways to talk to a real gemstone person."
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Real human advice from our Delhi atelier — no chatbots, no scripts."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp label",
+      "default": "Chat on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_link",
+      "label": "WhatsApp link"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_subtext",
+      "label": "WhatsApp subtext",
+      "default": "Replies typically in 5 min"
+    },
+    {
+      "type": "text",
+      "id": "store_label",
+      "label": "Store label",
+      "default": "Visit our Delhi store"
+    },
+    {
+      "type": "text",
+      "id": "store_address",
+      "label": "Store address",
+      "default": "Chanakyapuri, New Delhi"
+    },
+    {
+      "type": "text",
+      "id": "store_hours",
+      "label": "Store hours",
+      "default": "Mon–Sat 11am–8pm"
+    },
+    {
+      "type": "text",
+      "id": "video_label",
+      "label": "Video label",
+      "default": "Book a video consultation"
+    },
+    {
+      "type": "text",
+      "id": "video_link",
+      "label": "Video link"
+    },
+    {
+      "type": "text",
+      "id": "advisor_name",
+      "label": "Advisor name",
+      "default": "Gaurav Goyal"
+    },
+    {
+      "type": "text",
+      "id": "advisor_role",
+      "label": "Advisor role",
+      "default": "Senior Gemstone Advisor"
+    },
+    {
+      "type": "number",
+      "id": "padding_top",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "GPI Concierge Booking"
+    }
+  ]
+}
+{% endschema %}

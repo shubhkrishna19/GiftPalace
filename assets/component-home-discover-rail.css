@@ -1,0 +1,279 @@
+/* GPI Discover Rail - horizontal gemstone collection browse */
+
+.home-discover {
+  overflow: hidden;
+  padding-block: clamp(28px, 4vw, 56px);
+  padding-inline-start: max(18px, calc((100vw - 1440px) / 2 + 36px));
+  padding-inline-end: 0;
+  background:
+    linear-gradient(180deg, var(--gpi-color-bg-primary) 0%, var(--gpi-color-bg-secondary) 100%);
+  color: var(--gpi-color-text);
+}
+
+html.dark-mode .home-discover {
+  background:
+    linear-gradient(180deg, var(--gpi-color-bg-secondary) 0%, var(--gpi-color-bg-primary) 100%);
+}
+
+.home-discover__header {
+  max-width: min(680px, calc(100vw - 36px));
+  margin: 0 0 clamp(28px, 4vw, 46px);
+  text-align: left;
+}
+
+.home-discover__title {
+  margin: 0;
+  color: var(--gpi-color-text);
+  font-family: var(--gpi-heading);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.home-discover__title [data-letter] {
+  display: inline-block;
+}
+
+.home-discover__description {
+  max-width: 58ch;
+  margin: 16px 0 0;
+  color: var(--gpi-color-text-secondary);
+  font-family: var(--gpi-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.home-discover__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  margin: 24px 0;
+}
+
+.home-discover__tab {
+  min-height: 44px;
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 999px;
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0);
+  color: var(--gpi-color-text-secondary);
+  cursor: pointer;
+  font-family: var(--gpi-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 8px 18px;
+  text-transform: uppercase;
+}
+
+.home-discover__tab.active,
+.home-discover__tab:hover {
+  border-color: var(--gpi-color-accent);
+  color: var(--gpi-color-accent);
+}
+
+.home-discover__grid {
+  display: flex;
+  gap: 16px;
+  margin-top: 0;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 0 max(18px, calc((100vw - 1440px) / 2 + 36px)) 18px 0;
+  scroll-padding-inline-start: max(18px, calc((100vw - 1440px) / 2 + 36px));
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--gpi-color-accent) var(--gpi-color-bg-tertiary);
+  scrollbar-width: thin;
+}
+
+.home-discover__grid::-webkit-scrollbar {
+  height: 4px;
+}
+
+.home-discover__grid::-webkit-scrollbar-track {
+  background: var(--gpi-color-bg-tertiary);
+}
+
+.home-discover__grid::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--gpi-color-accent);
+}
+
+.home-discover__card {
+  position: relative;
+  flex: 0 0 clamp(220px, 28vw, 320px);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 6px;
+  background: var(--gpi-color-bg-tertiary);
+  box-shadow: 0 24px 46px -30px rgb(from var(--gpi-color-text) r g b / 0.34);
+  scroll-snap-align: start;
+  text-align: left;
+}
+
+html.dark-mode .home-discover__card {
+  box-shadow: 0 24px 46px -30px rgb(from var(--gpi-color-bg-primary) r g b / 0.78);
+}
+
+.home-discover__card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 56%;
+  background: linear-gradient(0deg, rgb(from var(--gpi-color-text) r g b / 0.62), rgb(from var(--gpi-color-text) r g b / 0));
+  pointer-events: none;
+}
+
+html.dark-mode .home-discover__card::after {
+  background: linear-gradient(0deg, rgb(from var(--gpi-color-bg-primary) r g b / 0.74), rgb(from var(--gpi-color-bg-primary) r g b / 0));
+}
+
+.home-discover__card-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-discover__card-name {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 58px;
+  z-index: 2;
+  margin: 0;
+  color: var(--gpi-color-bg-primary);
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.55rem, 2.3vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+html.dark-mode .home-discover__card-name {
+  color: var(--gpi-color-text);
+}
+
+.home-discover__card-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  background: var(--gpi-color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.home-discover__card-link {
+  position: absolute;
+  left: 18px;
+  bottom: 20px;
+  z-index: 2;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--gpi-color-accent);
+  font-family: var(--gpi-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  margin: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.home-discover__card:focus-within,
+.home-discover__tab:focus-visible,
+.home-discover__card-link:focus-visible {
+  outline: 2px solid var(--gpi-color-accent-hover);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-discover__title [data-letter] {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+
+  .home-discover__title.is-visible [data-letter] {
+    animation: gpi-discover-letter-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--letter-index) * 30ms);
+  }
+
+  .home-discover__card,
+  .home-discover__card-image,
+  .home-discover__card-name::after {
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .home-discover__card:hover,
+  .home-discover__card:focus-within {
+    transform: translateY(-4px);
+  }
+
+  .home-discover__card:hover .home-discover__card-image,
+  .home-discover__card:focus-within .home-discover__card-image {
+    transform: scale(1.04);
+  }
+
+  .home-discover__card:hover .home-discover__card-name::after,
+  .home-discover__card:focus-within .home-discover__card-name::after {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes gpi-discover-letter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .home-discover__card:hover,
+  .home-discover__card:hover .home-discover__card-image {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-discover {
+    padding-block: clamp(24px, 8vw, 44px);
+    padding-inline-start: 18px;
+  }
+
+  .home-discover__header {
+    max-width: calc(100vw - 36px);
+  }
+
+  .home-discover__title {
+    font-size: clamp(2.15rem, 11vw, 3.2rem);
+  }
+
+  .home-discover__description {
+    font-size: 15px;
+  }
+
+  .home-discover__grid {
+    gap: 12px;
+    padding-right: 18px;
+    scroll-padding-inline-start: 18px;
+  }
+
+  .home-discover__card {
+    flex-basis: clamp(220px, 72vw, 300px);
+  }
+}

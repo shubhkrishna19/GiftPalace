@@ -1,0 +1,160 @@
+{%- comment -%}
+  Snippet: product-cross-sell
+  Parameters:
+    - heading: String
+    - products: Array of products
+    - variant: 'plus' | 'discount'
+  Usage:
+    {% render 'product-cross-sell', heading: 'Pairs Beautifully', products: recommendations, variant: 'discount' %}
+{%- endcomment -%}
+
+<div class="gpi-product-cross-sell gpi-product-cross-sell--{{ variant }}">
+  {% if heading != blank %}
+    <h3 class="gpi-product-cross-sell__heading">{{ heading }}</h3>
+  {% endif %}
+  
+  <div class="gpi-product-cross-sell__grid">
+    {% for product in products limit: 4 %}
+      <div class="gpi-product-cross-sell__item">
+        <a href="{{ product.url }}" class="gpi-product-cross-sell__card">
+          <div class="gpi-product-cross-sell__image">
+            <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {% if variant == 'discount' %}
+              {%- liquid
+                assign current_variant = product.selected_or_first_available_variant
+                assign compare_at_price = current_variant.compare_at_price
+                assign price = current_variant.price
+              -%}
+              {% if compare_at_price > price %}
+                <span class="gpi-product-cross-sell__discount">
+                  -{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%
+                </span>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="gpi-product-cross-sell__info">
+            <span class="gpi-product-cross-sell__title">{{ product.title }}</span>
+            <div class="gpi-product-cross-sell__price">
+              <span class="gpi-product-cross-sell__price-current">{{ product.price | money }}</span>
+              {% if product.compare_at_price > product.price %}
+                <span class="gpi-product-cross-sell__price-compare">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      {% if variant == 'plus' and forloop.last == false %}
+        <div class="gpi-product-cross-sell__plus">+</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .gpi-product-cross-sell {
+    margin: 48px 0;
+  }
+  .gpi-product-cross-sell__heading {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 32px;
+    color: var(--gpi-color-text);
+  }
+  .gpi-product-cross-sell__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .gpi-product-cross-sell__item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+  }
+  .gpi-product-cross-sell__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .gpi-product-cross-sell__image {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--gpi-color-bg-secondary);
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .gpi-product-cross-sell__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .gpi-product-cross-sell__card:hover img {
+    transform: scale(1.05);
+  }
+  .gpi-product-cross-sell__discount {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--gpi-color-accent);
+    color: var(--gpi-color-bg-primary);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .gpi-product-cross-sell__info {
+    text-align: center;
+  }
+  .gpi-product-cross-sell__title {
+    display: block;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--gpi-color-text);
+  }
+  .gpi-product-cross-sell__price {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+  }
+  .gpi-product-cross-sell__price-current {
+    font-family: "Marcellus", Georgia, serif;
+    font-size: 1rem;
+    color: var(--gpi-color-accent);
+  }
+  .gpi-product-cross-sell__price-compare {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    color: var(--gpi-color-text-tertiary);
+    text-decoration: line-through;
+  }
+  .gpi-product-cross-sell__plus {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--gpi-color-accent);
+    margin-bottom: 40px;
+  }
+  
+  @media (max-width: 768px) {
+    .gpi-product-cross-sell__grid {
+      gap: 16px;
+    }
+    .gpi-product-cross-sell__item {
+      min-width: 140px;
+    }
+    .gpi-product-cross-sell__plus {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,477 @@
+<div class="hero-video-section section-block-{{ section.id }}">
+  <div class="hero-video-background">
+    {% if section.settings.video_url != blank %}
+      <video 
+        class="hero-video__element" 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        poster="{{ section.settings.video_poster | image_url: width: 1600 }}"
+      >
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.bg_image != blank %}
+      <img 
+        src="{{ section.settings.bg_image | image_url: width: 1600 }}" 
+        alt="Hero background"
+        class="hero-video__fallback"
+      >
+    {% endif %}
+    <div class="hero-video-overlay"></div>
+  </div>
+
+  <div class="hero-video-content">
+    <div class="hero-video-inner {% if section.settings.content_alignment == 'left' %}align-left{% elsif section.settings.content_alignment == 'right' %}align-right{% else %}align-center{% endif %}">
+      
+      <!-- Top Trust Badges -->
+      {% assign trust_blocks = section.blocks | where: 'type', 'trust_badge' %}
+      {% if trust_blocks.size > 0 %}
+        <div class="hero-badges-row">
+          {% for block in trust_blocks limit: 3 %}
+            <div class="hero-badge" {{ block.shopify_attributes }}>
+              <span class="hero-badge__icon">{% if block.settings.icon %}{{ block.settings.icon }}{% else %}✓{% endif %}</span>
+              <span class="hero-badge__text">{{ block.settings.label }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Main Content -->
+      <div class="hero-content-block">
+        {% if section.settings.eyebrow != blank %}
+          <p class="hero-eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h1 class="hero-title">{{ section.settings.title }}</h1>
+        {% endif %}
+
+        {% if section.settings.subtitle != blank %}
+          <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group">
+          {% if section.settings.primary_label != blank %}
+            <a 
+              class="button button--lg button--primary" 
+              {% if section.settings.primary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.primary_link }}"{% endif %}
+            >
+              {{ section.settings.primary_label }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.secondary_label != blank %}
+            <a 
+              class="button button--lg button--outline" 
+              {% if section.settings.secondary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.secondary_link }}"{% endif %}
+            >
+              {{ section.settings.secondary_label }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Bottom Stats -->
+      {% assign stat_blocks = section.blocks | where: 'type', 'stat_item' %}
+      {% if stat_blocks.size > 0 %}
+        <div class="hero-stats-row">
+          {% for block in stat_blocks limit: 3 %}
+            <div class="hero-stat" {{ block.shopify_attributes }}>
+              <div class="hero-stat__value">{{ block.settings.value }}</div>
+              <div class="hero-stat__label">{{ block.settings.label }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Modal Video Trigger -->
+  {% if section.settings.enable_modal_video and section.settings.modal_video_url != blank %}
+    <button class="hero-modal-trigger" aria-label="Play promotional video" data-modal-video="{{ section.settings.modal_video_url }}">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </button>
+  {% endif %}
+</div>
+
+<style>
+  .hero-video-section {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-0);
+  }
+
+  .hero-video__element,
+  .hero-video__fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+  }
+
+  .hero-video-content {
+    position: relative;
+    z-index: var(--z-10);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4xl);
+    color: white;
+    text-align: center;
+  }
+
+  .hero-video-content.align-left {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .hero-video-content.align-right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .hero-video-inner {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  /* Trust Badges */
+  .hero-badges-row {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+  }
+
+  .hero-badge__icon {
+    font-size: 16px;
+  }
+
+  /* Content Block */
+  .hero-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #d4af37;
+    margin: 0 0 var(--space-md) 0;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: var(--font-bold);
+    line-height: var(--line-height-tight);
+    margin: 0 0 var(--space-lg) 0;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: var(--line-height-relaxed);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 var(--space-lg) 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* CTA Group */
+  .hero-cta-group {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--space-lg) 0;
+  }
+
+  .hero-cta-group .button {
+    min-width: 200px;
+  }
+
+  /* Stats Row */
+  .hero-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-stat__value {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: var(--font-bold);
+    color: #d4af37;
+    margin-bottom: var(--space-xs);
+  }
+
+  .hero-stat__label {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Modal Trigger */
+  .hero-modal-trigger {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-20);
+    width: 60px;
+    height: 60px;
+    background: rgba(212, 175, 55, 0.9);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--duration-normal) ease-out;
+    animation: pulse 3s infinite;
+  }
+
+  .hero-modal-trigger:hover {
+    background: #d4af37;
+    transform: translateX(-50%) scale(1.15);
+  }
+
+  .hero-modal-trigger svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-video-section {
+      min-height: 500px;
+    }
+
+    .hero-video-content {
+      padding: var(--space-lg);
+    }
+
+    .hero-cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .hero-cta-group .button {
+      width: 100%;
+      min-width: unset;
+    }
+
+    .hero-badges-row {
+      justify-content: flex-start;
+    }
+
+    .hero-stats-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .hero-video-section {
+      min-height: 400px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+    }
+
+    .hero-stats-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero with Video",
+  "tag": "section",
+  "class": "section-hero-video",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Background Video URL (MP4)"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video Poster Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Fallback Background Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Discover the collection"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Main Title",
+      "default": "Gemstones with Meaning"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Each piece tells a story of beauty and intention"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary CTA Label",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary CTA Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary CTA Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_modal_video",
+      "label": "Enable Modal Video",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "modal_video_url",
+      "label": "Modal Video URL (MP4)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Emoji",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Badge Text",
+          "default": "Certified Authentic"
+        }
+      ]
+    },
+    {
+      "type": "stat_item",
+      "name": "Stat",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Stat Value",
+          "default": "10K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat Label",
+          "default": "Happy Customers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with Video"
+    }
+  ]
+}
+{% endschema %}

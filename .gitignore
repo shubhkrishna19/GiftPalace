@@ -18,3 +18,11 @@ yarn-error.log*
 # Build artifacts
 dist/
 build/
+
+# Workspace state - not part of the Shopify theme upload
+.claude/
+backup/
+tmp/
+assets/.stash/
+
+# docs/ (specs, plans, archives) is intentionally tracked as project history

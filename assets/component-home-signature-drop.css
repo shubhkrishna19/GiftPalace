@@ -1,0 +1,337 @@
+/* GPI Signature Drop - asymmetric certified gemstone bento */
+
+.home-signature-drop {
+  background:
+    linear-gradient(180deg, var(--gpi-color-bg-secondary) 0%, var(--gpi-color-bg-primary) 100%);
+  color: var(--gpi-color-text);
+}
+
+html.dark-mode .home-signature-drop {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgb(from var(--gpi-color-accent) r g b / 0.08), rgb(from var(--gpi-color-accent) r g b / 0) 34%),
+    linear-gradient(180deg, var(--gpi-color-bg-primary) 0%, var(--gpi-color-bg-secondary) 100%);
+}
+
+.home-signature-drop > .container,
+.home-signature-drop > .container-1170,
+.home-signature-drop > .container-1770,
+.home-signature-drop > .container-full {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.home-signature-drop__layout {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 48px);
+  padding-block: clamp(32px, 4.5vw, 64px) !important;
+  padding-inline: clamp(18px, 4vw, 36px) !important;
+}
+
+.home-signature-drop__content {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(280px, 0.46fr);
+  gap: clamp(20px, 4vw, 72px);
+  align-items: end;
+}
+
+.home-signature-drop__eyebrow {
+  grid-column: 1 / -1;
+  margin: 0 0 -6px;
+  color: var(--gpi-color-accent);
+  font-family: var(--gpi-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home-signature-drop__heading {
+  max-width: 15ch;
+  margin: 0;
+  color: var(--gpi-color-text);
+  font-family: var(--gpi-heading);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.02;
+}
+
+.home-signature-drop__copy {
+  max-width: 58ch;
+  margin-top: 18px;
+  color: var(--gpi-color-text-secondary);
+  font-family: var(--gpi-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.home-signature-drop__copy p:last-child {
+  margin-bottom: 0;
+}
+
+.home-signature-drop__proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.home-signature-drop__proof span {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 999px;
+  background: rgb(from var(--gpi-color-accent) r g b / 0.04);
+  color: var(--gpi-color-text-secondary);
+  font-family: var(--gpi-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 9px 14px;
+  text-transform: uppercase;
+}
+
+.home-signature-drop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.home-signature-drop__button {
+  min-height: 50px;
+  min-width: 168px;
+  border-radius: 999px;
+  background: var(--gpi-color-text);
+  color: var(--gpi-color-bg-primary);
+  font-family: var(--gpi-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-signature-drop__button.gpi-button--secondary {
+  border-color: var(--gpi-color-accent);
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0);
+  color: var(--gpi-color-text);
+}
+
+.gpi-signature-drop__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  height: clamp(560px, 60vw, 760px);
+}
+
+.gpi-signature-drop__card:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.gpi-signature-drop__card:nth-child(2) {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
+.gpi-signature-drop__card:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.gpi-signature-drop__card:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.home-signature-drop__frame,
+.gpi-signature-drop__card {
+  position: relative;
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 6px;
+  background: var(--gpi-color-bg-tertiary);
+  box-shadow: 0 28px 56px -28px rgb(from var(--gpi-color-text) r g b / 0.28);
+  text-decoration: none;
+}
+
+html.dark-mode .home-signature-drop__frame,
+html.dark-mode .gpi-signature-drop__card {
+  box-shadow: 0 28px 56px -28px rgb(from var(--gpi-color-bg-primary) r g b / 0.74);
+}
+
+.home-signature-drop__frame--main,
+.home-signature-drop__frame--small,
+.home-signature-drop__frame--soft {
+  border-radius: 6px;
+}
+
+.home-signature-drop__frame img,
+.gpi-signature-drop__card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+}
+
+.gpi-signature-drop__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  border: 1px solid rgb(from var(--gpi-color-bg-primary) r g b / 0.36);
+  border-radius: 999px;
+  background: var(--gpi-color-accent);
+  color: var(--gpi-color-bg-primary);
+  font-family: var(--gpi-body);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 9px 12px;
+  text-transform: uppercase;
+}
+
+.gpi-signature-drop__caption {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+  padding: 24px;
+  background: linear-gradient(0deg, rgb(from var(--gpi-color-text) r g b / 0.72), rgb(from var(--gpi-color-text) r g b / 0));
+  color: var(--gpi-color-bg-primary);
+}
+
+html.dark-mode .gpi-signature-drop__caption {
+  background: linear-gradient(0deg, rgb(from var(--gpi-color-bg-primary) r g b / 0.78), rgb(from var(--gpi-color-bg-primary) r g b / 0));
+  color: var(--gpi-color-text);
+}
+
+.gpi-signature-drop__caption strong {
+  color: inherit;
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.55rem, 2.6vw, 2.45rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.gpi-signature-drop__caption span {
+  color: var(--gpi-color-accent);
+  font-family: var(--gpi-heading);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.gpi-signature-drop__card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 4;
+  height: 3px;
+  background: var(--gpi-color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.home-signature-drop__frame:focus-visible,
+.home-signature-drop__button:focus-visible {
+  outline: 2px solid var(--gpi-color-accent-hover);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-signature-drop__frame img,
+  .gpi-signature-drop__caption,
+  .gpi-signature-drop__card::after,
+  .home-signature-drop__button {
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .home-signature-drop__frame:hover img,
+  .home-signature-drop__frame:focus-visible img {
+    transform: scale(1.04);
+  }
+
+  .home-signature-drop__frame:hover .gpi-signature-drop__caption,
+  .home-signature-drop__frame:focus-visible .gpi-signature-drop__caption {
+    transform: translateY(-4px);
+  }
+
+  .home-signature-drop__frame:hover::after,
+  .home-signature-drop__frame:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .home-signature-drop__button:hover,
+  .home-signature-drop__button:focus-visible {
+    transform: translateY(-2px);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .home-signature-drop__frame:hover img,
+  .home-signature-drop__frame:hover .gpi-signature-drop__caption,
+  .home-signature-drop__button:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-signature-drop__content {
+    grid-template-columns: 1fr;
+  }
+
+  .home-signature-drop__heading {
+    max-width: 16ch;
+  }
+
+  .gpi-signature-drop__grid {
+    height: clamp(520px, 84vw, 720px);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-signature-drop__layout {
+    padding-block: clamp(28px, 8vw, 48px) !important;
+  }
+
+  .home-signature-drop__heading {
+    font-size: clamp(2.25rem, 11vw, 3.4rem);
+  }
+
+  .home-signature-drop__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .home-signature-drop__button {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .gpi-signature-drop__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    height: auto;
+  }
+
+  .gpi-signature-drop__card:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gpi-signature-drop__caption {
+    padding: 20px;
+  }
+}

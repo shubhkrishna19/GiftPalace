@@ -1,0 +1,398 @@
+<div class="featured-collections-section section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="featured-collections-wrapper" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      
+      <!-- Header -->
+      <div class="featured-collections-header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="featured-collections-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        
+        {% if section.settings.title != blank %}
+          <h2 class="featured-collections-title">{{ section.settings.title }}</h2>
+        {% endif %}
+      </div>
+
+      <!-- Collections Grid -->
+      <div class="collections-grid">
+        {% assign collection_blocks = section.blocks | where: 'type', 'collection' %}
+        {% for block in collection_blocks %}
+          <div class="collection-card" {{ block.shopify_attributes }}>
+            <!-- Background Image -->
+            <div class="collection-card-background">
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.collection_name }}"
+                  loading="lazy"
+                  class="collection-card-image"
+                >
+              {% else %}
+                <div class="collection-card-placeholder">Image</div>
+              {% endif %}
+              
+              <!-- Overlay Gradient -->
+              <div class="collection-card-overlay"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="collection-card-content">
+              {% if block.settings.badge != blank %}
+                <span class="collection-card-badge">{{ block.settings.badge }}</span>
+              {% endif %}
+
+              <div class="collection-card-text">
+                {% if block.settings.collection_name != blank %}
+                  <h3 class="collection-card-title">{{ block.settings.collection_name }}</h3>
+                {% endif %}
+
+                {% if block.settings.item_count != blank %}
+                  <p class="collection-card-count">{{ block.settings.item_count }} Items</p>
+                {% endif %}
+              </div>
+
+              <!-- CTA -->
+              {% if block.settings.cta_label != blank %}
+                <a href="{{ block.settings.collection_link }}" class="collection-card-cta">
+                  {{ block.settings.cta_label }}
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Bottom CTA -->
+      {% if section.settings.show_bottom_cta %}
+        <div class="collections-bottom-cta">
+          {% if section.settings.bottom_cta_label != blank %}
+            <a href="{{ section.settings.bottom_cta_link }}" class="button button--outline">
+              {{ section.settings.bottom_cta_label }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.featured-collections-section {
+  background: var(--color-background-primary);
+  padding: var(--space-section) 0;
+}
+
+.featured-collections-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.featured-collections-kicker {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
+
+.featured-collections-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+@media (max-width: 1024px) {
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  min-height: 400px;
+  cursor: pointer;
+  group/card: hover;
+}
+
+.collection-card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.collection-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.collection-card:hover .collection-card-image {
+  transform: scale(1.08);
+}
+
+.collection-card-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-background-secondary) 0%, var(--color-border) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-semibold);
+}
+
+.collection-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+  transition: opacity var(--duration-normal) var(--ease-out-expo);
+}
+
+.collection-card:hover .collection-card-overlay {
+  opacity: 0.7;
+}
+
+.collection-card-content {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  z-index: 2;
+}
+
+.collection-card-badge {
+  align-self: flex-start;
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.collection-card-text {
+  transform: translateY(8px);
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.collection-card:hover .collection-card-text {
+  transform: translateY(0);
+}
+
+.collection-card-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-xs);
+  line-height: var(--line-height-tight);
+}
+
+.collection-card-count {
+  font-size: var(--text-sm);
+  opacity: 0.9;
+  font-weight: var(--font-regular);
+}
+
+.collection-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: white;
+  text-decoration: none;
+  font-weight: var(--font-semibold);
+  padding: var(--space-sm) 0;
+  border-bottom: 2px solid var(--color-primary);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.collection-card:hover .collection-card-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collection-card-cta:hover {
+  gap: var(--space-md);
+  padding-bottom: calc(var(--space-sm) + 4px);
+}
+
+.collection-card-cta svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.collection-card:hover .collection-card-cta svg {
+  transform: translateX(4px);
+}
+
+.collections-bottom-cta {
+  text-align: center;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+</style>
+
+{% schema %}
+{
+  "name": "Featured Collections Grid",
+  "tag": "section",
+  "class": "section-featured-collections",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop By Category"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Explore Our Collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_cta",
+      "label": "Show bottom CTA",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "bottom_cta_label",
+      "label": "Bottom CTA label",
+      "default": "View All Collections"
+    },
+    {
+      "type": "url",
+      "id": "bottom_cta_link",
+      "label": "Bottom CTA link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection card",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "collection_name",
+          "label": "Collection name",
+          "default": "Engagement Rings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Collection image"
+        },
+        {
+          "type": "text",
+          "id": "item_count",
+          "label": "Item count",
+          "default": "24"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text (optional)",
+          "default": "Trending"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Shop Collection"
+        },
+        {
+          "type": "url",
+          "id": "collection_link",
+          "label": "Collection link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections Grid"
+    }
+  ]
+}
+{% endschema %}

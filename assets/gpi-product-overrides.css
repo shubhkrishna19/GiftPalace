@@ -1,0 +1,227 @@
+/* GPI Product Page Overrides
+ * Aligns the product detail page with the Gift Palace India design system
+ * Layered over component-product.css + component-product-form.css — no core files edited
+ */
+
+/* ─── Product title ──────────────────────────────────────────────────────────── */
+.productView-title {
+  font-family: var(--gpi-heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+  color: var(--gpi-ink-strong) !important;
+}
+
+/* ─── Vendor / brand ─────────────────────────────────────────────────────────── */
+.productView-brand,
+.productView-vendor,
+.productView-brand a {
+  font-family: var(--gpi-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gpi-gold) !important;
+}
+
+/* ─── Zodiac / metadata subtitle ────────────────────────────────────────────── */
+.productView-zodiac-date,
+.product-card-zodiac-date {
+  color: var(--gpi-text-muted) !important;
+  font-family: var(--gpi-body);
+}
+
+/* ─── Price ──────────────────────────────────────────────────────────────────── */
+.productView-price .price-item--regular .money,
+.productView-price .price-item--regular {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  color: var(--gpi-ink-strong);
+}
+
+.productView-price .price--on-sale .price-item--sale .money,
+.productView-price .price-item--sale {
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  color: var(--gpi-gold);
+}
+
+.productView-price .price-item--regular.price-item--last .money,
+.productView-price .price--on-sale .price-item--regular .money {
+  color: var(--gpi-text-muted);
+  font-weight: 400;
+}
+
+.productView-price .price__saved,
+.productView-price .price-item--saved .money {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-gold);
+  font-weight: 600;
+}
+
+/* ─── Review stars ───────────────────────────────────────────────────────────── */
+.productView-rating .spr-starrating,
+.productView-rating .jdgm-star {
+  color: var(--gpi-gold);
+}
+
+/* ─── Short description ──────────────────────────────────────────────────────── */
+.productView-description,
+.productView-shortDescription,
+.product-description,
+.productView-description p {
+  font-family: var(--gpi-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Variant option labels ──────────────────────────────────────────────────── */
+.product-form__input .form__label,
+.product-form__title {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Swatch / text variant selected state ───────────────────────────────────── */
+.product-form__radio:checked + .product-form__label .text {
+  color: var(--gpi-surface-canvas) !important;
+  background-color: var(--gpi-gold) !important;
+  border-color: var(--gpi-gold) !important;
+}
+
+/* ─── Add to Cart button refinement ─────────────────────────────────────────── */
+.product-form .btn-addcart,
+.product-form .button--primary,
+.halo-productView-right .btn-addcart {
+  font-family: var(--gpi-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--gpi-radius-pill) !important;
+  transition: background-color var(--gpi-transition), border-color var(--gpi-transition), transform var(--gpi-transition);
+}
+
+.product-form .btn-addcart:hover,
+.product-form .button--primary:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── Quantity selector ──────────────────────────────────────────────────────── */
+.productView-qty .btn-quantity:before,
+.productView-qty .btn-quantity.plus:after {
+  background: var(--gpi-ink) !important;
+}
+
+/* ─── Product meta (SKU, availability) ──────────────────────────────────────── */
+.productView-sku,
+.productView-availability {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-text-muted);
+}
+
+.productView-availability .in-stock {
+  color: var(--gpi-gold);
+  font-weight: 600;
+}
+
+/* ─── Product tab headings (Description, Reviews, etc.) ──────────────────────── */
+.productView-tabs .tab-title,
+.product-tabs .tab-link,
+.product-info-tabs .tab-item {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gpi-text-muted);
+}
+
+.productView-tabs .tab-title.active,
+.product-tabs .tab-link.active,
+.product-info-tabs .tab-item.active {
+  color: var(--gpi-ink-strong);
+  border-bottom-color: var(--gpi-gold);
+}
+
+/* ─── Product share icons ────────────────────────────────────────────────────── */
+.productView-share .icon,
+.product-share svg {
+  fill: var(--gpi-text-muted);
+}
+
+.productView-share a:hover .icon,
+.product-share a:hover svg {
+  fill: var(--gpi-gold);
+}
+
+/* ─── Related / recommended products heading ─────────────────────────────────── */
+.product-recommendations .section-header__title,
+.recently-viewed-title,
+.section-related-products h2 {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Ring size guide link ───────────────────────────────────────────────────── */
+.ring-size-guide a,
+.size-guide-link {
+  font-family: var(--gpi-body);
+  color: var(--gpi-gold);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.ring-size-guide a:hover,
+.size-guide-link:hover {
+  color: var(--gpi-color-accent-gold-strong);
+}
+
+/* ─── Ask an expert / WhatsApp CTA ──────────────────────────────────────────── */
+.productView-askAnExpert a,
+.btn-ask-expert {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-gold);
+  font-weight: 600;
+}
+
+/* ─── Sticky ATC bar (if present) ───────────────────────────────────────────── */
+.halo-sticky-atc {
+  background-color: var(--gpi-surface-canvas);
+  border-top: 1px solid var(--gpi-border-soft);
+}
+
+.halo-sticky-atc .product-title {
+  font-family: var(--gpi-heading);
+  color: var(--gpi-ink-strong);
+  font-weight: 400;
+}
+
+.halo-sticky-atc .btn-addcart {
+  font-family: var(--gpi-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  border-radius: var(--gpi-radius-pill) !important;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .product-form .btn-addcart,
+  .product-form .button--primary {
+    transition: none;
+  }
+
+  .product-form .btn-addcart:hover,
+  .product-form .button--primary:hover {
+    transform: none;
+  }
+}

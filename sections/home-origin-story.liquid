@@ -1,0 +1,151 @@
+{{ 'component-home-origin-story.css' | asset_url | stylesheet_tag }}
+
+<div class="gpi-origin-story" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="gpi-origin-story__grid">
+      <div class="gpi-origin-story__photo gpi-origin-story__photo--left">
+        <img src="{{ 'gpi-artisan.webp' | asset_url }}" alt="Gift Palace India artisan setting a gemstone by hand" width="800" height="1000" loading="lazy">
+      </div>
+
+      <div class="gpi-origin-story__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gpi-origin-story__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="gpi-origin-story__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.story_p1 != blank %}
+          <div class="gpi-origin-story__story rte">
+            {{ section.settings.story_p1 }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.pull_quote != blank %}
+          <blockquote class="gpi-origin-story__pull-quote">{{ section.settings.pull_quote }}</blockquote>
+        {% endif %}
+
+        {% if section.settings.story_p2 != blank %}
+          <div class="gpi-origin-story__story rte">
+            {{ section.settings.story_p2 }}
+          </div>
+        {% endif %}
+
+        <div class="gpi-origin-story__founder">
+          {% if section.settings.founder_name != blank %}
+            <div class="gpi-origin-story__founder-name">{{ section.settings.founder_name }}</div>
+          {% endif %}
+          {% if section.settings.founder_role != blank %}
+            <div class="gpi-origin-story__founder-role">{{ section.settings.founder_role }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a class="gpi-origin-story__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+
+      <div class="gpi-origin-story__photos-right">
+        <div class="gpi-origin-story__photo gpi-origin-story__photo--top">
+          <img src="{{ 'gpi-atelier.webp' | asset_url }}" alt="Gift Palace India Delhi atelier workspace" width="1000" height="750" loading="lazy">
+        </div>
+        <div class="gpi-origin-story__photo gpi-origin-story__photo--bottom">
+          <img src="{{ 'gpi-advisor.webp' | asset_url }}" alt="Gift Palace India advisor reviewing gemstones" width="750" height="1000" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GPI Origin Story",
+  "tag": "section",
+  "class": "gpi-origin-story",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our origin"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three generations of gemstone craft, one Delhi atelier."
+    },
+    {
+      "type": "richtext",
+      "id": "story_p1",
+      "label": "Story paragraph 1",
+      "default": "<p>From a small workspace in Chanakyapuri to lab-tested certification — every piece carries the patience of careful hands and the quiet authority of generations of gemstone work.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_p2",
+      "label": "Story paragraph 2",
+      "default": "<p>Each stone is studied, set, and finished one by one. No assembly line. No shortcuts. Just slow craft you can feel.</p>"
+    },
+    {
+      "type": "text",
+      "id": "pull_quote",
+      "label": "Pull quote",
+      "default": "Slow craft you can hold. Indian heritage you can wear."
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder name",
+      "default": "Gaurav Goyal"
+    },
+    {
+      "type": "text",
+      "id": "founder_role",
+      "label": "Founder role",
+      "default": "Founder, Gift Palace India"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Visit our Delhi store"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "number",
+      "id": "padding_top",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "GPI Origin Story"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  Snippet: product-price
+  Parameters:
+    - product: Product object
+  Usage:
+    {% render 'product-price', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign compare_at_price = current_variant.compare_at_price
+  assign price = current_variant.price
+-%}
+
+<div class="gpi-product-price">
+  <span class="gpi-product-price__current">{{ price | money }}</span>
+  
+  {% if compare_at_price > price %}
+    <span class="gpi-product-price__compare">{{ compare_at_price | money }}</span>
+    <span class="gpi-product-price__discount">
+      -{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%
+    </span>
+  {% endif %}
+</div>
+
+<style>
+  .gpi-product-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .gpi-product-price__current {
+    font-family: "Marcellus", Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--gpi-color-accent);
+    line-height: 1;
+  }
+  .gpi-product-price__compare {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--gpi-color-text-tertiary);
+    text-decoration: line-through;
+    line-height: 1;
+  }
+  .gpi-product-price__discount {
+    background: var(--gpi-color-accent);
+    color: var(--gpi-color-bg-primary);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+</style>

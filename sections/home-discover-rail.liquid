@@ -1,0 +1,192 @@
+{%- comment -%}
+  Discover Rail Section (Gemstone Browse)
+  Adapted from MoonMagic pattern:
+  - Curated gemstone collection cards
+  - Image-first cards (1:1 aspect)
+  - Responsive: 4 cols desktop, 2 cols mobile
+{%- endcomment -%}
+
+<link rel="stylesheet" href="{{ 'component-home-discover-rail.css' | asset_url }}">
+
+{%- liquid
+  assign has_discover_collection = false
+  if section.settings.collection_1 != blank or section.settings.collection_2 != blank or section.settings.collection_3 != blank or section.settings.collection_4 != blank
+    assign has_discover_collection = true
+  endif
+-%}
+
+{%- if has_discover_collection -%}
+<section class="home-discover">
+  <div class="home-discover__header">
+    <h2 class="home-discover__title" data-letter-reveal>{{ section.settings.title }}</h2>
+    {% if section.settings.description %}
+      <p class="home-discover__description">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="home-discover__grid">
+    {% if section.settings.collection_1 != blank %}
+      {% assign col = section.settings.collection_1 %}
+      <div class="home-discover__card">
+        {% if col.featured_image %}
+          <img
+            src="{{ col.featured_image | image_url: width: 480 }}"
+            srcset="{{ col.featured_image | image_url: width: 300 }} 300w, {{ col.featured_image | image_url: width: 480 }} 480w, {{ col.featured_image | image_url: width: 640 }} 640w"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+            alt="{{ col.featured_image.alt | default: col.title | escape }}"
+            class="home-discover__card-image"
+            loading="lazy"
+            decoding="async"
+            width="480"
+            height="480"
+          />
+        {% endif %}
+        <h3 class="home-discover__card-name">{{ col.title }}</h3>
+        <a href="{{ col.url }}" class="home-discover__card-link">View {{ col.title }}</a>
+      </div>
+    {% endif %}
+    {% if section.settings.collection_2 != blank %}
+      {% assign col = section.settings.collection_2 %}
+      <div class="home-discover__card">
+        {% if col.featured_image %}
+          <img
+            src="{{ col.featured_image | image_url: width: 480 }}"
+            srcset="{{ col.featured_image | image_url: width: 300 }} 300w, {{ col.featured_image | image_url: width: 480 }} 480w, {{ col.featured_image | image_url: width: 640 }} 640w"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+            alt="{{ col.featured_image.alt | default: col.title | escape }}"
+            class="home-discover__card-image"
+            loading="lazy"
+            decoding="async"
+            width="480"
+            height="480"
+          />
+        {% endif %}
+        <h3 class="home-discover__card-name">{{ col.title }}</h3>
+        <a href="{{ col.url }}" class="home-discover__card-link">View {{ col.title }}</a>
+      </div>
+    {% endif %}
+    {% if section.settings.collection_3 != blank %}
+      {% assign col = section.settings.collection_3 %}
+      <div class="home-discover__card">
+        {% if col.featured_image %}
+          <img
+            src="{{ col.featured_image | image_url: width: 480 }}"
+            srcset="{{ col.featured_image | image_url: width: 300 }} 300w, {{ col.featured_image | image_url: width: 480 }} 480w, {{ col.featured_image | image_url: width: 640 }} 640w"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+            alt="{{ col.featured_image.alt | default: col.title | escape }}"
+            class="home-discover__card-image"
+            loading="lazy"
+            decoding="async"
+            width="480"
+            height="480"
+          />
+        {% endif %}
+        <h3 class="home-discover__card-name">{{ col.title }}</h3>
+        <a href="{{ col.url }}" class="home-discover__card-link">View {{ col.title }}</a>
+      </div>
+    {% endif %}
+    {% if section.settings.collection_4 != blank %}
+      {% assign col = section.settings.collection_4 %}
+      <div class="home-discover__card">
+        {% if col.featured_image %}
+          <img
+            src="{{ col.featured_image | image_url: width: 480 }}"
+            srcset="{{ col.featured_image | image_url: width: 300 }} 300w, {{ col.featured_image | image_url: width: 480 }} 480w, {{ col.featured_image | image_url: width: 640 }} 640w"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+            alt="{{ col.featured_image.alt | default: col.title | escape }}"
+            class="home-discover__card-image"
+            loading="lazy"
+            decoding="async"
+            width="480"
+            height="480"
+          />
+        {% endif %}
+        <h3 class="home-discover__card-name">{{ col.title }}</h3>
+        <a href="{{ col.url }}" class="home-discover__card-link">View {{ col.title }}</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <script>
+    (() => {
+      if (window.GPI_DISCOVER_REVEAL_INIT || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.GPI_DISCOVER_REVEAL_INIT = true;
+
+      const splitHeading = (heading) => {
+        if (heading.dataset.letterRevealReady) return;
+        const text = heading.textContent.trim();
+        heading.textContent = '';
+
+        Array.from(text).forEach((letter, index) => {
+          const span = document.createElement('span');
+          span.dataset.letter = letter === ' ' ? 'space' : 'char';
+          span.style.setProperty('--letter-index', index);
+          span.textContent = letter === ' ' ? '\u00A0' : letter;
+          heading.appendChild(span);
+        });
+
+        heading.dataset.letterRevealReady = 'true';
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.35 });
+
+      document.querySelectorAll('[data-letter-reveal]').forEach((heading) => {
+        splitHeading(heading);
+        observer.observe(heading);
+      });
+    })();
+  </script>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Discover Gemstones",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Discover by Gemstone Type"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Browse our curated collection of natural, certified gemstones."
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Gemstone 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Gemstone 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Gemstone 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Gemstone 4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discover Gemstones"
+    }
+  ]
+}
+{% endschema %}
+

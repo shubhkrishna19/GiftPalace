@@ -1,0 +1,114 @@
+{%- comment -%} Section: home-faq — FAQ Section with Schema.org FAQPage {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-home-faq.css' | asset_url }}">
+
+<section class="home-faq" aria-labelledby="home-faq-heading">
+  <div class="home-faq__container">
+    <div class="home-faq__header">
+      {% if section.settings.title != blank %}
+        <h2 id="home-faq-heading" class="home-faq__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="home-faq__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="home-faq__list">
+        {% for block in section.blocks %}
+          <details class="home-faq__item" {{ block.shopify_attributes }}>
+            <summary class="home-faq__question">
+              {{ block.settings.question }}
+              <span class="home-faq__icon">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="home-faq__answer rte">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{%- if section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in section.blocks -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.answer | strip_html | json }}
+          }
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find answers to common questions about our certified gemstones and services."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How are your gemstones certified?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>All our gemstones are certified by reputable third-party laboratories such as GJEPC and IGI, ensuring authenticity and quality standards.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer international shipping?",
+            "answer": "<p>Yes, we offer insured international shipping to most countries. Shipping costs and delivery times vary by location.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

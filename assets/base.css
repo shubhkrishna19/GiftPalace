@@ -6390,7 +6390,7 @@ body.is-custom-information .background-overlay {
 /* Product Card Subheading - Luxury Style (Moon Magic Inspired) */
 .card-subheading,
 .product-subheading {
-    display: block !important;
+    display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
     font-size: 0.75rem;
@@ -6407,7 +6407,8 @@ body.is-custom-information .background-overlay {
     border-radius: 20px;
     border: 1px solid #e8e4df;
     text-align: center;
-    display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Zodiac Subheading - Celestial Heirlooms */

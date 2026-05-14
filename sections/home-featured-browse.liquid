@@ -1,0 +1,104 @@
+{%- comment -%}
+  Featured Browse Grid Section (Product Cards)
+  Adapted from MoonMagic pattern:
+  - Image-led product cards (1:1 aspect ratio, 70%+ of card)
+  - Minimal text (product name, type, price, trust cue)
+  - Responsive grid: 4 cols (1440px), 3 cols (1024px), 2 cols (768px), 1 col (375px)
+  - Hover: subtle card lift + shadow
+{%- endcomment -%}
+
+<link rel="stylesheet" href="{{ 'component-home-featured-browse.css' | asset_url }}">
+
+{% assign featured_collection = section.settings.featured_collection %}
+{% if featured_collection != blank %}
+<section class="home-featured-browse">
+  <div class="home-featured-browse__header">
+    <h2 class="home-featured-browse__title">{{ section.settings.title | replace: 'wardrobe', '<em>wardrobe</em>' }}</h2>
+  </div>
+
+  <div class="home-featured-browse__grid">
+      {% for product in featured_collection.products limit: 6 %}
+        <a href="{{ product.url }}" class="home-featured-browse__card">
+          {% if product.featured_image %}
+            <div class="home-featured-browse__card-image-wrapper">
+            <img
+              src="{{ product.featured_image | image_url: width: 640 }}"
+              srcset="{{ product.featured_image | image_url: width: 360 }} 360w, {{ product.featured_image | image_url: width: 520 }} 520w, {{ product.featured_image | image_url: width: 640 }} 640w, {{ product.featured_image | image_url: width: 900 }} 900w"
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              class="home-featured-browse__card-image"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="640"
+            />
+            </div>
+          {% endif %}
+
+          <div class="home-featured-browse__card-content">
+            <h3 class="home-featured-browse__card-name">
+              <a href="{{ product.url }}" class="home-featured-browse__card-link">
+                {{ product.title }}
+              </a>
+            </h3>
+
+            {% if product.type %}
+              <p class="home-featured-browse__card-type">{{ product.type }}</p>
+            {% endif %}
+
+            {% if product.price %}
+              <p class="home-featured-browse__card-price">
+                {{ product.price | money_without_trailing_zeros }}
+              </p>
+            {% endif %}
+
+            {% if section.settings.show_trust_cue %}
+              <p class="home-featured-browse__card-trust">{{ section.settings.trust_cue_text }}</p>
+            {% endif %}
+          </div>
+          </div>
+        </a>
+      {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured Browse Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Gemstones"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Collection to Display"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_cue",
+      "label": "Show Trust Cue",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_cue_text",
+      "label": "Trust Cue Text",
+      "default": "✓ Certified & Authentic"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Browse Grid",
+      "settings": {
+        "title": "Featured Gemstones",
+        "trust_cue_text": "✓ Certified & Authentic"
+      }
+    }
+  ]
+}
+{% endschema %}

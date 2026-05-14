@@ -1,0 +1,392 @@
+<div class="gift-guides-section section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="gift-guides-wrapper" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      
+      <!-- Header -->
+      <div class="gift-guides-header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gift-guides-kicker">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        
+        {% if section.settings.title != blank %}
+          <h2 class="gift-guides-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="gift-guides-description">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Guides Grid -->
+      <div class="guides-grid">
+        {% assign guide_blocks = section.blocks | where: 'type', 'gift_guide' %}
+        {% for block in guide_blocks %}
+          <div class="guide-card" {{ block.shopify_attributes }}>
+            <!-- Media Section -->
+            <div class="guide-card-media">
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  alt="{{ block.settings.guide_title }}"
+                  loading="lazy"
+                  class="guide-card-image"
+                >
+              {% else %}
+                <div class="guide-card-placeholder">
+                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L2 7V12C2 16.4 5.6 20 10 21.9C11.3 22.6 12.7 22.6 14 21.9C18.4 20 22 16.4 22 12V7L12 2Z"></path>
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Content -->
+            <div class="guide-card-content">
+              {% if block.settings.tag != blank %}
+                <span class="guide-card-tag">{{ block.settings.tag }}</span>
+              {% endif %}
+
+              {% if block.settings.guide_title != blank %}
+                <h3 class="guide-card-title">{{ block.settings.guide_title }}</h3>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <p class="guide-card-description">{{ block.settings.description }}</p>
+              {% endif %}
+
+              <!-- Key Points -->
+              {% if block.settings.point_1 != blank or block.settings.point_2 != blank or block.settings.point_3 != blank %}
+                <ul class="guide-card-points">
+                  {% if block.settings.point_1 != blank %}
+                    <li>{{ block.settings.point_1 }}</li>
+                  {% endif %}
+                  {% if block.settings.point_2 != blank %}
+                    <li>{{ block.settings.point_2 }}</li>
+                  {% endif %}
+                  {% if block.settings.point_3 != blank %}
+                    <li>{{ block.settings.point_3 }}</li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+
+              <!-- CTA -->
+              {% if block.settings.cta_label != blank %}
+                <a href="{{ block.settings.guide_link }}" class="button button--primary guide-card-cta">
+                  {{ block.settings.cta_label }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.gift-guides-section {
+  background: var(--color-background-primary);
+  padding: var(--space-section) 0;
+}
+
+.gift-guides-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.gift-guides-kicker {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+.gift-guides-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.gift-guides-description {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 1024px) {
+  .guides-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .guides-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.guide-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.guide-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px);
+}
+
+.guide-card-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-background-secondary);
+  padding-bottom: 75%;
+}
+
+.guide-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.guide-card:hover .guide-card-image {
+  transform: scale(1.05);
+}
+
+.guide-card-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-border) 0%, var(--color-background-secondary) 100%);
+  color: var(--color-text-secondary);
+}
+
+.guide-card-content {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-card-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-background-secondary);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+  margin-bottom: var(--space-sm);
+}
+
+.guide-card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.guide-card-description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-relaxed);
+  flex: 1;
+}
+
+.guide-card-points {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.guide-card-points li {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.guide-card-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+}
+
+.guide-card-cta {
+  width: 100%;
+  text-align: center;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Gift Guides Section",
+  "tag": "section",
+  "class": "section-gift-guides",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Gifting Made Easy"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Find Your Perfect Gift"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover guides and collections curated for every occasion and person"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gift_guide",
+      "name": "Gift guide card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "guide_title",
+          "label": "Guide title",
+          "default": "Gifts for Her"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Popular"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Guide image"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Thoughtful gemstone gifts for the special women in your life"
+        },
+        {
+          "type": "text",
+          "id": "point_1",
+          "label": "Point 1",
+          "default": "Meaningful & personal"
+        },
+        {
+          "type": "text",
+          "id": "point_2",
+          "label": "Point 2",
+          "default": "Handpicked selections"
+        },
+        {
+          "type": "text",
+          "id": "point_3",
+          "label": "Point 3",
+          "default": "Expert styling advice"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Explore Guide"
+        },
+        {
+          "type": "url",
+          "id": "guide_link",
+          "label": "Guide link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guides Section"
+    }
+  ]
+}
+{% endschema %}

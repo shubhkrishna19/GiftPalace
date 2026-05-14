@@ -1,0 +1,196 @@
+.gpi-concierge-booking {
+  background: linear-gradient(180deg, var(--gpi-color-bg-secondary) 0%, var(--gpi-color-bg-primary) 100%);
+  color: var(--gpi-color-text);
+}
+
+.gpi-concierge-booking__card {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 2vw, 1.25rem);
+  background:
+    radial-gradient(circle at 18% 12%, rgb(from var(--gpi-color-accent) r g b / 0.11), transparent 34%),
+    linear-gradient(135deg, var(--gpi-color-bg-primary), var(--gpi-color-bg-secondary));
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 22px;
+  box-shadow: 0 18px 42px rgb(from var(--gpi-color-text) r g b / 0.06);
+}
+
+.gpi-concierge-booking__layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(300px, 1.1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.gpi-concierge-booking__advisor {
+  position: relative;
+}
+
+.gpi-concierge-booking__advisor img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: min(56vh, 540px);
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.gpi-concierge-booking__advisor-overlay {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 1rem;
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0.88);
+  border: 1px solid var(--gpi-color-border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.gpi-concierge-booking__advisor-name {
+  font-family: var(--gpi-heading);
+  font-size: 1.125rem;
+  color: var(--gpi-color-text);
+}
+
+.gpi-concierge-booking__advisor-role {
+  font-family: var(--gpi-body);
+  font-size: 0.8rem;
+  color: var(--gpi-color-text-secondary);
+}
+
+.gpi-concierge-booking__eyebrow {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gpi-color-accent);
+  margin: 0 0 0.75rem;
+}
+
+.gpi-concierge-booking__heading {
+  font-family: var(--gpi-heading);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  line-height: 1.1;
+  color: var(--gpi-color-text);
+  margin: 0 0 1rem;
+}
+
+.gpi-concierge-booking__description {
+  font-family: var(--gpi-body);
+  color: var(--gpi-color-text-secondary);
+  margin: 0 0 1.1rem;
+}
+
+.gpi-concierge-booking__ctas {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.gpi-concierge-booking__cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 58px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--gpi-color-accent);
+  border: 1px solid var(--gpi-color-border);
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0.55);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.gpi-concierge-booking__cta-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: currentColor;
+}
+
+.gpi-concierge-booking__cta-icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.gpi-concierge-booking__cta-title {
+  display: block;
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: currentColor;
+}
+
+.gpi-concierge-booking__cta-subtext {
+  display: block;
+  font-family: var(--gpi-body);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--gpi-color-text-secondary);
+}
+
+.gpi-concierge-booking__cta--whatsapp {
+  background: var(--gpi-color-accent);
+  color: var(--gpi-color-bg-primary);
+  border-color: var(--gpi-color-accent);
+}
+
+.gpi-concierge-booking__cta--whatsapp .gpi-concierge-booking__cta-subtext {
+  color: var(--gpi-color-bg-primary);
+}
+
+.gpi-concierge-booking__cta--store {
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0);
+  border-color: var(--gpi-color-accent);
+  color: var(--gpi-color-accent);
+}
+
+.gpi-concierge-booking__cta--video {
+  background: rgb(from var(--gpi-color-bg-primary) r g b / 0);
+  border-color: var(--gpi-color-border);
+  color: var(--gpi-color-accent);
+}
+
+.gpi-concierge-booking__cta:hover,
+.gpi-concierge-booking__cta:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--gpi-color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gpi-concierge-booking__cta--whatsapp {
+    transition: transform 180ms ease, filter 180ms ease;
+  }
+}
+
+@media (max-width: 768px) {
+  .gpi-concierge-booking {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .gpi-concierge-booking__card {
+    border-radius: 24px;
+    padding: 12px;
+  }
+
+  .gpi-concierge-booking__layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .gpi-concierge-booking__heading {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .gpi-concierge-booking__content {
+    padding: 0 4px 4px;
+  }
+
+  .gpi-concierge-booking__cta {
+    min-height: 58px;
+    padding: 13px 14px;
+  }
+}

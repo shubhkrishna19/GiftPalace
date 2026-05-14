@@ -1,0 +1,269 @@
+/* Gift Palace India - Design Tokens v1.0
+ * Centralized design system variables for all GPI-branded sections
+ * Updated: 2026-05-06
+ */
+
+:root {
+  /* Color Palette */
+  --gpi-ink-strong: #110d0a;
+  --gpi-ink: #18140f;
+  --gpi-text-muted: #4a3f34;
+  --gpi-text-soft: #5e5241;
+  
+  --gpi-surface-canvas: #fffdf8;
+  --gpi-surface-ivory: #fbf7ef;
+  --gpi-surface-ivory-dark: #f2eadb;
+  --gpi-surface-card: #ffffff;
+  
+  --gpi-gold: #8b6326;
+  --gpi-gold-soft: #b8914d;
+  
+  --gpi-border-soft: #e2d6c5;
+  --gpi-border-warm: #cfbda2;
+
+  /* Compatibility aliases for recovered MoonMagic-style homepage sections */
+  --gpi-color-bg-primary: var(--gpi-surface-canvas);
+  --gpi-color-bg-secondary: var(--gpi-surface-ivory);
+  --gpi-color-bg-tertiary: var(--gpi-surface-ivory-dark);
+  --gpi-color-surface: var(--gpi-surface-card);
+  --gpi-color-surface-canvas: var(--gpi-surface-canvas);
+  --gpi-color-surface-ivory: var(--gpi-surface-ivory);
+  --gpi-color-surface-card: var(--gpi-surface-card);
+  --gpi-color-ink-strong: var(--gpi-ink-strong);
+  --gpi-color-ink: var(--gpi-ink);
+  --gpi-color-text: var(--gpi-ink);
+  --gpi-color-text-secondary: var(--gpi-text-muted);
+  --gpi-color-text-tertiary: var(--gpi-text-soft);
+  --gpi-color-text-muted: var(--gpi-text-muted);
+  --gpi-color-accent: var(--gpi-gold);
+  --gpi-color-accent-hover: var(--gpi-gold-soft);
+  --gpi-color-accent-gold: var(--gpi-gold);
+  --gpi-color-accent-gold-strong: #6f4c19;
+  --gpi-color-accent-gold-soft: var(--gpi-gold-soft);
+  --gpi-color-border: var(--gpi-border-soft);
+  --gpi-color-border-light: rgba(226, 214, 197, 0.72);
+  --gpi-color-border-soft: var(--gpi-border-soft);
+
+  /* Font aliases */
+  --gpi-font-heading: var(--gpi-heading);
+  --gpi-font-body: var(--gpi-body);
+
+  /* Numbered spacing scale aliases (legacy component compatibility) */
+  --gpi-space-1: 4px;
+  --gpi-space-2: var(--gpi-space-xs);   /* 8px  */
+  --gpi-space-3: var(--gpi-space-sm);   /* 12px */
+  --gpi-space-4: var(--gpi-space-md);   /* 16px */
+  --gpi-space-5: var(--gpi-space-lg);   /* 24px */
+  --gpi-space-6: var(--gpi-space-xl);   /* 32px */
+  --gpi-space-7: var(--gpi-space-2xl);  /* 40px */
+  --gpi-space-8: var(--gpi-space-4xl);  /* 64px */
+  
+  /* Typography */
+  --gpi-heading: "Marcellus", Georgia, serif;
+  --gpi-body: "Manrope", Arial, sans-serif;
+  
+  /* Spacing & Layout */
+  --gpi-space-xs: 8px;
+  --gpi-space-sm: 12px;
+  --gpi-space-md: 16px;
+  --gpi-space-lg: 24px;
+  --gpi-space-xl: 32px;
+  --gpi-space-2xl: 40px;
+  --gpi-space-3xl: 48px;
+  --gpi-space-4xl: 64px;
+  
+  /* Border Radius */
+  --gpi-radius-sm: 12px;
+  --gpi-radius-small: var(--gpi-radius-sm);      /* alias */
+  --gpi-radius-card: 18px;
+  --gpi-radius-editorial: 22px;
+  --gpi-radius-large: var(--gpi-radius-editorial); /* alias */
+  --gpi-radius-pill: 999px;
+  
+  /* Shadows */
+  --gpi-shadow-low: 0 8px 24px rgba(24, 18, 12, 0.06);
+  --gpi-shadow-mid: 0 18px 36px rgba(24, 18, 12, 0.08);
+  --gpi-shadow-high: 0 28px 60px rgba(24, 20, 16, 0.14);
+  --gpi-shadow-medium: var(--gpi-shadow-mid);   /* alias */
+  
+  /* Motion */
+  --gpi-transition: 180ms ease;
+  --gpi-transition-slow: 300ms ease;
+  --gpi-transition-instant: 80ms ease;
+}
+
+/* Typography System */
+.gpi-heading-display {
+  font-family: var(--gpi-heading);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--gpi-ink-strong);
+}
+
+.gpi-heading-lg {
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--gpi-ink-strong);
+}
+
+.gpi-heading-md {
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--gpi-ink);
+}
+
+.gpi-body-base {
+  font-family: var(--gpi-body);
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--gpi-text-muted);
+}
+
+.gpi-body-small {
+  font-family: var(--gpi-body);
+  font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gpi-text-soft);
+}
+
+.gpi-eyebrow {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gpi-gold);
+}
+
+/* Component Base Styles */
+.gpi-button {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: var(--gpi-space-md) var(--gpi-space-lg);
+  border-radius: var(--gpi-radius-pill);
+  border: 1px solid transparent;
+  background: var(--gpi-ink);
+  color: var(--gpi-surface-card);
+  cursor: pointer;
+  transition: all var(--gpi-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.gpi-button:hover {
+  background: var(--gpi-ink-strong);
+  box-shadow: var(--gpi-shadow-low);
+}
+
+.gpi-button--secondary {
+  background: transparent;
+  border-color: var(--gpi-border-warm);
+  color: var(--gpi-ink);
+}
+
+.gpi-button--secondary:hover {
+  background: var(--gpi-surface-ivory);
+  border-color: var(--gpi-gold);
+}
+
+.gpi-card {
+  background: var(--gpi-surface-card);
+  border-radius: var(--gpi-radius-card);
+  border: 1px solid var(--gpi-border-soft);
+  box-shadow: var(--gpi-shadow-low);
+  overflow: hidden;
+  transition: box-shadow var(--gpi-transition);
+}
+
+.gpi-card:hover {
+  box-shadow: var(--gpi-shadow-mid);
+}
+
+/* Product Card Media Pattern */
+.gpi-product-card__media {
+  aspect-ratio: 4 / 5;
+  background: var(--gpi-surface-ivory);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+}
+
+.gpi-product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: clamp(10px, 3vw, 22px);
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 200px;
+}
+
+/* Lazy loading placeholder */
+.gpi-product-card__media img[loading="lazy"] {
+  background-color: var(--gpi-surface-ivory);
+}
+
+/* Shop by Intention Card Frame Pattern */
+.gpi-intention-card__frame {
+  width: clamp(92px, 10vw, 156px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto var(--gpi-space-md);
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 25%, #fff, var(--gpi-surface-ivory) 70%);
+  border: 1px solid rgba(155, 111, 43, 0.18);
+  border-radius: 48% 52% 45% 55% / 42% 46% 54% 58%;
+  box-shadow: 0 18px 44px rgba(24, 18, 12, 0.08);
+  overflow: hidden;
+}
+
+.gpi-intention-card__image {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+}
+
+/* Touch-Friendly Actions */
+@media (hover: none), (pointer: coarse) {
+  .gpi-card {
+    transform: none !important;
+  }
+  
+  .gpi-card-actions {
+    opacity: 1;
+    visibility: visible;
+    position: static;
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .gpi-heading-display {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  .gpi-heading-lg {
+    font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+  }
+  
+  .gpi-body-base {
+    font-size: clamp(0.75rem, 0.95vw, 0.875rem);
+  }
+}

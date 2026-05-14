@@ -1,0 +1,520 @@
+<div class="home-most-gifted section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-most-gifted__wrapper" style="--local-padding-top: {{ section.settings.padding_top }}px; --local-padding-h: {{ section.settings.padding_horizontal }}px; --local-padding-bottom: {{ section.settings.padding_bottom }}px; padding: var(--local-padding-top) var(--local-padding-h) var(--local-padding-bottom);">
+      <div class="home-most-gifted__intro">
+        <div>
+          {% if section.settings.eyebrow != blank %}
+            <p class="gpi-eyebrow home-most-gifted__eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="gpi-heading-lg home-most-gifted__heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
+
+        {% if section.settings.description != blank %}
+          <p class="gpi-body-base home-most-gifted__description">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+
+      <div class="home-most-gifted__proof-row" aria-label="Gift Palace India product proof">
+        <span>100K customers</span>
+        <span>GJEPC lab-tested confidence</span>
+        <span>Chanakyapuri store support</span>
+      </div>
+      
+      <div class="home-most-gifted__grid">
+        {% if section.settings.collection != blank %}
+          {% assign collection = collections[section.settings.collection] %}
+          
+          {% for product in collection.products limit: section.settings.products_count %}
+            <div class="home-most-gifted__item{% if forloop.first %} home-most-gifted__item--feature{% endif %} gpi-card">
+              <div class="home-most-gifted__media gpi-product-card__media">
+                {% if product.featured_image %}
+                  <img 
+                    src="{{ product.featured_image | image_url: width: 620 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    loading="lazy"
+                    width="620"
+                    height="775"
+                  />
+                {% endif %}
+                {% if forloop.first %}
+                  <span class="home-most-gifted__badge">Most gifted</span>
+                {% endif %}
+              </div>
+              
+              <div class="home-most-gifted__content">
+                {% if product.type != blank %}
+                  <p class="gpi-eyebrow">{{ product.type }}</p>
+                {% endif %}
+                
+                <h3 class="gpi-heading-md home-most-gifted__title">
+                  <a href="{{ product.url }}" class="home-most-gifted__link">{{ product.title }}</a>
+                </h3>
+                
+                {% if product.description %}
+                  <p class="gpi-body-small home-most-gifted__excerpt">{{ product.description | strip_html | truncatewords: 12 }}</p>
+                {% endif %}
+                
+                <div class="home-most-gifted__buy-row">
+                  <div class="home-most-gifted__price">
+                    {% if product.price_varies %}
+                      <span class="price">From {{ product.price_min | money }}</span>
+                    {% else %}
+                      <span class="price">{{ product.price | money }}</span>
+                    {% endif %}
+                  </div>
+                
+                  <a href="{{ product.url }}" class="gpi-button home-most-gifted__cta" aria-label="{{ section.settings.cta_label }}: {{ product.title | escape }}">
+                    {{ section.settings.cta_label }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      
+      {% if section.settings.view_all_label != blank and section.settings.view_all_link != blank %}
+        <div class="home-most-gifted__footer">
+          <a href="{{ section.settings.view_all_link }}" class="gpi-button gpi-button--secondary">
+            {{ section.settings.view_all_label }}
+          </a>
+        </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+<style media="not all" data-gpi-retired-inline>
+  .home-most-gifted {
+    background: var(--color-surface, #fafafa);
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .home-most-gifted__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg, 3rem);
+  }
+
+  /* Header Section */
+  .home-most-gifted__intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-lg, 3rem);
+  }
+
+  .home-most-gifted__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary, #d4af37);
+    margin: 0 0 var(--space-xs, 0.5rem) 0;
+  }
+
+  .home-most-gifted__heading {
+    font-size: clamp(1.5rem, 1rem + 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text, #1a1a1a);
+    margin: 0;
+  }
+
+  .home-most-gifted__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted, #666);
+    margin: 0;
+    max-width: 500px;
+  }
+
+  /* Proof Row */
+  .home-most-gifted__proof-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg, 3rem);
+    padding: var(--space-md, 2rem);
+    background: rgba(212, 175, 55, 0.04);
+    border-radius: var(--radius-md, 8px);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .home-most-gifted__proof-row span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs, 0.5rem);
+  }
+
+  .home-most-gifted__proof-row span::before {
+    content: '✓';
+    color: var(--color-primary, #d4af37);
+    font-weight: 700;
+  }
+
+  /* Product Grid */
+  .home-most-gifted__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md, 2rem);
+  }
+
+  .home-most-gifted__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm, 1.5rem);
+    padding: var(--space-sm, 1.5rem);
+    background: var(--color-surface, #fff);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: var(--radius-md, 8px);
+    transition: all var(--duration-normal, 300ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .home-most-gifted__item:hover {
+    border-color: var(--color-primary, #d4af37);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0,0,0,0.12));
+    transform: translateY(-8px);
+  }
+
+  /* Featured Item Styling */
+  .home-most-gifted__item--feature {
+    grid-column: span 2;
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: hidden;
+    border-radius: var(--radius-md, 8px);
+  }
+
+  .home-most-gifted__item--feature:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .home-most-gifted__item--feature .home-most-gifted__media {
+    border-radius: var(--radius-md, 8px) var(--radius-md, 8px) 0 0;
+  }
+
+  .home-most-gifted__item--feature .home-most-gifted__content {
+    padding: var(--space-md, 2rem);
+  }
+
+  /* Media Section */
+  .home-most-gifted__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--color-border, #e5e5e5);
+    border-radius: var(--radius-md, 8px);
+  }
+
+  .home-most-gifted__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-normal, 300ms) var(--ease-out-expo);
+  }
+
+  .home-most-gifted__item:hover .home-most-gifted__media img {
+    transform: scale(1.05);
+  }
+
+  .home-most-gifted__badge {
+    position: absolute;
+    top: var(--space-sm, 1.5rem);
+    right: var(--space-sm, 1.5rem);
+    padding: var(--space-xs, 0.5rem) var(--space-sm, 1.5rem);
+    background: var(--color-primary, #d4af37);
+    color: var(--color-surface, #1a1a1a);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm, 4px);
+  }
+
+  /* Content Section */
+  .home-most-gifted__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs, 0.75rem);
+  }
+
+  .home-most-gifted__content .gpi-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary, #d4af37);
+    margin: 0;
+  }
+
+  .home-most-gifted__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text, #1a1a1a);
+    margin: 0;
+  }
+
+  .home-most-gifted__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-normal, 300ms);
+  }
+
+  .home-most-gifted__link:hover {
+    color: var(--color-primary, #d4af37);
+  }
+
+  .home-most-gifted__excerpt {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-muted, #666);
+    margin: 0;
+  }
+
+  /* Buy Row */
+  .home-most-gifted__buy-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm, 1.5rem);
+    padding-top: var(--space-xs, 0.75rem);
+    border-top: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .home-most-gifted__price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .home-most-gifted__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xs, 0.75rem) var(--space-sm, 1.5rem);
+    background: var(--color-primary, #d4af37);
+    color: var(--color-surface, #1a1a1a);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-sm, 4px);
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-normal, 300ms) var(--ease-out-expo);
+  }
+
+  .home-most-gifted__cta:hover {
+    box-shadow: var(--shadow-md, 0 4px 12px rgba(212, 175, 55, 0.25));
+    transform: translateY(-2px);
+  }
+
+  /* Footer - View All */
+  .home-most-gifted__footer {
+    display: flex;
+    justify-content: center;
+    padding-top: var(--space-md, 2rem);
+    border-top: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .home-most-gifted__intro {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .home-most-gifted__item--feature {
+      grid-column: span 1;
+    }
+
+    .home-most-gifted__grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-most-gifted__heading {
+      font-size: 1.5rem;
+    }
+
+    .home-most-gifted__proof-row {
+      flex-direction: column;
+      gap: var(--space-sm, 1.5rem);
+    }
+
+    .home-most-gifted__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm, 1.5rem);
+    }
+
+    .home-most-gifted__item {
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .home-most-gifted__media {
+      width: 100px;
+      min-width: 100px;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm, 6px);
+    }
+
+    .home-most-gifted__content {
+      flex: 1;
+      padding: var(--space-sm, 1.5rem);
+    }
+
+    .home-most-gifted__buy-row {
+      flex-direction: column;
+      gap: var(--space-xs, 0.75rem);
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .home-most-gifted__cta {
+      width: 100%;
+    }
+  }
+
+  /* Dark mode colors */
+  @media (prefers-color-scheme: dark) {
+    .home-most-gifted__heading {
+      color: #ffffff;
+    }
+
+    .home-most-gifted__description {
+      color: #d4d4d4;
+    }
+
+    .home-most-gifted__title {
+      color: #ffffff;
+    }
+
+    .home-most-gifted__excerpt {
+      color: #d4d4d4;
+    }
+
+    .home-most-gifted__proof-row {
+      color: #ffffff;
+    }
+
+    .home-most-gifted__price {
+      color: #ffffff;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Most Gifted Right Now",
+  "tag": "section",
+  "class": "section-home-most-gifted",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Standard" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Customer favorites"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Most Gifted Right Now"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore the crystal bracelets our customers are choosing most this season."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Product CTA label",
+      "default": "View Details"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all CTA label",
+      "default": "Browse all bestsellers"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Most Gifted Right Now"
+    }
+  ]
+}
+{% endschema %}

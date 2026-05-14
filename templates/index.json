@@ -1,316 +1,1768 @@
-{
-    "sections": {
-        "home_conversion_intro": {
-            "type": "home-conversion-intro",
-            "blocks": {
-                "trust_bullet_1": {
-                    "type": "trust_bullet",
-                    "settings": {
-                        "title": "Every piece tells its story",
-                        "text": "Zodiac dates, stone properties, and meaning stay visible on every card \u00e2\u20ac\u201d so shoppers click with more clarity and confidence."
-                    }
-                },
-                "trust_bullet_2": {
-                    "type": "trust_bullet",
-                    "settings": {
-                        "title": "Gifts that feel personal, fast",
-                        "text": "Narrow by intention, stone type, or recipient in a few taps. No guesswork, no generic scrolling."
-                    }
-                },
-                "trust_bullet_3": {
-                    "type": "trust_bullet",
-                    "settings": {
-                        "title": "Real reviews, real gemstone facts",
-                        "text": "Styled imagery, genuine reviews, and gemstone specifics appear where you need them most \u00e2\u20ac\u201d before the first click."
-                    }
-                },
-                "proof_item_1": {
-                    "type": "proof_item",
-                    "settings": {
-                        "label": "Gift-first navigation",
-                        "text": "Lead with bestselling categories and intention-led discovery before visitors feel lost."
-                    }
-                },
-                "proof_item_2": {
-                    "type": "proof_item",
-                    "settings": {
-                        "label": "Richer product context",
-                        "text": "Helpful subtext supports product cards instead of forcing every item to sell itself with imagery alone."
-                    }
-                },
-                "proof_item_3": {
-                    "type": "proof_item",
-                    "settings": {
-                        "label": "Trust placed earlier",
-                        "text": "Social proof and review proof appear closer to the first product decisions."
-                    }
-                },
-                "shortcut_1": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Shop necklaces",
-                        "link": "shopify://collections/necklaces"
-                    }
-                },
-                "shortcut_2": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Browse bracelets",
-                        "link": "shopify://collections/frontpage"
-                    }
-                },
-                "shortcut_3": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Gift by zodiac",
-                        "link": "shopify://collections/celestial-heirlooms"
-                    }
-                },
-                "shortcut_4": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Raw crystals",
-                        "link": "shopify://collections/raw-crystals"
-                    }
-                },
-                "shortcut_5": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Shop rings",
-                        "link": "shopify://collections/rings"
-                    }
-                },
-                "shortcut_6": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Earrings under \u00e2\u201a\u00b9500",
-                        "link": "shopify://collections/earrings"
-                    }
-                },
-                "shortcut_7": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Gemstone bracelets",
-                        "link": "shopify://collections/bracelets"
-                    }
-                },
-                "shortcut_8": {
-                    "type": "shortcut",
-                    "settings": {
-                        "label": "Gift sets",
-                        "link": "shopify://collections/gift-sets"
-                    }
-                }
-            },
-            "block_order": [
-                "trust_bullet_1",
-                "trust_bullet_2",
-                "trust_bullet_3",
-                "proof_item_1",
-                "proof_item_2",
-                "proof_item_3",
-                "shortcut_1",
-                "shortcut_2",
-                "shortcut_3",
-                "shortcut_4",
-                "shortcut_5",
-                "shortcut_6",
-                "shortcut_7",
-                "shortcut_8"
-            ],
-            "settings": {
-                "container": "1770",
-                "eyebrow": "Gift with meaning",
-                "title": "Gemstone jewellery, zodiac gifts, and crystal pieces that feel personal \u00e2\u20ac\u201d curated for gifting and everyday meaning.",
-                "copy": "<p>Start with bestselling jewellery, crystal accents, and giftable gemstone picks, then guide shoppers deeper with intention-led browsing instead of generic category dumping.</p>",
-                "primary_label": "Shop bestselling pieces",
-                "primary_link": "shopify://collections/necklaces",
-                "secondary_label": "Browse by intention",
-                "secondary_link": "/pages/shop-by-intention",
-                "panel_kicker": "Why this path converts better",
-                "panel_title": "Why thousands trust Gift Palace India for meaningful jewellery.",
-                "panel_copy": "<p>Visitors should immediately understand what they can shop, why a product feels meaningful, and where to click next if they are buying for themselves or gifting someone else.</p>",
-                "padding_top": 48,
-                "padding_bottom": 48,
-                "padding_horizontal": 48
-            }
-        },
-        "home_meaning_guide": {
-            "type": "home-meaning-guide",
-            "blocks": {
-                "guide_card_1": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Intention-led",
-                        "title": "Find your intention",
-                        "text": "<p>Whether you are drawn to calm, clarity, protection, or love \u00e2\u20ac\u201d intention-led browsing takes you straight to pieces that match your energy, not just your style.</p>",
-                        "link_label": "Explore by intention",
-                        "link": "/pages/shop-by-intention"
-                    }
-                },
-                "guide_card_2": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Giftable",
-                        "title": "Gift by zodiac",
-                        "text": "<p>A zodiac piece makes a gift feel considered. Match the sign, and the story writes itself \u00e2\u20ac\u201d no wrapping required.</p>",
-                        "link_label": "Browse zodiac picks",
-                        "link": "shopify://collections/celestial-heirlooms"
-                    }
-                },
-                "guide_card_3": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Decor and display",
-                        "title": "Statement crystal pieces",
-                        "text": "<p>Turn a shelf, desk, or meditation corner into something with presence. Statement crystals bring weight and atmosphere to any space.</p>",
-                        "link_label": "See statement crystals",
-                        "link": "/pages/crystal-sculptures"
-                    }
-                },
-                "guide_card_4": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Daily wear",
-                        "title": "Layering-ready necklaces",
-                        "text": "<p>Lightweight, everyday, and made to stack. These are the pieces you reach for without thinking \u00e2\u20ac\u201d and that someone else notices first.</p>",
-                        "link_label": "Shop necklaces",
-                        "link": "shopify://collections/necklaces"
-                    }
-                },
-                "guide_card_5": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Mindful ritual",
-                        "title": "Jaap mala and spiritual picks",
-                        "text": "<p>For prayer, meditation, or mindful ritual \u00e2\u20ac\u201d mala beads and spiritual pieces that honour the practice and feel good to hold.</p>",
-                        "link_label": "Browse mala collection",
-                        "link": "shopify://collections/jaap-mala"
-                    }
-                },
-                "guide_card_6": {
-                    "type": "guide_card",
-                    "settings": {
-                        "kicker": "Natural stones",
-                        "title": "Loose gemstones and raw energy pieces",
-                        "text": "<p>Some visitors know the stone they want before they know the format, so give them a direct route into the material itself.</p>",
-                        "link_label": "Shop gemstones",
-                        "link": "shopify://collections/gemstones"
-                    }
-                }
-            },
-            "block_order": [
-                "guide_card_1",
-                "guide_card_2",
-                "guide_card_3",
-                "guide_card_4",
-                "guide_card_5",
-                "guide_card_6"
-            ],
-            "settings": {
-                "container": "1770",
-                "eyebrow": "A smarter browse flow",
-                "title": "Not sure where to start? Let your intention guide you.",
-                "copy": "<p>This layer turns a large catalog into guided discovery. Instead of making shoppers scroll blind, it gives them a clearer reason to click into the right collection next.</p>",
-                "padding_top": 48,
-                "padding_bottom": 48,
-                "padding_horizontal": 48
-            }
-        },
-        "home_concierge_cta": {
-            "type": "home-concierge-cta",
-            "blocks": {
-                "point_1": {
-                    "type": "point",
-                    "settings": {
-                        "title": "Help for gifting decisions",
-                        "text": "Tell us who you are shopping for \u00e2\u20ac\u201d we will suggest the right stone, category, and symbolism."
-                    }
-                },
-                "point_2": {
-                    "type": "point",
-                    "settings": {
-                        "title": "Support for sizing and product questions",
-                        "text": "A real person answers questions about fit, chain length, stone properties, or gifting combos."
-                    }
-                },
-                "point_3": {
-                    "type": "point",
-                    "settings": {
-                        "title": "Faster path to the right purchase",
-                        "text": "Skip the drift. Get guided to bestsellers or direct support so nothing feels overwhelming."
-                    }
-                }
-            },
-            "block_order": [
-                "point_1",
-                "point_2",
-                "point_3"
-            ],
-            "settings": {
-                "container": "1770",
-                "eyebrow": "Need help choosing? \u00e2\u20ac\u201d that is okay.",
-                "title": "Asking for help is the smartest way to shop. Here is yours.",
-                "copy": "<p>Some shoppers need a faster path into gift-ready bestsellers. Others want help narrowing by zodiac, intention, or styling. Give both groups a stronger final CTA.</p>",
-                "primary_label": "Shop gift-ready picks",
-                "primary_link": "shopify://collections/necklaces",
-                "secondary_label": "Call for assistance",
-                "secondary_link": "tel:+917011099721",
-                "note": "Use this final conversion moment to help undecided visitors move into bestsellers or direct support instead of dropping off.",
-                "padding_top": 32,
-                "padding_bottom": 32,
-                "padding_horizontal": 36
-            }
-        },
-        "home_hero_moonmagic": {
-            "type": "home-hero-moonmagic",
-            "blocks": {},
-            "block_order": [],
-            "settings": {}
-        },
-        "home_discover_rail": {
-            "type": "home-discover-rail",
-            "blocks": {},
-            "block_order": [],
-            "settings": {}
-        },
-        "home_featured_browse": {
-            "type": "home-featured-browse",
-            "blocks": {},
-            "block_order": [],
-            "settings": {}
-        },
-        "home_trust_pillars": {
-            "type": "home-trust-pillars",
-            "settings": {},
-            "disabled": false
-        },
-        "home_testimonials": {
-            "type": "home-testimonials",
-            "settings": {},
-            "disabled": false
-        },
-        "home_faq": {
-            "type": "home-faq",
-            "settings": {},
-            "disabled": false
-        },
-        "home_newsletter_signup": {
-            "type": "home-newsletter-signup",
-            "settings": {},
-            "disabled": false
-        }
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "home_luxury_hero": {
+      "type": "home-luxury-hero",
+      "settings": {
+        "container": "1770",
+        "collection": "bestsellers",
+        "image_1": "",
+        "image_2": "",
+        "image_3": "",
+        "eyebrow": "Certified gemstone jewellery",
+        "heading": "Gemstone gifts that feel personal, proven, and ready to wear.",
+        "copy": "<p>Shop meaningful gemstone jewellery, crystal gifts, zodiac pieces, and lab-tested stones with real support from Gift Palace India.</p>",
+        "primary_label": "Shop bestsellers",
+        "primary_link": "shopify://collections/bestsellers",
+        "secondary_label": "Chat before buying",
+        "secondary_link": "https://wa.me/917011099721",
+        "proof_1_title": "100K",
+        "proof_1_text": "online and offline customers",
+        "proof_2_title": "GJEPC",
+        "proof_2_text": "lab-tested gemstone confidence",
+        "proof_3_title": "Delhi",
+        "proof_3_text": "Chanakyapuri store support",
+        "main_image_label": "Most gifted this week",
+        "chip_1_label": "Gift by zodiac",
+        "chip_1_link": "shopify://collections/celestial-heirlooms",
+        "chip_2_label": "Shop bracelets",
+        "chip_2_link": "shopify://collections/bracelets",
+        "chip_3_label": "Raw crystals",
+        "chip_3_link": "shopify://collections/raw-crystals",
+        "padding_top": 48,
+        "padding_bottom": 64,
+        "padding_horizontal": 36
+      }
     },
-    "order": [
-        "home_hero_moonmagic",
-        "home_trust_pillars",
-        "home_discover_rail",
-        "home_featured_browse",
-        "home_testimonials",
-        "home_conversion_intro",
-        "home_meaning_guide",
-        "home_faq",
-        "home_newsletter_signup",
-        "home_concierge_cta"
-    ]
+    "home_lookbook_spotlight": {
+      "type": "home-lookbook-spotlight",
+      "settings": {
+        "eyebrow": "The lookbook",
+        "title": "Soft gold, natural stones, and pieces made to be worn close.",
+        "body": "Explore a calmer way to style gemstone jewellery, from everyday bracelets to gift-ready statement pieces.",
+        "primary_label": "Shop the edit",
+        "primary_link": "shopify://collections/bestsellers",
+        "secondary_label": "Browse gift picks",
+        "secondary_link": "shopify://collections/gift-ideas"
+      }
+    },
+    "home_conversion_intro": {
+      "type": "home-conversion-intro",
+      "blocks": {
+        "trust_bullet_1": {
+          "type": "trust_bullet",
+          "settings": {
+            "title": "100K customers",
+            "text": "Online and offline"
+          }
+        },
+        "trust_bullet_2": {
+          "type": "trust_bullet",
+          "settings": {
+            "title": "GJEPC lab-tested",
+            "text": "Gemstone confidence"
+          }
+        },
+        "trust_bullet_3": {
+          "type": "trust_bullet",
+          "settings": {
+            "title": "Chanakyapuri",
+            "text": "Delhi store support"
+          }
+        },
+        "proof_item_1": {
+          "type": "proof_item",
+          "settings": {
+            "label": "Gift for someone",
+            "text": "Bestselling pieces that feel personal without overthinking.",
+            "link": "shopify://collections/bestsellers"
+          }
+        },
+        "proof_item_2": {
+          "type": "proof_item",
+          "settings": {
+            "label": "Choose by intention",
+            "text": "Money, protection, love, peace, health, and daily energy.",
+            "link": "/pages/shop-by-intention"
+          }
+        },
+        "proof_item_3": {
+          "type": "proof_item",
+          "settings": {
+            "label": "Need help choosing",
+            "text": "Get a quick shortlist by stone, size, intention, and budget.",
+            "link": "https://wa.me/917011099721"
+          }
+        },
+        "shortcut_1": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Shop necklaces",
+            "link": "shopify://collections/necklaces"
+          }
+        },
+        "shortcut_2": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Browse bracelets",
+            "link": "shopify://collections/bracelets"
+          }
+        },
+        "shortcut_3": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Gift by zodiac",
+            "link": "shopify://collections/celestial-heirlooms"
+          }
+        },
+        "shortcut_4": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Raw crystals",
+            "link": "shopify://collections/raw-crystals"
+          }
+        },
+        "shortcut_5": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Shop rings",
+            "link": "shopify://collections/rings"
+          }
+        },
+        "shortcut_6": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Earrings under Rs. 500",
+            "link": "shopify://collections/earrings"
+          }
+        },
+        "shortcut_7": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Gemstone bracelets",
+            "link": "shopify://collections/bracelets"
+          }
+        },
+        "shortcut_8": {
+          "type": "shortcut",
+          "settings": {
+            "label": "Gift sets",
+            "link": "shopify://collections/gift-sets"
+          }
+        }
+      },
+      "block_order": [
+        "trust_bullet_1",
+        "trust_bullet_2",
+        "trust_bullet_3",
+        "proof_item_1",
+        "proof_item_2",
+        "proof_item_3",
+        "shortcut_1",
+        "shortcut_2",
+        "shortcut_3",
+        "shortcut_4",
+        "shortcut_5",
+        "shortcut_6",
+        "shortcut_7",
+        "shortcut_8"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Start here",
+        "title": "Shop by what the stone should mean.",
+        "copy": "<p>A cleaner path into gemstones for gifting, daily wear, intention, and certified buying confidence.</p>",
+        "primary_label": "Shop bestsellers",
+        "primary_link": "shopify://collections/bestsellers",
+        "secondary_label": "Browse by intention",
+        "secondary_link": "/pages/shop-by-intention",
+        "panel_kicker": "",
+        "panel_title": "",
+        "panel_copy": "",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "padding_horizontal": 36
+      }
+    },
+    "163945138066afddf5": {
+      "type": "product-block",
+      "settings": {
+        "container": "fullwidth",
+        "padding_full_width": 0,
+        "disable_padding_content": false,
+        "enable_border_top": true,
+        "enable_border_bottom": false,
+        "border_height": 1,
+        "color_border_bottom": "#e6e6e6",
+        "enable_minus_mg_top": false,
+        "minus_spacing_top": -100,
+        "mg_top_desktop": 45,
+        "mg_top_tablet": 40,
+        "mg_top_mobile": 30,
+        "mg_bottom_desktop": 30,
+        "mg_bottom_tablet": 30,
+        "mg_bottom_mobile": 10,
+        "product_block_layout": "scroll",
+        "product_bg": "#ffffff",
+        "product_bg_gradient": "",
+        "style_block_header": "style1",
+        "pd_top_title": 30,
+        "product_block_title": "Certified gemstone edits",
+        "enable_border_title": false,
+        "enable_border_title_style2": true,
+        "fontsize_title": 30,
+        "fontsize_title_mb": 20,
+        "mg_bottom_title": 12,
+        "mg_bottom_title_mb": 12,
+        "border_color_title": "#000000",
+        "color_title": "#232323",
+        "view_all": "Lab-tested gemstone picks for shoppers who want beauty, meaning, and clearer buying confidence.",
+        "view_all_align": "center",
+        "font_weight_view_all": "400",
+        "mg_bottom_view": 30,
+        "mg_bottom_view_mb": 0,
+        "enable_border_view_all": true,
+        "link_view_all": "shopify://collections/gemstones",
+        "color_view_all": "#3c3c3c",
+        "icon_view_all": "",
+        "color_view_all_icon": "#eb492f",
+        "title_align": "center",
+        "button_text": "Explore certified stones",
+        "button_text_font_size": 14,
+        "button_text_font_weight": "500",
+        "button_text_text_transform": "uppercase",
+        "product_button_width": 270,
+        "pd_top_product_button": 12,
+        "pd_bottom_product_button": 12,
+        "button_icon": "",
+        "mg_bottom_button": 55,
+        "enable_button_shadow": false,
+        "color_button": "#ffffff",
+        "border_color_button": "#232323",
+        "bg_color_button": "#232323",
+        "bg_color_gradient_button": "",
+        "color_button_hover": "",
+        "border_color_button_hover": "",
+        "bg_color_button_hover": "",
+        "bg_color_gradient_button_hover": "",
+        "product_block_collection": "gemstones",
+        "product_block_limit": 20,
+        "grid_gap": 25,
+        "pb_style": "style1",
+        "style_countdown": "style_1",
+        "countdown": "",
+        "font_size_countdown_text": 14,
+        "color_countdown": "#f42b23",
+        "countdown_margin_left": 15,
+        "product_block_per_row": "4",
+        "product_block_infinite_scroll": true,
+        "product_block_swipe_on_mobile": true,
+        "enable_product_card_pd_bottom": false,
+        "product_card_pd_bottom": 40,
+        "product_block_dots": false,
+        "product_block_dots_mb": true,
+        "spacing_top_dots": 0,
+        "product_block_arrows": true,
+        "product_block_arrows_mb": false,
+        "product_block_show": "4",
+        "position_vertical_arrow": "70px",
+        "product_block_per_view": "4",
+        "show_half": true,
+        "scroll_height": 4,
+        "scroll_track_bg": "#f1f1f1",
+        "scroll_thumb_color": "#000000",
+        "scroll_thumb_hover_color": "#444444",
+        "enable_hover_drag_icon": true,
+        "position": "left",
+        "width_banner": 40,
+        "display_list_collection": false,
+        "collection_color": "#202020",
+        "collection_color_hover": "#3e8cc4",
+        "collection_bg_color": "#ffffff",
+        "collection_bg_color_gradient": "",
+        "text_list": "View all categories",
+        "url_list": "",
+        "enable_layout_special": false,
+        "bg_card": "#ffffff",
+        "padding_card": 15,
+        "border_radius_card": 5,
+        "border_layout_card": "full",
+        "border_width_card": 5,
+        "border_color_card": "#f0f1f4"
+      }
+    },
+    "f69000d3-4d8c-439d-a650-6f122fcd1b9d": {
+      "type": "brand-slider",
+      "blocks": {
+        "ad3a1911-3e78-4eed-abef-a5cd4357dc89": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/bracelts.png",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "BRACELETS",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/bracelets",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "924c32dc-8497-4c2c-af82-3a30c43b0460": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8ABCBA24-4765-4654-A56F-1D3C0AE13563.jpg",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "CRYSTAL-SCULPTURES",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "https://www.giftpalaceindia.com/pages/crystal-sculptures",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "e92055a0-da72-406d-9e83-eba52f8072e6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/il_fullxfull.4376077559_47zt.jpg",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "NECKLACES",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/necklaces",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "345c1235-3d48-4ea4-a23a-0012dab4e316": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/new3.jpg",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "SILVER CHAINS",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 15,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 2,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/silver-chains",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "e429061d-6e1a-40a4-9b0b-f7eb741ef9d6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3j.png",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "GEMSTONES",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/gemstones",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "a89bd215-a89a-440d-932f-efc5504e7dc7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat6.png",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "RAW-CRYSTALS",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/raw-crystals",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "a6d69b36-d8da-46a3-b2af-8295002002bd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat7.png",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "CRYSTAL-TREE",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/cystal-tree",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "dc86edca-db5a-452e-b34a-5db69b72b823": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Benefits_Selenite.png",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "SELENITE & CLEANSING",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "600",
+            "color_text": "#232323",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 5,
+            "description": "SHOP NOW",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/selelite-cleansing",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "21276734-ac55-4a35-b2eb-eac387954213": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "margin_bottom_image": 0,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "LIVE-SALE",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "400",
+            "color_text": "#000000",
+            "color_text_hover": "#494949",
+            "margin_bottom_title": 0,
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "c8e0b0a7-8e86-4ae2-bb8f-ff7467861855": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ROSEQUARTZClassic108JapaMala2.jpg",
+            "margin_bottom_image": 20,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "JAAP MALA",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "700",
+            "color_text": "#000000",
+            "color_text_hover": "#3e8cc4",
+            "margin_bottom_title": 0,
+            "description": "Shop Now \nNew Launches !",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/jaap-mala",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "image_Gtr6jj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/angelspendant-Photoroom.jpg",
+            "margin_bottom_image": 0,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "Pendants",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "400",
+            "color_text": "#000000",
+            "color_text_hover": "#3e8cc4",
+            "margin_bottom_title": 0,
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "https://www.giftpalaceindia.com/collections/pendants",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "image_4UpjVa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/27022_W_1_1600X1600_e3fcc212-ee80-4a3e-8d88-f1434d702e63.jpg",
+            "margin_bottom_image": 0,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "Earrings",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "400",
+            "color_text": "#000000",
+            "color_text_hover": "#3e8cc4",
+            "margin_bottom_title": 0,
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "https://www.giftpalaceindia.com/collections/earrings",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        },
+        "image_yxLjeK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AmethystRoseGoldRing.jpg",
+            "margin_bottom_image": 0,
+            "image_border_radius": 0,
+            "enable_border": false,
+            "border_radius": 4,
+            "border_color": "#e2e5e7",
+            "border_color_hover": "#2d2d2d",
+            "title": "Rings",
+            "fontsize_text": 16,
+            "fontsize_text_mb": 13,
+            "font_weight_title": "400",
+            "color_text": "#000000",
+            "color_text_hover": "#3e8cc4",
+            "margin_bottom_title": 0,
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "https://www.giftpalaceindia.com/collections/rings",
+            "box_shadow": "none",
+            "bx_horizontal_length": 0,
+            "bx_vertical_length": 3,
+            "bx_blur_radius": 8,
+            "bx_spread": 0,
+            "bx_opacity": 0.2,
+            "bx_inset": "no"
+          }
+        }
+      },
+      "block_order": [
+        "ad3a1911-3e78-4eed-abef-a5cd4357dc89",
+        "924c32dc-8497-4c2c-af82-3a30c43b0460",
+        "e92055a0-da72-406d-9e83-eba52f8072e6",
+        "345c1235-3d48-4ea4-a23a-0012dab4e316",
+        "e429061d-6e1a-40a4-9b0b-f7eb741ef9d6",
+        "a89bd215-a89a-440d-932f-efc5504e7dc7",
+        "a6d69b36-d8da-46a3-b2af-8295002002bd",
+        "dc86edca-db5a-452e-b34a-5db69b72b823",
+        "21276734-ac55-4a35-b2eb-eac387954213",
+        "c8e0b0a7-8e86-4ae2-bb8f-ff7467861855",
+        "image_Gtr6jj",
+        "image_4UpjVa",
+        "image_yxLjeK"
+      ],
+      "settings": {
+        "container": "1770",
+        "padding_full_width": 0,
+        "mg_top_desktop": 35,
+        "mg_top_tablet": 25,
+        "mg_top_mobile": 25,
+        "mg_bottom_desktop": 45,
+        "mg_bottom_tablet": 35,
+        "mg_bottom_mobile": 35,
+        "brands_block_style": "style_1",
+        "brand_layout": "grid",
+        "display_brand_border": false,
+        "brand_bg": "rgba(0,0,0,0)",
+        "brand_bg_gradient": "",
+        "brand_title": "Shop the gemstone wardrobe",
+        "color_title": "#232323",
+        "fontsize_title": 30,
+        "fontsize_title_mb": 18,
+        "mg_bottom_title": 10,
+        "enable_border_title": false,
+        "border_color_title": "#000000",
+        "brand_des": "Start with the piece type you will actually wear: daily bracelets, giftable necklaces, raw crystals for desks and mandirs, and lab-tested gemstones for serious buying.",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "mg_bottom_des": 30,
+        "view_all": "",
+        "view_all_fs": 12,
+        "view_all_align": "center",
+        "font_weight_view_all": "400",
+        "mg_bottom_view": 30,
+        "enable_border_view_all": true,
+        "link_view_all": "",
+        "color_view_all": "#3c3c3c",
+        "icon_view_all": "",
+        "color_view_all_icon": "#eb492f",
+        "view_all_icon_side": "left",
+        "btn_text": "",
+        "fontsize_btn": 12,
+        "btn_spacing_top": 15,
+        "btn_color": "#828282",
+        "btn_link": "",
+        "title_align": "center",
+        "item_distance": 15,
+        "brand_rows": "4",
+        "enable_arrows": true,
+        "enable_dots": false,
+        "style_position_arrows": "none",
+        "position_horizontal_arrow": 15,
+        "color_arrow": "",
+        "arrow_background": "",
+        "arrow_background_gradient": "",
+        "arrow_border": "",
+        "color_arrow_hover": "",
+        "arrow_background_hover": "",
+        "arrow_background_gradient_hover": "",
+        "arrow_border_hover": "",
+        "brand_rows_mb": "2",
+        "enable_hover_zoom_image": true
+      }
+    },
+    "home_trust_proof": {
+      "type": "home-trust-proof",
+      "blocks": {
+        "gjepc_lab_tested": {
+          "type": "proof_card",
+          "settings": {
+            "label": "GJEPC Lab-Tested Confidence",
+            "text": "Shop gemstones backed by lab-tested documentation and clear authenticity support.",
+            "cta_label": "Learn about authenticity",
+            "cta_link": "/pages/authenticity"
+          }
+        },
+        "customer_base": {
+          "type": "proof_card",
+          "settings": {
+            "label": "Trusted by 100K Customers",
+            "text": "Our online and offline customers choose Gift Palace India for meaningful gemstone gifting.",
+            "cta_label": "See customer proof",
+            "cta_link": "/pages/reviews"
+          }
+        },
+        "chanakyapuri_store": {
+          "type": "proof_card",
+          "settings": {
+            "label": "Chanakyapuri Store",
+            "text": "Visit our Delhi store for in-person selection, gifting advice, and product assistance.",
+            "cta_label": "Plan a visit",
+            "cta_link": "/pages/contact"
+          }
+        },
+        "expert_support": {
+          "type": "proof_card",
+          "settings": {
+            "label": "Human Buying Support",
+            "text": "Get help choosing by stone, intention, budget, size, or gifting moment before you order.",
+            "cta_label": "Chat on WhatsApp",
+            "cta_link": "https://wa.me/917011099721"
+          }
+        }
+      },
+      "block_order": [
+        "gjepc_lab_tested",
+        "customer_base",
+        "chanakyapuri_store",
+        "expert_support"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Why trust us",
+        "heading": "Proof before persuasion",
+        "description": "A real Delhi store, GJEPC lab-tested gemstone confidence, and human support behind the products customers gift again.",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_horizontal": 36
+      }
+    },
+    "home_trust_pillars": {
+      "type": "home-trust-pillars",
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "shield",
+            "title": "GJEPC Member",
+            "text": "Proud member of the Gem & Jewellery Export Promotion Council."
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "certified",
+            "title": "100% Certified",
+            "text": "Every gemstone is lab-certified for authenticity and quality."
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "shipping",
+            "title": "Insured Shipping",
+            "text": "Secure, fully-insured worldwide shipping for your peace of mind."
+          }
+        },
+        "pillar_4": {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "support",
+            "title": "Lifetime Support",
+            "text": "Dedicated expert assistance for the lifetime of your purchase."
+          }
+        }
+      },
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "pillar_4"
+      ],
+      "settings": {
+        "title": "Why Choose Gift Palace India?",
+        "subheading": "Trusted by thousands for authentic gemstones and exceptional service."
+      }
+    },
+    "home_testimonials": {
+      "type": "home-testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author_name": "Ananya Sharma",
+            "location": "Mumbai, India",
+            "rating": 5,
+            "review_text": "The gemstone I received is absolutely stunning and exactly as described. The certification gives me great peace of mind. Excellent service!"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author_name": "Rahul Mehta",
+            "location": "Delhi, India",
+            "rating": 5,
+            "review_text": "Gift Palace India is my go-to for authentic gemstones. Their collection is vast and the quality is unmatched. Highly recommend to anyone looking for genuine stones."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author_name": "Priya Patel",
+            "location": "Ahmedabad, India",
+            "rating": 4,
+            "review_text": "Great experience overall. The customer support was very helpful in helping me choose the right stone for my needs. Shipping was also quite fast."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "title": "What Our Customers Say",
+        "subheading": "Trusted by thousands of gemstone enthusiasts worldwide for our quality, authenticity, and dedicated service."
+      }
+    },
+    "home_why_us": {
+      "type": "home-why-us",
+      "blocks": {
+        "why_us_1": {
+          "type": "prop",
+          "settings": {
+            "icon_name": "certificate",
+            "heading": "Certified natural gemstones",
+            "body": "Every important piece is backed by authenticity-led sourcing and careful inspection."
+          }
+        },
+        "why_us_2": {
+          "type": "prop",
+          "settings": {
+            "icon_name": "consultation",
+            "heading": "Human guidance before you choose",
+            "body": "Ask for help with intention, zodiac, gifting, or daily-wear suitability before buying."
+          }
+        },
+        "why_us_3": {
+          "type": "prop",
+          "settings": {
+            "icon_name": "shipping",
+            "heading": "Packed, shipped, and supported",
+            "body": "Gift-ready dispatch, practical delivery help, and after-purchase support from the team."
+          }
+        }
+      },
+      "block_order": [
+        "why_us_1",
+        "why_us_2",
+        "why_us_3"
+      ],
+      "settings": {
+        "eyebrow": "Why Gift Palace",
+        "title": "Built for confident gemstone buying.",
+        "subheading": "From certification to human guidance, every detail is designed to help you choose with clarity."
+      }
+    },
+    "home_concierge_cta": {
+      "type": "home-concierge-cta",
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "title": "Tell us the occasion",
+            "text": "Birthday, anniversary, housewarming, self-purchase, or a first gemstone gift."
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "title": "Get a shortlist",
+            "text": "We narrow the choice by intention, budget, stone type, and product category."
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "title": "Buy with confidence",
+            "text": "Ask about size, meaning, gifting fit, lab-tested confidence, and delivery."
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Still choosing?",
+        "title": "Let us help you find the right stone before you buy.",
+        "copy": "<p>For gifting, first-time gemstone buying, or intention-led shopping, our team can help you shortlist pieces that make sense for the person, budget, and occasion.</p>",
+        "primary_label": "Chat on WhatsApp",
+        "primary_link": "https://wa.me/917011099721",
+        "secondary_label": "Call +91 70110 99721",
+        "secondary_link": "tel:+917011099721",
+        "note": "Available Monday to Saturday, 10 AM to 7 PM IST. Chanakyapuri store support is available for in-person buying confidence.",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 36
+      }
+    },
+    "home_concierge_booking": {
+      "type": "home-concierge-booking",
+      "settings": {
+        "container": "1170",
+        "eyebrow": "Personal gemstone advisor",
+        "heading": "Talk to a real gemstone person before you choose.",
+        "description": "Share your birth date, intention, budget, product shortlist, or gifting moment. We help you narrow the right stone and piece with clarity.",
+        "whatsapp_label": "Chat on WhatsApp",
+        "whatsapp_link": "https://wa.me/917011099721",
+        "whatsapp_subtext": "Fast help for stone, size, gift, and budget questions",
+        "store_label": "Visit our Chanakyapuri store",
+        "store_address": "Chanakyapuri, New Delhi",
+        "store_hours": "Mon - Sat | 10 AM - 7 PM IST",
+        "video_label": "Plan a video consultation",
+        "video_link": "https://wa.me/917011099721",
+        "advisor_name": "Gift Palace India",
+        "advisor_role": "Gemstone buying support",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "home_store_proof": {
+      "type": "home-store-proof",
+      "settings": {
+        "container": "1770",
+        "image_1": "shopify://shop_images/3j.png",
+        "image_2": "shopify://shop_images/bracelts.png",
+        "image_3": "shopify://shop_images/Benefits_Selenite.png",
+        "eyebrow": "Real store confidence",
+        "heading": "Lab-tested gemstones with a real Delhi store behind them.",
+        "copy": "<p>Shop online with the reassurance of product support, documentation, and a physical Chanakyapuri store shoppers can trust before and after purchase.</p>",
+        "proof_1_title": "GJEPC lab-tested",
+        "proof_1_text": "Authenticity support for gemstone shoppers who want clearer buying confidence.",
+        "proof_2_title": "100K customers",
+        "proof_2_text": "Online and offline customers across gifting, jewellery, crystals, and gemstone buying.",
+        "proof_3_title": "Chanakyapuri store",
+        "proof_3_text": "Offline buying support in Delhi for shoppers who prefer guidance before purchase.",
+        "primary_label": "Shop gemstones",
+        "primary_link": "shopify://collections/gemstones",
+        "secondary_label": "Chat before buying",
+        "secondary_link": "https://wa.me/917011099721",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 36
+      }
+    },
+    "home_origin_story": {
+      "type": "home-origin-story",
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Chanakyapuri store heritage",
+        "heading": "Offline trust, online convenience, and gemstone craft that feels personal.",
+        "story_p1": "<p>Gift Palace India brings together a real Chanakyapuri store, customer-first gemstone guidance, and jewellery selected for gifting, daily wear, and intention-led buying.</p>",
+        "story_p2": "<p>Our focus is simple: clear product quality, lab-tested gemstone confidence, human support before purchase, and pieces that feel meaningful when they arrive.</p>",
+        "pull_quote": "Trusted by 100K online and offline customers.",
+        "founder_name": "Gift Palace India",
+        "founder_role": "Chanakyapuri, New Delhi",
+        "cta_label": "Chat before buying",
+        "cta_link": "https://wa.me/917011099721",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "home_meaning_guide": {
+      "type": "home-meaning-guide",
+      "blocks": {
+        "guide_card_1": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Pyrite",
+            "collection": "abundance-wealth",
+            "title": "Money",
+            "text": "<p>For abundance, focus, business gifting, and prosperity-led purchases.</p>",
+            "link_label": "Shop money stones",
+            "link": "shopify://collections/abundance-wealth"
+          }
+        },
+        "guide_card_2": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Evil eye",
+            "collection": "meditation-spirituality",
+            "title": "Protection",
+            "text": "<p>For everyday nazar protection, spiritual gifting, and safe-energy styling.</p>",
+            "link_label": "Shop protection",
+            "link": "shopify://collections/meditation-spirituality"
+          }
+        },
+        "guide_card_3": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Rose quartz",
+            "collection": "love-relationships",
+            "title": "Love",
+            "text": "<p>For self-love, relationship gifting, anniversaries, and softer daily wear.</p>",
+            "link_label": "Shop love stones",
+            "link": "shopify://collections/love-relationships"
+          }
+        },
+        "guide_card_4": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Amethyst",
+            "collection": "balance-peace",
+            "title": "Peaceful Energies",
+            "text": "<p>For calm rooms, slower routines, meditation corners, and thoughtful home gifts.</p>",
+            "link_label": "Shop peaceful stones",
+            "link": "shopify://collections/balance-peace"
+          }
+        },
+        "guide_card_5": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Healing crystals",
+            "collection": "health-well-beings",
+            "title": "Health",
+            "text": "<p>For wellness gifting, daily balance, and crystal picks chosen with care.</p>",
+            "link_label": "Shop health stones",
+            "link": "shopify://collections/health-well-beings"
+          }
+        },
+        "guide_card_6": {
+          "type": "guide_card",
+          "settings": {
+            "kicker": "Ruby",
+            "title": "Confidence",
+            "text": "<p>For bold gifting, leadership energy, milestone moments, and statement jewellery.</p>",
+            "link_label": "Shop confidence stones",
+            "link": "shopify://collections/gemstones"
+          }
+        }
+      },
+      "block_order": [
+        "guide_card_1",
+        "guide_card_2",
+        "guide_card_3",
+        "guide_card_4",
+        "guide_card_5",
+        "guide_card_6"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Shop by intention",
+        "title": "Choose by intention",
+        "copy": "<p>Start with the reason behind the stone, then explore pieces that fit the moment.</p>",
+        "padding_top": 28,
+        "padding_bottom": 24,
+        "padding_horizontal": 36
+      }
+    },
+    "home_gemstone_atlas": {
+      "type": "home-gemstone-atlas",
+      "blocks": {
+        "ruby": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Ruby",
+            "sanskrit_name": "Manikya",
+            "ruling_planet": "Sun",
+            "meaning": "Confidence, leadership, vitality, and presence."
+          }
+        },
+        "pearl": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Pearl",
+            "sanskrit_name": "Moti",
+            "ruling_planet": "Moon",
+            "meaning": "Calm, emotional balance, softness, and grace."
+          }
+        },
+        "coral": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Red Coral",
+            "sanskrit_name": "Moonga",
+            "ruling_planet": "Mars",
+            "meaning": "Courage, protection, discipline, and steady action."
+          }
+        },
+        "emerald": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Emerald",
+            "sanskrit_name": "Panna",
+            "ruling_planet": "Mercury",
+            "meaning": "Clarity, learning, communication, and refined judgement."
+          }
+        },
+        "pukhraj": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Yellow Sapphire",
+            "sanskrit_name": "Pukhraj",
+            "ruling_planet": "Jupiter",
+            "meaning": "Wisdom, prosperity, guidance, and auspicious growth."
+          }
+        },
+        "diamond": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Diamond",
+            "sanskrit_name": "Heera",
+            "ruling_planet": "Venus",
+            "meaning": "Beauty, devotion, refinement, and lasting value."
+          }
+        },
+        "neelam": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Blue Sapphire",
+            "sanskrit_name": "Neelam",
+            "ruling_planet": "Saturn",
+            "meaning": "Focus, protection, discipline, and deep transformation."
+          }
+        },
+        "gomed": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Hessonite",
+            "sanskrit_name": "Gomed",
+            "ruling_planet": "Rahu",
+            "meaning": "Grounding, confidence, stability, and clear decisions."
+          }
+        },
+        "lehsuniya": {
+          "type": "stone",
+          "settings": {
+            "stone_name": "Cat's Eye",
+            "sanskrit_name": "Lehsuniya",
+            "ruling_planet": "Ketu",
+            "meaning": "Protection, intuition, spiritual strength, and resilience."
+          }
+        }
+      },
+      "block_order": [
+        "ruby",
+        "pearl",
+        "coral",
+        "emerald",
+        "pukhraj",
+        "diamond",
+        "neelam",
+        "gomed",
+        "lehsuniya"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Navratna quality guide",
+        "heading": "Choose the stone by meaning, planet, and purpose.",
+        "description": "A concise gemstone atlas for shoppers who want beauty, belief, and lab-tested buying confidence in one place.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "home_signature_drop": {
+      "type": "home-signature-drop",
+      "settings": {
+        "container": "1770",
+        "collection": "bestsellers",
+        "image_1": "",
+        "image_2": "",
+        "image_3": "",
+        "eyebrow": "Limited gemstone edit",
+        "heading": "Fresh picks chosen for gifts, intention, and everyday wear.",
+        "copy": "<p>A tighter edit of customer-loved gemstone pieces, selected for easy gifting, visible quality, and fast decisions when the best pieces are moving.</p>",
+        "proof_1": "Gift-ready pieces",
+        "proof_2": "Certified gemstone confidence",
+        "proof_3": "Updated from customer demand",
+        "primary_label": "Shop the edit",
+        "primary_link": "shopify://collections/live-sale",
+        "secondary_label": "Ask for help",
+        "secondary_link": "https://wa.me/917011099721",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 36
+      }
+    },
+    "home_featured_browse": {
+      "type": "home-featured-browse",
+      "settings": {
+        "title": "Browse Our <em>Bestsellers</em>",
+        "show_trust_cue": true,
+        "trust_cue_text": "Certified authentic"
+      }
+    },
+    "16393870238958f868": {
+      "type": "custom-service-block",
+      "blocks": {
+        "cbece3c5-69e7-4ac0-9014-0d3771d72d19": {
+          "type": "Text",
+          "settings": {
+            "bg_color_block": "#ffffff",
+            "border_block": "#ffffff",
+            "icon_type": "image",
+            "image": "",
+            "icon": "",
+            "width_icon": 64,
+            "height_icon": 64,
+            "mg_bottom_icon": 28,
+            "color_icon": "#3c3c3c",
+            "text": "Buying Support",
+            "type_tab_font": "font_1",
+            "fontsize_title_block": 18,
+            "fontsize_title_block_mb": 18,
+            "title_block_font_weight": "500",
+            "mg_bottom_title": 10,
+            "mg_bottom_title_mb": 0,
+            "color_block": "#232323",
+            "description": "<span style=\"line-height: 28px;\">Stuck between two stones or sizes? Ask us before you order and get a clearer shortlist.</span>",
+            "fontsize_des_block": 14,
+            "fontsize_des_block_mb": 14,
+            "lineheight_des_block": 22,
+            "mg_bottom_des": 0,
+            "color_des_block": "#3c3c3c",
+            "button": "Chat on WhatsApp",
+            "link": "https://wa.me/917011099721",
+            "button_style": "style1",
+            "fontsize_button": 14,
+            "button_width": 235,
+            "fontweight_button": "500",
+            "enable_underline_button": true,
+            "color_button": "#ba7a2d",
+            "button_border": "",
+            "button_background": "",
+            "button_background_gradient": "",
+            "button_color_hover": "#ba7a2d",
+            "button_border_hover": "",
+            "button_background_hover": "",
+            "button_background_gradient_hover": ""
+          }
+        },
+        "fa71b4aa-cce0-43b7-8f5d-12fb9b713fd2": {
+          "type": "Text",
+          "settings": {
+            "bg_color_block": "#ffffff",
+            "border_block": "#ffffff",
+            "icon_type": "image",
+            "image": "",
+            "icon": "",
+            "width_icon": 64,
+            "height_icon": 64,
+            "mg_bottom_icon": 28,
+            "color_icon": "#3c3c3c",
+            "text": "Gift-Safe Packing",
+            "type_tab_font": "font_1",
+            "fontsize_title_block": 18,
+            "fontsize_title_block_mb": 18,
+            "title_block_font_weight": "500",
+            "mg_bottom_title": 10,
+            "mg_bottom_title_mb": 0,
+            "color_block": "#232323",
+            "description": "<span style=\"line-height: 28px;\">Jewellery and crystals are packed carefully so the unboxing still feels presentable.</span>",
+            "fontsize_des_block": 14,
+            "fontsize_des_block_mb": 14,
+            "lineheight_des_block": 22,
+            "mg_bottom_des": 0,
+            "color_des_block": "#3c3c3c",
+            "button": "",
+            "link": "",
+            "button_style": "style1",
+            "fontsize_button": 14,
+            "button_width": 235,
+            "fontweight_button": "500",
+            "enable_underline_button": false,
+            "color_button": "#ba7a2d",
+            "button_border": "",
+            "button_background": "",
+            "button_background_gradient": "",
+            "button_color_hover": "#ba7a2d",
+            "button_border_hover": "",
+            "button_background_hover": "",
+            "button_background_gradient_hover": ""
+          }
+        },
+        "150cc01c-9394-4067-b3a3-4cbadd5f4083": {
+          "type": "Text",
+          "settings": {
+            "bg_color_block": "#ffffff",
+            "border_block": "#ffffff",
+            "icon_type": "image",
+            "image": "",
+            "icon": "",
+            "width_icon": 64,
+            "height_icon": 64,
+            "mg_bottom_icon": 28,
+            "color_icon": "#3c3c3c",
+            "text": "Replacement Support",
+            "type_tab_font": "font_1",
+            "fontsize_title_block": 18,
+            "fontsize_title_block_mb": 18,
+            "title_block_font_weight": "500",
+            "mg_bottom_title": 10,
+            "mg_bottom_title_mb": 0,
+            "color_block": "#232323",
+            "description": "<span style=\"line-height: 28px;\">If an order arrives wrong, missing, or damaged, our team helps with the next step clearly.</span>",
+            "fontsize_des_block": 14,
+            "fontsize_des_block_mb": 14,
+            "lineheight_des_block": 22,
+            "mg_bottom_des": 0,
+            "color_des_block": "#3c3c3c",
+            "button": "",
+            "link": "",
+            "button_style": "style1",
+            "fontsize_button": 14,
+            "button_width": 235,
+            "fontweight_button": "500",
+            "enable_underline_button": false,
+            "color_button": "#ba7a2d",
+            "button_border": "",
+            "button_background": "",
+            "button_background_gradient": "",
+            "button_color_hover": "#ba7a2d",
+            "button_border_hover": "",
+            "button_background_hover": "",
+            "button_background_gradient_hover": ""
+          }
+        },
+        "7acc1f45-cd4d-4f50-955b-640df4d6dfd2": {
+          "type": "Text",
+          "settings": {
+            "bg_color_block": "#ffffff",
+            "border_block": "#ffffff",
+            "icon_type": "image",
+            "image": "",
+            "icon": "",
+            "width_icon": 64,
+            "height_icon": 64,
+            "mg_bottom_icon": 28,
+            "color_icon": "#3c3c3c",
+            "text": "Phone Support",
+            "type_tab_font": "font_1",
+            "fontsize_title_block": 18,
+            "fontsize_title_block_mb": 18,
+            "title_block_font_weight": "500",
+            "mg_bottom_title": 10,
+            "mg_bottom_title_mb": 0,
+            "color_block": "#232323",
+            "description": "<span style=\"line-height: 28px;\">Gifting last minute or choosing for someone else? Call or WhatsApp during store hours.</span>",
+            "fontsize_des_block": 14,
+            "fontsize_des_block_mb": 14,
+            "lineheight_des_block": 22,
+            "mg_bottom_des": 0,
+            "color_des_block": "#3c3c3c",
+            "button": "Call now",
+            "link": "tel:+917011099721",
+            "button_style": "style1",
+            "fontsize_button": 14,
+            "button_width": 235,
+            "fontweight_button": "500",
+            "enable_underline_button": true,
+            "color_button": "#ba7a2d",
+            "button_border": "",
+            "button_background": "",
+            "button_background_gradient": "",
+            "button_color_hover": "#ba7a2d",
+            "button_border_hover": "",
+            "button_background_hover": "",
+            "button_background_gradient_hover": ""
+          }
+        }
+      },
+      "block_order": [
+        "cbece3c5-69e7-4ac0-9014-0d3771d72d19",
+        "fa71b4aa-cce0-43b7-8f5d-12fb9b713fd2",
+        "150cc01c-9394-4067-b3a3-4cbadd5f4083",
+        "7acc1f45-cd4d-4f50-955b-640df4d6dfd2"
+      ],
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "display_border_top": false,
+        "display_border_bottom": false,
+        "border_color": "#d0d0d0",
+        "service_block_swipe_on_mobile": "slider",
+        "color_icon_slider": "#212121",
+        "service_block_style": "style_1",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 30,
+        "mg_bottom_desktop": 40,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 30,
+        "policies_bg": "#ffffff",
+        "policies_bg_gradient": "",
+        "service_block_title": "Support that makes gemstone buying easier.",
+        "enable_border_title": false,
+        "color_title": "#000000",
+        "fontsize_title": 30,
+        "fontsize_title_mb": 22,
+        "mg_bottom_title_service_block": 12,
+        "mg_bottom_title_service_block_mb": 12,
+        "service_block_des": "Clear answers before purchase, safer packing after order, and authenticity support whenever a shopper needs it.",
+        "service_block_des_pos": "bottom",
+        "color_des": "#000000",
+        "fontsize_des": 16,
+        "mg_top_service_block_des": 50,
+        "mg_bottom_service_block_des": 50,
+        "view_all": "",
+        "view_all_align": "center",
+        "font_weight_view_all": "400",
+        "mg_top_view": 0,
+        "mg_bottom_view": 30,
+        "enable_border_view_all": true,
+        "link_view_all": "",
+        "color_view_all": "#3c3c3c",
+        "icon_view_all": "",
+        "color_view_all_icon": "#eb492f",
+        "title_align": "center",
+        "item_width": "full_width",
+        "border_item": "none",
+        "enable_item_distance": true,
+        "enable_hover_box_shadow": false,
+        "enable_hover_effects_top": false,
+        "item_padding_top": 13,
+        "item_padding_bottom": 13,
+        "item_padding_left_right": 40,
+        "item_radius": 4,
+        "grid_gap": 30
+      }
+    },
+    "home_shop_shortcuts": {
+      "type": "home-shop-shortcuts",
+      "blocks": {
+        "shortcut_necklaces": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Gift",
+            "label": "Shop necklaces",
+            "text": "Meaningful pendants and gemstone pieces that feel easy to gift.",
+            "link": "shopify://collections/necklaces"
+          }
+        },
+        "shortcut_bracelets": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Daily wear",
+            "label": "Browse bracelets",
+            "text": "Customer-loved bracelets for protection, abundance, calm, and styling.",
+            "link": "shopify://collections/bracelets"
+          }
+        },
+        "shortcut_zodiac": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Personal",
+            "label": "Gift by zodiac",
+            "text": "A direct route into birth signs, symbolism, and personal gifting.",
+            "link": "shopify://collections/celestial-heirlooms"
+          }
+        },
+        "shortcut_crystals": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Energy",
+            "label": "Raw crystals",
+            "text": "Stones for desks, homes, rituals, and intention-led gifting.",
+            "link": "shopify://collections/raw-crystals"
+          }
+        },
+        "shortcut_budget": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Budget",
+            "label": "Under Rs. 500",
+            "text": "Affordable crystal and jewellery picks that still feel thoughtful.",
+            "link": "shopify://collections/earrings"
+          }
+        },
+        "shortcut_gemstones": {
+          "type": "shortcut",
+          "settings": {
+            "kicker": "Certified",
+            "label": "Gemstone edits",
+            "text": "Lab-tested confidence for shoppers who want clarity before buying.",
+            "link": "shopify://collections/gemstones"
+          }
+        }
+      },
+      "block_order": [
+        "shortcut_necklaces",
+        "shortcut_bracelets",
+        "shortcut_zodiac",
+        "shortcut_crystals",
+        "shortcut_budget",
+        "shortcut_gemstones"
+      ],
+      "settings": {
+        "container": "1770",
+        "eyebrow": "Popular shortcuts",
+        "heading": "Find the right piece without searching the whole store.",
+        "copy": "<p>Direct routes for the most common buying moments: gifts, zodiac, bracelets, raw crystals, budget-friendly picks, and customer-loved gemstone edits.</p>",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_horizontal": 36
+      }
+    },
+    "home_community_proof": {
+      "type": "home-community-proof",
+      "settings": {
+        "container": "1770",
+        "image_1": "shopify://shop_images/Pisces_Zodiac_banner_pendant_11.jpg",
+        "image_2": "shopify://shop_images/bracelts.png",
+        "image_3": "shopify://shop_images/3j.png",
+        "eyebrow": "Worn, gifted, trusted",
+        "heading": "A real customer base behind every gemstone recommendation.",
+        "copy": "<p>Gift Palace India is built across online orders, offline store support, customer reviews, and real gifting moments. This is proof shoppers can feel before they checkout.</p>",
+        "metric_1_title": "100K",
+        "metric_1_text": "online and offline customers",
+        "metric_2_title": "Delhi",
+        "metric_2_text": "Chanakyapuri store support",
+        "metric_3_title": "Reviews",
+        "metric_3_text": "real buyer proof below",
+        "cta_label": "See customer proof",
+        "cta_link": "/pages/reviews",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 36
+      }
+    },
+    "home_press_strip": {
+      "type": "home-press-strip",
+      "blocks": {
+        "press_1": {
+          "type": "logo",
+          "settings": {
+            "logo_label": "GJEPC"
+          }
+        },
+        "press_2": {
+          "type": "logo",
+          "settings": {
+            "logo_label": "Certified Gemstones"
+          }
+        },
+        "press_3": {
+          "type": "logo",
+          "settings": {
+            "logo_label": "Since 1989"
+          }
+        },
+        "press_4": {
+          "type": "logo",
+          "settings": {
+            "logo_label": "Insured Delivery"
+          }
+        },
+        "press_5": {
+          "type": "logo",
+          "settings": {
+            "logo_label": "Human Consultation"
+          }
+        }
+      },
+      "block_order": [
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "press_5"
+      ],
+      "settings": {
+        "eyebrow": "Seen and trusted",
+        "title": "Proof points that sit quietly, not loudly."
+      }
+    },
+    "home_discover_rail": {
+      "type": "home-discover-rail",
+      "settings": {
+        "title": "Discover by Gemstone",
+        "description": "Explore our curated collections by stone type — each certified, every piece one of a kind."
+      }
+    },
+    "home_faq": {
+      "type": "home-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Are your gemstones certified?",
+            "answer": "<p>Yes. Every gemstone we sell comes with a lab certificate from a recognised gemmological institute. You can request the certificate before purchase.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>We ship worldwide with full insurance. International orders typically arrive within 7–14 business days depending on your location.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I get a consultation before buying?",
+            "answer": "<p>Absolutely. Book a free video consultation or visit one of our Delhi stores. Our experts will guide you to the right gemstone for your needs and budget.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 7-day return policy on most items. Customised pieces are non-returnable. Contact us within 7 days of delivery and we will arrange a hassle-free return.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "subheading": "Answers to the questions we hear most often."
+      }
+    },
+    "173081418900bda130": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_nbfr46": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_nbfr46"
+      ],
+      "settings": {
+        "include_margins": false,
+        "container": "1770",
+        "theme_style": "dark",
+        "text_align": "center",
+        "eyebrow": "What buyers say",
+        "title": "Proof from real buyers.",
+        "description": "<p>Verified review proof belongs close to the buying journey. It reduces hesitation, supports the product story, and gives first-time visitors social confidence.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_horizontal": 32
+      }
+    },
+    "home_newsletter_signup": {
+      "type": "home-newsletter-signup",
+      "settings": {
+        "title": "Join the Inner Circle",
+        "subheading": "Get early access to new collections and expert gemstone insights.",
+        "placeholder": "Enter your email",
+        "submit_label": "Subscribe",
+        "disclaimer": "<p>By subscribing, you agree to our Privacy Policy. Double opt-in required.</p>"
+      }
+    }
+  },
+  "order": [
+    "home_luxury_hero",
+    "home_lookbook_spotlight",
+    "home_conversion_intro",
+    "163945138066afddf5",
+    "f69000d3-4d8c-439d-a650-6f122fcd1b9d",
+    "home_trust_proof",
+    "home_trust_pillars",
+    "home_testimonials",
+    "home_why_us",
+    "home_concierge_cta",
+    "home_concierge_booking",
+    "home_store_proof",
+    "home_origin_story",
+    "home_meaning_guide",
+    "home_gemstone_atlas",
+    "home_signature_drop",
+    "home_featured_browse",
+    "16393870238958f868",
+    "home_shop_shortcuts",
+    "home_community_proof",
+    "home_press_strip",
+    "home_discover_rail",
+    "home_faq",
+    "173081418900bda130",
+    "home_newsletter_signup"
+  ]
 }

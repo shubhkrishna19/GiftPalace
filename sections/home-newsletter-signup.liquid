@@ -1,0 +1,146 @@
+{%- comment -%} Section: Newsletter Signup — Email capture with value props {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-home-newsletter-signup.css' | asset_url }}">
+
+<section class="home-newsletter-signup" aria-labelledby="home-newsletter-signup-heading">
+  <div class="home-newsletter-signup__container">
+    <div class="home-newsletter-signup__header">
+      {% if section.settings.title != blank %}
+        <h2 id="home-newsletter-signup-heading" class="home-newsletter-signup__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="home-newsletter-signup__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <ul class="home-newsletter-signup__bullets" role="list">
+        {% for block in section.blocks %}
+          <li class="home-newsletter-signup__bullet" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.text }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="home-newsletter-signup__form-wrapper">
+      {% form 'customer', class: 'home-newsletter-signup__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        {%- if form.errors -%}
+          <div class="home-newsletter-signup__message home-newsletter-signup__message--error">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+          </div>
+        {%- endif -%}
+
+        {%- if form.posted_successfully? -%}
+          <div class="home-newsletter-signup__message home-newsletter-signup__message--success" tabindex="-1" autofocus>
+            {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
+          </div>
+        {%- else -%}
+          <div class="home-newsletter-signup__input-group">
+            <div class="home-newsletter-signup__honeypot" aria-hidden="true">
+              <label for="NewsletterHoneypot">Do not fill this field</label>
+              <input type="text" name="contact[honeypot]" id="NewsletterHoneypot" tabindex="-1" autocomplete="off">
+            </div>
+
+            <input
+              type="email"
+              name="contact[email]"
+              id="NewsletterEmail"
+              class="home-newsletter-signup__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                aria-invalid="true"
+                aria-describedby="Newsletter-error"
+              {% endif %}
+              placeholder="{{ section.settings.placeholder_text }}"
+              required
+            >
+            <button type="submit" class="home-newsletter-signup__submit" name="commit" id="Subscribe">
+              {{ section.settings.button_text }}
+            </button>
+          </div>
+          {%- if section.settings.disclaimer != blank -%}
+            <p class="home-newsletter-signup__disclaimer">{{ section.settings.disclaimer }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join the Inner Circle"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get early access to new collections and expert gemstone insights."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder Text",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "<p>By subscribing, you agree to our Privacy Policy. Double opt-in required.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Value Prop Bullet",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Bullet Text",
+          "default": "Exclusive early access"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup",
+      "blocks": [
+        {
+          "type": "bullet",
+          "settings": { "text": "Exclusive early access" }
+        },
+        {
+          "type": "bullet",
+          "settings": { "text": "Certified gemstone guides" }
+        },
+        {
+          "type": "bullet",
+          "settings": { "text": "Member-only pricing" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

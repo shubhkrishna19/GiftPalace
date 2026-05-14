@@ -1,0 +1,86 @@
+/* GPI Search Page Overrides
+ * Aligns the search results page and predictive search with the GPI design system
+ */
+
+/* ─── Quick search dropdown ──────────────────────────────────────────────────── */
+.quickSearchResultsBlock .search-block-title {
+  font-family: var(--gpi-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gpi-ink-strong);
+  border-bottom-color: var(--gpi-border-soft);
+}
+
+.quickSearchResultsBlock .list-item .link {
+  background-color: var(--gpi-surface-ivory);
+  color: var(--gpi-text-muted);
+  font-family: var(--gpi-body);
+}
+
+.quickSearchResultsBlock .list-item .link:hover {
+  color: var(--gpi-gold);
+}
+
+.productViewAll {
+  border-top-color: var(--gpi-border-soft);
+}
+
+/* ─── Search result page heading ─────────────────────────────────────────────── */
+.search-header .page-title,
+.main-search .search-title,
+.search-results__heading {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Search input ───────────────────────────────────────────────────────────── */
+.search-form .form-input,
+.predictive-search__form input,
+.search-input {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink);
+  border-color: var(--gpi-border-warm);
+  background-color: var(--gpi-surface-canvas);
+}
+
+.search-form .form-input:focus,
+.predictive-search__form input:focus {
+  border-color: var(--gpi-gold);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(139, 99, 38, 0.15);
+}
+
+/* ─── Search submit button ───────────────────────────────────────────────────── */
+.search-form .btn-search,
+.search-form .button--search {
+  color: var(--gpi-ink);
+}
+
+.search-form .btn-search:hover,
+.search-form .button--search:hover {
+  color: var(--gpi-gold);
+}
+
+/* ─── No results text ────────────────────────────────────────────────────────── */
+.search-no-results,
+.search-empty-message {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Search result count ────────────────────────────────────────────────────── */
+.search-results-count,
+.search-count {
+  font-family: var(--gpi-body);
+  font-size: 0.8125rem;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Loading skeleton in predictive search ──────────────────────────────────── */
+.predictive-search__loading {
+  background-color: var(--gpi-surface-ivory);
+}

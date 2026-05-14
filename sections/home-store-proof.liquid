@@ -1,0 +1,404 @@
+{%- liquid
+  assign local_image_1 = ''
+  assign local_image_2 = ''
+  assign local_image_3 = ''
+  if section.settings.image_1 == blank
+    assign local_image_1 = 'gpi-atelier.webp' | asset_url
+  endif
+  if section.settings.image_2 == blank
+    assign local_image_2 = 'gpi-hero-bracelet.webp' | asset_url
+  endif
+  if section.settings.image_3 == blank
+    assign local_image_3 = 'gpi-stone-emerald.webp' | asset_url
+  endif
+-%}
+
+<section class="home-store-proof section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-store-proof__layout" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-store-proof__media" aria-label="Gift Palace India gemstone product proof">
+        {% if section.settings.image_1 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--large">
+            <img src="{{ section.settings.image_1 | image_url: width: 760 }}" alt="{{ section.settings.image_1.alt | default: section.settings.heading | escape }}" loading="lazy" width="760" height="900">
+          </figure>
+        {% elsif local_image_1 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--large">
+            <img src="{{ local_image_1 }}" alt="Delhi gemstone atelier interior" width="800" height="600" loading="lazy">
+          </figure>
+        {% endif %}
+        {% if section.settings.image_2 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--small home-store-proof__image--top">
+            <img src="{{ section.settings.image_2 | image_url: width: 420 }}" alt="{{ section.settings.image_2.alt | default: section.settings.proof_1_title | escape }}" loading="lazy" width="420" height="520">
+          </figure>
+        {% elsif local_image_2 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--small home-store-proof__image--top">
+            <img src="{{ local_image_2 }}" alt="Gemstone gold bracelet on cream velvet" width="420" height="525" loading="lazy">
+          </figure>
+        {% endif %}
+        {% if section.settings.image_3 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--small home-store-proof__image--bottom">
+            <img src="{{ section.settings.image_3 | image_url: width: 420 }}" alt="{{ section.settings.image_3.alt | default: section.settings.proof_2_title | escape }}" loading="lazy" width="420" height="520">
+          </figure>
+        {% elsif local_image_3 != blank %}
+          <figure class="home-store-proof__image home-store-proof__image--small home-store-proof__image--bottom">
+            <img src="{{ local_image_3 }}" alt="Polished emerald gemstone macro" width="420" height="420" loading="lazy">
+          </figure>
+        {% endif %}
+      </div>
+
+      <div class="home-store-proof__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="home-store-proof__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="home-store-proof__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.copy != blank %}
+          <div class="home-store-proof__copy rte">{{ section.settings.copy }}</div>
+        {% endif %}
+
+        <div class="home-store-proof__proofs">
+          {% if section.settings.proof_1_title != blank %}
+            <div class="home-store-proof__proof">
+              <strong>{{ section.settings.proof_1_title }}</strong>
+              <span>{{ section.settings.proof_1_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.proof_2_title != blank %}
+            <div class="home-store-proof__proof">
+              <strong>{{ section.settings.proof_2_title }}</strong>
+              <span>{{ section.settings.proof_2_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.proof_3_title != blank %}
+            <div class="home-store-proof__proof">
+              <strong>{{ section.settings.proof_3_title }}</strong>
+              <span>{{ section.settings.proof_3_text }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="home-store-proof__actions">
+          {% if section.settings.primary_label != blank %}
+            <a class="home-store-proof__button home-store-proof__button--primary" {% if section.settings.primary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.primary_link }}"{% endif %}>{{ section.settings.primary_label }}</a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            <a class="home-store-proof__button home-store-proof__button--secondary" {% if section.settings.secondary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.secondary_link }}"{% endif %}>{{ section.settings.secondary_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-store-proof {
+    background: linear-gradient(180deg, var(--color-surface, #fafafa) 0%, rgba(212, 175, 55, 0.01) 100%);
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .home-store-proof__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.78fr);
+    gap: clamp(1.75rem, 6vw, 6rem);
+    align-items: center;
+    padding-top: clamp(2.5rem, 5vw, 5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 5rem);
+    padding-left: clamp(1rem, 4vw, 3rem);
+    padding-right: clamp(1rem, 4vw, 3rem);
+  }
+
+  .home-store-proof__media {
+    position: relative;
+    min-height: clamp(420px, 45vw, 720px);
+  }
+
+  .home-store-proof__image {
+    position: absolute;
+    margin: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(212, 175, 55, 0.15));
+    transition: all var(--duration-normal, 300ms) var(--ease-out-expo);
+  }
+
+  .home-store-proof__image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--duration-normal, 300ms) var(--ease-out-expo);
+  }
+
+  .home-store-proof__image:hover {
+    box-shadow: var(--shadow-xl, 0 20px 48px rgba(212, 175, 55, 0.25));
+  }
+
+  .home-store-proof__image:hover img {
+    transform: scale(1.05);
+  }
+
+  .home-store-proof__image--large {
+    inset: 0 20% 0 0;
+    border-radius: 999px 999px 46px 46px;
+  }
+
+  .home-store-proof__image--small {
+    right: 0;
+    width: 38%;
+    aspect-ratio: 0.82;
+    border: 8px solid var(--color-surface, #fafafa);
+    border-radius: 34px;
+  }
+
+  .home-store-proof__image--top {
+    top: 9%;
+  }
+
+  .home-store-proof__image--bottom {
+    bottom: 8%;
+  }
+
+  .home-store-proof__eyebrow {
+    margin: 0 0 12px;
+    color: var(--color-primary, #d4af37);
+    font-family: var(--gpi-body, "Manrope", Arial, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .home-store-proof__heading {
+    max-width: 760px;
+    margin: 0;
+    color: var(--color-text, #1a1a1a);
+    font-family: var(--gpi-heading, "Marcellus", Georgia, serif);
+    font-size: clamp(2.4rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .home-store-proof__copy {
+    max-width: 620px;
+    margin-top: 18px;
+    color: var(--color-text-muted, #666);
+    font-family: var(--gpi-body, "Manrope", Arial, sans-serif);
+    font-size: clamp(0.98rem, 1.08vw, 1.1rem);
+    line-height: 1.7;
+  }
+
+  .home-store-proof__proofs {
+    display: grid;
+    gap: 10px;
+    margin-top: clamp(22px, 3vw, 36px);
+  }
+
+  .home-store-proof__proof {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.38fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: baseline;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    padding-top: 14px;
+    transition: all var(--duration-normal, 300ms) var(--ease-out-expo);
+  }
+
+  .home-store-proof__proof:hover {
+    border-top-color: var(--color-primary, #d4af37);
+  }
+
+  .home-store-proof__proof strong {
+    color: var(--color-text, #1a1a1a);
+    font-family: var(--gpi-heading, "Marcellus", Georgia, serif);
+    font-size: clamp(1.18rem, 1.7vw, 1.6rem);
+    font-weight: 400;
+    line-height: 1.08;
+  }
+
+  .home-store-proof__proof span {
+    color: var(--color-text-muted, #666);
+    font-family: var(--gpi-body, "Manrope", Arial, sans-serif);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .home-store-proof__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm, 0.75rem);
+    margin-top: clamp(24px, 3vw, 38px);
+  }
+
+  .home-store-proof__button {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: var(--gpi-body, "Manrope", Arial, sans-serif);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    padding: 13px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all var(--duration-normal, 300ms) var(--ease-out-expo);
+    cursor: pointer;
+  }
+
+  .home-store-proof__button--primary {
+    background: var(--color-primary, #d4af37);
+    color: var(--color-text, #1a1a1a);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+  }
+
+  .home-store-proof__button--primary:hover {
+    background: #c99f37;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .home-store-proof__button--secondary {
+    border-color: var(--color-border, #e5e5e5);
+    background: white;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .home-store-proof__button--secondary:hover {
+    border-color: var(--color-primary, #d4af37);
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .home-store-proof__button:focus-visible {
+    outline: 2px solid var(--color-primary, #d4af37);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 920px) {
+    .home-store-proof__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .home-store-proof__media {
+      min-height: 520px;
+      order: 2;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .home-store-proof__layout[style] {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+
+    .home-store-proof__media {
+      min-height: 360px;
+    }
+
+    .home-store-proof__image--large {
+      inset: 0 16% 0 0;
+      border-radius: 999px 999px 30px 30px;
+    }
+
+    .home-store-proof__image--small {
+      width: 42%;
+      border-width: 5px;
+      border-radius: 22px;
+    }
+
+    .home-store-proof__heading {
+      font-size: clamp(2.25rem, 10vw, 3.35rem);
+    }
+
+    .home-store-proof__proof {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .home-store-proof__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Dark mode colors */
+  @media (prefers-color-scheme: dark) {
+    .home-store-proof__heading {
+      color: #ffffff;
+    }
+
+    .home-store-proof__copy {
+      color: #d4d4d4;
+    }
+
+    .home-store-proof__proof strong {
+      color: #ffffff;
+    }
+
+    .home-store-proof__proof span {
+      color: #d4d4d4;
+    }
+
+    .home-store-proof__button--secondary {
+      background: #1a1a1a;
+      color: #ffffff;
+      border-color: #333;
+    }
+
+    .home-store-proof__button--secondary:hover {
+      background: #242424;
+      border-color: var(--color-primary, #d4af37);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Home Store Proof",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    { "type": "image_picker", "id": "image_1", "label": "Large image" },
+    { "type": "image_picker", "id": "image_2", "label": "Small image 1" },
+    { "type": "image_picker", "id": "image_3", "label": "Small image 2" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real store confidence" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Lab-tested gemstones with a real Delhi store behind them." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>Shop online with the reassurance of product support, documentation, and a physical Chanakyapuri store shoppers can trust.</p>" },
+    { "type": "text", "id": "proof_1_title", "label": "Proof 1 title", "default": "GJEPC lab-tested" },
+    { "type": "textarea", "id": "proof_1_text", "label": "Proof 1 text", "default": "Authenticity support for gemstone shoppers who want clearer buying confidence." },
+    { "type": "text", "id": "proof_2_title", "label": "Proof 2 title", "default": "100K customers" },
+    { "type": "textarea", "id": "proof_2_text", "label": "Proof 2 text", "default": "Online and offline customers across gifting, jewellery, crystals, and gemstone buying." },
+    { "type": "text", "id": "proof_3_title", "label": "Proof 3 title", "default": "Chanakyapuri store" },
+    { "type": "textarea", "id": "proof_3_text", "label": "Proof 3 text", "default": "Offline buying support in Delhi for shoppers who prefer guidance before purchase." },
+    { "type": "text", "id": "primary_label", "label": "Primary label", "default": "Shop gemstones" },
+    { "type": "url", "id": "primary_link", "label": "Primary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary label", "default": "Chat before buying" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 56 },
+    { "type": "range", "id": "padding_horizontal", "min": 0, "max": 72, "step": 4, "unit": "px", "label": "Side padding", "default": 36 }
+  ],
+  "presets": [
+    {
+      "name": "Home Store Proof"
+    }
+  ]
+}
+{% endschema %}

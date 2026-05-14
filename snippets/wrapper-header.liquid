@@ -1,4 +1,9 @@
 {% section 'announcement-bar' %}
+
+<div class="dark-mode-toggle-wrapper" aria-hidden="false">
+  {% render 'dark-mode-toggle' %}
+</div>
+
 {%- case settings.header_layout -%}
 	{%- when '01' -%}
 		{% section 'header' %}

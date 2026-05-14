@@ -1,0 +1,201 @@
+{%- liquid
+  assign feature_image = section.settings.image_1
+  assign accent_image = section.settings.image_2
+  assign stone_image = section.settings.image_3
+  assign extra_image = blank
+  assign drop_collection = section.settings.collection
+  if drop_collection.products == blank and section.settings.collection != blank
+    assign drop_collection = collections[section.settings.collection]
+  endif
+  assign feature_product = blank
+  assign accent_product = blank
+  assign stone_product = blank
+  assign extra_product = blank
+  assign feature_image_local = ''
+  assign accent_image_local = ''
+  assign stone_image_local = ''
+  assign feature_fallback_link = '/collections/gemstones'
+  assign accent_fallback_link = '/collections/pearl'
+  assign stone_fallback_link = '/collections/emerald'
+  assign extra_fallback_link = '/collections/yellow-sapphire'
+
+  if drop_collection != blank
+    assign feature_product = drop_collection.products[0]
+    assign accent_product = drop_collection.products[1]
+    assign stone_product = drop_collection.products[2]
+    assign extra_product = drop_collection.products[3]
+    if drop_collection.products.size > 0
+      if feature_image == blank
+        assign feature_image = feature_product.featured_image
+      endif
+    endif
+    if drop_collection.products.size > 1
+      if accent_image == blank
+        assign accent_image = accent_product.featured_image
+      endif
+    endif
+    if drop_collection.products.size > 2
+      if stone_image == blank
+        assign stone_image = stone_product.featured_image
+      endif
+    endif
+    if drop_collection.products.size > 3
+      assign extra_image = extra_product.featured_image
+    endif
+  endif
+
+  if feature_image == blank
+    assign feature_image_local = 'gpi-stone-ruby.webp' | asset_url
+  endif
+  if accent_image == blank
+    assign accent_image_local = 'gpi-stone-pearl.webp' | asset_url
+  endif
+  if stone_image == blank
+    assign stone_image_local = 'gpi-stone-emerald.webp' | asset_url
+  endif
+-%}
+
+<section class="home-signature-drop section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-signature-drop__layout" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-signature-drop__media gpi-signature-drop__grid" aria-label="Gift Palace India limited gemstone picks">
+        {% if feature_image != blank or feature_image_local != blank %}
+          <a class="home-signature-drop__frame home-signature-drop__frame--main gpi-signature-drop__card" {% if feature_product != blank %}href="{{ feature_product.url }}"{% elsif section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}href="{{ feature_fallback_link }}"{% endif %}>
+            <span class="gpi-signature-drop__badge">GJEPC ✓</span>
+            {% if feature_image != blank %}
+              <img src="{{ feature_image | image_url: width: 1100 }}" alt="{{ feature_image.alt | default: section.settings.heading | escape }}" loading="lazy" width="1100" height="1320">
+            {% else %}
+              <img src="{{ feature_image_local }}" alt="Certified ruby gemstone edit" loading="lazy" width="1100" height="1320">
+            {% endif %}
+            <span class="gpi-signature-drop__caption">
+              <strong>{{ feature_product.title | default: section.settings.heading }}</strong>
+              <span>{% if feature_product != blank %}{{ feature_product.price | money }}{% else %}{{ section.settings.proof_1 }}{% endif %}</span>
+            </span>
+          </a>
+        {% endif %}
+
+        {% if accent_image != blank or accent_image_local != blank %}
+          <a class="home-signature-drop__frame home-signature-drop__frame--small gpi-signature-drop__card" {% if accent_product != blank %}href="{{ accent_product.url }}"{% elsif section.settings.secondary_link != blank %}href="{{ section.settings.secondary_link }}"{% else %}href="{{ accent_fallback_link }}"{% endif %}>
+            <span class="gpi-signature-drop__badge">GJEPC ✓</span>
+            {% if accent_image != blank %}
+              <img src="{{ accent_image | image_url: width: 900 }}" alt="{{ accent_image.alt | default: section.settings.proof_1 | escape }}" loading="lazy" width="900" height="680">
+            {% else %}
+              <img src="{{ accent_image_local }}" alt="Certified pearl gemstone edit" loading="lazy" width="900" height="680">
+            {% endif %}
+            <span class="gpi-signature-drop__caption">
+              <strong>{{ accent_product.title | default: section.settings.proof_1 }}</strong>
+              <span>{% if accent_product != blank %}{{ accent_product.price | money }}{% else %}{{ section.settings.proof_2 }}{% endif %}</span>
+            </span>
+          </a>
+        {% endif %}
+
+        {% if stone_image != blank or stone_image_local != blank %}
+          <a class="home-signature-drop__frame home-signature-drop__frame--small home-signature-drop__frame--soft gpi-signature-drop__card" {% if stone_product != blank %}href="{{ stone_product.url }}"{% elsif section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}href="{{ stone_fallback_link }}"{% endif %}>
+            <span class="gpi-signature-drop__badge">GJEPC ✓</span>
+            {% if stone_image != blank %}
+              <img src="{{ stone_image | image_url: width: 700 }}" alt="{{ stone_image.alt | default: section.settings.proof_2 | escape }}" loading="lazy" width="700" height="900">
+            {% else %}
+              <img src="{{ stone_image_local }}" alt="Certified emerald gemstone edit" loading="lazy" width="700" height="900">
+            {% endif %}
+            <span class="gpi-signature-drop__caption">
+              <strong>{{ stone_product.title | default: section.settings.proof_2 }}</strong>
+              <span>{% if stone_product != blank %}{{ stone_product.price | money }}{% else %}{{ section.settings.proof_3 }}{% endif %}</span>
+            </span>
+          </a>
+        {% endif %}
+
+        <a class="home-signature-drop__frame home-signature-drop__frame--small gpi-signature-drop__card" {% if extra_product != blank %}href="{{ extra_product.url }}"{% elsif section.settings.secondary_link != blank %}href="{{ section.settings.secondary_link }}"{% else %}href="{{ extra_fallback_link }}"{% endif %}>
+          <span class="gpi-signature-drop__badge">GJEPC ✓</span>
+          {% if extra_image != blank %}
+            <img src="{{ extra_image | image_url: width: 700 }}" alt="{{ extra_image.alt | default: section.settings.proof_3 | escape }}" loading="lazy" width="700" height="900">
+          {% else %}
+            <img src="{{ 'gpi-stone-emerald.webp' | asset_url }}" alt="{{ section.settings.proof_3 | escape }}" loading="lazy" width="700" height="900">
+          {% endif %}
+          <span class="gpi-signature-drop__caption">
+            <strong>{{ extra_product.title | default: 'Astrology-ready gemstone edit' }}</strong>
+            <span>{% if extra_product != blank %}{{ extra_product.price | money }}{% else %}{{ section.settings.proof_3 }}{% endif %}</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="home-signature-drop__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gpi-eyebrow home-signature-drop__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="gpi-heading-lg home-signature-drop__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.copy != blank %}
+          <div class="gpi-body-base home-signature-drop__copy rte">{{ section.settings.copy }}</div>
+        {% endif %}
+
+        <div class="home-signature-drop__proof" aria-label="Why these picks are worth viewing now">
+          {% if section.settings.proof_1 != blank %}
+            <span>{{ section.settings.proof_1 }}</span>
+          {% endif %}
+          {% if section.settings.proof_2 != blank %}
+            <span>{{ section.settings.proof_2 }}</span>
+          {% endif %}
+          {% if section.settings.proof_3 != blank %}
+            <span>{{ section.settings.proof_3 }}</span>
+          {% endif %}
+        </div>
+
+        <div class="home-signature-drop__actions">
+          {% if section.settings.primary_label != blank %}
+            <a class="gpi-button home-signature-drop__button" {% if section.settings.primary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.primary_link }}"{% endif %}>{{ section.settings.primary_label }}</a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            <a class="gpi-button gpi-button--secondary home-signature-drop__button" {% if section.settings.secondary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.secondary_link }}"{% endif %}>{{ section.settings.secondary_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Signature Drop",
+  "tag": "section",
+  "class": "section-home-signature-drop",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    { "type": "collection", "id": "collection", "label": "Fallback collection" },
+    { "type": "image_picker", "id": "image_1", "label": "Feature image" },
+    { "type": "image_picker", "id": "image_2", "label": "Support image 1" },
+    { "type": "image_picker", "id": "image_3", "label": "Support image 2" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Limited gemstone edit" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Fresh picks chosen for gifts, intention, and everyday wear." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>A tighter edit of customer-loved gemstone pieces, selected for easy gifting, visible quality, and fast decisions when the best pieces are moving.</p>" },
+    { "type": "text", "id": "proof_1", "label": "Proof 1", "default": "Gift-ready pieces" },
+    { "type": "text", "id": "proof_2", "label": "Proof 2", "default": "Certified gemstone confidence" },
+    { "type": "text", "id": "proof_3", "label": "Proof 3", "default": "Updated from customer demand" },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA label", "default": "Shop the edit" },
+    { "type": "url", "id": "primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Ask for help" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary CTA link" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 56 },
+    { "type": "range", "id": "padding_horizontal", "min": 16, "max": 72, "step": 4, "unit": "px", "label": "Side padding", "default": 36 }
+  ],
+  "presets": [
+    {
+      "name": "GPI Signature Drop"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,141 @@
+{%- comment -%} Section: home-trust-pillars — Trust Pillars row (GJEPC, Certified, Shipping, Support) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-home-trust-pillars.css' | asset_url }}">
+
+<section class="home-trust-pillars" aria-labelledby="home-trust-pillars-heading">
+  {% if section.settings.title != blank or section.settings.subheading != blank %}
+    <div class="home-trust-pillars__header">
+      {% if section.settings.title != blank %}
+        <h2 id="home-trust-pillars-heading" class="home-trust-pillars__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="home-trust-pillars__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="home-trust-pillars__grid">
+      {% for block in section.blocks %}
+        <article class="home-trust-pillars__item" {{ block.shopify_attributes }}>
+          <div class="home-trust-pillars__icon" aria-hidden="true">
+            {% if block.settings.svg_code != blank %}
+              {{ block.settings.svg_code }}
+            {% elsif block.settings.icon_name == 'shield' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            {% elsif block.settings.icon_name == 'certified' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            {% elsif block.settings.icon_name == 'shipping' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            {% elsif block.settings.icon_name == 'support' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            {% endif %}
+          </div>
+          {% if block.settings.title != blank %}
+            <h3 class="home-trust-pillars__item-title">{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.text != blank %}
+            <p class="home-trust-pillars__item-text">{{ block.settings.text }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Trust Pillars",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Why Choose Gift Palace India?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Trusted by thousands for authentic gemstones and exceptional service."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_name",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield (GJEPC)" },
+            { "value": "certified", "label": "Certified" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "support", "label": "Support" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "Custom SVG Code",
+          "info": "Overrides the icon selection above."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pillar Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Add some descriptive text here for your trust pillar."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Pillars",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "shield",
+            "title": "GJEPC Member",
+            "text": "Proud member of the Gem & Jewellery Export Promotion Council."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "certified",
+            "title": "100% Certified",
+            "text": "Every gemstone is lab-certified for authenticity and quality."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "shipping",
+            "title": "Insured Shipping",
+            "text": "Secure, fully-insured worldwide shipping for your peace of mind."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon_name": "support",
+            "title": "Lifetime Support",
+            "text": "Dedicated expert assistance for the lifetime of your purchase."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

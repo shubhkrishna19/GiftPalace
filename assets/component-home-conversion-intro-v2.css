@@ -1,0 +1,85 @@
+/* Component: Home Conversion Intro V2 - Dark Mode & Responsive Styles */
+
+/* Responsive: Mobile first */
+.home-conversion-intro-v2 {
+  padding: clamp(20px, 5vw, 36px);
+}
+
+.home-conversion-intro-v2__heading {
+  font-size: var(--text-hero-mobile, clamp(1.75rem, 5vw, 2.5rem));
+  line-height: 1.2;
+}
+
+.home-conversion-intro-v2__description {
+  font-size: var(--text-base-mobile, clamp(0.875rem, 2vw, 1rem));
+  line-height: 1.6;
+}
+
+/* Responsive: Tablet (768px+) */
+@media (min-width: 768px) {
+  .home-conversion-intro-v2 {
+    padding: clamp(24px, 4vw, 44px);
+  }
+
+  .home-conversion-intro-v2__heading {
+    font-size: var(--text-hero-tablet, clamp(2.5rem, 6vw, 3.5rem));
+  }
+}
+
+/* Responsive: Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .home-conversion-intro-v2 {
+    padding: clamp(32px, 4.5vw, 64px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: center;
+  }
+
+  .home-conversion-intro-v2__image {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+
+  .home-conversion-intro-v2__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .home-conversion-intro-v2__heading {
+    font-size: var(--text-hero, clamp(3rem, 8vw, 4.5rem));
+  }
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  .home-conversion-intro-v2 {
+    background-color: var(--gpi-color-bg-primary);
+  }
+
+  .home-conversion-intro-v2__heading {
+    color: var(--gpi-color-text);
+  }
+
+  .home-conversion-intro-v2__description {
+    color: var(--gpi-color-text-secondary);
+  }
+
+  .home-conversion-intro-v2__subheading {
+    color: var(--gpi-color-text-secondary);
+  }
+
+  .home-conversion-intro-v2__cta {
+    color: var(--gpi-color-bg-primary);
+    background-color: var(--gpi-color-accent);
+  }
+
+  .home-conversion-intro-v2__link {
+    color: var(--gpi-color-accent);
+  }
+
+  .home-conversion-intro-v2__copy {
+    color: var(--gpi-color-text-secondary);
+  }
+}

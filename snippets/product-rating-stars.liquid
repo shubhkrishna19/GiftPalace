@@ -1,0 +1,53 @@
+{%- comment -%}
+  Snippet: product-rating-stars
+  Parameters:
+    - rating: Number (0-5)
+    - count: Number (optional)
+  Usage:
+    {% render 'product-rating-stars', rating: 4.5, count: 120 %}
+{%- endcomment -%}
+
+<div class="gpi-product-rating">
+  <div class="gpi-product-rating__stars" aria-label="{{ rating }} out of 5 stars">
+    {% for i in (1..5) %}
+      {%- liquid
+        assign fill_percent = 0
+        if rating >= i
+          assign fill_percent = 100
+        elsif rating > i | minus: 1
+          assign fill_percent = rating | minus: i | minus: 1 | times: 100
+        endif
+      -%}
+      <svg class="gpi-star" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1L13.09 6.26L19 7.27L14.5 11.65L15.56 17.54L10 14.77L4.44 17.54L5.5 11.65L1 7.27L6.91 6.26L10 1Z" 
+          stroke="var(--gpi-color-accent)" 
+          stroke-width="1"
+          fill="{% if rating >= i %}var(--gpi-color-accent){% else %}var(--gpi-color-border-light){% endif %}" />
+      </svg>
+    {% endfor %}
+  </div>
+  {% if count != blank %}
+    <span class="gpi-product-rating__count">({{ count }} reviews)</span>
+  {% endif %}
+</div>
+
+<style>
+  .gpi-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gpi-product-rating__stars {
+    display: flex;
+    gap: 2px;
+  }
+  .gpi-star {
+    width: 16px;
+    height: 16px;
+  }
+  .gpi-product-rating__count {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    color: var(--gpi-color-text-secondary);
+  }
+</style>

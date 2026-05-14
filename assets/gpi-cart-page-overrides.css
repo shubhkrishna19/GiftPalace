@@ -1,0 +1,202 @@
+/* GPI Cart Page Overrides
+ * Aligns the full /cart page with the Gift Palace India design system
+ * Layered over component-cart.css + component-cart-summary.css — no core files edited
+ */
+
+/* ─── Cart header row ────────────────────────────────────────────────────────── */
+.cart-header {
+  background-color: var(--gpi-surface-ivory) !important;
+  border-bottom: 1px solid var(--gpi-border-soft);
+}
+
+.cart-header-item {
+  font-family: var(--gpi-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Cart item row ──────────────────────────────────────────────────────────── */
+.cart-item {
+  border-color: var(--gpi-border-soft) !important;
+}
+
+.cart-item-name,
+.cart-item-name a {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  color: var(--gpi-ink-strong);
+}
+
+.cart-item-name a:hover {
+  color: var(--gpi-gold);
+}
+
+.cart-item-variant,
+.cart-item-vendor {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Cart item price / value ────────────────────────────────────────────────── */
+.cart-item__price-wrapper .price,
+.cart-item-value {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  color: var(--gpi-ink-strong);
+}
+
+.cart-item__price-wrapper .price.cart-item__old-price {
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Quantity +/- bars ──────────────────────────────────────────────────────── */
+.cart-item-qty .btn-quantity:before,
+.cart-item-qty .btn-quantity.plus:after {
+  background: var(--gpi-ink) !important;
+}
+
+/* ─── Remove icon ────────────────────────────────────────────────────────────── */
+.cart-remove .icon,
+.cart-remove svg {
+  fill: var(--gpi-text-muted);
+}
+
+.cart-remove:hover .icon,
+.cart-remove:hover svg {
+  fill: var(--gpi-gold);
+}
+
+/* ─── Cart totals heading ────────────────────────────────────────────────────── */
+.cart--totals-title {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+  text-transform: none;
+}
+
+.cart--totals-title::after {
+  background-color: var(--gpi-border-warm) !important;
+  height: 1px !important;
+}
+
+/* ─── Subtotal / grand-total dividers ─────────────────────────────────────────── */
+.cart-total-subtotal::after,
+.cart-total-grandtotal,
+.cart-total-grandtotal::after,
+.cart-total-savings,
+#shipping-calculator::after {
+  background-color: var(--gpi-border-soft) !important;
+  border-color: var(--gpi-border-soft) !important;
+}
+
+.cart-total-grandtotal {
+  border-top-color: var(--gpi-border-soft) !important;
+}
+
+.cart-total-savings {
+  border-top-color: var(--gpi-border-soft) !important;
+}
+
+/* ─── Label / value text ─────────────────────────────────────────────────────── */
+.cart-total-label,
+.cart-total-value {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink-strong);
+}
+
+.cart-total-grandtotal .cart-total-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.6875rem;
+}
+
+.cart-total-grandtotal .cart-total-value {
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  color: var(--gpi-gold);
+}
+
+/* ─── Checkout / submit button ───────────────────────────────────────────────── */
+.cart-actions .button--primary,
+.cart-actions button[type="submit"],
+.cart-actions .btn-checkout {
+  background-color: var(--gpi-gold) !important;
+  border-color: var(--gpi-gold) !important;
+  color: var(--gpi-surface-canvas) !important;
+  font-family: var(--gpi-body) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--gpi-radius-pill) !important;
+  transition: background-color var(--gpi-transition), border-color var(--gpi-transition);
+}
+
+.cart-actions .button--primary:hover,
+.cart-actions button[type="submit"]:hover,
+.cart-actions .btn-checkout:hover {
+  background-color: var(--gpi-color-accent-gold-strong) !important;
+  border-color: var(--gpi-color-accent-gold-strong) !important;
+}
+
+/* ─── Continue shopping / secondary button ───────────────────────────────────── */
+.cart-actions .button:not(.button--primary):not([type="submit"]) {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  color: var(--gpi-text-muted);
+  border-color: var(--gpi-border-warm);
+  border-radius: var(--gpi-radius-pill);
+}
+
+.cart-actions .button:not(.button--primary):not([type="submit"]):hover {
+  color: var(--gpi-gold);
+  border-color: var(--gpi-gold);
+}
+
+/* ─── Shipping calculator inputs ──────────────────────────────────────────────── */
+#address_province,
+#address_zip {
+  border-color: var(--gpi-border-warm) !important;
+  color: var(--gpi-ink) !important;
+  font-family: var(--gpi-body);
+}
+
+#wrapper-response {
+  color: var(--gpi-gold) !important;
+  background-color: var(--gpi-surface-ivory) !important;
+  border-radius: var(--gpi-radius-sm);
+}
+
+/* ─── Cart note textarea ─────────────────────────────────────────────────────── */
+.cart-note .form-label {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Security images label ──────────────────────────────────────────────────── */
+.cart-securityImage-label {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Empty cart text ────────────────────────────────────────────────────────── */
+.cart-content-empty .cart-text {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Breadcrumb ─────────────────────────────────────────────────────────────── */
+.cart-container .breadcrumb {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cart-actions .button--primary,
+  .cart-actions button[type="submit"] {
+    transition: none;
+  }
+}

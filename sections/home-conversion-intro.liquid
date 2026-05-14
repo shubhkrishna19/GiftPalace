@@ -1,73 +1,123 @@
-<link rel="stylesheet" href="{{ 'component-home-conversion-intro.css' | asset_url }}">
-
-<section class="home-conversion-intro" aria-labelledby="home-conversion-intro-heading">
-  <div class="home-conversion-intro__header">
-    {% if section.settings.eyebrow %}
-      <p class="home-conversion-intro__eyebrow">{{ section.settings.eyebrow }}</p>
-    {% endif %}
-    {% if section.settings.title %}
-      <h2 id="home-conversion-intro-heading" class="home-conversion-intro__title">{{ section.settings.title }}</h2>
-    {% endif %}
-    {% if section.settings.copy %}
-      <div class="home-conversion-intro__copy">{{ section.settings.copy }}</div>
-    {% endif %}
-  </div>
-
-  <div class="home-conversion-intro__trust-section">
-    {% for block in section.blocks %}
-      {% if block.type == 'trust_bullet' %}
-        <div class="home-conversion-intro__trust-bullet" {{ block.shopify_attributes }}>
-          <h3 class="home-conversion-intro__trust-bullet-title">{{ block.settings.title }}</h3>
-          <p class="home-conversion-intro__trust-bullet-text">{{ block.settings.text }}</p>
+<section class="home-conversion-intro" aria-labelledby="home-conversion-intro-heading" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-conversion-intro__shell" style="padding-left: {{ section.settings.padding_horizontal }}px; padding-right: {{ section.settings.padding_horizontal }}px;">
+      <div class="home-conversion-intro__main">
+        <div class="home-conversion-intro__header">
+          {% if section.settings.eyebrow %}
+            <p class="home-conversion-intro__eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+          {% if section.settings.title %}
+            <h2 id="home-conversion-intro-heading" class="home-conversion-intro__title">{{ section.settings.title }}</h2>
+          {% endif %}
+          {% if section.settings.copy %}
+            <div class="home-conversion-intro__copy">{{ section.settings.copy }}</div>
+          {% endif %}
         </div>
-      {% endif %}
-    {% endfor %}
-  </div>
 
-  <div class="home-conversion-intro__proof-panel">
-    {% if section.settings.panel_kicker %}
-      <p class="home-conversion-intro__panel-kicker">{{ section.settings.panel_kicker }}</p>
-    {% endif %}
-    {% if section.settings.panel_title %}
-      <h3 class="home-conversion-intro__panel-title">{{ section.settings.panel_title }}</h3>
-    {% endif %}
-    {% if section.settings.panel_copy %}
-      <div class="home-conversion-intro__panel-copy">{{ section.settings.panel_copy }}</div>
-    {% endif %}
+        <div class="home-conversion-intro__trust-section">
+          {% for block in section.blocks %}
+            {% if block.type == 'trust_bullet' %}
+              <div class="home-conversion-intro__trust-bullet" {{ block.shopify_attributes }}>
+                <h3 class="home-conversion-intro__trust-bullet-title">{{ block.settings.title }}</h3>
+                <p class="home-conversion-intro__trust-bullet-text">{{ block.settings.text }}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
 
-    <div class="home-conversion-intro__proof-items">
-      {% for block in section.blocks %}
-        {% if block.type == 'proof_item' %}
-          <div class="home-conversion-intro__proof-item" {{ block.shopify_attributes }}>
-            <p class="home-conversion-intro__proof-item-label">{{ block.settings.label }}</p>
-            <p class="home-conversion-intro__proof-item-text">{{ block.settings.text }}</p>
-          </div>
+        <div class="home-conversion-intro__cta">
+          {% if section.settings.primary_label and section.settings.primary_link %}
+            <a href="{{ section.settings.primary_link }}" class="home-conversion-intro__cta-primary button">
+              {{ section.settings.primary_label }}
+            </a>
+          {% endif %}
+          {% if section.settings.secondary_label and section.settings.secondary_link %}
+            <a href="{{ section.settings.secondary_link }}" class="home-conversion-intro__cta-secondary button button--secondary">
+              {{ section.settings.secondary_label }}
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="home-conversion-intro__visual" aria-label="Gemstone buying paths">
+          <figure class="home-conversion-intro__visual-card home-conversion-intro__visual-card--large">
+            <img
+              src="{{ 'gpi-hero-crystal.webp' | asset_img_url: '640x' }}"
+              srcset="{{ 'gpi-hero-crystal.webp' | asset_img_url: '480x' }} 480w, {{ 'gpi-hero-crystal.webp' | asset_img_url: '640x' }} 640w, {{ 'gpi-hero-crystal.webp' | asset_img_url: '900x' }} 900w"
+              sizes="(max-width: 768px) 82vw, 420px"
+              alt="Blue crystal gemstone for intention-led shopping"
+              width="640"
+              height="760"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+          <figure class="home-conversion-intro__visual-card home-conversion-intro__visual-card--small home-conversion-intro__visual-card--ruby">
+            <img
+              src="{{ 'gpi-stone-ruby.webp' | asset_img_url: '360x' }}"
+              srcset="{{ 'gpi-stone-ruby.webp' | asset_img_url: '240x' }} 240w, {{ 'gpi-stone-ruby.webp' | asset_img_url: '360x' }} 360w, {{ 'gpi-stone-ruby.webp' | asset_img_url: '540x' }} 540w"
+              sizes="(max-width: 768px) 42vw, 240px"
+              alt="Ruby gemstone gift selection"
+              width="360"
+              height="420"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+          <figure class="home-conversion-intro__visual-card home-conversion-intro__visual-card--pearl">
+            <img
+              src="{{ 'gpi-stone-pearl.webp' | asset_img_url: '360x' }}"
+              srcset="{{ 'gpi-stone-pearl.webp' | asset_img_url: '240x' }} 240w, {{ 'gpi-stone-pearl.webp' | asset_img_url: '360x' }} 360w, {{ 'gpi-stone-pearl.webp' | asset_img_url: '540x' }} 540w"
+              sizes="(max-width: 768px) 42vw, 240px"
+              alt="Pearl gemstone jewellery selection"
+              width="360"
+              height="420"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+        </div>
+      </div>
+
+      <div class="home-conversion-intro__proof-panel">
+        {% if section.settings.panel_kicker != blank %}
+          <p class="home-conversion-intro__panel-kicker">{{ section.settings.panel_kicker }}</p>
         {% endif %}
-      {% endfor %}
+        {% if section.settings.panel_title != blank %}
+          <h3 class="home-conversion-intro__panel-title">{{ section.settings.panel_title }}</h3>
+        {% endif %}
+        {% if section.settings.panel_copy != blank %}
+          <div class="home-conversion-intro__panel-copy">{{ section.settings.panel_copy }}</div>
+        {% endif %}
+
+        <div class="home-conversion-intro__proof-items">
+          {% for block in section.blocks %}
+            {% if block.type == 'proof_item' %}
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}" class="home-conversion-intro__proof-item" {{ block.shopify_attributes }}>
+                  <span class="home-conversion-intro__proof-item-label">{{ block.settings.label }}</span>
+                  <span class="home-conversion-intro__proof-item-text">{{ block.settings.text }}</span>
+                </a>
+              {% else %}
+                <div class="home-conversion-intro__proof-item" {{ block.shopify_attributes }}>
+                  <span class="home-conversion-intro__proof-item-label">{{ block.settings.label }}</span>
+                  <span class="home-conversion-intro__proof-item-text">{{ block.settings.text }}</span>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="home-conversion-intro__shortcuts" aria-label="Popular shopping paths">
+        {% for block in section.blocks %}
+          {% if block.type == 'shortcut' and block.settings.label != blank %}
+            <a href="{{ block.settings.link }}" class="home-conversion-intro__shortcut" {{ block.shopify_attributes }}>
+              {{ block.settings.label }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
-
-  <div class="home-conversion-intro__shortcuts">
-    {% for block in section.blocks %}
-      {% if block.type == 'shortcut' %}
-        <a href="{{ block.settings.link }}" class="home-conversion-intro__shortcut" {{ block.shopify_attributes }}>
-          {{ block.settings.label }}
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
-
-  <div class="home-conversion-intro__cta">
-    {% if section.settings.primary_label and section.settings.primary_link %}
-      <a href="{{ section.settings.primary_link }}" class="home-conversion-intro__cta-primary button">
-        {{ section.settings.primary_label }}
-      </a>
-    {% endif %}
-    {% if section.settings.secondary_label and section.settings.secondary_link %}
-      <a href="{{ section.settings.secondary_link }}" class="home-conversion-intro__cta-secondary button button--secondary">
-        {{ section.settings.secondary_label }}
-      </a>
-    {% endif %}
   </div>
 </section>
 
@@ -158,8 +208,7 @@
     {
       "type": "text",
       "id": "container",
-      "label": "Container Width",
-      "default": "1770"
+      "label": "Container Width"
     }
   ],
   "blocks": [
@@ -192,6 +241,11 @@
           "type": "textarea",
           "id": "text",
           "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
         }
       ]
     },

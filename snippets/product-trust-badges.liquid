@@ -1,0 +1,87 @@
+{%- comment -%}
+  Snippet: product-trust-badges
+  Parameters:
+    - badge_1_icon: SVG string (optional)
+    - badge_1_label: String
+    - badge_2_icon: SVG string (optional)
+    - badge_2_label: String
+    - badge_3_icon: SVG string (optional)
+    - badge_3_label: String
+    - badge_4_icon: SVG string (optional)
+    - badge_4_label: String
+  Usage:
+    {% render 'product-trust-badges', 
+      badge_1_label: 'Certified Authentic',
+      badge_2_label: 'Easy Care Support',
+      ...
+    %}
+{%- endcomment -%}
+
+<div class="gpi-trust-badges">
+  {% for i in (1..4) %}
+    {% capture label_key %}badge_{{ i }}_label{% endcapture %}
+    {% capture icon_key %}badge_{{ i }}_icon{% endcapture %}
+    {% assign label = [label_key] %}
+    {% assign icon = [icon_key] %}
+    
+    {% if label != blank %}
+      <div class="gpi-trust-badge">
+        {% if icon != blank %}
+          <div class="gpi-trust-badge__icon">{{ icon }}</div>
+        {% endif %}
+        <span class="gpi-trust-badge__label">{{ label }}</span>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<style>
+  .gpi-trust-badges {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--gpi-color-border);
+    border-bottom: 1px solid var(--gpi-color-border);
+    margin: 24px 0;
+  }
+  .gpi-trust-badge {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    position: relative;
+  }
+  .gpi-trust-badge:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background: var(--gpi-color-accent);
+    opacity: 0.3;
+  }
+  .gpi-trust-badge__icon {
+    width: 24px;
+    height: 24px;
+    color: var(--gpi-color-accent);
+  }
+  .gpi-trust-badge__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .gpi-trust-badge__label {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gpi-color-text);
+  }
+</style>

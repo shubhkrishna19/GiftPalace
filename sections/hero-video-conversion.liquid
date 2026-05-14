@@ -1,0 +1,499 @@
+<div class="hero-video-conversion section-block-{{ section.id }}">
+  <div class="hero-video-wrapper">
+    <!-- Background Video/Image -->
+    <div class="hero-video-background">
+      {% if section.settings.video_url != blank %}
+        <video 
+          autoplay 
+          muted 
+          loop 
+          playsinline
+          class="hero-video"
+          poster="{{ section.settings.fallback_image | image_url: width: 1920 }}">
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+        </video>
+      {% elsif section.settings.fallback_image != blank %}
+        <img 
+          src="{{ section.settings.fallback_image | image_url: width: 1920 }}" 
+          alt="{{ section.settings.title }}"
+          class="hero-image"
+          width="1920"
+          height="600"
+        />
+      {% endif %}
+      
+      <!-- Overlay -->
+      <div class="hero-overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity }})"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content-wrapper">
+      <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+        <div class="hero-content hero-content-{{ section.settings.alignment }}" style="padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;">
+          {% if section.settings.kicker != blank %}
+            <p class="hero-kicker">{{ section.settings.kicker }}</p>
+          {% endif %}
+
+          {% if section.settings.title != blank %}
+            <h1 class="hero-title">{{ section.settings.title }}</h1>
+          {% endif %}
+
+          {% if section.settings.subtitle != blank %}
+            <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+          {% endif %}
+
+          <!-- CTA Section -->
+          {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
+            <div class="hero-cta-group">
+              {% if section.settings.primary_label != blank %}
+                <a href="{{ section.settings.primary_link }}" class="btn btn-primary btn-large">
+                  <span>{{ section.settings.primary_label }}</span>
+                  <span class="btn-arrow">→</span>
+                </a>
+              {% endif %}
+              {% if section.settings.secondary_label != blank %}
+                <a href="{{ section.settings.secondary_link }}" class="btn btn-secondary btn-large">
+                  {{ section.settings.secondary_label }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <!-- Trust Indicators -->
+          {% assign trust_blocks = section.blocks | where: 'type', 'trust_indicator' %}
+          {% if trust_blocks.size > 0 %}
+            <div class="hero-trust-indicators">
+              {% for block in trust_blocks %}
+                <div class="trust-badge" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon != blank %}
+                    <img src="{{ block.settings.icon }}" alt="" class="badge-icon" />
+                  {% endif %}
+                  <span class="badge-text">{{ block.settings.text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Play Button (if modal video) -->
+    {% if section.settings.enable_modal_video and section.settings.modal_video_url != blank %}
+      <button class="hero-play-btn" aria-label="Play video" data-video-url="{{ section.settings.modal_video_url }}">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .hero-video-conversion {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-video-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.min_height }}px;
+  }
+
+  .hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .hero-video,
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: white;
+    text-align: center;
+  }
+
+  .hero-content-left {
+    text-align: left;
+  }
+
+  .hero-content-right {
+    text-align: right;
+  }
+
+  .hero-kicker {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.95;
+    max-width: 600px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-content-left .hero-cta-group,
+  .hero-content-right .hero-cta-group {
+    justify-content: flex-start;
+  }
+
+  .hero-content-right .hero-cta-group {
+    justify-content: flex-end;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background: #d4af37;
+    color: #1a1a1a;
+  }
+
+  .btn-primary:hover {
+    background: #e8c950;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    color: #1a1a1a;
+  }
+
+  .btn-arrow {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .hero-trust-indicators {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-content-left .hero-trust-indicators,
+  .hero-content-right .hero-trust-indicators {
+    justify-content: flex-start;
+  }
+
+  .hero-content-right .hero-trust-indicators {
+    justify-content: flex-end;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .badge-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .badge-text {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hero-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-play-btn:hover {
+    background: #d4af37;
+    color: white;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .hero-play-btn svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      gap: 12px;
+    }
+
+    .hero-cta-group {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-content-left .hero-cta-group,
+    .hero-content-right .hero-cta-group {
+      justify-content: center;
+    }
+
+    .hero-trust-indicators {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-play-btn {
+      width: 60px;
+      height: 60px;
+    }
+
+    .hero-play-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Video Conversion",
+  "tag": "section",
+  "class": "section-hero-video-conversion",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Background Video URL (MP4)"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Image"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "fullwidth",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum Height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 0.8,
+      "step": 0.1,
+      "label": "Overlay Opacity",
+      "default": 0.3
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Content Alignment",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Premium Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Transform Your Gift-Giving"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover intentional, meaningful gifts that resonate with every occasion."
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary CTA Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary CTA Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary CTA Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_modal_video",
+      "label": "Enable Modal Video",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "modal_video_url",
+      "label": "Modal Video URL"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Vertical Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Horizontal Padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_indicator",
+      "name": "Trust Indicator",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Video Conversion"
+    }
+  ]
+}
+{% endschema %}

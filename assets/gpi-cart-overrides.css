@@ -1,0 +1,173 @@
+/* GPI Cart Overrides
+ * Aligns the quick-cart / cart sidebar with the Gift Palace India design system
+ * Layered over component-quick-cart.css — no core cart files edited
+ */
+
+/* ─── Cart sidebar shell ─────────────────────────────────────────────────────── */
+.halo-cart-sidebar {
+  background-color: var(--gpi-surface-canvas);
+}
+
+/* ─── Cart header / title ────────────────────────────────────────────────────── */
+.previewCartTitle,
+.halo-cart-sidebar .previewCartTitle {
+  font-family: var(--gpi-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Cart item product name ─────────────────────────────────────────────────── */
+.previewCartItem-name {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  color: var(--gpi-ink-strong);
+}
+
+.previewCartItem-name:hover {
+  color: var(--gpi-gold);
+}
+
+/* ─── Cart item vendor / variant / options ────────────────────────────────────── */
+.previewCartItem-vendor,
+.previewCartItem-variant,
+.product-option {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Cart item separator ────────────────────────────────────────────────────── */
+.previewCartItem {
+  border-bottom-color: var(--gpi-border-soft);
+  background-color: transparent;
+}
+
+/* ─── Cart prices ────────────────────────────────────────────────────────────── */
+.previewCartItem-price .price {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  color: var(--gpi-gold);
+}
+
+.previewCartTotals .previewCartTotals-label {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  color: var(--gpi-ink-strong);
+}
+
+.previewCartTotals .previewCartTotals-value {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+.previewCartTotals.total .previewCartTotals-value,
+.previewCartTotals.subTotal .previewCartTotals-value {
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Cart tool strip ────────────────────────────────────────────────────────── */
+.cartTool-item {
+  background-color: var(--gpi-surface-ivory);
+  border-color: var(--gpi-border-soft);
+}
+
+.cartTool-item:hover {
+  background-color: var(--gpi-surface-ivory-dark);
+}
+
+.cartTool-item svg {
+  color: var(--gpi-ink);
+}
+
+/* ─── Quantity +/- buttons ───────────────────────────────────────────────────── */
+.previewCartItem-qty .btn-quantity:before,
+.previewCartItem-qty .btn-quantity.plus:after {
+  background: var(--gpi-ink);
+}
+
+/* ─── Remove button ──────────────────────────────────────────────────────────── */
+.previewCartItem-remove svg {
+  fill: var(--gpi-text-muted);
+}
+
+.previewCartItem-remove:hover svg {
+  fill: var(--gpi-gold);
+}
+
+/* ─── Cart checkout / CTA button ─────────────────────────────────────────────── */
+.previewCartGroup .button--primary,
+.previewCartGroup .button[type="submit"],
+.halo-cart-sidebar .previewCartGroup .btn-checkout {
+  background-color: var(--gpi-gold);
+  border-color: var(--gpi-gold);
+  color: var(--gpi-surface-canvas);
+  font-family: var(--gpi-body);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color var(--gpi-transition), border-color var(--gpi-transition);
+}
+
+.previewCartGroup .button--primary:hover,
+.previewCartGroup .button[type="submit"]:hover,
+.halo-cart-sidebar .previewCartGroup .btn-checkout:hover {
+  background-color: var(--gpi-color-accent-gold-strong);
+  border-color: var(--gpi-color-accent-gold-strong);
+}
+
+/* ─── Continue shopping link ─────────────────────────────────────────────────── */
+.previewCart .button-continue {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  color: var(--gpi-text-muted);
+  text-decoration-color: var(--gpi-border-warm);
+}
+
+.previewCart .button-continue:hover {
+  color: var(--gpi-gold);
+  text-decoration-color: var(--gpi-gold);
+}
+
+/* ─── Cart popup tools (note, shipping, discount) ────────────────────────────── */
+.popup-toolDown {
+  background-color: var(--gpi-surface-canvas);
+  border-top-color: var(--gpi-border-soft);
+}
+
+.popup-toolDown label {
+  font-family: var(--gpi-body);
+  color: var(--gpi-ink-strong);
+}
+
+/* ─── Shipping calculator result ─────────────────────────────────────────────── */
+#shipping-calculator #wrapper-response {
+  color: var(--gpi-gold);
+  background-color: var(--gpi-surface-ivory);
+  border-radius: var(--gpi-radius-sm);
+}
+
+/* ─── Empty cart text ────────────────────────────────────────────────────────── */
+.previewCart-emptyBody .empty {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+}
+
+/* ─── Wrapper cart count ─────────────────────────────────────────────────────── */
+.wrapper-cartCount {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-soft);
+}
+
+/* ─── Cart item collection row title ─────────────────────────────────────────── */
+.previewCartCollection {
+  border-top-color: var(--gpi-border-soft);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .previewCartItem-remove,
+  .cartTool-item,
+  .previewCartGroup .button--primary {
+    transition: none;
+  }
+}

@@ -1,0 +1,95 @@
+{%- comment -%}
+  Snippet: product-variant-picker
+  Parameters:
+    - product: Product object
+    - block: Block object
+  Usage:
+    {% render 'product-variant-picker', product: product, block: block %}
+{%- endcomment -%}
+
+{%- unless product.has_only_default_variant -%}
+  <variant-radios class="gpi-variant-picker" data-section="{{ section.id }}" data-url="{{ product.url }}">
+    {%- for option in product.options_with_values -%}
+      <fieldset class="gpi-variant-picker__option">
+        <legend class="gpi-variant-picker__label">
+          {{ option.name }}: <span class="gpi-variant-picker__selected-value">{{ option.selected_value }}</span>
+        </legend>
+        <div class="gpi-variant-picker__values">
+          {%- for value in option.values -%}
+            <input type="radio" 
+                   id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
+                   name="{{ option.name }}"
+                   value="{{ value | escape }}"
+                   form="{{ product_form_id }}"
+                   {% if option.selected_value == value %}checked{% endif %}
+                   class="gpi-variant-picker__input sr-only">
+            <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}" class="gpi-variant-picker__value">
+              {{ value }}
+            </label>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </variant-radios>
+{%- endunless -%}
+
+<style>
+  .gpi-variant-picker {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .gpi-variant-picker__option {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .gpi-variant-picker__label {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    color: var(--gpi-color-text);
+  }
+  .gpi-variant-picker__selected-value {
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--gpi-color-text-secondary);
+  }
+  .gpi-variant-picker__values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .gpi-variant-picker__value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1px solid var(--gpi-color-border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    background: var(--gpi-color-bg-primary);
+    color: var(--gpi-color-text);
+  }
+  .gpi-variant-picker__input:checked + .gpi-variant-picker__value {
+    border-color: var(--gpi-color-accent);
+    background: var(--gpi-color-bg-secondary);
+    color: var(--gpi-color-accent);
+    font-weight: 600;
+  }
+  .gpi-variant-picker__value:hover {
+    border-color: var(--gpi-color-accent);
+  }
+</style>

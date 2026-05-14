@@ -2,7 +2,7 @@
 
 **Project:** Gift Palace India — MoonMagic-style homepage rebuild
 **Status:** PHASE 5 — PARALLEL EXPANSION 🟢
-**Last Updated:** 2026-05-08
+**Last Updated:** 2026-05-12
 
 ---
 
@@ -61,11 +61,11 @@ Multiple agents (Claude, Gemini CLI, others) work this file in parallel. To prev
 ## 🔴 LIVE CLAIM STATUS (always `git pull` + `git log -10` before claiming)
 
 ```
-🟢 OPEN — safe to claim:        T-08, T-09, T-10, T-11, T-12
+🟢 OPEN — safe to claim:        (none)
 🔵 IN PROGRESS — DO NOT TOUCH:  (none)
-✅ COMPLETE:                     T-01, T-02, T-03, T-04, T-05, T-06, T-07, O-01, O-02
+✅ COMPLETE:                     T-01, T-02, T-03, T-04, T-05, T-06, T-07, T-08, T-09, T-10, T-11, T-12, O-01, O-02
 🟡 RESERVED — orchestrator:     O-03 (smoke test, runs after T-08..T-12)
-👤 USER ONLY:                    U-01, U-02, U-03
+👤 USER ONLY:                    U-01, U-02, U-03, U-04
 ```
 
 **For the manual window / human collaborator:** pick from 🟢 OPEN list. Claim by editing this file (change Status → 🔵 IN PROGRESS, set Owner='Manual <name> <UTC>') and committing `chore: claim T-XX` BEFORE writing code. Do not pick a 🔵 task even if it looks idle — agents may be mid-work. If a 🔵 task hasn't moved in >30 min, mark it ⚠️ HANDOFF and grab it.
@@ -85,11 +85,11 @@ Multiple agents (Claude, Gemini CLI, others) work this file in parallel. To prev
 | T-05 | Build Newsletter signup section (email capture + value prop) | `sections/home-newsletter-signup.liquid`, `assets/component-home-newsletter-signup.css` | ✅ COMPLETE | Gemini-D 2026-05-08 | Use Shopify's `{% form 'customer' %}`. Honeypot + double-opt-in copy. |
 | T-06 | Add structured data snippet for homepage (Organization + Website + BreadcrumbList JSON-LD) | `snippets/home-structured-data.liquid` | ✅ COMPLETE | Gemini-E 2026-05-08 | New snippet only. Do NOT modify `theme.liquid`; orchestrator will include it. |
 | T-07 | Accessibility audit pass on existing 6 sections (alt text, aria-labels, focus rings, color contrast) | (surgical edits to 6 home-*.liquid + their CSS) | ✅ COMPLETE | Gemini-F 2026-05-08 | Don't restructure markup. Add `aria-*`, fix `alt=""` placeholders, ensure focus-visible. |
-| T-08 | Build "Why Buy From Us" section (3-column value props with checkmark icons) | `sections/home-why-us.liquid`, `assets/component-home-why-us.css` | 🟢 OPEN | — | Block-based, max 6 props. Each: heading + body + optional icon SVG. Suggested wire position: after:home_testimonials. |
-| T-09 | Build Lookbook Spotlight section (single hero image + overlay copy + dual CTA) | `sections/home-lookbook-spotlight.liquid`, `assets/component-home-lookbook-spotlight.css` | 🟢 OPEN | — | Image picker + overlay text. Use background-image with object-fit. Min-height 60vh desktop, 50vh mobile. Suggested wire position: after:home_meaning_guide. |
-| T-10 | Build Compact Brand Story section (text + small portrait, "Since 1989" angle) | `sections/home-brand-story.liquid`, `assets/component-home-brand-story.css` | 🟢 OPEN | — | Two-column: 60% copy / 40% portrait. Single quote pull-out. Background --gpi-color-surface-ivory. Suggested wire position: after:home_meaning_guide. |
-| T-11 | Build Featured Press / Press Mentions logo strip | `sections/home-press-strip.liquid`, `assets/component-home-press-strip.css` | 🟢 OPEN | — | Block-based logos (image + url). Grayscale by default, full color on hover. 5-8 logos in a row, wraps on mobile. Suggested position: before:home_concierge_cta. |
-| T-12 | Image optimization audit on all 6 existing home sections (preload hero, srcset, sizes attr) | (surgical edits to existing 6 home-*.liquid only) | 🟢 OPEN | — | Add proper srcset + sizes to <img>. Add `<link rel='preload'>` for hero image (must come from section settings — use Liquid). NO new files. NO restructuring. |
+| T-08 | Build "Why Buy From Us" section (3-column value props with checkmark icons) | `sections/home-why-us.liquid`, `assets/component-home-why-us.css` | ✅ COMPLETE | Codex 2026-05-12 | Built block-based section, max 6 props, token-aligned CSS, presets appended to `docs/SECTIONS_TO_WIRE.md`. Needs Shopify-admin copy/icon review after wiring. |
+| T-09 | Build Lookbook Spotlight section (single hero image + overlay copy + dual CTA) | `sections/home-lookbook-spotlight.liquid`, `assets/component-home-lookbook-spotlight.css` | ✅ COMPLETE | Codex 2026-05-12 | Built image-picker spotlight with overlay copy, dual CTA, responsive min-height. Queued after `home-brand-story`. Needs Shopify-admin image/link population and storefront preview review. |
+| T-10 | Build Compact Brand Story section (text + small portrait, "Since 1989" angle) | `sections/home-brand-story.liquid`, `assets/component-home-brand-story.css` | ✅ COMPLETE | Codex 2026-05-12 | Built 60/40 story section with portrait picker, pull quote, and "Selling since 1989" badge. Queued after `home_meaning_guide`. Needs Shopify-admin portrait/link population and preview review. |
+| T-11 | Build Featured Press / Press Mentions logo strip | `sections/home-press-strip.liquid`, `assets/component-home-press-strip.css` | ✅ COMPLETE | Codex 2026-05-12 | Built block-based logo strip, max 8 logos, grayscale-to-color hover, responsive wrap. Added to `docs/SECTIONS_TO_WIRE.md`. Needs Shopify-admin logo/link population after wiring. |
+| T-12 | Image optimization audit on all 6 existing home sections (preload hero, srcset, sizes attr) | (surgical edits to existing 6 home-*.liquid only) | ✅ COMPLETE | Codex 2026-05-12 | Added hero preload plus responsive `srcset`/`sizes`/`decoding` to hero, discover rail, featured browse, conversion intro, and meaning guide images. Concierge CTA has no images to optimize. |
 
 ### Tasks reserved for orchestrator (do not claim)
 | ID | Task | Notes |
@@ -104,6 +104,7 @@ Multiple agents (Claude, Gemini CLI, others) work this file in parallel. To prev
 | U-01 | Populate hero section in Shopify admin (image, headline, trust badges) | Theme settings only |
 | U-02 | Add Discover Rail tab blocks (1 per gemstone collection) | Theme settings only |
 | U-03 | Choose collection in Featured Browse Grid | Theme settings only |
+| U-04 | Populate new Phase 5 sections after orchestrator wiring | Add lookbook hero image/links, brand portrait/link, press logos/links, and final copy review for Why Us cards |
 
 ---
 
@@ -284,6 +285,16 @@ Created `snippets/home-structured-data.liquid`. Emits @graph with Organization, 
 
 ### Entry 12 — T-01: Theme Check validation + Final pass (Gemini-Validator, 2026-05-08)
 Verified all 10 `home_*` sections in `templates/index.json` match canonical order. All new sections have valid schemas and presets. CSS token hygiene confirmed (no forbidden redeclarations). Improved `urlTemplate` safety in `home-structured-data.liquid`. `shopify theme check` flagged pre-existing missing `gemstone-loader.png` asset in `theme.liquid` and other legacy files; new sections are clean. Commit: `fix(T-01): Theme check validation pass`.
+
+---
+
+### Entry 13 — T-08/T-09/T-10: Remaining homepage section trio (Codex, 2026-05-12)
+Built `sections/home-why-us.liquid`, `sections/home-lookbook-spotlight.liquid`, and `sections/home-brand-story.liquid` with matching CSS assets. All three use canonical `--gpi-*` tokens, complete Shopify schemas, and presets. Added the three sections to `docs/SECTIONS_TO_WIRE.md` instead of editing `templates/index.json`. Remaining work: orchestrator wiring, Shopify-admin media/link/content population, then storefront preview review across mobile and desktop.
+
+---
+
+### Entry 14 — T-11/T-12: Press strip and image optimization pass (Codex, 2026-05-12)
+Built `sections/home-press-strip.liquid` and `assets/component-home-press-strip.css`; queued the Press Mentions preset in `docs/SECTIONS_TO_WIRE.md`. Completed the scoped image optimization pass on the existing six MoonMagic homepage sections: hero now preloads the selected Shopify image, collection/product images have responsive `srcset`/`sizes`, static asset images use responsive asset image URLs, and Concierge CTA was left unchanged because it has no images.
 
 ---
 

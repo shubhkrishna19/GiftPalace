@@ -1,0 +1,241 @@
+{%- comment -%}
+  Snippet: product-reviews
+  Parameters:
+    - product: Product object
+  Usage:
+    {% render 'product-reviews', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value | default: 4.86
+  assign count = product.metafields.reviews.rating_count.value | default: 12
+-%}
+
+<div class="gpi-product-reviews" id="reviews">
+  <div class="gpi-product-reviews__header">
+    <div class="gpi-product-reviews__summary">
+      <div class="gpi-product-reviews__rating-large">
+        <span class="gpi-product-reviews__rating-value">{{ rating }}</span>
+        <div class="gpi-product-reviews__rating-stars">
+          {% render 'product-rating-stars', rating: rating %}
+        </div>
+        <span class="gpi-product-reviews__rating-count">Based on {{ count }} reviews</span>
+      </div>
+      
+      <div class="gpi-product-reviews__bars">
+        {% for i in (5..1) %}
+          {%- liquid
+            assign percent = 0
+            if i == 5
+              assign percent = 85
+            elsif i == 4
+              assign percent = 10
+            elsif i == 3
+              assign percent = 5
+            endif
+          -%}
+          <div class="gpi-review-bar">
+            <span class="gpi-review-bar__label">{{ i }}★</span>
+            <div class="gpi-review-bar__track">
+              <div class="gpi-review-bar__fill" style="width: {{ percent }}%;"></div>
+            </div>
+            <span class="gpi-review-bar__percent">{{ percent }}%</span>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <div class="gpi-product-reviews__action">
+        <button class="gpi-button gpi-button--outline-gold">Write a review</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="gpi-product-reviews__photos">
+    <h4 class="gpi-product-reviews__subheading">Customer Photos</h4>
+    <div class="gpi-product-reviews__photo-grid">
+      {% for i in (1..6) %}
+        <div class="gpi-review-photo-item">
+          <div class="gpi-review-photo-placeholder"></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="gpi-product-reviews__list">
+    {%- comment -%} Placeholder Review 1 {%- endcomment -%}
+    <div class="gpi-review-card">
+      <div class="gpi-review-card__header">
+        <div class="gpi-review-card__stars">
+          {% render 'product-rating-stars', rating: 5 %}
+        </div>
+        <span class="gpi-review-card__date">May 02, 2026</span>
+      </div>
+      <div class="gpi-review-card__user">
+        <span class="gpi-review-card__name">Aditi S.</span>
+        <span class="gpi-review-card__location">New Delhi, India</span>
+      </div>
+      <p class="gpi-review-card__text">Absolutely stunning bracelet. The amethyst quality is heirloom-level. I wear it every day and feel so balanced.</p>
+    </div>
+
+    {%- comment -%} Placeholder Review 2 {%- endcomment -%}
+    <div class="gpi-review-card">
+      <div class="gpi-review-card__header">
+        <div class="gpi-review-card__stars">
+          {% render 'product-rating-stars', rating: 5 %}
+        </div>
+        <span class="gpi-review-card__date|">April 24, 2026</span>
+      </div>
+      <div class="gpi-review-card__user">
+        <span class="gpi-review-card__name">Rohit M.</span>
+        <span class="gpi-review-card__location">Mumbai, India</span>
+      </div>
+      <p class="gpi-review-card__text">Gifted this to my wife for our anniversary. She loved the authentic GJEPC certification. The packaging was very premium too.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .gpi-product-reviews {
+    padding: 64px 0;
+    border-top: 1px solid var(--gpi-color-border);
+  }
+  .gpi-product-reviews__header {
+    margin-bottom: 48px;
+  }
+  .gpi-product-reviews__summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .gpi-product-reviews__rating-large {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .gpi-product-reviews__rating-value {
+    font-family: "Marcellus", Georgia, serif;
+    font-size: 3.5rem;
+    color: var(--gpi-color-text);
+    line-height: 1;
+  }
+  .gpi-product-reviews__rating-count {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    color: var(--gpi-color-text-secondary);
+  }
+  .gpi-product-reviews__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gpi-review-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .gpi-review-bar__label {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: 24px;
+  }
+  .gpi-review-bar__track {
+    flex: 1;
+    height: 8px;
+    background: var(--gpi-color-bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .gpi-review-bar__fill {
+    height: 100%;
+    background: var(--gpi-color-accent);
+  }
+  .gpi-review-bar__percent {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.75rem;
+    width: 32px;
+    text-align: right;
+  }
+  .gpi-product-reviews__action {
+    display: flex;
+    justify-content: center;
+  }
+  .gpi-product-reviews__subheading {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+  }
+  .gpi-product-reviews__photo-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+  .gpi-review-photo-item {
+    flex: 0 0 96px;
+  }
+  .gpi-review-photo-placeholder {
+    width: 96px;
+    height: 96px;
+    background: var(--gpi-color-bg-secondary);
+    border-radius: 4px;
+  }
+  .gpi-product-reviews__list {
+    margin-top: 48px;
+    display: grid;
+    gap: 32px;
+  }
+  .gpi-review-card {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--gpi-color-border);
+  }
+  .gpi-review-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .gpi-review-card__date {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--gpi-color-text-tertiary);
+  }
+  .gpi-review-card__user {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+  .gpi-review-card__name {
+    font-family: "Marcellus", Georgia, serif;
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--gpi-color-text);
+  }
+  .gpi-review-card__location {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gpi-color-text-tertiary);
+  }
+  .gpi-review-card__text {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--gpi-color-text-secondary);
+  }
+  
+  @media (max-width: 900px) {
+    .gpi-product-reviews__summary {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

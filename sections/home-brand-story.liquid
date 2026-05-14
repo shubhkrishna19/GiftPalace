@@ -1,0 +1,122 @@
+{%- comment -%} Section: home-brand-story - Compact Gift Palace origin story with portrait and pull quote {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-home-brand-story.css' | asset_url }}">
+
+<section class="home-brand-story" aria-labelledby="home-brand-story-heading">
+  <div class="home-brand-story__inner">
+    <div class="home-brand-story__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="home-brand-story__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h2 id="home-brand-story-heading" class="home-brand-story__title">{{ section.settings.title | escape }}</h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <div class="home-brand-story__body rte">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.quote != blank %}
+        <blockquote class="home-brand-story__quote">
+          <span aria-hidden="true">"</span>{{ section.settings.quote | escape }}<span aria-hidden="true">"</span>
+        </blockquote>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <a class="home-brand-story__link" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    <div class="home-brand-story__portrait-wrap">
+      {% if section.settings.portrait != blank %}
+        <img
+          src="{{ section.settings.portrait | image_url: width: 900 }}"
+          srcset="
+            {{ section.settings.portrait | image_url: width: 480 }} 480w,
+            {{ section.settings.portrait | image_url: width: 720 }} 720w,
+            {{ section.settings.portrait | image_url: width: 900 }} 900w
+          "
+          sizes="(max-width: 768px) 100vw, 40vw"
+          alt="{{ section.settings.portrait.alt | default: section.settings.portrait_alt | default: section.settings.title | escape }}"
+          class="home-brand-story__portrait"
+          loading="lazy"
+          width="900"
+          height="1125"
+        >
+      {% else %}
+        <div class="home-brand-story__portrait home-brand-story__portrait--placeholder" aria-hidden="true"></div>
+      {% endif %}
+
+      {% if section.settings.badge_text != blank %}
+        <div class="home-brand-story__badge">{{ section.settings.badge_text | escape }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Since 1989"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "A family-led jewellery house for gemstones with meaning."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Gift Palace India brings together old-world trust, practical gemstone guidance, and a more modern way to browse jewellery online.</p><p>Every edit is shaped for shoppers who want beauty, certification, and human help before they choose.</p>"
+    },
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Pull quote",
+      "default": "Choose the piece only when the story, stone, and setting all feel right."
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait",
+      "label": "Portrait or atelier image"
+    },
+    {
+      "type": "text",
+      "id": "portrait_alt",
+      "label": "Fallback portrait alt text",
+      "default": "Gift Palace India advisor with gemstone jewellery"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Selling since 1989"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}

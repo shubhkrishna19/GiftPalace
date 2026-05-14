@@ -1,0 +1,280 @@
+/**
+ * GPI Sizing Defaults
+ * 
+ * Default sizing utilities to ensure images and components render 
+ * consistently across all breakpoints and contexts
+ */
+
+/* Global image defaults */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+/* Ensure containers have proper dimensions */
+[class*="__media"],
+[class*="__image"],
+[class*="__visual"],
+[class*="__frame"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Product and card defaults */
+.gpi-product-card,
+[class*="product-card"],
+[class*="card"],
+.gpi-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* Responsive image sizing */
+.gpi-product-card__media,
+.gpi-shop-by-intention__frame,
+[class*="__hero"],
+[class*="featured"],
+[class*="showcase"] {
+  width: 100%;
+  position: relative;
+}
+
+/* Explicit width for container-based layouts */
+.container,
+.container-full,
+.container-1170,
+.container-1770 {
+  width: 100%;
+  max-width: 100%;
+  padding-left: var(--gpi-space-lg, 16px);
+  padding-right: var(--gpi-space-lg, 16px);
+}
+
+.container-1770 {
+  max-width: 1770px;
+}
+
+.container-1170 {
+  max-width: 1170px;
+}
+
+.container-full {
+  max-width: 100vw;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Grid and flex sizing defaults */
+[class*="grid"],
+[class*="row"],
+[class*="flex"] {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Section defaults */
+section,
+[role="region"],
+.section-block {
+  width: 100%;
+  display: block;
+}
+
+/* Sizing for common element patterns */
+.content-area,
+.content-column,
+[class*="__content"],
+[class*="__text"],
+[class*="__description"],
+[class*="__title"],
+[class*="__heading"] {
+  width: 100%;
+}
+
+/* Button and CTA defaults */
+button,
+.button,
+[class*="button"],
+[class*="cta"],
+a[class*="action"],
+a[class*="button"] {
+  display: inline-block;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--gpi-space-sm, 12px) var(--gpi-space-md, 16px);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* List defaults */
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: block;
+}
+
+/* Form defaults */
+input,
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: var(--gpi-space-sm, 12px) var(--gpi-space-md, 16px);
+}
+
+/* Responsive text sizing defaults */
+h1, h2, h3, h4, h5, h6,
+.heading,
+[class*="heading"],
+[class*="title"] {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+p, span, div:not([class]),
+[class*="copy"],
+[class*="text"],
+[class*="description"] {
+  width: 100%;
+}
+
+/* Mobile breakpoint defaults */
+@media (max-width: 480px) {
+  /* Ensure touch targets are minimum 44x44px */
+  button,
+  .button,
+  [class*="button"],
+  a[class*="action"],
+  [role="button"] {
+    min-width: 100%;
+    min-height: 44px;
+  }
+
+  /* Stack columns on mobile */
+  [class*="grid"],
+  [class*="row"],
+  .grid,
+  .row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Full-width images on mobile */
+  img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Ensure containers don't overflow */
+  .container,
+  .container-1170,
+  .container-1770 {
+    max-width: 100%;
+    padding-left: var(--gpi-space-md, 16px);
+    padding-right: var(--gpi-space-md, 16px);
+  }
+}
+
+/* Tablet breakpoint defaults */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container-1770 {
+    max-width: 90vw;
+  }
+
+  .container-1170 {
+    max-width: 95vw;
+  }
+
+  /* Adjusted grid columns for tablet */
+  [class*="grid"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Desktop breakpoint defaults */
+@media (min-width: 769px) {
+  /* Explicit sizing for desktop images */
+  img[width][height] {
+    aspect-ratio: attr(width) / attr(height);
+  }
+}
+
+/* Prevent common sizing issues */
+img[src=""],
+img:not([src]),
+img:not([alt]) {
+  display: none;
+}
+
+/* Loading state placeholder sizing */
+img[loading="lazy"]:before,
+img[loading="eager"]:before,
+[class*="skeleton"],
+[class*="placeholder"],
+[class*="loading"] {
+  content: "";
+  display: block;
+  background: var(--gpi-surface-ivory, #fbf7ef);
+}
+
+/* Prevent layout shift */
+img {
+  vertical-align: middle;
+}
+
+/* SVG defaults */
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Picture element defaults */
+picture {
+  display: block;
+  width: 100%;
+}
+
+picture img {
+  width: 100%;
+  height: auto;
+}
+
+/* Video defaults */
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Iframe defaults */
+iframe {
+  max-width: 100%;
+  border: none;
+  display: block;
+}
+
+/* Prevent font size anomalies */
+body {
+  font-size: var(--gpi-text-base, 1rem);
+  line-height: 1.5;
+}
+
+/* Ensure proper text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

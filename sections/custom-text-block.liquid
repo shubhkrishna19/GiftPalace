@@ -1,3 +1,23 @@
+{%- liquid
+    assign has_menu_links = false
+    if section.settings.menu != blank and section.settings.menu.links.size > 0
+        assign has_menu_links = true
+    endif
+
+    assign has_text_blocks = false
+    if section.blocks.size > 0
+        assign has_text_blocks = true
+    endif
+
+    assign show_fallback_links = false
+    if has_menu_links == false and has_text_blocks == false and request.page_type == 'index'
+        assign show_fallback_links = true
+    endif
+
+    assign fallback_links = 'Shop necklaces::shopify://collections/necklaces||Browse bracelets::shopify://collections/frontpage||Gift by zodiac::shopify://collections/celestial-heirlooms||Raw crystals::shopify://collections/raw-crystals||Live-sale drops::shopify://collections/live-sale'
+-%}
+
+{%- if has_menu_links or has_text_blocks or show_fallback_links -%}
 <div class="custom-text-block section-block-{{section.id}}" id="custom-text-{{section.id}}">
     <div class="custom-text--block">
         <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
@@ -18,17 +38,40 @@
                 </div>
             {% endif %}
             <div class="block__custom--text">
-                {% for link in section.settings.menu.links %}
-                <div class="wrapper-text">
-                    <a title="{{ link.title }}"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
-                        {{ link.title }}
-                    </a>
-                </div>
-                {% endfor %}
+                {% if has_menu_links %}
+                    {% for link in section.settings.menu.links %}
+                    <div class="wrapper-text">
+                        <a title="{{ link.title }}"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
+                            {{ link.title }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% elsif has_text_blocks %}
+                    {% for block in section.blocks %}
+                        {% if block.settings.text != blank %}
+                            <div class="wrapper-text" {{ block.shopify_attributes }}>
+                                <a title="{{ block.settings.text | escape }}"{% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %}>
+                                    {{ block.settings.text }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% assign fallback_links_array = fallback_links | split: '||' %}
+                    {% for fallback_link in fallback_links_array %}
+                        {% assign fallback_link_parts = fallback_link | split: '::' %}
+                        <div class="wrapper-text">
+                            <a title="{{ fallback_link_parts[0] }}"{% if fallback_link_parts[1] == blank %} role="link" aria-disabled="true"{% else %} href="{{ fallback_link_parts[1] }}"{% endif %}>
+                                {{ fallback_link_parts[0] }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{%- endif -%}
 
 <style>
     {%- liquid
@@ -485,6 +528,25 @@
         "id" : "bg_color_gradient_active",
         "label" : "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
     }
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Quick link",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "text",
+                    "label": "Label",
+                    "default": "Shop now"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                }
+            ]
+        }
     ],
     "presets": [
         {

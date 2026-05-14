@@ -1,0 +1,117 @@
+{%- comment -%} Section: home-lookbook-spotlight - Editorial image spotlight with overlay copy and dual CTA {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-home-lookbook-spotlight.css' | asset_url }}">
+
+<section class="home-lookbook-spotlight" aria-labelledby="home-lookbook-spotlight-heading">
+  <div class="home-lookbook-spotlight__media">
+    {% if section.settings.image != blank %}
+      <img
+        src="{{ section.settings.image | image_url: width: 1800 }}"
+        srcset="
+          {{ section.settings.image | image_url: width: 720 }} 720w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1800 }} 1800w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.image_alt | default: section.settings.title | escape }}"
+        class="home-lookbook-spotlight__image"
+        loading="lazy"
+        width="1800"
+        height="1200"
+      >
+    {% else %}
+      <div class="home-lookbook-spotlight__placeholder" aria-hidden="true"></div>
+    {% endif %}
+  </div>
+
+  <div class="home-lookbook-spotlight__overlay">
+    <div class="home-lookbook-spotlight__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="home-lookbook-spotlight__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h2 id="home-lookbook-spotlight-heading" class="home-lookbook-spotlight__title">{{ section.settings.title | escape }}</h2>
+      {% endif %}
+
+      {% if section.settings.body != blank %}
+        <p class="home-lookbook-spotlight__body">{{ section.settings.body | escape }}</p>
+      {% endif %}
+
+      {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
+        <div class="home-lookbook-spotlight__actions">
+          {% if section.settings.primary_label != blank and section.settings.primary_link != blank %}
+            <a class="home-lookbook-spotlight__button home-lookbook-spotlight__button--primary" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>
+          {% endif %}
+
+          {% if section.settings.secondary_label != blank and section.settings.secondary_link != blank %}
+            <a class="home-lookbook-spotlight__button home-lookbook-spotlight__button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lookbook Spotlight",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Fallback image alt text",
+      "default": "Gift Palace India jewellery lookbook styling"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The lookbook"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Soft gold, natural stones, and pieces made to be worn close."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Explore a calmer way to style gemstone jewellery, from everyday bracelets to gift-ready statement pieces."
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop the edit"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Browse gift picks"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook Spotlight"
+    }
+  ]
+}
+{% endschema %}

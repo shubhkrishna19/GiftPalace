@@ -1,0 +1,211 @@
+{%- liquid
+  assign hero_collection = section.settings.collection
+  assign hero_products = hero_collection.products
+  assign hero_image_1 = section.settings.image_1
+  assign hero_image_2 = section.settings.image_2
+  assign hero_image_3 = section.settings.image_3
+
+  assign hero_local_1 = ''
+  assign hero_local_2 = ''
+  assign hero_local_3 = ''
+
+  if hero_image_1 == blank
+    if hero_products.size > 0
+      assign hero_image_1 = hero_products[0].featured_image
+    else
+      assign hero_local_1 = 'gpi-hero-bracelet.webp' | asset_url
+    endif
+  endif
+  if hero_image_2 == blank
+    if hero_products.size > 1
+      assign hero_image_2 = hero_products[1].featured_image
+    else
+      assign hero_local_2 = 'gpi-hero-crystal.webp' | asset_url
+    endif
+  endif
+  if hero_image_3 == blank
+    if hero_products.size > 2
+      assign hero_image_3 = hero_products[2].featured_image
+    else
+      assign hero_local_3 = 'gpi-hero-wearing.webp' | asset_url
+    endif
+  endif
+-%}
+
+<section class="gpi-luxury-hero section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="gpi-luxury-hero__layout" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="gpi-luxury-hero__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gpi-luxury-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          {%- liquid
+            assign hero_heading = section.settings.heading | escape
+            assign hero_heading = hero_heading | replace: 'personal', '<em>personal</em>'
+            assign hero_heading = hero_heading | replace: 'Personal', '<em>Personal</em>'
+          -%}
+          <h1 class="gpi-luxury-hero__heading">{{ hero_heading }}</h1>
+        {% endif %}
+
+        {% if section.settings.copy != blank %}
+          <div class="gpi-luxury-hero__copy rte">{{ section.settings.copy }}</div>
+        {% endif %}
+
+        <div class="gpi-luxury-hero__actions">
+          {% if section.settings.primary_label != blank %}
+            <a class="gpi-luxury-hero__button gpi-luxury-hero__button--primary" {% if section.settings.primary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.primary_link }}"{% endif %}>{{ section.settings.primary_label }}</a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            <a class="gpi-luxury-hero__button gpi-luxury-hero__button--secondary" {% if section.settings.secondary_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.secondary_link }}"{% endif %}>{{ section.settings.secondary_label }}</a>
+          {% endif %}
+        </div>
+
+        <div class="gpi-luxury-hero__proof" aria-label="Gift Palace India proof">
+          {% if section.settings.proof_1_title != blank %}
+            <div>
+              <strong>{{ section.settings.proof_1_title }}</strong>
+              <span>{{ section.settings.proof_1_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.proof_2_title != blank %}
+            <div>
+              <strong>{{ section.settings.proof_2_title }}</strong>
+              <span>{{ section.settings.proof_2_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.proof_3_title != blank %}
+            <div>
+              <strong>{{ section.settings.proof_3_title }}</strong>
+              <span>{{ section.settings.proof_3_text }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="gpi-luxury-hero__chips" aria-label="Popular shopping paths">
+          {% if section.settings.chip_1_label != blank %}
+            <a {% if section.settings.chip_1_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.chip_1_link }}"{% endif %}>{{ section.settings.chip_1_label }}</a>
+          {% endif %}
+          {% if section.settings.chip_2_label != blank %}
+            <a {% if section.settings.chip_2_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.chip_2_link }}"{% endif %}>{{ section.settings.chip_2_label }}</a>
+          {% endif %}
+          {% if section.settings.chip_3_label != blank %}
+            <a {% if section.settings.chip_3_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.chip_3_link }}"{% endif %}>{{ section.settings.chip_3_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="gpi-luxury-hero__visual" aria-label="Gift Palace India featured gemstone products">
+        {%- liquid
+          assign hero_video_src = section.settings.hero_video_url
+          if hero_video_src == blank
+            assign hero_video_src = 'gpi-hero-video.mp4' | asset_url
+          endif
+        -%}
+        {% if hero_video_src != blank %}
+          <div class="gpi-luxury-hero__video-wrapper" aria-hidden="true">
+            <video
+              class="gpi-luxury-hero__video"
+              playsinline
+              muted
+              autoplay
+              loop
+              preload="metadata"
+            >
+              <source src="{{ hero_video_src }}" type="video/mp4">
+            </video>
+          </div>
+        {% endif %}
+        <div class="gpi-luxury-hero__orb gpi-luxury-hero__orb--one"></div>
+        <div class="gpi-luxury-hero__orb gpi-luxury-hero__orb--two"></div>
+
+        {% if hero_image_1 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--main" {% if hero_products[0] != blank %}href="{{ hero_products[0].url }}"{% elsif section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_image_1 | image_url: width: 1120 }}" alt="{{ hero_image_1.alt | default: section.settings.heading | escape }}" loading="eager" fetchpriority="high" width="1120" height="1320">
+            <span>{{ section.settings.main_image_label }}</span>
+          </a>
+        {% elsif hero_local_1 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--main" {% if section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_local_1 }}" alt="Gemstone gold bracelet on cream velvet — Gift Palace India editorial hero" loading="eager" fetchpriority="high" width="1120" height="1400">
+            <span>{{ section.settings.main_image_label }}</span>
+          </a>
+        {% endif %}
+
+        {% if hero_image_2 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--small gpi-luxury-hero__product--top" {% if hero_products[1] != blank %}href="{{ hero_products[1].url }}"{% elsif section.settings.secondary_link != blank %}href="{{ section.settings.secondary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_image_2 | image_url: width: 640 }}" alt="{{ hero_image_2.alt | default: section.settings.proof_1_title | escape }}" loading="eager" width="640" height="780">
+          </a>
+        {% elsif hero_local_2 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--small gpi-luxury-hero__product--top" {% if section.settings.secondary_link != blank %}href="{{ section.settings.secondary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_local_2 }}" alt="Raw amethyst crystal cluster on parchment — Gift Palace India" loading="eager" width="640" height="800">
+          </a>
+        {% endif %}
+
+        {% if hero_image_3 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--small gpi-luxury-hero__product--bottom" {% if hero_products[2] != blank %}href="{{ hero_products[2].url }}"{% elsif section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_image_3 | image_url: width: 640 }}" alt="{{ hero_image_3.alt | default: section.settings.proof_2_title | escape }}" loading="eager" width="640" height="780">
+          </a>
+        {% elsif hero_local_3 != blank %}
+          <a class="gpi-luxury-hero__product gpi-luxury-hero__product--small gpi-luxury-hero__product--bottom" {% if section.settings.primary_link != blank %}href="{{ section.settings.primary_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+            <img src="{{ hero_local_3 }}" alt="Hand wearing gemstone gold bracelet — editorial Indian luxury" loading="eager" width="640" height="853">
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Luxury Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    { "type": "collection", "id": "collection", "label": "Hero product collection" },
+    { "type": "image_picker", "id": "image_1", "label": "Hero image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Hero image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Hero image 3" },
+    { "type": "url", "id": "hero_video_url", "label": "Hero ambient video URL (optional)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Certified gemstone jewellery" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Gemstone gifts that feel personal, proven, and ready to wear." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>Shop meaningful gemstone jewellery, crystal gifts, zodiac pieces, and lab-tested stones with real support from Gift Palace India.</p>" },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA label", "default": "Shop bestsellers" },
+    { "type": "url", "id": "primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Chat before buying" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary CTA link" },
+    { "type": "text", "id": "proof_1_title", "label": "Proof 1 title", "default": "100K" },
+    { "type": "text", "id": "proof_1_text", "label": "Proof 1 text", "default": "online and offline customers" },
+    { "type": "text", "id": "proof_2_title", "label": "Proof 2 title", "default": "GJEPC" },
+    { "type": "text", "id": "proof_2_text", "label": "Proof 2 text", "default": "lab-tested gemstone confidence" },
+    { "type": "text", "id": "proof_3_title", "label": "Proof 3 title", "default": "Delhi" },
+    { "type": "text", "id": "proof_3_text", "label": "Proof 3 text", "default": "Chanakyapuri store support" },
+    { "type": "text", "id": "main_image_label", "label": "Main image label", "default": "Most gifted this week" },
+    { "type": "text", "id": "chip_1_label", "label": "Chip 1 label", "default": "Gift by zodiac" },
+    { "type": "url", "id": "chip_1_link", "label": "Chip 1 link" },
+    { "type": "text", "id": "chip_2_label", "label": "Chip 2 label", "default": "Shop bracelets" },
+    { "type": "url", "id": "chip_2_link", "label": "Chip 2 link" },
+    { "type": "text", "id": "chip_3_label", "label": "Chip 3 label", "default": "Raw crystals" },
+    { "type": "url", "id": "chip_3_link", "label": "Chip 3 link" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 },
+    { "type": "range", "id": "padding_horizontal", "min": 0, "max": 72, "step": 4, "unit": "px", "label": "Side padding", "default": 36 }
+  ],
+  "presets": [
+    {
+      "name": "GPI Luxury Hero"
+    }
+  ]
+}
+{% endschema %}

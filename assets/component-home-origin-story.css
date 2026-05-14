@@ -1,0 +1,189 @@
+.gpi-origin-story {
+  padding: clamp(3rem, 6vw, 4rem) 0;
+  background:
+    linear-gradient(180deg, var(--gpi-color-bg-primary) 0%, var(--gpi-color-bg-secondary) 100%);
+}
+
+.gpi-origin-story__grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.82fr) minmax(300px, 1.25fr) minmax(160px, 0.52fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.gpi-origin-story__content {
+  min-width: 0;
+}
+
+.gpi-origin-story__eyebrow {
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gpi-color-accent);
+  margin: 0 0 0.75rem;
+}
+
+.gpi-origin-story__heading {
+  font-family: var(--gpi-heading);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--gpi-color-text);
+  margin: 0 0 1.5rem;
+}
+
+.gpi-origin-story__story {
+  color: var(--gpi-color-text-secondary);
+}
+
+.gpi-origin-story__story p {
+  margin: 0 0 1rem;
+}
+
+.gpi-origin-story__story p:first-of-type::first-letter {
+  font-family: var(--gpi-heading);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  float: left;
+  line-height: 0.85;
+  color: var(--gpi-color-accent);
+  font-weight: 600;
+  padding-right: 0.4rem;
+}
+
+.gpi-origin-story__pull-quote {
+  font-family: var(--gpi-heading);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  color: var(--gpi-color-text);
+  border-left: 2px solid var(--gpi-color-accent);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.gpi-origin-story img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 20px 46px rgb(from var(--gpi-color-text) r g b / 0.1);
+}
+
+.gpi-origin-story__photo {
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.gpi-origin-story__photo--left {
+  aspect-ratio: 4 / 5;
+}
+
+.gpi-origin-story__photo--top {
+  aspect-ratio: 1 / 1;
+}
+
+.gpi-origin-story__photo--bottom {
+  aspect-ratio: 4 / 5;
+}
+
+.gpi-origin-story__photos-right {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gpi-origin-story__photo--left img {
+    transform: rotate(-1.5deg);
+  }
+
+  .gpi-origin-story__photo--top img {
+    transform: rotate(0.5deg);
+  }
+
+  .gpi-origin-story__photo--bottom img {
+    transform: rotate(-0.8deg);
+  }
+}
+
+.gpi-origin-story__founder {
+  margin-top: 1.25rem;
+}
+
+.gpi-origin-story__founder-name {
+  font-family: var(--gpi-heading);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--gpi-color-text);
+  margin-bottom: 0.25rem;
+}
+
+.gpi-origin-story__founder-role {
+  font-family: var(--gpi-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--gpi-color-text-secondary);
+}
+
+.gpi-origin-story__cta {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  border: 1px solid var(--gpi-color-accent);
+  border-radius: var(--gpi-radius-pill, 999px);
+  color: var(--gpi-color-accent);
+  font-family: var(--gpi-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 240ms ease, color 240ms ease;
+  margin-top: 1.5rem;
+}
+
+.gpi-origin-story__cta:hover {
+  background: var(--gpi-color-accent);
+  color: var(--gpi-color-bg-primary);
+}
+
+@media (max-width: 768px) {
+  .gpi-origin-story {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .gpi-origin-story__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .gpi-origin-story__photo--left {
+    order: 2;
+  }
+
+  .gpi-origin-story__content {
+    order: 1;
+  }
+
+  .gpi-origin-story__photos-right {
+    order: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .gpi-origin-story__heading {
+    font-size: clamp(2.05rem, 10vw, 3rem);
+  }
+
+  .gpi-origin-story__story p:first-of-type::first-letter {
+    float: none;
+    font-size: inherit;
+    line-height: inherit;
+    padding-right: 0;
+  }
+}

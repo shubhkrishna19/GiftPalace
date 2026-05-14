@@ -1,0 +1,60 @@
+{%- comment -%}
+  Snippet: product-accordion
+  Parameters:
+    - title: String
+    - body: HTML String
+    - open: Boolean (optional)
+  Usage:
+    {% render 'product-accordion', title: 'Shipping & Returns', body: product.description %}
+{%- endcomment -%}
+
+<details class="gpi-product-accordion" {% if open %}open{% endif %}>
+  <summary class="gpi-product-accordion__summary">
+    <span class="gpi-product-accordion__title">{{ title }}</span>
+    <span class="gpi-product-accordion__icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </span>
+  </summary>
+  <div class="gpi-product-accordion__content rte">
+    {{ body }}
+  </div>
+</details>
+
+<style>
+  .gpi-product-accordion {
+    border-bottom: 1px solid var(--gpi-color-border);
+  }
+  .gpi-product-accordion__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .gpi-product-accordion__summary::-webkit-details-marker {
+    display: none;
+  }
+  .gpi-product-accordion__title {
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gpi-color-text);
+  }
+  .gpi-product-accordion__icon {
+    color: var(--gpi-color-accent);
+    transition: transform 0.3s ease;
+  }
+  .gpi-product-accordion[open] .gpi-product-accordion__icon {
+    transform: rotate(180deg);
+  }
+  .gpi-product-accordion__content {
+    padding-bottom: 24px;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gpi-color-text-secondary);
+  }
+</style>

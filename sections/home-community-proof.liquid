@@ -1,0 +1,139 @@
+<section class="home-community-proof section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="home-community-proof__layout" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px;">
+      <div class="home-community-proof__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="gpi-eyebrow home-community-proof__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="gpi-heading-lg home-community-proof__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.copy != blank %}
+          <div class="gpi-body-base home-community-proof__copy rte">{{ section.settings.copy }}</div>
+        {% endif %}
+
+        <div class="home-community-proof__metrics" aria-label="Gift Palace India community proof">
+          {% if section.settings.metric_1_title != blank %}
+            <div>
+              <strong>{{ section.settings.metric_1_title }}</strong>
+              <span>{{ section.settings.metric_1_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.metric_2_title != blank %}
+            <div>
+              <strong>{{ section.settings.metric_2_title }}</strong>
+              <span>{{ section.settings.metric_2_text }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.metric_3_title != blank %}
+            <div>
+              <strong>{{ section.settings.metric_3_title }}</strong>
+              <span>{{ section.settings.metric_3_text }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.cta_label != blank %}
+          <a class="gpi-button home-community-proof__button" {% if section.settings.cta_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.cta_link }}"{% endif %}>{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+
+      <div class="home-community-proof__visual home-community-proof__testimonials home-community-proof__grid" aria-label="Gift Palace India customer testimonials">
+        <article class="home-community-proof__item home-community-proof__testimonial home-community-proof__testimonial--one">
+          <div class="home-community-proof__photo">
+            <img src="{{ 'gpi-testimonial-1-woman.webp' | asset_url }}" alt="Aditi S. customer portrait" loading="lazy" width="120" height="120">
+          </div>
+          <span class="home-community-proof__quote-mark" aria-hidden="true">&ldquo;</span>
+          <div class="home-community-proof__stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+          </div>
+          <blockquote>They helped me choose a bracelet that felt personal, not random. The certificate and Delhi store support made gifting much easier.</blockquote>
+          <p class="home-community-proof__customer">Aditi S.</p>
+          <p class="home-community-proof__location">Chanakyapuri, Delhi</p>
+        </article>
+
+        <article class="home-community-proof__item home-community-proof__testimonial home-community-proof__testimonial--two">
+          <div class="home-community-proof__photo">
+            <img src="{{ 'gpi-testimonial-2-man.webp' | asset_url }}" alt="Rohit M. customer portrait" loading="lazy" width="120" height="120">
+          </div>
+          <div class="home-community-proof__stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+          </div>
+          <blockquote>The WhatsApp shortlist saved time. I said zodiac gift and budget, and they sent pieces that actually made sense.</blockquote>
+          <p class="home-community-proof__customer">Rohit M.</p>
+          <p class="home-community-proof__location">Gurugram</p>
+        </article>
+
+        <article class="home-community-proof__item home-community-proof__testimonial home-community-proof__testimonial--three">
+          <div class="home-community-proof__photo">
+            <img src="{{ 'gpi-testimonial-3-elder.webp' | asset_url }}" alt="Meera K. customer portrait" loading="lazy" width="120" height="120">
+          </div>
+          <div class="home-community-proof__stars home-community-proof__stars--large" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.6l2.4 5 5.5.8-4 3.9.9 5.5L10 14.2l-4.8 2.6.9-5.5-4-3.9 5.5-.8L10 1.6z"/></svg>
+          </div>
+          <blockquote>The piece looked more premium in person than the photos. The stone meaning was explained clearly before checkout.</blockquote>
+          <p class="home-community-proof__customer">Meera K.</p>
+          <p class="home-community-proof__location">Mumbai</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Community Proof",
+  "tag": "section",
+  "class": "section-home-community-proof",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    { "type": "image_picker", "id": "image_1", "label": "Large image" },
+    { "type": "image_picker", "id": "image_2", "label": "Small image 1" },
+    { "type": "image_picker", "id": "image_3", "label": "Small image 2" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Worn, gifted, trusted" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "A real customer base behind every gemstone recommendation." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>Gift Palace India is built across online orders, offline store support, customer reviews, and real gifting moments. This is proof shoppers can feel before they checkout.</p>" },
+    { "type": "text", "id": "metric_1_title", "label": "Metric 1 title", "default": "100K" },
+    { "type": "text", "id": "metric_1_text", "label": "Metric 1 text", "default": "online and offline customers" },
+    { "type": "text", "id": "metric_2_title", "label": "Metric 2 title", "default": "Delhi" },
+    { "type": "text", "id": "metric_2_text", "label": "Metric 2 text", "default": "Chanakyapuri store support" },
+    { "type": "text", "id": "metric_3_title", "label": "Metric 3 title", "default": "Reviews" },
+    { "type": "text", "id": "metric_3_text", "label": "Metric 3 text", "default": "real buyer proof below" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See customer proof" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 56 },
+    { "type": "range", "id": "padding_horizontal", "min": 16, "max": 72, "step": 4, "unit": "px", "label": "Side padding", "default": 36 }
+  ],
+  "presets": [
+    {
+      "name": "GPI Community Proof"
+    }
+  ]
+}
+{% endschema %}

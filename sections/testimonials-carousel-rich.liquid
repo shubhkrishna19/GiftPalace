@@ -1,0 +1,622 @@
+<div class="testimonials-carousel-section section-block-{{ section.id }}">
+  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+    <div class="testimonials-header" style="padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px 0;">
+      {% if section.settings.kicker != blank %}
+        <p class="testimonials-kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      
+      {% if section.settings.title != blank %}
+        <h2 class="testimonials-title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="testimonials-description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      <!-- Trust Stats -->
+      {% assign stats_blocks = section.blocks | where: 'type', 'stat' %}
+      {% if stats_blocks.size > 0 %}
+        <div class="testimonials-stats">
+          {% for block in stats_blocks %}
+            <div class="stat-item" {{ block.shopify_attributes }}>
+              <div class="stat-number">{{ block.settings.number }}</div>
+              <div class="stat-label">{{ block.settings.label }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="testimonials-carousel-wrapper" style="padding: {{ section.settings.padding_bottom }}px {{ section.settings.padding_horizontal }}px;">
+      <div class="testimonials-carousel" data-carousel-id="testimonials-{{ section.id }}">
+        <div class="carousel-slides-container">
+          {% assign testimonial_blocks = section.blocks | where: 'type', 'testimonial' %}
+          
+          {% for block in testimonial_blocks %}
+            <div class="carousel-slide testimonial-card" {{ block.shopify_attributes }}>
+              <div class="testimonial-content">
+                <!-- Star Rating -->
+                {% if block.settings.rating != blank %}
+                  <div class="testimonial-rating">
+                    {% for i in (1..block.settings.rating) %}
+                      <span class="star">★</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                <!-- Testimonial Text -->
+                {% if block.settings.text != blank %}
+                  <blockquote class="testimonial-text">
+                    "{{ block.settings.text }}"
+                  </blockquote>
+                {% endif %}
+
+                <!-- Author Section -->
+                <div class="testimonial-author">
+                  {% if block.settings.author_image != blank %}
+                    <div class="author-image">
+                      <img src="{{ block.settings.author_image | image_url: width: 60 }}" 
+                           alt="{{ block.settings.author_name }}"
+                           width="60"
+                           height="60" />
+                    </div>
+                  {% endif %}
+
+                  <div class="author-info">
+                    {% if block.settings.author_name != blank %}
+                      <p class="author-name">{{ block.settings.author_name }}</p>
+                    {% endif %}
+                    {% if block.settings.author_role != blank %}
+                      <p class="author-role">{{ block.settings.author_role }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!-- Social Proof Badge -->
+                {% if block.settings.badge != blank %}
+                  <div class="testimonial-badge">
+                    {{ block.settings.badge }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Video Testimonial -->
+              {% if block.settings.video_url != blank %}
+                <div class="testimonial-video">
+                  <div class="video-thumbnail">
+                    {% if block.settings.video_thumbnail != blank %}
+                      <img src="{{ block.settings.video_thumbnail | image_url: width: 300 }}" 
+                           alt="Video testimonial"
+                           width="300"
+                           height="200" />
+                    {% endif %}
+                    <button class="video-play-btn" data-video-url="{{ block.settings.video_url }}" aria-label="Play testimonial video">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+          <button class="carousel-btn carousel-prev" aria-label="Previous testimonial">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          <button class="carousel-btn carousel-next" aria-label="Next testimonial">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Carousel Indicators -->
+        {% if testimonial_blocks.size > 1 %}
+          <div class="carousel-indicators">
+            {% assign testimonial_last_index = testimonial_blocks.size | minus: 1 %}
+            {% for i in (0..testimonial_last_index) %}
+              <button class="indicator {% if i == 0 %}active{% endif %}" data-slide="{{ i }}" aria-label="Go to slide {{ i | plus: 1 }}"></button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .testimonials-carousel-section {
+    width: 100%;
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .testimonials-kicker {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin: 0 0 16px 0;
+  }
+
+  .testimonials-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+  }
+
+  .testimonials-description {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .testimonials-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #d4af37;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+  }
+
+  .testimonials-carousel-wrapper {
+    position: relative;
+  }
+
+  .testimonials-carousel {
+    position: relative;
+  }
+
+  .carousel-slides-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-slides-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-slides-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .carousel-slide {
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-slide.hidden {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .testimonial-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: #d4af37;
+    transform: translateY(-4px);
+  }
+
+  .testimonial-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .testimonial-rating {
+    font-size: 18px;
+    color: #d4af37;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    font-style: italic;
+    flex: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .author-image {
+    flex-shrink: 0;
+  }
+
+  .author-image img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-weight: 600;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .author-role {
+    font-size: 13px;
+    color: #999;
+    margin: 4px 0 0 0;
+  }
+
+  .testimonial-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 20px;
+    display: inline-block;
+    width: fit-content;
+    margin-top: 12px;
+  }
+
+  .testimonial-video {
+    margin-top: 16px;
+  }
+
+  .video-thumbnail {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    transition: all 0.3s ease;
+  }
+
+  .video-play-btn:hover {
+    background: #d4af37;
+    color: white;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .video-play-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 2px;
+  }
+
+  .carousel-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-btn:hover {
+    background: #d4af37;
+    color: white;
+    border-color: #d4af37;
+  }
+
+  .carousel-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .carousel-indicators {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .indicator.active {
+    background: #d4af37;
+    width: 32px;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-carousel-wrapper {
+      padding: {{ section.settings.padding_bottom }}px 16px;
+    }
+
+    .carousel-controls {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousels = document.querySelectorAll('[data-carousel-id]');
+    
+    carousels.forEach(carousel => {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const prevBtn = carousel.querySelector('.carousel-prev');
+      const nextBtn = carousel.querySelector('.carousel-next');
+      const indicators = carousel.querySelectorAll('.indicator');
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(ind => ind.classList.remove('active'));
+        
+        if (index >= slides.length) currentIndex = 0;
+        if (index < 0) currentIndex = slides.length - 1;
+        
+        slides[currentIndex].classList.add('active');
+        indicators[currentIndex]?.classList.add('active');
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => {
+        currentIndex--;
+        showSlide(currentIndex);
+      });
+
+      if (nextBtn) nextBtn.addEventListener('click', () => {
+        currentIndex++;
+        showSlide(currentIndex);
+      });
+
+      indicators.forEach((ind, idx) => {
+        ind.addEventListener('click', () => {
+          currentIndex = idx;
+          showSlide(currentIndex);
+        });
+      });
+
+      showSlide(0);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Testimonials Rich",
+  "tag": "section",
+  "class": "section-testimonials-carousel-rich",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "1770",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "1170", "label": "1170px" },
+        { "value": "1770", "label": "1770px" },
+        { "value": "fullwidth", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Customer Love"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Loved by Thousands of Customers"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Join thousands of happy customers who found the perfect gift."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal Padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Star Rating"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "This is the perfect gift for someone special. The quality is outstanding!"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Sarah Johnson"
+        },
+        {
+          "type": "text",
+          "id": "author_role",
+          "label": "Author Role",
+          "default": "Verified Buyer"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text",
+          "default": "Verified Purchase"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_thumbnail",
+          "label": "Video Thumbnail"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Rich"
+    }
+  ]
+}
+{% endschema %}

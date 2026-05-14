@@ -1,0 +1,198 @@
+/* home-newsletter-signup — compact signup block, viewport-aware */
+
+.home-newsletter-signup {
+  padding: clamp(24px, 3.5vw, 48px) clamp(18px, 4vw, 64px);
+  background: var(--gpi-surface-ivory);
+  text-align: center;
+}
+
+.home-newsletter-signup__container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.home-newsletter-signup__title {
+  font-family: var(--gpi-heading);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 400;
+  color: var(--gpi-ink-strong);
+  margin: 0 0 var(--gpi-space-sm);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.home-newsletter-signup__subheading {
+  font-family: var(--gpi-body);
+  color: var(--gpi-text-muted);
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  margin: 0 0 var(--gpi-space-lg);
+  line-height: 1.55;
+}
+
+/* ─── Benefits Bullets ──────────────────────────────────────────────────────── */
+.home-newsletter-signup__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--gpi-space-xl);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gpi-space-xs) var(--gpi-space-xl);
+}
+
+.home-newsletter-signup__bullet {
+  display: flex;
+  align-items: center;
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  color: var(--gpi-ink);
+}
+
+.home-newsletter-signup__bullet::before {
+  content: "•";
+  color: var(--gpi-gold);
+  margin-right: var(--gpi-space-xs);
+  font-size: 1.1rem;
+}
+
+/* ─── Form ──────────────────────────────────────────────────────────────────── */
+.home-newsletter-signup__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gpi-space-sm);
+  margin-bottom: var(--gpi-space-md);
+}
+
+.home-newsletter-signup__input-group {
+  display: flex;
+  gap: var(--gpi-space-sm);
+}
+
+.home-newsletter-signup__input {
+  flex: 1;
+  padding: var(--gpi-space-md);
+  border: 1px solid var(--gpi-border-soft);
+  border-radius: var(--gpi-radius-sm);
+  background: var(--gpi-surface-card);
+  color: var(--gpi-ink);
+  font-family: var(--gpi-body);
+  font-size: 1rem;
+  transition: border-color var(--gpi-transition);
+}
+
+.home-newsletter-signup__input:focus {
+  outline: none;
+  border-color: var(--gpi-gold);
+  box-shadow: 0 0 0 3px rgba(139, 99, 38, 0.1);
+}
+
+.home-newsletter-signup__input::placeholder {
+  color: var(--gpi-text-soft);
+  opacity: 0.8;
+}
+
+.home-newsletter-signup__submit {
+  padding: var(--gpi-space-md) var(--gpi-space-xl);
+  background: var(--gpi-ink-strong);
+  color: var(--gpi-surface-canvas);
+  border: none;
+  border-radius: var(--gpi-radius-sm);
+  font-family: var(--gpi-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--gpi-transition), box-shadow var(--gpi-transition);
+  white-space: nowrap;
+}
+
+.home-newsletter-signup__submit:hover {
+  background: var(--gpi-gold);
+  box-shadow: var(--gpi-shadow-low);
+}
+
+.home-newsletter-signup__submit:focus-visible {
+  outline: 2px solid var(--gpi-gold);
+  outline-offset: 3px;
+}
+
+/* ─── Status Messages ───────────────────────────────────────────────────────── */
+.home-newsletter-signup__message {
+  font-family: var(--gpi-body);
+  font-size: 0.875rem;
+  margin-top: var(--gpi-space-sm);
+}
+
+.home-newsletter-signup__message--success {
+  color: var(--gpi-gold);
+  font-weight: 600;
+}
+
+.home-newsletter-signup__disclaimer {
+  font-family: var(--gpi-body);
+  font-size: 0.75rem;
+  color: var(--gpi-text-muted);
+  margin-top: var(--gpi-space-md);
+  line-height: 1.4;
+}
+
+.home-newsletter-signup__disclaimer p {
+  margin: 0;
+}
+
+.home-newsletter-signup__honeypot {
+  display: none;
+}
+
+/* ─── Tablet ────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .home-newsletter-signup {
+    padding: var(--gpi-space-xl) var(--gpi-space-2xl);
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .home-newsletter-signup {
+    padding: var(--gpi-space-xl) var(--gpi-space-md);
+  }
+
+  .home-newsletter-signup__input-group {
+    flex-direction: column;
+  }
+
+  .home-newsletter-signup__bullets {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gpi-space-xs);
+  }
+}
+
+/* ─── Dark Mode ─────────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  .home-newsletter-signup {
+    background: var(--gpi-ink);
+  }
+
+  .home-newsletter-signup__title {
+    color: var(--gpi-surface-ivory);
+  }
+
+  .home-newsletter-signup__input {
+    background: var(--gpi-ink-strong);
+    border-color: rgba(139, 99, 38, 0.3);
+    color: var(--gpi-surface-ivory);
+  }
+
+  .home-newsletter-signup__submit {
+    background: var(--gpi-gold);
+    color: var(--gpi-ink-strong);
+  }
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .home-newsletter-signup__input,
+  .home-newsletter-signup__submit {
+    transition: none;
+  }
+}
