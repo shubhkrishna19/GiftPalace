@@ -183,9 +183,9 @@
         "primary_link": "shopify://collections/bestsellers",
         "secondary_label": "Browse by intention",
         "secondary_link": "/pages/shop-by-intention",
-        "panel_kicker": "",
-        "panel_title": "",
-        "panel_copy": "",
+        "panel_kicker": "Why this path converts better",
+        "panel_title": "Built for confident gemstone buying.",
+        "panel_copy": "<p>Visitors should immediately understand what they can shop, why a piece feels meaningful, and where to click next — whether they are buying for themselves or gifting someone.</p>",
         "padding_top": 28,
         "padding_bottom": 28,
         "padding_horizontal": 36
