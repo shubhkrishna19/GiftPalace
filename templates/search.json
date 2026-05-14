@@ -1,4 +1,10 @@
 {
-  "sections": {"search": {"type": "gpi-search"}},
-  "order": ["search"]
+  "sections": {
+    "search": {
+      "type": "gpi-search"
+    }
+  },
+  "order": [
+    "search"
+  ]
 }

@@ -3,12 +3,36 @@
     "main": {
       "type": "gpi-404",
       "blocks": {
-        "s1": {"type": "shortcut", "settings": {"collection": "necklaces", "label": "Necklaces"}},
-        "s2": {"type": "shortcut", "settings": {"collection": "bracelets", "label": "Bracelets"}},
-        "s3": {"type": "shortcut", "settings": {"collection": "rings", "label": "Rings"}}
+        "s1": {
+          "type": "shortcut",
+          "settings": {
+            "collection": "necklaces",
+            "label": "Necklaces"
+          }
+        },
+        "s2": {
+          "type": "shortcut",
+          "settings": {
+            "collection": "bracelets",
+            "label": "Bracelets"
+          }
+        },
+        "s3": {
+          "type": "shortcut",
+          "settings": {
+            "collection": "rings",
+            "label": "Rings"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"]
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

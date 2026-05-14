@@ -1,4 +1,10 @@
 {
-  "sections": {"blog": {"type": "gpi-blog"}},
-  "order": ["blog"]
+  "sections": {
+    "blog": {
+      "type": "gpi-blog"
+    }
+  },
+  "order": [
+    "blog"
+  ]
 }

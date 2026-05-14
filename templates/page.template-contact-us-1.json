@@ -12,5 +12,7 @@
       }
     }
   },
-  "order": ["contact"]
+  "order": [
+    "contact"
+  ]
 }

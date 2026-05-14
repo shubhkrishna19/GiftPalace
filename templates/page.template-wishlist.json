@@ -1,4 +1,10 @@
 {
-  "sections": {"wishlist": {"type": "gpi-wishlist"}},
-  "order": ["wishlist"]
+  "sections": {
+    "wishlist": {
+      "type": "gpi-wishlist"
+    }
+  },
+  "order": [
+    "wishlist"
+  ]
 }

@@ -1,4 +1,10 @@
 {
-  "sections": {"main": {"type": "gpi-collections-index"}},
-  "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "gpi-collections-index"
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

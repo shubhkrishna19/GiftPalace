@@ -1,0 +1,9 @@
+# Shopify CLI ignore — prevent tmp/dev artifacts from upload queue
+*.tmp.*
+.tmp.*
+*~
+*.bak
+.claude/
+backup/
+tmp/
+docs/
