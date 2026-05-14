@@ -1,0 +1,93 @@
+/* GPI Contrast Fixes — global overrides for dark-bg sections
+ * Issue: --gpi-text-muted (#4a3f34) on --gpi-ink-strong (#110d0a) = 2.4:1
+ *        — fails WCAG AA which requires 4.5:1 for body text.
+ * Fix: when an element sits on a dark surface, swap muted/soft text
+ *      to ivory variants so contrast is restored without flattening
+ *      visual hierarchy.
+ */
+
+/* ---------- Home: Trust pillars, FAQ, Newsletter, Testimonials, Shop shortcuts ---------- */
+/* These sections render with bg: var(--gpi-ink-strong) — bump text to ivory. */
+.home-trust-pillars,
+.home-faq,
+.home-newsletter-signup,
+.home-shop-shortcuts {
+  color: var(--gpi-surface-ivory);
+}
+.home-trust-pillars *,
+.home-faq *,
+.home-newsletter-signup *,
+.home-shop-shortcuts * {
+  --gpi-text-muted: rgba(251, 247, 239, 0.78);
+  --gpi-text-soft: rgba(251, 247, 239, 0.6);
+  --gpi-color-text-muted: rgba(251, 247, 239, 0.78);
+  --gpi-color-text-tertiary: rgba(251, 247, 239, 0.6);
+  --gpi-color-text-secondary: rgba(251, 247, 239, 0.85);
+  --gpi-color-ink: var(--gpi-surface-ivory);
+  --gpi-color-ink-strong: var(--gpi-surface-canvas);
+  --gpi-color-border: rgba(251, 247, 239, 0.16);
+  --gpi-color-border-soft: rgba(251, 247, 239, 0.12);
+  --gpi-color-border-light: rgba(251, 247, 239, 0.16);
+}
+
+/* Light-bg home sections that nonetheless include a dark CTA card */
+.home-meaning-guide .home-meaning-cta,
+.home-conversion-section .home-conversion-panel {
+  color: var(--gpi-surface-ivory);
+}
+.home-meaning-guide .home-meaning-cta *,
+.home-conversion-section .home-conversion-panel * {
+  --gpi-text-muted: rgba(251, 247, 239, 0.78);
+  --gpi-color-text-muted: rgba(251, 247, 239, 0.78);
+}
+
+/* ---------- GPI: dark CTAs, badges, pills ---------- */
+/* .gpi-button--primary, .gpi-chip.is-active, .gpi-collection-toolbar__view-btn.is-active
+ * already use surface-card / canvas for text — no fix needed.
+ * .gpi-page-about__cta block (dark CTA at bottom of About) needs muted-text bump.
+ */
+.gpi-page-about__cta {
+  color: var(--gpi-surface-canvas);
+}
+.gpi-page-about__cta * {
+  --gpi-text-muted: rgba(251, 247, 239, 0.78);
+  --gpi-color-text-muted: rgba(251, 247, 239, 0.78);
+}
+
+/* Header announcement strip (dark by design) */
+.gpi-header__row--announce {
+  color: var(--gpi-surface-canvas);
+}
+.gpi-header__row--announce * {
+  --gpi-text-muted: rgba(251, 247, 239, 0.82);
+  --gpi-color-text-muted: rgba(251, 247, 239, 0.82);
+}
+
+/* Currency switcher: ensure dropdown contrast within either ivory or dark contexts */
+.gpi-header__row--announce .gpi-currency__menu {
+  color: var(--gpi-ink);
+}
+
+/* ---------- Visible focus on dark surfaces ---------- */
+.home-trust-pillars a:focus-visible,
+.home-faq a:focus-visible,
+.home-newsletter-signup a:focus-visible,
+.home-shop-shortcuts a:focus-visible,
+.gpi-page-about__cta a:focus-visible,
+.gpi-header__row--announce a:focus-visible {
+  outline-color: var(--gpi-gold-soft);
+}
+
+/* ---------- Ensure muted-text doesn't disappear on ivory section bgs either ---------- */
+/* Keep light-bg defaults — but slightly darken muted so it never falls below 4.5:1. */
+.home-trust-proof,
+.home-concierge-cta,
+.home-store-proof,
+.gpi-real-store,
+.gpi-cert-stones,
+.gpi-wardrobe {
+  --gpi-color-text-muted: #3d3324;
+  --gpi-color-text-tertiary: #4a3f34;
+}
+
+/* ---------- Print + reduced-motion already handled in mobile-pass.css ---------- */
