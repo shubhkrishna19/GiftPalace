@@ -1,0 +1,271 @@
+/* GPI Mobile-First Pass
+ * Targeted overrides for small-screen edges (≤480px, ≤360px) and tap-target hardening.
+ * Loaded automatically by every gpi-* section via component-gpi-foundation.css import chain.
+ * Author rule: never specify pixel values smaller than 14px for body text or 44px for tap targets.
+ */
+
+/* ---------- Universal mobile hardening ---------- */
+
+@media (max-width: 768px) {
+  /* Prevent iOS auto-zoom on inputs (≥16px font triggers no zoom) */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* Container side padding */
+  .gpi-container { padding-left: 16px; padding-right: 16px; }
+
+  /* Sections breathe less on mobile */
+  .gpi-section { padding: clamp(32px, 6vw, 64px) 0; }
+
+  /* Tap targets ≥44px */
+  .gpi-button { min-height: 44px; }
+  .gpi-button--sm { min-height: 40px; padding: 10px 18px; font-size: 13px; }
+  .gpi-button--md { min-height: 44px; }
+  .gpi-button--lg { min-height: 52px; padding: 16px 28px; }
+}
+
+/* ---------- Foundation primitives ---------- */
+
+@media (max-width: 480px) {
+  .gpi-trust-strip { grid-template-columns: 1fr; gap: 16px; }
+  .gpi-newsletter__row { flex-direction: column; padding: 8px; border-radius: var(--gpi-radius-card); }
+  .gpi-newsletter__input { width: 100%; padding: 14px 18px; }
+  .gpi-newsletter__submit { width: 100%; }
+
+  /* Wishlist heart on product cards stays accessible */
+  .gpi-wishlist-heart--sm { width: 38px; height: 38px; }
+  .gpi-product-card__quickadd { opacity: 1; visibility: visible; bottom: 10px; font-size: 13px; padding: 10px 18px; }
+}
+
+/* ---------- Product page ---------- */
+
+@media (max-width: 768px) {
+  .gpi-product__title { font-size: clamp(24px, 7vw, 32px); }
+  .gpi-product__microtrust { padding: 12px; gap: 10px 14px; font-size: 11px; }
+  .gpi-product__atc { font-size: 15px; }
+  .gpi-product__qty-btn { width: 40px; height: 40px; font-size: 20px; }
+  .gpi-product__qty-input { width: 44px; font-size: 15px; }
+  .gpi-product__main-image { aspect-ratio: 1; border-radius: var(--gpi-radius-small); }
+  .gpi-product__thumbs { grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); gap: 6px; }
+}
+
+@media (max-width: 480px) {
+  .gpi-product__cert-row { gap: 10px 12px; }
+  .gpi-product__cert-row li { font-size: 11px; }
+  .gpi-product__qty-atc { grid-template-columns: auto 1fr; row-gap: 10px; }
+  .gpi-product__qty-atc .gpi-wishlist-heart { grid-column: 1 / -1; justify-self: stretch; width: auto; height: 44px; border-radius: var(--gpi-radius-pill); display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--gpi-border-soft); }
+  .gpi-product__qty-atc .gpi-wishlist-heart::after { content: 'Save'; font-size: 13px; font-family: var(--gpi-body); }
+  .gpi-product-tabs__nav { padding-bottom: 4px; }
+  .gpi-product-tabs__trigger { padding: 12px 14px; font-size: 12px; }
+  .gpi-fbt__bundle { padding: 16px; gap: 16px; }
+  .gpi-fbt__card { min-width: 0; width: 100%; }
+  .gpi-fbt__items { flex-direction: column; align-items: stretch; }
+  .gpi-fbt__plus { align-self: center; }
+}
+
+/* ---------- Collection page ---------- */
+
+@media (max-width: 768px) {
+  .gpi-collection-hero { min-height: 200px; padding: 32px 0; }
+  .gpi-collection-hero__title { font-size: clamp(28px, 8vw, 40px); }
+  .gpi-collection-toolbar__inner { gap: 8px; }
+  .gpi-collection-toolbar__count { font-size: 12px; }
+  .gpi-collection-toolbar__sort select { font-size: 12px; padding: 8px 28px 8px 10px; }
+  .gpi-collection-toolbar__filters { left: -16px; right: -16px; min-width: 0; max-width: none; border-radius: 0; box-shadow: var(--gpi-shadow-high); }
+}
+
+@media (max-width: 480px) {
+  .gpi-collection-grid { gap: 14px 10px; }
+  .gpi-product-card__info { padding: 12px 12px 16px; }
+  .gpi-product-card__title { font-size: 14px; }
+  .gpi-collection-empty { padding: 48px 16px; }
+}
+
+/* ---------- Cart page ---------- */
+
+@media (max-width: 768px) {
+  .gpi-cart__heading { font-size: clamp(26px, 7vw, 36px); }
+  .gpi-cart-item { padding: 16px 0; grid-template-columns: 72px 1fr; gap: 12px; }
+  .gpi-cart-item__image { width: 72px; height: 72px; }
+  .gpi-cart-item__title { font-size: 15px; }
+  .gpi-cart-item__variant { font-size: 12px; }
+  .gpi-cart-summary { padding: 20px; }
+  .gpi-cart-summary__heading { font-size: 18px; margin-bottom: 14px; }
+  .gpi-cart-summary__total strong { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .gpi-cart-item__price { font-size: 15px; padding-top: 8px; }
+  .gpi-cart-empty { padding: 48px 16px; }
+  .gpi-cart-empty__heading { font-size: clamp(22px, 7vw, 30px); }
+}
+
+/* ---------- Customer pages ---------- */
+
+@media (max-width: 768px) {
+  .gpi-customer { padding: 32px 0; }
+  .gpi-customer__shell { padding: 28px 20px; border-radius: var(--gpi-radius-card); }
+  .gpi-customer__heading { font-size: clamp(20px, 6vw, 28px); }
+  .gpi-customer__form button[type="submit"] { width: 100%; }
+
+  .gpi-account__hi { font-size: clamp(24px, 7vw, 32px); }
+  .gpi-account__nav { padding: 4px; }
+  .gpi-account__nav a { padding: 12px 14px; font-size: 13px; }
+  .gpi-account__panel { padding: 20px; }
+  .gpi-orders__row { padding: 14px 0; gap: 8px; }
+}
+
+/* ---------- Content pages (about / contact / faq / policy / intention / lookbook / locator) ---------- */
+
+@media (max-width: 768px) {
+  .gpi-page-about__hero { min-height: 280px; }
+  .gpi-page-about__title,
+  .gpi-page-contact__title,
+  .gpi-page-faqs__hero h1,
+  .gpi-page-policy__hero h1,
+  .gpi-page-intention__hero h1,
+  .gpi-page-lookbook__hero h1,
+  .gpi-page-locator__head h1 { font-size: clamp(28px, 7vw, 42px); }
+
+  .gpi-page-about__values-grid,
+  .gpi-page-about__atelier-steps,
+  .gpi-page-about__team-grid { gap: 20px; }
+
+  .gpi-page-contact__channels-grid { gap: 14px; }
+  .gpi-page-contact__channel { padding: 20px; }
+
+  .gpi-page-faqs__item { padding: 14px 16px; }
+  .gpi-page-faqs__item summary { font-size: 15px; gap: 12px; }
+
+  .gpi-page-intention__frame { width: clamp(96px, 18vw, 130px); font-size: 28px; }
+  .gpi-page-intention__tile h3 { font-size: 16px; }
+  .gpi-page-intention__tile p { font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .gpi-page-about__values-grid,
+  .gpi-page-about__atelier-steps,
+  .gpi-page-about__team-grid { grid-template-columns: 1fr; }
+  .gpi-page-about__cta-buttons { flex-direction: column; align-items: stretch; }
+  .gpi-page-about__cta-buttons .gpi-button { width: 100%; }
+  .gpi-page-locator__actions { flex-wrap: wrap; }
+}
+
+/* ---------- Blog & Article ---------- */
+
+@media (max-width: 768px) {
+  .gpi-blog__hero { padding: 24px 0; }
+  .gpi-blog__hero-title { font-size: clamp(24px, 6.5vw, 36px); }
+  .gpi-blog__hero-excerpt { font-size: 14px; }
+  .gpi-blog__hero-grid { gap: 24px; }
+
+  .gpi-article__hero { padding: 32px 0 24px; }
+  .gpi-article__hero-copy h1 { font-size: clamp(26px, 7vw, 40px); }
+  .gpi-article__meta { gap: 12px; font-size: 12px; flex-wrap: wrap; }
+  .gpi-article__meta span + span::before { margin-right: 12px; }
+  .gpi-article__body { font-size: 16px; line-height: 1.7; }
+  .gpi-article__body h2 { font-size: 22px; margin-top: 32px; }
+  .gpi-article__body h3 { font-size: 18px; }
+  .gpi-article__body p:first-of-type::first-letter { font-size: 48px; padding: 4px 8px 0 0; }
+  .gpi-article__body blockquote { font-size: 18px; padding-left: 16px; margin: 24px 0; }
+
+  .gpi-article__body-grid { gap: 16px; }
+  .gpi-article__share { width: 100%; position: static; }
+  .gpi-article__share p { display: none; }
+  .gpi-article__share ul { flex-direction: row; gap: 8px; }
+  .gpi-article__share a, .gpi-article__share button { width: 44px; height: 44px; }
+}
+
+@media (max-width: 480px) {
+  .gpi-blog__pagination { gap: 16px; font-size: 12px; flex-wrap: wrap; justify-content: center; }
+}
+
+/* ---------- Search ---------- */
+
+@media (max-width: 768px) {
+  .gpi-search__hero { padding: 32px 0 16px; }
+  .gpi-search__form { gap: 6px; }
+  .gpi-search__form input[type="search"] { padding: 12px 18px; font-size: 16px; }
+  .gpi-search__count { font-size: 13px; margin-top: 14px; }
+}
+
+/* ---------- Wishlist ---------- */
+
+@media (max-width: 768px) {
+  .gpi-wishlist__hero { padding: 32px 0; }
+  .gpi-wishlist__hero h1 { font-size: clamp(28px, 7vw, 42px); }
+  .gpi-wishlist__hero h1 span { font-size: 14px; padding: 4px 10px; margin-left: 8px; }
+}
+
+/* ---------- Edge (404, password, gift card) ---------- */
+
+@media (max-width: 768px) {
+  .gpi-404 { padding: 64px 0; }
+  .gpi-404__inner h1 { font-size: clamp(26px, 7vw, 42px); }
+  .gpi-404__cards { gap: 12px; }
+  .gpi-password__inner h1 { font-size: clamp(26px, 7vw, 40px); }
+}
+
+@media (max-width: 480px) {
+  .gpi-404__search { flex-direction: column; }
+  .gpi-404__search input { width: 100%; }
+  .gpi-404__cards { grid-template-columns: 1fr; }
+}
+
+/* ---------- Footer ---------- */
+
+@media (max-width: 768px) {
+  .gpi-footer { padding: clamp(40px, 6vw, 64px) 0 24px; }
+  .gpi-footer__top { padding-bottom: 32px; }
+  .gpi-footer__col-heading { margin-bottom: 12px; }
+  .gpi-footer__legal { gap: 16px; }
+  .gpi-footer__legal-left { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .gpi-footer__policy-list { gap: 12px; }
+  .gpi-footer__legal-right { width: 100%; justify-content: space-between; }
+}
+
+@media (max-width: 480px) {
+  .gpi-footer__cols { grid-template-columns: 1fr; gap: 24px; }
+  .gpi-footer__social a { width: 40px; height: 40px; }
+}
+
+/* ---------- Header (additional small-screen polish, layered on top of component-gpi-header.css) ---------- */
+
+@media (max-width: 768px) {
+  /* On mobile the nav row is hidden; nav-icons appear in the mobile drawer instead.
+     Make sure the off-canvas drawer is comfortable to thumb-scroll. */
+  .gpi-header__mobile-list > li > a {
+    min-height: 52px;
+    padding: 14px 4px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  .gpi-header, .gpi-footer, .gpi-newsletter, .gpi-product-tabs__nav,
+  .gpi-cart-summary__pay, .gpi-cart-summary__secure,
+  .gpi-product__qty-atc, .gpi-product-rec, .gpi-fbt {
+    display: none !important;
+  }
+  .gpi-container { max-width: none; padding: 0; }
+}

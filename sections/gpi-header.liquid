@@ -1,4 +1,4 @@
-{%- comment -%} Section: gpi-header — three-row layout with announce strip + currency, oversized centered logo, nav + utility cluster {%- endcomment -%}
+{%- comment -%} Section: gpi-header — three-row layout with announce strip + currency, oversized centered logo, nav with per-item icons + utility cluster {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'component-gpi-header.css' | asset_url }}">
 
@@ -12,11 +12,30 @@
     assign transparent_cls = ' gpi-header--transparent'
   endif
   assign logo_max = section.settings.logo_max_height | default: 44
+
+  comment
+    Build a lookup of nav-icon blocks keyed by handleize(label) so
+    we can match against the linklist's link.handle / link.title.
+  endcomment
+  assign icon_keys = ''
+  assign icon_urls = ''
+  for block in section.blocks
+    if block.type == 'nav_icon' and block.settings.image != blank
+      assign key = block.settings.match_label | handleize
+      assign icon_keys = icon_keys | append: '|' | append: key
+      assign icon_urls = icon_urls | append: '|' | append: block.settings.image | image_url: width: 80
+    endif
+  endfor
+  assign icon_key_arr = icon_keys | split: '|'
+  assign icon_url_arr = icon_urls | split: '|'
 -%}
 
 <header class="gpi-header{{ sticky_cls }}{{ transparent_cls }}" data-gpi-header role="banner">
 
   {%- if section.blocks.size > 0 -%}
+    {%- assign announce_count = 0 -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'announcement' -%}{%- assign announce_count = announce_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {%- if announce_count > 0 -%}
     <div class="gpi-header__row gpi-header__row--announce">
       <div class="gpi-container gpi-header__announce">
         <div class="gpi-header__announce-track" data-gpi-announce>
@@ -33,12 +52,13 @@
         {%- render 'gpi-currency-switcher' -%}
       </div>
     </div>
+    {%- endif -%}
   {%- endif -%}
 
   <div class="gpi-header__row gpi-header__row--brand">
     <div class="gpi-container gpi-header__brand-inner">
       <button class="gpi-header__menu-toggle" type="button" aria-label="Open menu" aria-controls="gpi-mobile-nav" data-gpi-menu-toggle>
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
       <a href="{{ routes.root_url }}" class="gpi-header__logo" aria-label="{{ shop.name }} home">
         {%- if section.settings.logo != blank -%}
@@ -61,20 +81,20 @@
       <div class="gpi-header__utility">
         {%- if section.settings.show_search -%}
           <button class="gpi-header__icon-btn" type="button" aria-label="Open search" data-gpi-search-toggle>
-            <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           </button>
         {%- endif -%}
         <a class="gpi-header__icon-btn gpi-header__wishlist" href="/pages/wishlist" aria-label="Wishlist">
-          <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M12 21s-7-4.35-7-10a4.5 4.5 0 018-2.83A4.5 4.5 0 0119 11c0 5.65-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path d="M12 21s-7-4.35-7-10a4.5 4.5 0 018-2.83A4.5 4.5 0 0119 11c0 5.65-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
           <span class="gpi-header__badge" data-gpi-wishlist-count hidden>0</span>
         </a>
         {%- if section.settings.show_account -%}
           <a class="gpi-header__icon-btn" href="{% if customer %}/account{% else %}/account/login{% endif %}" aria-label="Account">
-            <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           </a>
         {%- endif -%}
         <a class="gpi-header__icon-btn gpi-header__cart" href="{{ routes.cart_url }}" aria-label="Cart">
-          <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M5 6h14l-1.5 11a2 2 0 01-2 1.7H8.5A2 2 0 016.5 17L5 6zM9 6V4a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path d="M5 6h14l-1.5 11a2 2 0 01-2 1.7H8.5A2 2 0 016.5 17L5 6zM9 6V4a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
           <span class="gpi-header__badge" data-gpi-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
         </a>
       </div>
@@ -86,13 +106,23 @@
       <nav class="gpi-header__nav" aria-label="Primary">
         {%- if section.settings.main_menu != blank -%}
           {%- assign menu = linklists[section.settings.main_menu] -%}
-          <ul class="gpi-header__nav-list" role="list">
+          <ul class="gpi-header__nav-list" role="list" data-gpi-nav-list>
             {%- for link in menu.links -%}
+              {%- assign link_key = link.title | handleize -%}
+              {%- assign icon_url = '' -%}
+              {%- for k in icon_key_arr -%}
+                {%- if k == link_key and k != '' -%}
+                  {%- assign icon_url = icon_url_arr[forloop.index0] -%}
+                {%- endif -%}
+              {%- endfor -%}
               <li class="gpi-header__nav-item{% if link.links.size > 0 %} gpi-header__nav-item--has-mega{% endif %}">
                 <a href="{{ link.url }}" class="gpi-header__nav-link"{% if link.links.size > 0 %} aria-haspopup="true" aria-expanded="false"{% endif %}>
-                  {{ link.title }}
+                  {%- if icon_url != '' -%}
+                    <img src="{{ icon_url }}" alt="" class="gpi-header__nav-icon" width="28" height="28" loading="lazy">
+                  {%- endif -%}
+                  <span class="gpi-header__nav-label">{{ link.title }}</span>
                   {%- if link.links.size > 0 -%}
-                    <svg viewBox="0 0 12 8" aria-hidden="true" width="10" height="6"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <svg class="gpi-header__nav-chev" viewBox="0 0 12 8" aria-hidden="true" width="10" height="6"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                   {%- endif -%}
                 </a>
                 {%- if link.links.size > 0 -%}{%- render 'gpi-mega-menu', linklist: link.links -%}{%- endif -%}
@@ -118,15 +148,26 @@
 
   <div class="gpi-header__mobile-nav" id="gpi-mobile-nav" data-gpi-mobile-nav hidden>
     <div class="gpi-header__mobile-inner">
-      <button class="gpi-header__icon-btn" type="button" aria-label="Close menu" data-gpi-menu-close>
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </button>
+      <div class="gpi-header__mobile-head">
+        <span class="gpi-header__mobile-title">Menu</span>
+        <button class="gpi-header__icon-btn" type="button" aria-label="Close menu" data-gpi-menu-close>
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
       {%- if section.settings.main_menu != blank -%}
         {%- assign menu = linklists[section.settings.main_menu] -%}
         <ul class="gpi-header__mobile-list" role="list">
           {%- for link in menu.links -%}
+            {%- assign link_key = link.title | handleize -%}
+            {%- assign icon_url = '' -%}
+            {%- for k in icon_key_arr -%}
+              {%- if k == link_key and k != '' -%}{%- assign icon_url = icon_url_arr[forloop.index0] -%}{%- endif -%}
+            {%- endfor -%}
             <li>
-              <a href="{{ link.url }}">{{ link.title }}</a>
+              <a href="{{ link.url }}">
+                {%- if icon_url != '' -%}<img src="{{ icon_url }}" alt="" width="32" height="32" loading="lazy">{%- endif -%}
+                <span>{{ link.title }}</span>
+              </a>
               {%- if link.links.size > 0 -%}
                 <ul role="list">
                   {%- for child in link.links -%}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endfor -%}
@@ -167,6 +208,16 @@
       "settings": [
         {"type": "text", "id": "text", "label": "Message", "default": "Free India shipping above ₹2,999"},
         {"type": "url", "id": "link", "label": "Link (optional)"}
+      ]
+    },
+    {
+      "type": "nav_icon",
+      "name": "Nav icon",
+      "limit": 24,
+      "settings": [
+        {"type": "paragraph", "content": "Adds a small icon next to a top-level menu link. Match Label must exactly equal the menu link title (case- and space-insensitive — internally handleized)."},
+        {"type": "text", "id": "match_label", "label": "Match label (must equal menu link title)"},
+        {"type": "image_picker", "id": "image", "label": "Icon image (square, 56–120 px PNG/WebP with transparency)"}
       ]
     }
   ],
