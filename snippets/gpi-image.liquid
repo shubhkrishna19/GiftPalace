@@ -1,0 +1,35 @@
+{%- comment -%}
+  Snippet: gpi-image — responsive image with srcset/sizes/lazy/dims.
+  Params:
+    image (required) — Image object
+    alt (optional)   — defaults to image.alt
+    class (optional)
+    sizes (optional) — defaults below
+    loading (optional, default 'lazy')
+    fetchpriority (optional)
+    widths (optional, default 360,540,720,900,1200,1500,1800)
+{%- endcomment -%}
+{%- liquid
+  assign img            = image
+  assign alt_text       = alt | default: img.alt | default: ''
+  assign img_class      = class | default: ''
+  assign sizes_attr     = sizes | default: '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw'
+  assign loading_attr   = loading | default: 'lazy'
+  assign widths_csv     = widths | default: '360,540,720,900,1200,1500,1800'
+  assign width_list     = widths_csv | split: ','
+  assign h              = img.height
+  assign w              = img.width
+-%}
+{%- if img != blank -%}
+<img
+  src="{{ img | image_url: width: 720 }}"
+  srcset="{%- for ww in width_list -%}{{ img | image_url: width: ww }} {{ ww }}w{%- unless forloop.last %},{% endunless -%}{%- endfor -%}"
+  sizes="{{ sizes_attr }}"
+  alt="{{ alt_text | escape }}"
+  width="{{ w }}"
+  height="{{ h }}"
+  loading="{{ loading_attr }}"
+  decoding="async"
+  {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %}
+  class="{{ img_class }}">
+{%- endif -%}

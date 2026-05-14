@@ -1,0 +1,24 @@
+{%- comment -%}
+  Snippet: gpi-mega-menu — sub-menu panel for a top-level header link.
+  Params: linklist (required, the parent link's .links collection)
+{%- endcomment -%}
+{%- if linklist.size > 0 -%}
+<div class="gpi-mega" data-gpi-mega>
+  <div class="gpi-mega__inner gpi-container">
+    <div class="gpi-mega__cols">
+      {%- for child in linklist -%}
+        <div class="gpi-mega__col">
+          <h4 class="gpi-mega__heading"><a href="{{ child.url }}">{{ child.title }}</a></h4>
+          {%- if child.links.size > 0 -%}
+            <ul class="gpi-mega__list" role="list">
+              {%- for grand in child.links -%}
+                <li><a href="{{ grand.url }}">{{ grand.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}

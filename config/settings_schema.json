@@ -221,6 +221,10 @@
         "label": "t:sections.header.settings.header_layout.layout",
         "options": [
           {
+            "value": "gpi",
+            "label": "GPI (Gift Palace India)"
+          },
+          {
             "value": "01",
             "label": "t:sections.header.settings.header_layout.label__1"
           },
@@ -269,7 +273,7 @@
             "label": "t:sections.header.settings.header_layout.label__12"
           }
         ],
-        "default": "01"
+        "default": "gpi"
       },
       {
         "type": "checkbox",
@@ -288,6 +292,10 @@
         "label": "t:sections.footer.settings.footer_layout.layout",
         "options": [
           {
+            "value": "gpi",
+            "label": "GPI (Gift Palace India)"
+          },
+          {
             "value": "01",
             "label": "t:sections.footer.settings.footer_layout.label__1"
           },
@@ -304,7 +312,7 @@
             "label": "t:sections.footer.settings.footer_layout.label__4"
           }
         ],
-        "default": "01"
+        "default": "gpi"
       },
       {
         "type": "header",

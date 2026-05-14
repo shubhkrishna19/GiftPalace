@@ -1,0 +1,35 @@
+{%- comment -%}
+  Snippet: gpi-price — price + compare-at + EMI + Save% + tax line.
+  Params: product (required) OR variant (required), show_emi (default true), show_tax (default true)
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign v = variant
+  else
+    assign v = product.selected_or_first_available_variant
+  endif
+  assign cur = v.price
+  assign cmp = v.compare_at_price
+  assign on_sale = false
+  if cmp > cur
+    assign on_sale = true
+    assign save_pct = cmp | minus: cur | times: 100.0 | divided_by: cmp | round
+  endif
+  assign emi_threshold = 300000
+  assign show_emi = show_emi | default: true
+  assign show_tax = show_tax | default: true
+-%}
+<div class="gpi-price{% if on_sale %} gpi-price--sale{% endif %}">
+  <span class="gpi-price__current">{{ cur | money }}</span>
+  {%- if on_sale -%}
+    <s class="gpi-price__compare">{{ cmp | money }}</s>
+    <span class="gpi-price__save">Save {{ save_pct }}%</span>
+  {%- endif -%}
+  {%- if show_emi and cur >= emi_threshold -%}
+    {%- assign emi_amt = cur | divided_by: 6 | money -%}
+    <span class="gpi-price__emi">EMI from {{ emi_amt }}/mo</span>
+  {%- endif -%}
+  {%- if show_tax -%}
+    <span class="gpi-price__tax">Tax included.</span>
+  {%- endif -%}
+</div>

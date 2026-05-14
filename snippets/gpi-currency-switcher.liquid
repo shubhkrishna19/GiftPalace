@@ -1,0 +1,32 @@
+{%- comment -%}
+  Snippet: gpi-currency-switcher — dropdown currency picker (announcement bar / footer).
+  Wired by assets/gpi-currency.js. Persists choice in localStorage + ?currency=XYZ URL.
+  No params required.
+{%- endcomment -%}
+{%- liquid
+  assign currencies = 'INR,USD,GBP,AED,EUR' | split: ','
+  assign flags      = 'IN,US,GB,AE,EU' | split: ','
+  assign symbols    = '₹,$,£,د.إ,€' | split: ','
+  assign default_currency = 'INR'
+-%}
+<div class="gpi-currency" data-gpi-currency>
+  <button class="gpi-currency__trigger" type="button" aria-haspopup="listbox" aria-expanded="false" data-gpi-currency-trigger>
+    <span class="gpi-currency__flag" data-gpi-currency-flag aria-hidden="true">{{ flags[0] }}</span>
+    <span class="gpi-currency__code" data-gpi-currency-code>{{ default_currency }}</span>
+    <svg class="gpi-currency__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <ul class="gpi-currency__menu" role="listbox" hidden data-gpi-currency-menu>
+    {%- for code in currencies -%}
+      <li role="option"
+          data-gpi-currency-option
+          data-currency="{{ code }}"
+          data-flag="{{ flags[forloop.index0] }}"
+          data-symbol="{{ symbols[forloop.index0] }}"
+          tabindex="0">
+        <span class="gpi-currency__flag" aria-hidden="true">{{ flags[forloop.index0] }}</span>
+        <span class="gpi-currency__code">{{ code }}</span>
+        <span class="gpi-currency__symbol">{{ symbols[forloop.index0] }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>

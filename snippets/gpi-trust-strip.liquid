@@ -1,0 +1,34 @@
+{%- comment -%}
+  Snippet: gpi-trust-strip — 4 trust cues (icon + label + microcopy).
+  Defaults to: BIS Hallmarked, Free India Shipping, 7-Day Returns, Certified Gemstones.
+  Params: variant ('default'/'product'/'cart'), accept overrides per cue.
+{%- endcomment -%}
+{%- liquid
+  assign variant_cls = variant | default: 'default'
+  assign c1_label = cue_1_label | default: 'BIS Hallmarked'
+  assign c1_text  = cue_1_text  | default: 'Certified authenticity on every piece.'
+  assign c2_label = cue_2_label | default: 'Free India shipping'
+  assign c2_text  = cue_2_text  | default: 'On orders above ₹2,999.'
+  assign c3_label = cue_3_label | default: '7-day returns'
+  assign c3_text  = cue_3_text  | default: 'No questions asked.'
+  assign c4_label = cue_4_label | default: 'Certified gemstones'
+  assign c4_text  = cue_4_text  | default: 'Lab-tested & GJEPC verified.'
+-%}
+<ul class="gpi-trust-strip gpi-trust-strip--{{ variant_cls }}" role="list">
+  <li class="gpi-trust-strip__item">
+    <svg class="gpi-trust-strip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.8 6.4 19.5l1.1-6.3L3 8.9l6-.9 3-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <div><strong>{{ c1_label }}</strong><span>{{ c1_text }}</span></div>
+  </li>
+  <li class="gpi-trust-strip__item">
+    <svg class="gpi-trust-strip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h14l4 4v6h-3a2 2 0 01-4 0H10a2 2 0 01-4 0H3V7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <div><strong>{{ c2_label }}</strong><span>{{ c2_text }}</span></div>
+  </li>
+  <li class="gpi-trust-strip__item">
+    <svg class="gpi-trust-strip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 11-3.5-7.1M21 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><strong>{{ c3_label }}</strong><span>{{ c3_text }}</span></div>
+  </li>
+  <li class="gpi-trust-strip__item">
+    <svg class="gpi-trust-strip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 110-18 9 9 0 010 18z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><strong>{{ c4_label }}</strong><span>{{ c4_text }}</span></div>
+  </li>
+</ul>

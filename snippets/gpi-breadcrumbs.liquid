@@ -1,0 +1,57 @@
+{%- comment -%}
+  Snippet: gpi-breadcrumbs — accessible breadcrumb + BreadcrumbList JSON-LD.
+  Auto-derives from template + current object.
+{%- endcomment -%}
+{%- liquid
+  assign crumbs = '' | split: ','
+  assign crumbs = crumbs | push: 'Home|/'
+
+  case template.name
+    when 'product'
+      if product.collections.first
+        assign coll = product.collections.first
+        assign crumbs = crumbs | push: coll.title | append: '|' | append: coll.url
+      endif
+      assign crumbs = crumbs | push: product.title | append: '|' | append: product.url
+    when 'collection'
+      assign crumbs = crumbs | push: collection.title | append: '|' | append: collection.url
+    when 'article'
+      assign crumbs = crumbs | push: blog.title | append: '|' | append: blog.url
+      assign crumbs = crumbs | push: article.title | append: '|' | append: article.url
+    when 'blog'
+      assign crumbs = crumbs | push: blog.title | append: '|' | append: blog.url
+    when 'page'
+      assign crumbs = crumbs | push: page.title | append: '|' | append: page.url
+    when 'search'
+      assign crumbs = crumbs | push: 'Search results|/search'
+  endcase
+-%}
+<nav class="gpi-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="gpi-breadcrumbs__list">
+    {%- for c in crumbs -%}
+      {%- assign parts = c | split: '|' -%}
+      {%- assign label = parts[0] -%}
+      {%- assign url = parts[1] -%}
+      <li class="gpi-breadcrumbs__item">
+        {%- if forloop.last -%}
+          <span aria-current="page">{{ label }}</span>
+        {%- else -%}
+          <a href="{{ url }}">{{ label }}</a>
+          <span class="gpi-breadcrumbs__sep" aria-hidden="true">›</span>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ol>
+</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {%- for c in crumbs -%}
+      {%- assign parts = c | split: '|' -%}
+      {"@type":"ListItem","position":{{ forloop.index }},"name":"{{ parts[0] | escape }}","item":"{{ shop.url }}{{ parts[1] }}"}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>

@@ -7,6 +7,8 @@
 {%- endif -%}
 
 {%- case settings.footer_layout -%}
+	{%- when 'gpi' -%}
+		{% section 'gpi-footer' %}
 	{%- when '01' -%}
 		{% section 'footer' %}
 	{%- when '02' -%}

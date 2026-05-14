@@ -1,0 +1,21 @@
+{%- comment -%}
+  Snippet: gpi-wishlist-heart — heart toggle for saving a product.
+  Wired by assets/gpi-wishlist.js.
+  Params: product_id (req), product_handle (req), size (sm/md/lg default md)
+{%- endcomment -%}
+{%- liquid
+  assign s = size | default: 'md'
+-%}
+<button class="gpi-wishlist-heart gpi-wishlist-heart--{{ s }}"
+        type="button"
+        data-gpi-wishlist-toggle
+        data-product-id="{{ product_id }}"
+        data-product-handle="{{ product_handle }}"
+        aria-pressed="false"
+        aria-label="Save to wishlist">
+  <svg class="gpi-wishlist-heart__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 21s-7-4.35-7-10a4.5 4.5 0 018-2.83A4.5 4.5 0 0119 11c0 5.65-7 10-7 10z"
+          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  </svg>
+  <span class="visually-hidden">Save to wishlist</span>
+</button>

@@ -1,0 +1,58 @@
+{%- comment -%}
+  Snippet: gpi-product-card — canonical product card used across collection, search, related, FBT, recently-viewed, cart upsell, intention pages.
+  Params:
+    product (required)
+    aspect_ratio (default '4/5')
+    show_stone_badge (default true)
+    show_quick_add (default true)
+    show_wishlist (default true)
+    sizes (optional, default '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw')
+{%- endcomment -%}
+{%- liquid
+  assign ar      = aspect_ratio | default: '4/5'
+  assign showsb  = show_stone_badge
+  if showsb == nil
+    assign showsb = true
+  endif
+  assign showqa  = show_quick_add
+  if showqa == nil
+    assign showqa = true
+  endif
+  assign showwl  = show_wishlist
+  if showwl == nil
+    assign showwl = true
+  endif
+  assign sizes_  = sizes | default: '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw'
+  assign stone   = product.metafields.gpi.stone_type
+  assign rating  = product.metafields.judgeme.rating | default: product.metafields.reviews.rating
+  assign rcount  = product.metafields.judgeme.review_count | default: product.metafields.reviews.rating_count
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+-%}
+<article class="gpi-product-card" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="gpi-product-card__link" aria-label="{{ product.title | escape }}">
+    <div class="gpi-product-card__media" style="--aspect-ratio: {{ ar }};">
+      {%- render 'gpi-image', image: product.featured_image, alt: product.title, sizes: sizes_, loading: 'lazy', class: 'gpi-product-card__image' -%}
+      {%- if showsb and stone != blank -%}{%- render 'gpi-stone-badge', stone: stone -%}{%- endif -%}
+      {%- if on_sale -%}<span class="gpi-product-card__sale">Sale</span>{%- endif -%}
+      {%- unless product.available -%}<span class="gpi-product-card__sold">Sold out</span>{%- endunless -%}
+    </div>
+    <div class="gpi-product-card__info">
+      <h3 class="gpi-product-card__title">{{ product.title }}</h3>
+      {%- render 'gpi-price', product: product, show_emi: false, show_tax: false -%}
+      {%- if rating -%}{%- render 'gpi-rating-stars', rating: rating, count: rcount, size: 'sm' -%}{%- endif -%}
+    </div>
+  </a>
+  {%- if showwl -%}
+    {%- render 'gpi-wishlist-heart', product_id: product.id, product_handle: product.handle, size: 'sm' -%}
+  {%- endif -%}
+  {%- if showqa and product.available -%}
+    {%- if product.variants.size == 1 -%}
+      <button class="gpi-product-card__quickadd" type="button" data-gpi-quick-add="{{ product.variants.first.id }}">Quick add</button>
+    {%- else -%}
+      <a href="{{ product.url }}" class="gpi-product-card__quickadd">Select options</a>
+    {%- endif -%}
+  {%- endif -%}
+</article>

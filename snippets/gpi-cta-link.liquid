@@ -1,0 +1,19 @@
+{%- comment -%}
+  Snippet: gpi-cta-link — styled link/button.
+  Params: href (req), label (req), variant (primary/secondary/ghost/text), size (sm/md/lg), block (bool), icon (svg name), aria_label
+{%- endcomment -%}
+{%- liquid
+  assign v       = variant | default: 'primary'
+  assign s       = size | default: 'md'
+  assign blk_cls = ''
+  if block
+    assign blk_cls = ' gpi-button--block'
+  endif
+  assign aria    = aria_label | default: label
+-%}
+<a href="{{ href }}" class="gpi-button gpi-button--{{ v }} gpi-button--{{ s }}{{ blk_cls }}" aria-label="{{ aria | escape }}">
+  <span class="gpi-button__label">{{ label }}</span>
+  {%- if icon == 'arrow' -%}
+    <svg class="gpi-button__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- endif -%}
+</a>

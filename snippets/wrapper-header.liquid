@@ -1,10 +1,14 @@
+{%- if settings.header_layout != 'gpi' -%}
 {% section 'announcement-bar' %}
 
 <div class="dark-mode-toggle-wrapper" aria-hidden="false">
   {% render 'dark-mode-toggle' %}
 </div>
+{%- endif -%}
 
 {%- case settings.header_layout -%}
+	{%- when 'gpi' -%}
+		{% section 'gpi-header' %}
 	{%- when '01' -%}
 		{% section 'header' %}
 	{%- when '02' -%}

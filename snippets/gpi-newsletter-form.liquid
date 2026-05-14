@@ -1,0 +1,31 @@
+{%- comment -%}
+  Snippet: gpi-newsletter-form — email capture using Shopify customer form.
+  Params: placeholder (default 'Your email'), submit_label (default 'Subscribe'), heading (optional), lede (optional)
+{%- endcomment -%}
+{%- liquid
+  assign ph = placeholder | default: 'Your email'
+  assign btn = submit_label | default: 'Subscribe'
+-%}
+<div class="gpi-newsletter">
+  {%- if heading != blank -%}<h3 class="gpi-newsletter__heading">{{ heading }}</h3>{%- endif -%}
+  {%- if lede != blank -%}<p class="gpi-newsletter__lede">{{ lede }}</p>{%- endif -%}
+  {% form 'customer', class: 'gpi-newsletter__form' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <label class="visually-hidden" for="gpi-newsletter-email-{{ section.id | default: 'g' }}">Email address</label>
+    <div class="gpi-newsletter__row">
+      <input id="gpi-newsletter-email-{{ section.id | default: 'g' }}"
+             class="gpi-newsletter__input"
+             type="email"
+             name="contact[email]"
+             autocomplete="email"
+             required
+             placeholder="{{ ph | escape }}">
+      <input type="text" name="contact[gpi_hp]" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+      <button type="submit" class="gpi-button gpi-button--primary gpi-newsletter__submit">{{ btn }}</button>
+    </div>
+    <div class="gpi-newsletter__feedback" aria-live="polite">
+      {%- if form.posted_successfully? -%}<p class="gpi-newsletter__success">Thanks for joining the Gift Palace circle.</p>{%- endif -%}
+      {%- if form.errors -%}<p class="gpi-newsletter__error">{{ form.errors | default_errors }}</p>{%- endif -%}
+    </div>
+  {% endform %}
+</div>

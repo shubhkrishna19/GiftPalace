@@ -1,0 +1,7 @@
+{%- comment -%}
+  Snippet: gpi-stone-badge — chip showing stone type with per-stone color.
+  Params: stone (string, required)
+{%- endcomment -%}
+{%- if stone != blank -%}
+<span class="gpi-stone-badge" data-stone="{{ stone | handleize }}">{{ stone }}</span>
+{%- endif -%}
