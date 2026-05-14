@@ -18,10 +18,35 @@
           <li class="gpi-cert-stones__card"{{ block.shopify_attributes }}>
             <a href="{{ target }}" class="gpi-cert-stones__link">
               <figure class="gpi-cert-stones__media">
+                {%- liquid
+                  assign stone_key = block.settings.title | downcase
+                  assign fallback_asset = ''
+                  if stone_key contains 'ruby' or stone_key contains 'manik'
+                    assign fallback_asset = 'gpi-stone-ruby.webp'
+                  elsif stone_key contains 'neelam' or stone_key contains 'blue sapphire'
+                    assign fallback_asset = 'gpi-stone-neelam.webp'
+                  elsif stone_key contains 'emerald' or stone_key contains 'panna'
+                    assign fallback_asset = 'gpi-stone-emerald.webp'
+                  elsif stone_key contains 'pukhraj' or stone_key contains 'yellow sapphire'
+                    assign fallback_asset = 'gpi-stone-pukhraj.webp'
+                  elsif stone_key contains 'diamond' or stone_key contains 'heera'
+                    assign fallback_asset = 'gpi-stone-diamond.webp'
+                  elsif stone_key contains 'pearl' or stone_key contains 'moti'
+                    assign fallback_asset = 'gpi-stone-pearl.webp'
+                  elsif stone_key contains 'coral' or stone_key contains 'moonga'
+                    assign fallback_asset = 'gpi-stone-coral.webp'
+                  elsif stone_key contains 'gomed' or stone_key contains 'hessonite'
+                    assign fallback_asset = 'gpi-stone-gomed.webp'
+                  elsif stone_key contains 'lehsuniya' or stone_key contains 'cat'
+                    assign fallback_asset = 'gpi-stone-lehsuniya.webp'
+                  endif
+                -%}
                 {%- if block.settings.image -%}
                   {%- render 'gpi-image', image: block.settings.image, alt: block.settings.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
                 {%- elsif coll.image -%}
                   {%- render 'gpi-image', image: coll.image, alt: coll.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
+                {%- elsif fallback_asset != '' -%}
+                  <img src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="1024" height="1024" loading="lazy">
                 {%- else -%}
                   <span class="gpi-cert-stones__placeholder" aria-hidden="true">{{ block.settings.glyph | default: '◆' }}</span>
                 {%- endif -%}

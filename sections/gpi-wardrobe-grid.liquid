@@ -18,11 +18,22 @@
           {%- assign img = block.settings.image | default: coll.image -%}
           {%- assign featured = coll.products.first -%}
           {%- if img == blank and featured.featured_image -%}{%- assign img = featured.featured_image -%}{%- endif -%}
+          {%- liquid
+            assign tile_handle = block.settings.title | default: coll.title | handleize
+            assign tile_asset = 'gpi-cat-' | append: tile_handle | append: '.webp'
+            assign tile_alts = ',necklaces,bracelets,rings,earrings,mala,gemstones,loose-gemstones,pendants,raw-crystals,mala-beads,'
+            assign has_known_asset = false
+            if tile_alts contains tile_handle
+              assign has_known_asset = true
+            endif
+          -%}
           <li class="gpi-wardrobe__tile"{{ block.shopify_attributes }}>
             <a href="{{ target }}" class="gpi-wardrobe__link">
               <div class="gpi-wardrobe__media">
                 {%- if img -%}
                   {%- render 'gpi-image', image: img, alt: block.settings.title | default: coll.title, sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', loading: 'lazy' -%}
+                {%- elsif has_known_asset -%}
+                  <img src="{{ tile_asset | asset_url }}" alt="{{ block.settings.title | default: coll.title | escape }}" width="928" height="1152" loading="lazy">
                 {%- else -%}
                   <span class="gpi-wardrobe__glyph" aria-hidden="true">{{ block.settings.glyph | default: '✦' }}</span>
                 {%- endif -%}
