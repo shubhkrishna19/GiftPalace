@@ -332,6 +332,21 @@
   .gpi-product-tabs__trigger { white-space: nowrap; }
 }
 
+/* ---------- Reviews anchor on first-fold ---------- */
+.gpi-product__reviews-anchor {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none; color: inherit;
+  transition: color var(--gpi-transition);
+}
+.gpi-product__reviews-anchor:hover { color: var(--gpi-gold); }
+.gpi-product__reviews-text {
+  font-size: 13px;
+  color: var(--gpi-text-muted);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.gpi-product__reviews-anchor:hover .gpi-product__reviews-text { color: var(--gpi-gold); }
+
 /* ---------- Certificate download CTA ---------- */
 .gpi-product__cert-dl {
   display: inline-flex; align-items: center; gap: 8px;

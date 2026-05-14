@@ -54,8 +54,13 @@
         <h1 class="gpi-product__title">{{ product.title }}</h1>
 
         <div class="gpi-product__meta-row">
-          {%- if product.metafields.judgeme.rating -%}
-            {%- render 'gpi-rating-stars', rating: product.metafields.judgeme.rating, count: product.metafields.judgeme.review_count, size: 'md' -%}
+          {%- assign rating = product.metafields.judgeme.rating | default: product.metafields.reviews.rating | default: 0 -%}
+          {%- assign rcount = product.metafields.judgeme.review_count | default: product.metafields.reviews.rating_count | default: 0 -%}
+          {%- if rating > 0 -%}
+            <a href="#gpi-tab-reviews" class="gpi-product__reviews-anchor" aria-label="Jump to reviews">
+              {%- render 'gpi-rating-stars', rating: rating, count: rcount, size: 'md' -%}
+              {%- if rcount > 0 -%}<span class="gpi-product__reviews-text">Read {{ rcount }} review{% if rcount != 1 %}s{% endif %}</span>{%- endif -%}
+            </a>
           {%- endif -%}
           {%- if section.settings.show_sku and cur.sku != blank -%}
             <span class="gpi-product__sku">SKU {{ cur.sku }}</span>

@@ -5,11 +5,39 @@
 {%- liquid
   assign hero_image = section.settings.hero_image | default: collection.image
   assign show_breadcrumb = section.settings.show_breadcrumb
+  assign coll_handle = collection.handle
+  assign fallback_asset = ''
+  case coll_handle
+    when 'necklaces'           then assign fallback_asset = 'gpi-cat-necklaces.webp'
+    when 'bracelets'           then assign fallback_asset = 'gpi-cat-bracelets.webp'
+    when 'rings'               then assign fallback_asset = 'gpi-cat-rings.webp'
+    when 'earrings'            then assign fallback_asset = 'gpi-cat-earrings.webp'
+    when 'jaap-mala'           then assign fallback_asset = 'gpi-cat-mala.webp'
+    when 'mala'                then assign fallback_asset = 'gpi-cat-mala.webp'
+    when 'gemstones'           then assign fallback_asset = 'gpi-cat-gemstones.webp'
+    when 'raw-crystals'        then assign fallback_asset = 'gpi-hero-crystal.webp'
+    when 'crystals'            then assign fallback_asset = 'gpi-hero-crystal.webp'
+    when 'rubies'              then assign fallback_asset = 'gpi-atlas-ruby.webp'
+    when 'emerald'             then assign fallback_asset = 'gpi-atlas-emerald.webp'
+    when 'panna'               then assign fallback_asset = 'gpi-atlas-emerald.webp'
+    when 'neelam'              then assign fallback_asset = 'gpi-atlas-neelam.webp'
+    when 'pukhraj'             then assign fallback_asset = 'gpi-atlas-pukhraj.webp'
+    when 'pearl'               then assign fallback_asset = 'gpi-atlas-moti.webp'
+    when 'celestial-heirlooms' then assign fallback_asset = 'gpi-mean-zodiac.webp'
+    when 'zodiac'              then assign fallback_asset = 'gpi-mean-zodiac.webp'
+    when 'gift-sets'           then assign fallback_asset = 'gpi-most-gifted-bg.webp'
+    else                            assign fallback_asset = 'gpi-hero-wearing.webp'
+  endcase
 -%}
-<section class="gpi-collection-hero{% if hero_image %} gpi-collection-hero--has-image{% endif %}" aria-labelledby="gpi-collection-title">
+<section class="gpi-collection-hero gpi-collection-hero--has-image" aria-labelledby="gpi-collection-title">
   {%- if hero_image -%}
     <div class="gpi-collection-hero__media">
       {%- render 'gpi-image', image: hero_image, alt: collection.title, sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'gpi-collection-hero__img' -%}
+      <div class="gpi-collection-hero__overlay"></div>
+    </div>
+  {%- else -%}
+    <div class="gpi-collection-hero__media">
+      <img src="{{ fallback_asset | asset_url }}" alt="{{ collection.title | escape }}" class="gpi-collection-hero__img" width="1920" height="1080" loading="eager" fetchpriority="high">
       <div class="gpi-collection-hero__overlay"></div>
     </div>
   {%- endif -%}

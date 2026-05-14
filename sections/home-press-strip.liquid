@@ -1,4 +1,14 @@
-{%- comment -%} Section: home-press-strip - Compact logo strip for press, partners, or proof mentions {%- endcomment -%}
+{%- comment -%} Section: home-press-strip - Compact logo strip. Auto-hides when no logo blocks have an image (avoids empty/broken state). {%- endcomment -%}
+{%- liquid
+  assign has_real_logos = false
+  for b in section.blocks
+    if b.settings.logo_image != blank
+      assign has_real_logos = true
+      break
+    endif
+  endfor
+-%}
+{%- if has_real_logos -%}
 <link rel="stylesheet" href="{{ 'component-home-press-strip.css' | asset_url }}">
 
 <section class="home-press-strip" aria-labelledby="home-press-strip-heading">
@@ -59,6 +69,7 @@
     {% endif %}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {

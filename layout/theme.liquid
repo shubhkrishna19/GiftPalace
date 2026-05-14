@@ -42,6 +42,19 @@
             <meta name="twitter:image" content="{{ 'gpi-og-default.png' | asset_url }}">
             <meta name="twitter:card" content="summary_large_image">
         {%- endunless -%}
+        {%- comment -%} Preload hero image per template for LCP (Core Web Vitals) {%- endcomment -%}
+        {%- case template.name -%}
+            {%- when 'index' -%}
+                <link rel="preload" as="image" type="image/webp" href="{{ 'gpi-hero-wearing.webp' | asset_url }}" fetchpriority="high">
+            {%- when 'product' -%}
+                {%- if product.featured_image -%}<link rel="preload" as="image" href="{{ product.featured_image | image_url: width: 1200 }}" fetchpriority="high">{%- endif -%}
+            {%- when 'collection' -%}
+                {%- if collection.image -%}<link rel="preload" as="image" href="{{ collection.image | image_url: width: 1920 }}" fetchpriority="high">{%- endif -%}
+            {%- when '404' -%}
+                <link rel="preload" as="image" type="image/webp" href="{{ 'gpi-404-bg.webp' | asset_url }}" fetchpriority="high">
+            {%- when 'password' -%}
+                <link rel="preload" as="image" type="image/webp" href="{{ 'gpi-password-bg.webp' | asset_url }}" fetchpriority="high">
+        {%- endcase -%}
         <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
