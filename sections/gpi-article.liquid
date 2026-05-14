@@ -1,0 +1,117 @@
+{%- comment -%} Section: gpi-article — article detail (hero + body + share + related) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-blog.css' | asset_url }}">
+
+<article class="gpi-article">
+  <header class="gpi-article__hero">
+    {%- if article.image -%}
+      <div class="gpi-article__hero-media">
+        {%- render 'gpi-image', image: article.image, alt: article.title, sizes: '100vw', loading: 'eager', fetchpriority: 'high' -%}
+      </div>
+    {%- endif -%}
+    <div class="gpi-container gpi-article__hero-copy">
+      {%- render 'gpi-breadcrumbs' -%}
+      {%- if article.tags.size > 0 -%}<p class="gpi-article__tag">{{ article.tags.first }}</p>{%- endif -%}
+      <h1>{{ article.title }}</h1>
+      <p class="gpi-article__meta">
+        {%- if section.settings.show_author -%}<span>{{ article.author }}</span>{%- endif -%}
+        <span>{{ article.published_at | date: '%d %b %Y' }}</span>
+        {%- if article.metafields.gpi.read_time -%}<span>{{ article.metafields.gpi.read_time }} min read</span>{%- endif -%}
+      </p>
+    </div>
+  </header>
+
+  <section class="gpi-article__body-wrap gpi-section">
+    <div class="gpi-container gpi-article__body-grid">
+      <aside class="gpi-article__share" aria-label="Share this article">
+        <p>Share</p>
+        <ul role="list">
+          <li><a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X">X</a></li>
+          <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">f</a></li>
+          <li><a href="https://wa.me/?text={{ article.title | url_encode }}%20{{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">w</a></li>
+          <li><button type="button" data-gpi-copy-link aria-label="Copy link">⎘</button></li>
+        </ul>
+      </aside>
+      <div class="gpi-article__body rte">
+        {{ article.content }}
+      </div>
+    </div>
+  </section>
+
+  {%- if article.comments_enabled? and article.comments_count > 0 -%}
+    <section class="gpi-article__comments gpi-section">
+      <div class="gpi-container">
+        <h2>Comments ({{ article.comments_count }})</h2>
+        {%- for comment in article.comments -%}
+          <div class="gpi-article__comment">
+            <p class="gpi-article__comment-meta"><strong>{{ comment.author }}</strong> · {{ comment.created_at | date: '%d %b %Y' }}</p>
+            <div>{{ comment.content }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if blog.articles.size > 1 -%}
+    <section class="gpi-article__related gpi-section">
+      <div class="gpi-container">
+        <h2>More from the journal</h2>
+        <ul class="gpi-blog__grid" role="list">
+          {%- assign related_count = 0 -%}
+          {%- for related in blog.articles -%}
+            {%- if related.id != article.id and related_count < 3 -%}
+              <li>
+                <article class="gpi-blog-card">
+                  <a href="{{ related.url }}" class="gpi-blog-card__media">{%- if related.image -%}{%- render 'gpi-image', image: related.image, alt: related.title, sizes: '33vw', loading: 'lazy' -%}{%- endif -%}</a>
+                  <div class="gpi-blog-card__body">
+                    {%- if related.tags.size > 0 -%}<p class="gpi-blog-card__tag">{{ related.tags.first }}</p>{%- endif -%}
+                    <h2><a href="{{ related.url }}">{{ related.title }}</a></h2>
+                    <p class="gpi-blog-card__meta">{{ related.published_at | date: '%d %b %Y' }}</p>
+                  </div>
+                </article>
+              </li>
+              {%- assign related_count = related_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "image": "{{ article.image | image_url: width: 1200 | prepend: 'https:' }}",
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "dateModified": "{{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+  "author": {"@type": "Person", "name": {{ article.author | json }}},
+  "publisher": {"@type": "Organization", "name": {{ shop.name | json }}, "logo": {"@type": "ImageObject", "url": "{{ settings.share_image | image_url: width: 400 | prepend: 'https:' }}"}}
+}
+</script>
+
+<script>
+(function () {
+  var btn = document.querySelector('[data-gpi-copy-link]');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      var orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(function () { btn.textContent = orig; }, 1500);
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "GPI Article",
+  "settings": [
+    {"type": "checkbox", "id": "show_author", "label": "Show author", "default": true}
+  ],
+  "presets": [{"name": "GPI Article"}]
+}
+{% endschema %}

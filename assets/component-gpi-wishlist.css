@@ -1,0 +1,38 @@
+/* GPI Wishlist */
+.gpi-wishlist__hero {
+  background: var(--gpi-surface-ivory);
+  padding: clamp(40px, 5vw, 80px) 0;
+}
+.gpi-wishlist__hero h1 {
+  font-family: var(--gpi-heading);
+  font-size: clamp(32px, 4vw, 56px);
+  margin: 12px 0;
+  color: var(--gpi-ink-strong);
+}
+.gpi-wishlist__hero h1 span {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 6px 14px;
+  background: var(--gpi-ink-strong);
+  color: var(--gpi-surface-canvas);
+  border-radius: var(--gpi-radius-pill);
+  font-size: 18px;
+  vertical-align: middle;
+}
+.gpi-wishlist__lede {
+  color: var(--gpi-text-muted);
+  max-width: 56ch;
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.gpi-wishlist__grid-wrap .gpi-collection-grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 20px;
+}
+@media (max-width: 1024px) {
+  .gpi-wishlist__grid-wrap .gpi-collection-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .gpi-wishlist__grid-wrap .gpi-collection-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
+}

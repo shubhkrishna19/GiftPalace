@@ -1,0 +1,85 @@
+{%- comment -%} Section: gpi-blog — blog index (hero + grid + newsletter) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-blog.css' | asset_url }}">
+
+<article class="gpi-blog">
+  {%- assign featured = blog.articles.first -%}
+  {%- if featured -%}
+    <header class="gpi-blog__hero">
+      <div class="gpi-container gpi-blog__hero-grid">
+        <a class="gpi-blog__hero-media" href="{{ featured.url }}">
+          {%- if featured.image -%}{%- render 'gpi-image', image: featured.image, alt: featured.title, sizes: '(min-width:1024px) 60vw, 100vw', loading: 'eager', fetchpriority: 'high' -%}{%- endif -%}
+        </a>
+        <div class="gpi-blog__hero-copy">
+          <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Journal' }}</p>
+          <h1 class="gpi-blog__hero-title"><a href="{{ featured.url }}">{{ featured.title }}</a></h1>
+          <p class="gpi-blog__hero-excerpt">{{ featured.excerpt_or_content | strip_html | truncate: 240 }}</p>
+          <p class="gpi-blog__meta">{{ featured.published_at | date: '%d %b %Y' }} · {{ featured.author }}{% if featured.metafields.gpi.read_time %} · {{ featured.metafields.gpi.read_time }} min read{% endif %}</p>
+          <a href="{{ featured.url }}" class="gpi-button gpi-button--secondary gpi-button--md">Read article</a>
+        </div>
+      </div>
+    </header>
+  {%- endif -%}
+
+  {%- if blog.all_tags.size > 0 -%}
+    <nav class="gpi-blog__tags" aria-label="Filter by tag">
+      <div class="gpi-container">
+        <ul role="list">
+          <li><a href="{{ blog.url }}"{% unless current_tags %} class="is-active"{% endunless %}>All</a></li>
+          {%- for tag in blog.all_tags -%}
+            <li><a href="{{ blog.url }}/tagged/{{ tag | handleize }}"{% if current_tags contains tag %} class="is-active"{% endif %}>{{ tag }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </nav>
+  {%- endif -%}
+
+  <section class="gpi-blog__grid-wrap gpi-section">
+    <div class="gpi-container">
+      {%- paginate blog.articles by 9 -%}
+        <ul class="gpi-blog__grid" role="list">
+          {%- for article in blog.articles offset: 1 -%}
+            <li>
+              <article class="gpi-blog-card">
+                <a href="{{ article.url }}" class="gpi-blog-card__media">
+                  {%- if article.image -%}{%- render 'gpi-image', image: article.image, alt: article.title, sizes: '(min-width:1024px) 33vw, 50vw', loading: 'lazy' -%}{%- endif -%}
+                </a>
+                <div class="gpi-blog-card__body">
+                  {%- if article.tags.size > 0 -%}<p class="gpi-blog-card__tag">{{ article.tags.first }}</p>{%- endif -%}
+                  <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                  <p class="gpi-blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+                  <p class="gpi-blog-card__meta">{{ article.published_at | date: '%d %b %Y' }}{% if article.metafields.gpi.read_time %} · {{ article.metafields.gpi.read_time }} min{% endif %}</p>
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- if paginate.pages > 1 -%}
+          <nav class="gpi-blog__pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Newer</a>{%- endif -%}
+            <span>Page {{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Older →</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </section>
+
+  <section class="gpi-blog__newsletter gpi-section">
+    <div class="gpi-container gpi-blog__newsletter-inner">
+      {%- render 'gpi-newsletter-form', heading: section.settings.newsletter_heading, lede: section.settings.newsletter_lede -%}
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "GPI Blog",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Journal"},
+    {"type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Get our quiet emails"},
+    {"type": "textarea", "id": "newsletter_lede", "label": "Newsletter lede", "default": "New stories on stones, gifting, and atelier life — once or twice a month."}
+  ],
+  "presets": [{"name": "GPI Blog"}]
+}
+{% endschema %}

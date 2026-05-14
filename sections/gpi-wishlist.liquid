@@ -1,0 +1,72 @@
+{%- comment -%} Section: gpi-wishlist — localStorage-backed wishlist page {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-wishlist.css' | asset_url }}">
+
+<article class="gpi-wishlist">
+  <header class="gpi-wishlist__hero">
+    <div class="gpi-container">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Your wishlist' }}</p>
+      <h1>{{ section.settings.title | default: 'Saved for later' }} <span data-gpi-wishlist-count>0</span></h1>
+      <p class="gpi-wishlist__lede">{{ section.settings.lede | default: 'Pieces you set aside. Move them to your bag when you are ready — they will stay here on this browser until then.' }}</p>
+      <button type="button" class="gpi-button gpi-button--secondary gpi-button--sm" data-gpi-wishlist-share>Copy share link</button>
+    </div>
+  </header>
+
+  <section class="gpi-wishlist__grid-wrap gpi-section">
+    <div class="gpi-container">
+      <ul class="gpi-collection-grid" role="list" data-gpi-wishlist-list></ul>
+
+      <div class="gpi-collection-empty" data-gpi-wishlist-empty hidden>
+        <h2 class="gpi-collection-empty__heading">Your wishlist is waiting</h2>
+        <p class="gpi-collection-empty__lede">Tap the heart on any product to save it here. We will hold it for you on this browser.</p>
+        <div class="gpi-collection-empty__chips">
+          <a href="/collections/all" class="gpi-button gpi-button--primary gpi-button--md">Browse all</a>
+          <a href="/pages/shop-by-intention" class="gpi-button gpi-button--secondary gpi-button--md">Shop by intention</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<script>
+(function () {
+  function hydrate() {
+    var list = document.querySelector('[data-gpi-wishlist-list]');
+    var empty = document.querySelector('[data-gpi-wishlist-empty]');
+    if (!list || !window.gpiWishlist) return;
+    if (window.gpiWishlist.count() === 0) {
+      list.hidden = true; if (empty) empty.hidden = false;
+      return;
+    }
+    list.hidden = false; if (empty) empty.hidden = true;
+    window.gpiWishlist.renderList(list);
+  }
+  document.addEventListener('DOMContentLoaded', hydrate);
+  document.addEventListener('gpi:wishlist:change', hydrate);
+
+  var shareBtn = document.querySelector('[data-gpi-wishlist-share]');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function () {
+      var ids = window.gpiWishlist.list().map(function (e) { return e.handle; }).join(',');
+      var url = window.location.origin + '/pages/wishlist?wl=' + encodeURIComponent(ids);
+      navigator.clipboard.writeText(url).then(function () {
+        var orig = shareBtn.textContent;
+        shareBtn.textContent = 'Copied ✓';
+        setTimeout(function () { shareBtn.textContent = orig; }, 1800);
+      });
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "GPI Wishlist",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your wishlist"},
+    {"type": "text", "id": "title", "label": "Title", "default": "Saved for later"},
+    {"type": "textarea", "id": "lede", "label": "Lede"}
+  ],
+  "presets": [{"name": "GPI Wishlist"}]
+}
+{% endschema %}

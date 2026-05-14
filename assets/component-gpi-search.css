@@ -1,0 +1,31 @@
+/* GPI Search */
+
+.gpi-search__hero {
+  background: var(--gpi-surface-ivory);
+  padding: clamp(48px, 6vw, 80px) 0 clamp(24px, 3vw, 40px);
+}
+.gpi-search__form {
+  display: flex; gap: 8px;
+  max-width: 720px;
+}
+.gpi-search__form input[type="search"] {
+  flex: 1;
+  background: var(--gpi-surface-card);
+  border: 1px solid var(--gpi-border-soft);
+  border-radius: var(--gpi-radius-pill);
+  padding: 14px 24px;
+  font-family: var(--gpi-heading);
+  font-size: 18px;
+  color: var(--gpi-ink-strong);
+  outline: none;
+}
+.gpi-search__form input[type="search"]:focus { border-color: var(--gpi-gold); }
+.gpi-search__count {
+  margin: 20px 0 0;
+  color: var(--gpi-text-muted);
+  font-size: 14px;
+}
+.gpi-search__count strong { color: var(--gpi-ink-strong); }
+.gpi-search__grid-wrap .gpi-collection-grid { grid-template-columns: repeat(4, 1fr); gap: 24px 20px; }
+@media (max-width: 1024px) { .gpi-search__grid-wrap .gpi-collection-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .gpi-search__grid-wrap .gpi-collection-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; } }

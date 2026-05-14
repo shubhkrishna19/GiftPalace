@@ -1,0 +1,84 @@
+{%- comment -%} Section: gpi-search — results page (tabbed by type) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-search.css' | asset_url }}">
+
+<article class="gpi-search">
+  <header class="gpi-search__hero">
+    <div class="gpi-container">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="gpi-search__form">
+        <label class="visually-hidden" for="GpiSearchInput">Search</label>
+        <input id="GpiSearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for stones, intentions, gifts…" autocomplete="off" autofocus>
+        <button type="submit" class="gpi-button gpi-button--primary gpi-button--md">Search</button>
+      </form>
+      {%- if search.performed -%}
+        <p class="gpi-search__count">
+          {%- if search.results_count > 0 -%}
+            {{ search.results_count }} result{% unless search.results_count == 1 %}s{% endunless %} for <strong>"{{ search.terms }}"</strong>
+          {%- else -%}
+            No matches for <strong>"{{ search.terms }}"</strong>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- if search.performed and search.results_count > 0 -%}
+    <section class="gpi-search__grid-wrap gpi-section">
+      <div class="gpi-container">
+        {%- paginate search.results by 24 -%}
+          <ul class="gpi-collection-grid" role="list">
+            {%- for item in search.results -%}
+              <li>
+                {%- if item.object_type == 'product' -%}
+                  {%- render 'gpi-product-card', product: item -%}
+                {%- elsif item.object_type == 'article' -%}
+                  <article class="gpi-blog-card">
+                    <a href="{{ item.url }}" class="gpi-blog-card__media">{%- if item.image -%}{%- render 'gpi-image', image: item.image, alt: item.title, sizes: '300px', loading: 'lazy' -%}{%- endif -%}</a>
+                    <div class="gpi-blog-card__body">
+                      <p class="gpi-blog-card__tag">Article</p>
+                      <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                      <p class="gpi-blog-card__excerpt">{{ item.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                    </div>
+                  </article>
+                {%- elsif item.object_type == 'page' -%}
+                  <article class="gpi-blog-card">
+                    <div class="gpi-blog-card__body">
+                      <p class="gpi-blog-card__tag">Page</p>
+                      <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                      <p class="gpi-blog-card__excerpt">{{ item.content | strip_html | truncate: 120 }}</p>
+                    </div>
+                  </article>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+          {%- if paginate.pages > 1 -%}
+            <nav class="gpi-blog__pagination" aria-label="Pagination">
+              {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Newer</a>{%- endif -%}
+              <span>Page {{ paginate.current_page }} / {{ paginate.pages }}</span>
+              {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Older →</a>{%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </section>
+  {%- elsif search.performed -%}
+    <section class="gpi-search__empty gpi-section">
+      <div class="gpi-container">
+        <div class="gpi-collection-empty">
+          <h2 class="gpi-collection-empty__heading">No matches yet</h2>
+          <p class="gpi-collection-empty__lede">Try a different spelling or browse what we usually point shoppers to first.</p>
+          <div class="gpi-collection-empty__chips">
+            <a href="/pages/shop-by-intention" class="gpi-button gpi-button--primary gpi-button--md">Shop by intention</a>
+            <a href="/collections/all" class="gpi-button gpi-button--secondary gpi-button--md">Browse everything</a>
+            <a href="https://wa.me/917011099721" class="gpi-button gpi-button--text">Ask us on WhatsApp →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{"name": "GPI Search", "presets": [{"name": "GPI Search"}]}
+{% endschema %}
