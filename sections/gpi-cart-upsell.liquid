@@ -1,0 +1,36 @@
+{%- comment -%} Section: gpi-cart-upsell — bestseller rail to lift AOV {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-cart.css' | asset_url }}">
+
+{%- liquid
+  assign coll_handle = section.settings.upsell_collection | default: 'frontpage'
+  assign upsell = collections[coll_handle]
+  assign limit = section.settings.limit | default: 6
+-%}
+
+{%- if upsell.products.size > 0 -%}
+<section class="gpi-cart-upsell gpi-section" aria-labelledby="gpi-cart-upsell-heading-{{ section.id }}">
+  <div class="gpi-container">
+    <h2 id="gpi-cart-upsell-heading-{{ section.id }}" class="gpi-cart-upsell__heading">{{ section.settings.heading | default: 'Pairs well with your gift' }}</h2>
+    <div class="gpi-product-rec__rail">
+      <ul class="gpi-product-rec__list" role="list">
+        {%- for product in upsell.products limit: limit -%}
+          <li>{%- render 'gpi-product-card', product: product, show_quick_add: true -%}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GPI Cart upsell",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Pairs well with your gift"},
+    {"type": "collection", "id": "upsell_collection", "label": "Upsell collection"},
+    {"type": "range", "id": "limit", "label": "Products to show", "min": 4, "max": 12, "step": 2, "default": 6}
+  ],
+  "presets": [{"name": "GPI Cart upsell"}]
+}
+{% endschema %}

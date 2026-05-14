@@ -1,0 +1,11 @@
+{%- comment -%} Section: gpi-cart-trust — 4-cue trust strip {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-cart.css' | asset_url }}">
+
+<section class="gpi-cart-trust gpi-section" aria-label="Why buy from us">
+  <div class="gpi-container">{%- render 'gpi-trust-strip', variant: 'cart' -%}</div>
+</section>
+
+{% schema %}
+{"name": "GPI Cart trust", "presets": [{"name": "GPI Cart trust"}]}
+{% endschema %}

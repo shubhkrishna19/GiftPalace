@@ -1,0 +1,194 @@
+{%- comment -%} Section: gpi-cart-main — composite cart (items + sticky summary) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-cart.css' | asset_url }}">
+
+<section class="gpi-cart" data-gpi-cart>
+  <div class="gpi-container">
+    {%- render 'gpi-breadcrumbs' -%}
+
+    {%- if cart.item_count == 0 -%}
+      <div class="gpi-cart-empty">
+        <h1 class="gpi-cart-empty__heading">Your gift palace is waiting</h1>
+        <p class="gpi-cart-empty__lede">Nothing in your bag yet. Begin with a piece that feels meant for the moment.</p>
+        <div class="gpi-cart-empty__chips">
+          <a href="/collections/all" class="gpi-button gpi-button--primary gpi-button--md">Browse all</a>
+          <a href="/pages/shop-by-intention" class="gpi-button gpi-button--secondary gpi-button--md">Shop by intention</a>
+          <a href="/collections/necklaces" class="gpi-button gpi-button--text">Bestselling necklaces →</a>
+        </div>
+      </div>
+    {%- else -%}
+
+      <h1 class="gpi-cart__heading">Your bag</h1>
+      <p class="gpi-cart__count">{{ cart.item_count }} {{ cart.item_count | pluralize: 'piece', 'pieces' }}</p>
+
+      <div class="gpi-cart__layout">
+        <form action="{{ routes.cart_url }}" method="post" novalidate class="gpi-cart__form" data-gpi-cart-form>
+          <ul class="gpi-cart__items" role="list">
+            {%- for item in cart.items -%}
+              <li class="gpi-cart-item" data-line-id="{{ item.key }}" data-line-index="{{ forloop.index }}">
+                <a class="gpi-cart-item__image" href="{{ item.url }}">
+                  {%- if item.image -%}
+                    {%- render 'gpi-image', image: item.image, alt: item.title, sizes: '120px', loading: 'lazy' -%}
+                  {%- endif -%}
+                </a>
+                <div class="gpi-cart-item__body">
+                  <a class="gpi-cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="gpi-cart-item__variant">
+                      {%- for opt in item.options_with_values -%}
+                        {{ opt.name }}: {{ opt.value }}{% unless forloop.last %} · {% endunless %}
+                      {%- endfor -%}
+                    </p>
+                  {%- endunless -%}
+                  {%- if item.selling_plan_allocation -%}
+                    <p class="gpi-cart-item__plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  {%- endif -%}
+                  <div class="gpi-cart-item__row">
+                    <div class="gpi-cart-item__qty">
+                      <button type="button" class="gpi-cart-item__qty-btn" data-gpi-line-qty="-" data-line="{{ forloop.index }}" aria-label="Decrease quantity">−</button>
+                      <input type="number"
+                             name="updates[]"
+                             value="{{ item.quantity }}"
+                             min="0"
+                             class="gpi-cart-item__qty-input"
+                             data-line="{{ forloop.index }}"
+                             aria-label="Quantity for {{ item.product.title }}">
+                      <button type="button" class="gpi-cart-item__qty-btn" data-gpi-line-qty="+" data-line="{{ forloop.index }}" aria-label="Increase quantity">+</button>
+                    </div>
+                    <a href="{{ item.url_to_remove }}" class="gpi-cart-item__remove" data-gpi-line-remove="{{ forloop.index }}" aria-label="Remove {{ item.product.title }}">Remove</a>
+                  </div>
+                  {%- if item.line_level_discount_allocations.size > 0 -%}
+                    <ul class="gpi-cart-item__discounts" role="list">
+                      {%- for d in item.line_level_discount_allocations -%}
+                        <li>{{ d.discount_application.title }} (−{{ d.amount | money }})</li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+                <div class="gpi-cart-item__price">
+                  {%- if item.original_line_price > item.final_line_price -%}
+                    <s>{{ item.original_line_price | money }}</s>
+                    <strong>{{ item.final_line_price | money }}</strong>
+                  {%- else -%}
+                    <strong>{{ item.final_line_price | money }}</strong>
+                  {%- endif -%}
+                  {%- if item.quantity > 1 -%}
+                    <span class="gpi-cart-item__unit">{{ item.final_price | money }} each</span>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <details class="gpi-cart__note">
+            <summary>Add a gift note or special instructions</summary>
+            <textarea name="note" rows="3" placeholder="Type your note here">{{ cart.note }}</textarea>
+          </details>
+        </form>
+
+        <aside class="gpi-cart__summary">
+          <div class="gpi-cart-summary">
+            <h2 class="gpi-cart-summary__heading">Order summary</h2>
+
+            <dl class="gpi-cart-summary__rows">
+              <dt>Subtotal</dt>
+              <dd data-gpi-cart-subtotal>{{ cart.items_subtotal_price | money }}</dd>
+              {%- if cart.cart_level_discount_applications.size > 0 -%}
+                {%- for d in cart.cart_level_discount_applications -%}
+                  <dt>{{ d.title }}</dt>
+                  <dd>−{{ d.total_allocated_amount | money }}</dd>
+                {%- endfor -%}
+              {%- endif -%}
+              <dt class="gpi-cart-summary__shipping-label">Shipping</dt>
+              <dd class="gpi-cart-summary__shipping">
+                {%- assign threshold = 299900 -%}{%- comment -%} ₹2,999 in paise {%- endcomment -%}
+                {%- if cart.items_subtotal_price >= threshold -%}Free across India
+                {%- else -%}
+                  {%- assign needed = threshold | minus: cart.items_subtotal_price -%}
+                  Add <strong>{{ needed | money }}</strong> for free shipping
+                {%- endif -%}
+              </dd>
+            </dl>
+
+            <div class="gpi-cart-summary__total">
+              <span>Total</span>
+              <strong data-gpi-cart-total>{{ cart.total_price | money }}</strong>
+            </div>
+            <p class="gpi-cart-summary__tax">Tax included where applicable. Shipping calculated at checkout.</p>
+
+            <form action="{{ routes.cart_url }}" method="post">
+              <button type="submit" name="checkout" formaction="{{ routes.cart_url }}" form="" class="gpi-button gpi-button--primary gpi-button--lg gpi-button--block">
+                Checkout — {{ cart.total_price | money }}
+              </button>
+            </form>
+
+            <a href="/collections/all" class="gpi-cart-summary__continue">Continue shopping</a>
+
+            <ul class="gpi-cart-summary__pay" role="list" aria-label="Payment methods">
+              {%- for type in shop.enabled_payment_types -%}
+                <li>{{ type | payment_type_svg_tag: class: 'gpi-cart-summary__pay-icon' }}</li>
+              {%- endfor -%}
+            </ul>
+            <p class="gpi-cart-summary__secure">
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 11V8a6 6 0 0112 0v3M5 11h14v9a1 1 0 01-1 1H6a1 1 0 01-1-1v-9z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              Secure checkout — encrypted end to end.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <button type="submit" form="" class="visually-hidden" data-gpi-cart-update>Update</button>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.querySelector('[data-gpi-cart-form]');
+  if (!form) return;
+  function updateLine(line, qty) {
+    return fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: parseInt(line, 10), quantity: parseInt(qty, 10) })
+    }).then(function (r) { return r.json(); });
+  }
+  function refreshCart() {
+    fetch('/cart.js').then(function (r) { return r.json(); }).then(function (cart) {
+      var sub = document.querySelector('[data-gpi-cart-subtotal]');
+      var tot = document.querySelector('[data-gpi-cart-total]');
+      if (sub) sub.textContent = (cart.items_subtotal_price / 100).toLocaleString('en-IN', { style: 'currency', currency: cart.currency });
+      if (tot) tot.textContent = (cart.total_price / 100).toLocaleString('en-IN', { style: 'currency', currency: cart.currency });
+      document.dispatchEvent(new CustomEvent('cart:change', { detail: { count: cart.item_count } }));
+      if (cart.item_count === 0) window.location.reload();
+    });
+  }
+  form.querySelectorAll('[data-gpi-line-qty]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var line = btn.dataset.line;
+      var input = form.querySelector('input[data-line="' + line + '"]');
+      if (!input) return;
+      var cur = parseInt(input.value, 10) || 1;
+      var op = btn.dataset.gpiLineQty;
+      var next = op === '+' ? cur + 1 : Math.max(0, cur - 1);
+      input.value = next;
+      updateLine(line, next).then(refreshCart);
+    });
+  });
+  form.querySelectorAll('input.gpi-cart-item__qty-input').forEach(function (input) {
+    input.addEventListener('change', function () {
+      updateLine(input.dataset.line, input.value).then(refreshCart);
+    });
+  });
+  form.querySelectorAll('[data-gpi-line-remove]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      updateLine(a.dataset.gpiLineRemove, 0).then(refreshCart);
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{"name": "GPI Cart main", "presets": [{"name": "GPI Cart main"}]}
+{% endschema %}
