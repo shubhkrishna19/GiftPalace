@@ -58,7 +58,10 @@
         <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        {%- comment -%} Non-blocking Google Fonts load. font-display: swap already set in URL. {%- endcomment -%}
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap"></noscript>
+        <meta name="format-detection" content="telephone=no">
         <link rel="dns-prefetch" href="https://www.google-analytics.com">
         <link rel="dns-prefetch" href="https://www.googletagmanager.com">
         
