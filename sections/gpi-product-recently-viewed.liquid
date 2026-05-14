@@ -1,0 +1,59 @@
+{%- comment -%} Section: gpi-product-recently-viewed — localStorage-backed strip {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-product.css' | asset_url }}">
+
+<section class="gpi-product-rv gpi-section" aria-labelledby="gpi-rv-heading-{{ section.id }}" data-gpi-recently-viewed hidden>
+  <div class="gpi-container">
+    <h2 id="gpi-rv-heading-{{ section.id }}" class="gpi-product-rec__heading">{{ section.settings.heading | default: 'Recently viewed' }}</h2>
+    <div class="gpi-product-rec__rail">
+      <ul class="gpi-product-rec__list" role="list" data-gpi-rv-list></ul>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var KEY = 'gpiRecentlyViewed';
+  var MAX = 8;
+  function read() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; } }
+  function write(list) { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {} }
+  function push(handle) {
+    var list = read().filter(function (h) { return h !== handle; });
+    list.unshift(handle);
+    write(list.slice(0, MAX));
+  }
+  {%- if template.name == 'product' -%}
+  push('{{ product.handle }}');
+  {%- endif -%}
+  var root = document.querySelector('[data-gpi-recently-viewed]');
+  var list = document.querySelector('[data-gpi-rv-list]');
+  if (!root || !list) return;
+  var current = '{{ product.handle | default: "" }}';
+  var handles = read().filter(function (h) { return h && h !== current; });
+  if (!handles.length) return;
+  Promise.all(handles.slice(0, MAX).map(function (h) {
+    return fetch('/products/' + h + '.js').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+  })).then(function (products) {
+    var html = products.filter(Boolean).map(function (p) {
+      var price = (p.price / 100).toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+      var img = p.featured_image || (p.images && p.images[0]) || '';
+      return '<li><article class="gpi-product-card"><a href="/products/' + p.handle + '" class="gpi-product-card__link">' +
+             '<div class="gpi-product-card__media"><img src="' + img + '" alt="' + p.title.replace(/"/g,'&quot;') + '" loading="lazy"></div>' +
+             '<div class="gpi-product-card__info"><h3 class="gpi-product-card__title">' + p.title + '</h3>' +
+             '<div class="gpi-price"><span class="gpi-price__current">' + price + '</span></div></div></a></article></li>';
+    }).join('');
+    list.innerHTML = html;
+    if (html) root.hidden = false;
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "GPI Recently viewed",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Recently viewed"}
+  ],
+  "presets": [{"name": "GPI Recently viewed"}]
+}
+{% endschema %}

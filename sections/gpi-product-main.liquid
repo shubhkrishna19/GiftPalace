@@ -1,0 +1,138 @@
+{%- comment -%} Section: gpi-product-main — composite product top: gallery + info column with title/price/variants/ATC/healing/trust. {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-product.css' | asset_url }}">
+
+{%- liquid
+  assign cur     = product.selected_or_first_available_variant
+  assign product_form_id = 'gpi-product-form-' | append: section.id
+  assign on_sale = false
+  if cur.compare_at_price > cur.price
+    assign on_sale = true
+  endif
+-%}
+
+<section class="gpi-product" data-gpi-product data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+  <div class="gpi-container">
+    {%- render 'gpi-breadcrumbs' -%}
+
+    <div class="gpi-product__layout">
+
+      <div class="gpi-product__gallery" data-gpi-gallery>
+        <div class="gpi-product__main-image" data-gpi-gallery-main>
+          {%- if product.images.size > 0 -%}
+            {%- for img in product.images -%}
+              <div class="gpi-product__image-frame{% if forloop.first %} is-active{% endif %}" data-gpi-image-index="{{ forloop.index0 }}">
+                {%- render 'gpi-image', image: img, alt: product.title, sizes: '(min-width:1024px) 56vw, 100vw', loading: forloop.first | default: 'eager', fetchpriority: forloop.first | default: 'high', class: 'gpi-product__image' -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="gpi-product__image-placeholder">{{ 'product-1' | placeholder_svg_tag: 'gpi-product__image' }}</div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <ul class="gpi-product__thumbs" role="list" data-gpi-gallery-thumbs>
+            {%- for img in product.images -%}
+              <li>
+                <button type="button"
+                        class="gpi-product__thumb{% if forloop.first %} is-active{% endif %}"
+                        data-gpi-thumb="{{ forloop.index0 }}"
+                        aria-label="Show image {{ forloop.index }} of {{ product.images.size }}">
+                  {%- render 'gpi-image', image: img, alt: '', sizes: '120px', loading: 'lazy' -%}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="gpi-product__info{% if section.settings.sticky_info %} gpi-product__info--sticky{% endif %}">
+
+        {%- if section.settings.show_vendor and product.vendor != blank -%}
+          <p class="gpi-product__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="gpi-product__title">{{ product.title }}</h1>
+
+        <div class="gpi-product__meta-row">
+          {%- if product.metafields.judgeme.rating -%}
+            {%- render 'gpi-rating-stars', rating: product.metafields.judgeme.rating, count: product.metafields.judgeme.review_count, size: 'md' -%}
+          {%- endif -%}
+          {%- if section.settings.show_sku and cur.sku != blank -%}
+            <span class="gpi-product__sku">SKU {{ cur.sku }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- render 'gpi-price', product: product, show_emi: true, show_tax: true -%}
+
+        <ul class="gpi-product__cert-row" role="list">
+          <li><span class="gpi-product__cert-icon">✓</span> BIS Hallmarked</li>
+          <li><span class="gpi-product__cert-icon">✓</span> GJEPC Certified</li>
+          <li><span class="gpi-product__cert-icon">✓</span> Lab Tested</li>
+        </ul>
+
+        {%- if product.metafields.gpi.short_desc != blank -%}
+          <p class="gpi-product__short-desc">{{ product.metafields.gpi.short_desc }}</p>
+        {%- elsif product.description != blank -%}
+          <p class="gpi-product__short-desc">{{ product.description | strip_html | truncate: 220 }}</p>
+        {%- endif -%}
+
+        {%- form 'product', product, id: product_form_id, class: 'gpi-product__form' -%}
+          <input type="hidden" name="id" value="{{ cur.id }}">
+
+          {%- render 'product-variant-picker', product: product, block: section -%}
+
+          <div class="gpi-product__qty-atc">
+            <div class="gpi-product__qty">
+              <button type="button" class="gpi-product__qty-btn" data-gpi-qty="-" aria-label="Decrease quantity">−</button>
+              <input type="number" name="quantity" value="1" min="1" class="gpi-product__qty-input" aria-label="Quantity">
+              <button type="button" class="gpi-product__qty-btn" data-gpi-qty="+" aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" name="add" class="gpi-button gpi-button--primary gpi-button--lg gpi-product__atc" {% unless product.available %}disabled{% endunless %}>
+              <span>{% if product.available %}Add to bag{% else %}Sold out{% endif %}</span>
+            </button>
+            {%- render 'gpi-wishlist-heart', product_id: product.id, product_handle: product.handle, size: 'lg' -%}
+          </div>
+
+          {%- if section.settings.show_buynow and product.available -%}
+            <button type="submit" name="checkout" class="gpi-button gpi-button--secondary gpi-button--lg gpi-product__buynow">Buy it now</button>
+          {%- endif -%}
+        {%- endform -%}
+
+        <ul class="gpi-product__microtrust" role="list">
+          <li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 7h14l4 4v6h-3a2 2 0 01-4 0H10a2 2 0 01-4 0H3V7z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Free India shipping above ₹2,999</li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M21 12a9 9 0 11-3.5-7.1M21 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day easy returns</li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 110-18 9 9 0 010 18z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Certificate of authenticity included</li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.8 6.4 19.5l1.1-6.3L3 8.9l6-.9 3-6z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Hand-finished in our atelier</li>
+        </ul>
+
+        {%- comment -%} Healing benefits — preserved from previous work {%- endcomment -%}
+        {%- render 'product-healing-benefits', product: product -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- render 'gpi-schema-product', product: product -%}
+<script src="{{ 'gpi-product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "GPI Product main",
+  "settings": [
+    {"type": "checkbox", "id": "show_vendor",   "label": "Show vendor",   "default": true},
+    {"type": "checkbox", "id": "show_sku",      "label": "Show SKU",      "default": true},
+    {"type": "checkbox", "id": "show_buynow",   "label": "Show Buy It Now button", "default": true},
+    {"type": "checkbox", "id": "sticky_info",   "label": "Sticky info column on desktop", "default": true},
+    {"type": "select",   "id": "gallery_layout",
+      "label": "Gallery thumbs",
+      "options": [
+        {"value": "thumbs-bottom", "label": "Bottom"},
+        {"value": "thumbs-left",   "label": "Left"}
+      ],
+      "default": "thumbs-bottom"
+    }
+  ],
+  "presets": [{"name": "GPI Product main"}]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+{%- comment -%} Section: gpi-product-recommendations — "You may also like" {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-product.css' | asset_url }}">
+
+{%- liquid
+  assign limit = section.settings.limit | default: 8
+  assign heading = section.settings.heading | default: 'You may also like'
+-%}
+
+<section class="gpi-product-rec gpi-section" aria-labelledby="gpi-rec-heading-{{ section.id }}">
+  <div class="gpi-container">
+    <div class="gpi-product-rec__head">
+      <h2 id="gpi-rec-heading-{{ section.id }}" class="gpi-product-rec__heading">{{ heading }}</h2>
+      {%- if product.collections.first -%}
+        <a href="{{ product.collections.first.url }}" class="gpi-button gpi-button--text">See more {{ product.collections.first.title }} <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      {%- endif -%}
+    </div>
+
+    <div class="gpi-product-rec__rail" data-gpi-scroll-rail>
+      {%- assign rec_section_url = product.url | append: '/recommendations?intent=related&limit=' | append: limit | append: '&section_id=' | append: section.id -%}
+      <ul class="gpi-product-rec__list" role="list">
+        {%- if recommendations.performed and recommendations.products_count > 0 -%}
+          {%- for prod in recommendations.products -%}
+            <li>{%- render 'gpi-product-card', product: prod -%}</li>
+          {%- endfor -%}
+        {%- elsif product.collections.first -%}
+          {%- for prod in product.collections.first.products limit: limit -%}
+            {%- unless prod.id == product.id -%}<li>{%- render 'gpi-product-card', product: prod -%}</li>{%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Recommendations",
+  "settings": [
+    {"type": "text",  "id": "heading", "label": "Heading", "default": "You may also like"},
+    {"type": "range", "id": "limit",   "label": "Products to show", "min": 4, "max": 12, "step": 2, "default": 8}
+  ],
+  "presets": [{"name": "GPI Recommendations"}]
+}
+{% endschema %}

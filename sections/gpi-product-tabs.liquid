@@ -1,0 +1,113 @@
+{%- comment -%} Section: gpi-product-tabs — tab/accordion view for Description, Specs, Care, Shipping, Reviews {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-product.css' | asset_url }}">
+
+<section class="gpi-product-tabs" data-gpi-tabs>
+  <div class="gpi-container">
+    {%- if section.blocks.size > 0 -%}
+      <div class="gpi-product-tabs__nav" role="tablist" data-gpi-tabs-nav>
+        {%- for block in section.blocks -%}
+          <button class="gpi-product-tabs__trigger{% if forloop.first %} is-active{% endif %}"
+                  role="tab"
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="gpi-tab-panel-{{ section.id }}-{{ block.id }}"
+                  data-gpi-tab="{{ block.id }}"
+                  type="button"{{ block.shopify_attributes }}>
+            {{ block.settings.title }}
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="gpi-product-tabs__panels">
+        {%- for block in section.blocks -%}
+          <div class="gpi-product-tabs__panel{% if forloop.first %} is-active{% endif %}"
+               role="tabpanel"
+               id="gpi-tab-panel-{{ section.id }}-{{ block.id }}"
+               data-gpi-tab-panel="{{ block.id }}"
+               {{ block.shopify_attributes }}>
+            <h3 class="gpi-product-tabs__panel-heading">{{ block.settings.title }}</h3>
+            <div class="gpi-product-tabs__content rte">
+              {%- case block.type -%}
+                {%- when 'description' -%}
+                  {{ product.description }}
+                {%- when 'specs' -%}
+                  {%- if block.settings.specs_metafield != blank -%}
+                    {{ product.metafields.specs[block.settings.specs_metafield] }}
+                  {%- else -%}
+                    <dl class="gpi-product-tabs__specs">
+                      {%- if product.vendor != blank -%}<dt>Brand</dt><dd>{{ product.vendor }}</dd>{%- endif -%}
+                      {%- if product.type != blank -%}<dt>Type</dt><dd>{{ product.type }}</dd>{%- endif -%}
+                      {%- if product.metafields.gpi.stone_type -%}<dt>Stone</dt><dd>{{ product.metafields.gpi.stone_type }}</dd>{%- endif -%}
+                      {%- if product.metafields.gpi.metal -%}<dt>Metal</dt><dd>{{ product.metafields.gpi.metal }}</dd>{%- endif -%}
+                      {%- if product.metafields.gpi.weight -%}<dt>Weight</dt><dd>{{ product.metafields.gpi.weight }}</dd>{%- endif -%}
+                      {%- if product.metafields.gpi.dimensions -%}<dt>Dimensions</dt><dd>{{ product.metafields.gpi.dimensions }}</dd>{%- endif -%}
+                      {%- if product.metafields.gpi.certificate -%}<dt>Certification</dt><dd>{{ product.metafields.gpi.certificate }}</dd>{%- endif -%}
+                    </dl>
+                  {%- endif -%}
+                {%- when 'rich_text' -%}
+                  {{ block.settings.content }}
+                {%- when 'reviews' -%}
+                  <div id="gpi-reviews-anchor"></div>
+                  {%- if product.metafields.judgeme.widget != blank -%}
+                    {{ product.metafields.judgeme.widget }}
+                  {%- else -%}
+                    <p>Reviews appear here when customers leave them.</p>
+                  {%- endif -%}
+              {%- endcase -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GPI Product tabs",
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {"type": "text", "id": "title", "label": "Tab title", "default": "Description"}
+      ]
+    },
+    {
+      "type": "specs",
+      "name": "Specifications",
+      "limit": 1,
+      "settings": [
+        {"type": "text", "id": "title", "label": "Tab title", "default": "Specifications"},
+        {"type": "text", "id": "specs_metafield", "label": "Custom specs metafield key (optional)"}
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Rich text",
+      "limit": 6,
+      "settings": [
+        {"type": "text", "id": "title", "label": "Tab title", "default": "Care"},
+        {"type": "richtext", "id": "content", "label": "Content"}
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": [
+        {"type": "text", "id": "title", "label": "Tab title", "default": "Reviews"}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "GPI Product tabs", "blocks": [
+      {"type": "description"},
+      {"type": "specs"},
+      {"type": "rich_text", "settings": {"title": "Care", "content": "<p>Store in the pouch provided. Avoid contact with perfumes and chemicals. Clean gently with a soft, dry cloth. Recharge crystals in moonlight monthly.</p>"}},
+      {"type": "rich_text", "settings": {"title": "Shipping & Returns", "content": "<p>Free India shipping on orders above ₹2,999. Easy 7-day returns. International shipping available.</p>"}},
+      {"type": "reviews"}
+    ]}
+  ]
+}
+{% endschema %}
