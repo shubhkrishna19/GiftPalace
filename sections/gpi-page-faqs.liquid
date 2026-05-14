@@ -1,0 +1,73 @@
+{%- comment -%} Section: gpi-page-faqs — accordion FAQ page with FAQPage JSON-LD {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-faqs">
+  <header class="gpi-page-faqs__hero">
+    <div class="gpi-container">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Help center' }}</p>
+      <h1>{{ section.settings.title | default: 'Frequently asked' }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="gpi-page-contact__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <section class="gpi-page-faqs__list-wrap gpi-section">
+    <div class="gpi-container gpi-page-faqs__layout">
+      <aside class="gpi-page-faqs__contact">
+        <h3>Need more help?</h3>
+        <p>Reach the team directly — we usually reply within an hour during India working hours.</p>
+        <a href="https://wa.me/917011099721" class="gpi-button gpi-button--secondary gpi-button--md gpi-button--block">WhatsApp us</a>
+        <a href="mailto:support@giftpalaceindia.com" class="gpi-button gpi-button--text">Or email →</a>
+      </aside>
+      <div class="gpi-page-faqs__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'qa' -%}
+            <details class="gpi-page-faqs__item"{{ block.shopify_attributes }}>
+              <summary>{{ block.settings.question }}</summary>
+              <div class="rte">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</article>
+
+{%- if section.blocks.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'qa' -%}
+        {"@type":"Question","name":{{ block.settings.question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.answer | strip_html | json }}}}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GPI FAQs page",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Help center"},
+    {"type": "text", "id": "title",   "label": "Title",   "default": "Frequently asked"},
+    {"type": "textarea", "id": "lede", "label": "Lede"}
+  ],
+  "blocks": [
+    {"type": "qa", "name": "Question", "limit": 30, "settings": [
+      {"type": "text", "id": "question", "label": "Question"},
+      {"type": "richtext", "id": "answer", "label": "Answer"}
+    ]}
+  ],
+  "presets": [{"name": "GPI FAQs page", "blocks": [
+    {"type":"qa","settings":{"question":"Are your gemstones certified?","answer":"<p>Yes. Every piece is BIS hallmarked where applicable and accompanied by a certificate of authenticity. Our gemstones are lab-tested and sourced through GJEPC-certified channels.</p>"}},
+    {"type":"qa","settings":{"question":"Do you offer free shipping in India?","answer":"<p>Free standard shipping on orders above ₹2,999. Express options are available at checkout.</p>"}},
+    {"type":"qa","settings":{"question":"What is your return policy?","answer":"<p>We offer 7-day returns on unworn items in original packaging. Custom and personalized pieces are non-returnable.</p>"}},
+    {"type":"qa","settings":{"question":"How do I find my ring size?","answer":"<p>Use the ring size guide on any ring product page, or message us on WhatsApp and we will walk you through it.</p>"}}
+  ]}]
+}
+{% endschema %}

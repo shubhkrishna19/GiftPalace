@@ -1,0 +1,56 @@
+{%- comment -%} Section: gpi-page-locator — store locator card + map {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-locator gpi-section">
+  <div class="gpi-container">
+    <header class="gpi-page-locator__head">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Visit us' }}</p>
+      <h1>{{ section.settings.title | default: 'Find a Gift Palace boutique' }}</h1>
+      {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+
+    <div class="gpi-page-locator__layout">
+      <ul class="gpi-page-locator__list" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'store' -%}
+            <li class="gpi-page-locator__card"{{ block.shopify_attributes }}>
+              <h3>{{ block.settings.name }}</h3>
+              <address>{{ block.settings.address }}</address>
+              {%- if block.settings.hours != blank -%}<p class="gpi-page-locator__hours">{{ block.settings.hours }}</p>{%- endif -%}
+              <div class="gpi-page-locator__actions">
+                {%- if block.settings.phone != blank -%}<a href="tel:{{ block.settings.phone | replace: ' ', '' | replace: '+', '' }}">Call</a>{%- endif -%}
+                {%- if block.settings.directions_link != blank -%}<a href="{{ block.settings.directions_link }}" target="_blank" rel="noopener">Directions</a>{%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.map_embed != blank -%}
+        <div class="gpi-page-locator__map">{{ section.settings.map_embed }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "GPI Store locator",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Visit us"},
+    {"type": "text", "id": "title", "label": "Title", "default": "Find a Gift Palace boutique"},
+    {"type": "textarea", "id": "lede", "label": "Lede"},
+    {"type": "html", "id": "map_embed", "label": "Map embed iframe"}
+  ],
+  "blocks": [
+    {"type": "store", "name": "Store", "limit": 6, "settings": [
+      {"type": "text", "id": "name", "label": "Name", "default": "Gift Palace Delhi"},
+      {"type": "textarea", "id": "address", "label": "Address"},
+      {"type": "text", "id": "phone", "label": "Phone"},
+      {"type": "text", "id": "hours", "label": "Hours"},
+      {"type": "url", "id": "directions_link", "label": "Directions URL"}
+    ]}
+  ],
+  "presets": [{"name": "GPI Store locator"}]
+}
+{% endschema %}

@@ -1,0 +1,101 @@
+{%- comment -%} Section: gpi-page-contact — composite Contact page {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-customer.css' | asset_url }}">
+
+<article class="gpi-page-contact">
+  <header class="gpi-page-contact__hero">
+    <div class="gpi-container">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Talk to us' }}</p>
+      <h1 class="gpi-page-contact__title">{{ section.settings.title | default: 'We are here to help.' }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="gpi-page-contact__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <section class="gpi-page-contact__channels gpi-section">
+    <div class="gpi-container">
+      <ul class="gpi-page-contact__channels-grid" role="list">
+        <li class="gpi-page-contact__channel">
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.86 19.86 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.86 19.86 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <h3>Call us</h3>
+          <p>+91 70110 99721</p>
+          <a href="tel:+917011099721" class="gpi-button gpi-button--text">Call now →</a>
+        </li>
+        <li class="gpi-page-contact__channel">
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <h3>WhatsApp us</h3>
+          <p>Tap to message — we usually reply in minutes.</p>
+          <a href="https://wa.me/917011099721" class="gpi-button gpi-button--text" rel="noopener" target="_blank">Open WhatsApp →</a>
+        </li>
+        <li class="gpi-page-contact__channel">
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <h3>Email us</h3>
+          <p>support@giftpalaceindia.com</p>
+          <a href="mailto:support@giftpalaceindia.com" class="gpi-button gpi-button--text">Send email →</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="gpi-page-contact__form-wrap gpi-section">
+    <div class="gpi-container gpi-page-contact__form-grid">
+      <div class="gpi-page-contact__form-copy">
+        <h2>{{ section.settings.form_heading | default: 'Send a message' }}</h2>
+        <p>{{ section.settings.form_lede }}</p>
+        {%- if section.settings.address != blank -%}
+          <address class="gpi-page-contact__address">{{ section.settings.address }}</address>
+        {%- endif -%}
+      </div>
+      <div class="gpi-page-contact__form">
+        {% form 'contact', class: 'gpi-customer__form' %}
+          {% if form.posted_successfully? %}
+            <div class="gpi-customer__success">Thanks — we will get back to you within one business day.</div>
+          {% endif %}
+          {% if form.errors %}<div class="gpi-customer__errors">{{ form.errors | default_errors }}</div>{% endif %}
+          <div class="gpi-customer__field"><label for="ContactName">Your name</label><input id="ContactName" type="text" name="contact[name]" autocomplete="name" required></div>
+          <div class="gpi-customer__field"><label for="ContactEmail">Email</label><input id="ContactEmail" type="email" name="contact[email]" autocomplete="email" required></div>
+          <div class="gpi-customer__field"><label for="ContactPhone">Phone (optional)</label><input id="ContactPhone" type="tel" name="contact[phone]" autocomplete="tel"></div>
+          <div class="gpi-customer__field"><label for="ContactSubject">Subject</label>
+            <select id="ContactSubject" name="contact[subject]" required>
+              <option value="General">General enquiry</option>
+              <option value="Order">Order help</option>
+              <option value="Custom">Custom design</option>
+              <option value="Wholesale">Wholesale</option>
+              <option value="Press">Press</option>
+            </select>
+          </div>
+          <div class="gpi-customer__field"><label for="ContactBody">Message</label><textarea id="ContactBody" name="contact[body]" rows="6" required></textarea></div>
+          <button type="submit" class="gpi-button gpi-button--primary gpi-button--lg gpi-button--block">Send message</button>
+        {% endform %}
+      </div>
+    </div>
+  </section>
+
+  {%- if section.settings.show_map and section.settings.map_embed != blank -%}
+    <section class="gpi-page-contact__map gpi-section">
+      <div class="gpi-container">
+        <div class="gpi-page-contact__map-frame">{{ section.settings.map_embed }}</div>
+      </div>
+    </section>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "GPI Contact page",
+  "settings": [
+    {"type": "header", "content": "Hero"},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Talk to us"},
+    {"type": "text", "id": "title", "label": "Title", "default": "We are here to help."},
+    {"type": "textarea", "id": "lede", "label": "Lede"},
+    {"type": "header", "content": "Form"},
+    {"type": "text", "id": "form_heading", "label": "Heading", "default": "Send a message"},
+    {"type": "textarea", "id": "form_lede", "label": "Lede"},
+    {"type": "textarea", "id": "address", "label": "Address"},
+    {"type": "header", "content": "Map"},
+    {"type": "checkbox", "id": "show_map", "label": "Show map", "default": true},
+    {"type": "html", "id": "map_embed", "label": "Google Maps embed iframe"}
+  ],
+  "presets": [{"name": "GPI Contact page"}]
+}
+{% endschema %}

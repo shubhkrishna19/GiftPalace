@@ -1,0 +1,4 @@
+{
+  "sections": {"policy": {"type": "gpi-page-policy"}},
+  "order": ["policy"]
+}

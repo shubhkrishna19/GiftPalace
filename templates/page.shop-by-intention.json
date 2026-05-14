@@ -1,0 +1,4 @@
+{
+  "sections": {"intention": {"type": "gpi-page-intention"}},
+  "order": ["intention"]
+}

@@ -1,0 +1,71 @@
+{%- comment -%} Section: gpi-page-intention — Shop by intention landing {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-intention">
+  <header class="gpi-page-intention__hero">
+    <div class="gpi-container">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'A smarter browse flow' }}</p>
+      <h1>{{ section.settings.title | default: 'Shop by intention' }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="gpi-page-contact__lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <section class="gpi-page-intention__grid-wrap gpi-section">
+    <div class="gpi-container">
+      <ul class="gpi-page-intention__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'intention' -%}
+            <li class="gpi-page-intention__tile"{{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link }}">
+                <div class="gpi-page-intention__frame">
+                  {%- if block.settings.image -%}
+                    {%- render 'gpi-image', image: block.settings.image, alt: block.settings.name, sizes: '160px', loading: 'lazy' -%}
+                  {%- else -%}
+                    <span class="gpi-page-intention__glyph" aria-hidden="true">{{ block.settings.glyph | default: '✦' }}</span>
+                  {%- endif -%}
+                </div>
+                <h3>{{ block.settings.name }}</h3>
+                {%- if block.settings.subtitle != blank -%}<p>{{ block.settings.subtitle }}</p>{%- endif -%}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "GPI Intention page",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A smarter browse flow"},
+    {"type": "text", "id": "title", "label": "Title", "default": "Shop by intention"},
+    {"type": "textarea", "id": "lede", "label": "Lede", "default": "Whether you are drawn to calm, clarity, or confidence — let your intention guide you to the right piece."}
+  ],
+  "blocks": [
+    {"type": "intention", "name": "Intention tile", "limit": 16, "settings": [
+      {"type": "text", "id": "name", "label": "Name"},
+      {"type": "text", "id": "subtitle", "label": "Subtitle"},
+      {"type": "text", "id": "glyph", "label": "Glyph (fallback if no image)", "default": "✦"},
+      {"type": "image_picker", "id": "image", "label": "Image"},
+      {"type": "url", "id": "link", "label": "Link"}
+    ]}
+  ],
+  "presets": [{"name": "GPI Intention page", "blocks": [
+    {"type":"intention","settings":{"name":"Calm","subtitle":"Soothe the noise","glyph":"☾"}},
+    {"type":"intention","settings":{"name":"Clarity","subtitle":"See it clearly","glyph":"✦"}},
+    {"type":"intention","settings":{"name":"Protection","subtitle":"Steady & shielded","glyph":"⛨"}},
+    {"type":"intention","settings":{"name":"Love","subtitle":"Open the heart","glyph":"❤"}},
+    {"type":"intention","settings":{"name":"Wealth","subtitle":"Abundance flows","glyph":"♛"}},
+    {"type":"intention","settings":{"name":"Confidence","subtitle":"Stand in your power","glyph":"☀"}},
+    {"type":"intention","settings":{"name":"Healing","subtitle":"Restore & repair","glyph":"✚"}},
+    {"type":"intention","settings":{"name":"Spiritual growth","subtitle":"Rise within","glyph":"☘"}},
+    {"type":"intention","settings":{"name":"Creativity","subtitle":"Unblock the muse","glyph":"✺"}},
+    {"type":"intention","settings":{"name":"Grounding","subtitle":"Root & return","glyph":"⏛"}},
+    {"type":"intention","settings":{"name":"Joy","subtitle":"Bright everyday","glyph":"✸"}},
+    {"type":"intention","settings":{"name":"Strength","subtitle":"Unshaken","glyph":"❖"}}
+  ]}]
+}
+{% endschema %}

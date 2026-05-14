@@ -1,0 +1,160 @@
+{%- comment -%} Section: gpi-page-about — composite About page {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-about">
+  <header class="gpi-page-about__hero">
+    {%- if section.settings.hero_image -%}
+      {%- render 'gpi-image', image: section.settings.hero_image, alt: section.settings.hero_alt, sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'gpi-page-about__hero-img' -%}
+      <div class="gpi-page-about__hero-overlay"></div>
+    {%- endif -%}
+    <div class="gpi-container gpi-page-about__hero-copy">
+      <p class="gpi-page-about__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      <h1 class="gpi-page-about__title">{{ section.settings.hero_title }}</h1>
+      {%- if section.settings.hero_lede != blank -%}<p class="gpi-page-about__lede">{{ section.settings.hero_lede }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <section class="gpi-page-about__story gpi-section">
+    <div class="gpi-container gpi-page-about__story-grid">
+      <div class="gpi-page-about__story-copy rte">
+        {%- if section.settings.story_kicker != blank -%}<p class="gpi-eyebrow">{{ section.settings.story_kicker }}</p>{%- endif -%}
+        <h2>{{ section.settings.story_heading }}</h2>
+        {{ section.settings.story_body }}
+      </div>
+      {%- if section.settings.story_image -%}
+        <figure class="gpi-page-about__story-fig">
+          {%- render 'gpi-image', image: section.settings.story_image, alt: section.settings.story_image_alt, sizes: '(min-width:1024px) 40vw, 100vw', loading: 'lazy' -%}
+          {%- if section.settings.story_image_caption != blank -%}<figcaption>{{ section.settings.story_image_caption }}</figcaption>{%- endif -%}
+        </figure>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- assign value_blocks = section.blocks | where: 'type', 'value' -%}
+  {%- if value_blocks.size > 0 -%}
+    <section class="gpi-page-about__values gpi-section">
+      <div class="gpi-container">
+        <h2 class="gpi-page-about__values-heading">{{ section.settings.values_heading | default: 'What we stand for' }}</h2>
+        <ul class="gpi-page-about__values-grid" role="list">
+          {%- for block in value_blocks -%}
+            <li class="gpi-page-about__value"{{ block.shopify_attributes }}>
+              <div class="gpi-page-about__value-icon">
+                {%- if block.settings.icon_svg != blank -%}{{ block.settings.icon_svg }}
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path d="M12 2l3 7 7 .9-5 4.7 1.2 7-6.2-3.5L5.8 21.6 7 14.6 2 9.9 9 9l3-7z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                {%- endif -%}
+              </div>
+              <h3>{{ block.settings.heading }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- assign step_blocks = section.blocks | where: 'type', 'process_step' -%}
+  {%- if step_blocks.size > 0 -%}
+    <section class="gpi-page-about__atelier gpi-section">
+      <div class="gpi-container">
+        <h2 class="gpi-page-about__atelier-heading">{{ section.settings.atelier_heading | default: 'How a Gift Palace piece is made' }}</h2>
+        <ol class="gpi-page-about__atelier-steps">
+          {%- for block in step_blocks -%}
+            <li{{ block.shopify_attributes }}>
+              {%- if block.settings.image -%}{%- render 'gpi-image', image: block.settings.image, alt: block.settings.heading, sizes: '(min-width:1024px) 25vw, 50vw', loading: 'lazy' -%}{%- endif -%}
+              <p class="gpi-page-about__atelier-num">0{{ forloop.index }}</p>
+              <h3>{{ block.settings.heading }}</h3>
+              <p>{{ block.settings.body }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- assign team_blocks = section.blocks | where: 'type', 'team_member' -%}
+  {%- if team_blocks.size > 0 -%}
+    <section class="gpi-page-about__team gpi-section">
+      <div class="gpi-container">
+        <h2 class="gpi-page-about__values-heading">{{ section.settings.team_heading | default: 'The people behind the palace' }}</h2>
+        <ul class="gpi-page-about__team-grid" role="list">
+          {%- for block in team_blocks -%}
+            <li{{ block.shopify_attributes }}>
+              {%- if block.settings.image -%}{%- render 'gpi-image', image: block.settings.image, alt: block.settings.name, sizes: '240px', loading: 'lazy' -%}{%- endif -%}
+              <h3>{{ block.settings.name }}</h3>
+              <p>{{ block.settings.role }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section class="gpi-page-about__cta gpi-section">
+    <div class="gpi-container gpi-page-about__cta-inner">
+      <h2>{{ section.settings.cta_heading | default: 'Begin your search.' }}</h2>
+      <p>{{ section.settings.cta_lede }}</p>
+      <div class="gpi-page-about__cta-buttons">
+        {%- if section.settings.cta_primary_label != blank -%}
+          {%- render 'gpi-cta-link', href: section.settings.cta_primary_link, label: section.settings.cta_primary_label, variant: 'primary', size: 'lg' -%}
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_label != blank -%}
+          {%- render 'gpi-cta-link', href: section.settings.cta_secondary_link, label: section.settings.cta_secondary_label, variant: 'secondary', size: 'lg' -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "GPI About page",
+  "settings": [
+    {"type": "header", "content": "Hero"},
+    {"type": "image_picker", "id": "hero_image", "label": "Hero image"},
+    {"type": "text", "id": "hero_alt", "label": "Hero image alt"},
+    {"type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our story"},
+    {"type": "text", "id": "hero_title", "label": "Title", "default": "Crafted in trust since 1989"},
+    {"type": "textarea", "id": "hero_lede", "label": "Lede"},
+    {"type": "header", "content": "Story"},
+    {"type": "text", "id": "story_kicker", "label": "Kicker", "default": "The beginning"},
+    {"type": "text", "id": "story_heading", "label": "Heading", "default": "Three generations. One pursuit."},
+    {"type": "richtext", "id": "story_body", "label": "Body"},
+    {"type": "image_picker", "id": "story_image", "label": "Story image"},
+    {"type": "text", "id": "story_image_alt", "label": "Story image alt"},
+    {"type": "text", "id": "story_image_caption", "label": "Caption"},
+    {"type": "header", "content": "Values"},
+    {"type": "text", "id": "values_heading", "label": "Values heading", "default": "What we stand for"},
+    {"type": "header", "content": "Atelier process"},
+    {"type": "text", "id": "atelier_heading", "label": "Heading", "default": "How a Gift Palace piece is made"},
+    {"type": "header", "content": "Team"},
+    {"type": "text", "id": "team_heading", "label": "Heading", "default": "The people behind the palace"},
+    {"type": "header", "content": "Closing CTA"},
+    {"type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Begin your search."},
+    {"type": "textarea", "id": "cta_lede", "label": "CTA lede"},
+    {"type": "text", "id": "cta_primary_label", "label": "Primary label", "default": "Browse all pieces"},
+    {"type": "url", "id": "cta_primary_link", "label": "Primary link"},
+    {"type": "text", "id": "cta_secondary_label", "label": "Secondary label", "default": "Shop by intention"},
+    {"type": "url", "id": "cta_secondary_link", "label": "Secondary link"}
+  ],
+  "blocks": [
+    {"type": "value", "name": "Value", "limit": 6, "settings": [
+      {"type": "html", "id": "icon_svg", "label": "Custom icon SVG (optional)"},
+      {"type": "text", "id": "heading", "label": "Heading"},
+      {"type": "textarea", "id": "body", "label": "Body"}
+    ]},
+    {"type": "process_step", "name": "Process step", "limit": 6, "settings": [
+      {"type": "image_picker", "id": "image", "label": "Image"},
+      {"type": "text", "id": "heading", "label": "Heading"},
+      {"type": "textarea", "id": "body", "label": "Body"}
+    ]},
+    {"type": "team_member", "name": "Team member", "limit": 8, "settings": [
+      {"type": "image_picker", "id": "image", "label": "Photo"},
+      {"type": "text", "id": "name", "label": "Name"},
+      {"type": "text", "id": "role", "label": "Role"}
+    ]}
+  ],
+  "presets": [{"name": "GPI About page"}]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{%- comment -%} Section: gpi-page-policy — single section that renders the page body in a styled shell. Use for Shipping, Returns, Privacy, Terms pages. {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-policy">
+  <header class="gpi-page-policy__hero">
+    <div class="gpi-container">
+      {%- render 'gpi-breadcrumbs' -%}
+      <h1>{{ page.title | default: section.settings.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="gpi-page-policy__sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <section class="gpi-page-policy__layout gpi-section">
+    <div class="gpi-container gpi-page-policy__grid">
+      <aside class="gpi-page-policy__nav" aria-label="Policies">
+        <h3>Policies</h3>
+        <ul role="list">
+          <li><a href="/policies/shipping-policy">Shipping</a></li>
+          <li><a href="/policies/refund-policy">Returns &amp; refunds</a></li>
+          <li><a href="/policies/privacy-policy">Privacy</a></li>
+          <li><a href="/policies/terms-of-service">Terms of service</a></li>
+        </ul>
+      </aside>
+      <div class="gpi-page-policy__content rte">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "GPI Policy page",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Fallback title"},
+    {"type": "text", "id": "subtitle", "label": "Subtitle"}
+  ],
+  "presets": [{"name": "GPI Policy page"}]
+}
+{% endschema %}

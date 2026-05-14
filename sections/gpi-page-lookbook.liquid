@@ -1,0 +1,57 @@
+{%- comment -%} Section: gpi-page-lookbook — editorial layout, block-based images with optional shoppable hotspots {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'component-gpi-foundation.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-gpi-page.css' | asset_url }}">
+
+<article class="gpi-page-lookbook">
+  <header class="gpi-page-lookbook__hero">
+    <div class="gpi-container">
+      <p class="gpi-eyebrow">{{ section.settings.eyebrow | default: 'Lookbook' }}</p>
+      <h1>{{ section.settings.title | default: 'In the wild' }}</h1>
+      {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+  </header>
+
+  <ul class="gpi-page-lookbook__list" role="list">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'editorial' -%}
+        <li class="gpi-page-lookbook__row" data-align="{{ block.settings.align }}"{{ block.shopify_attributes }}>
+          <figure>
+            {%- if block.settings.image -%}{%- render 'gpi-image', image: block.settings.image, alt: block.settings.alt, sizes: '100vw', loading: 'lazy' -%}{%- endif -%}
+            <figcaption>
+              <h3>{{ block.settings.heading }}</h3>
+              {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+              {%- if block.settings.cta_label != blank -%}
+                {%- render 'gpi-cta-link', href: block.settings.cta_link, label: block.settings.cta_label, variant: 'text', icon: 'arrow' -%}
+              {%- endif -%}
+            </figcaption>
+          </figure>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</article>
+
+{% schema %}
+{
+  "name": "GPI Lookbook page",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Lookbook"},
+    {"type": "text", "id": "title", "label": "Title", "default": "In the wild"},
+    {"type": "textarea", "id": "lede", "label": "Lede"}
+  ],
+  "blocks": [
+    {"type": "editorial", "name": "Editorial image", "limit": 12, "settings": [
+      {"type": "image_picker", "id": "image", "label": "Image"},
+      {"type": "text", "id": "alt", "label": "Alt text"},
+      {"type": "select", "id": "align", "label": "Caption alignment", "default": "right", "options": [
+        {"value": "left", "label": "Left"}, {"value": "right", "label": "Right"}, {"value": "center", "label": "Center under image"}
+      ]},
+      {"type": "text", "id": "heading", "label": "Heading"},
+      {"type": "textarea", "id": "body", "label": "Body"},
+      {"type": "text", "id": "cta_label", "label": "CTA label"},
+      {"type": "url", "id": "cta_link", "label": "CTA link"}
+    ]}
+  ],
+  "presets": [{"name": "GPI Lookbook page"}]
+}
+{% endschema %}
